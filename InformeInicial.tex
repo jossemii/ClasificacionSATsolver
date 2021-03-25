@@ -1,0 +1,109 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[catalan]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{multirow}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{vmargin}
+\usepackage{wrapfig}
+\usepackage{enumitem}
+\usepackage{subfiles}
+\usepackage{multirow}
+\usepackage{float}
+\setlength\parindent{0pt}
+
+
+\setpapersize{A4}
+\setmargins{2.5cm}  % margen izquierdo
+{1.5cm}             % margen superior
+{16.5cm}            % anchura del texto
+{23.42cm}           % altura del texto
+{10pt}              % altura de los encabezados
+{1cm}               % espacio entre el texto y los encabezados
+{0pt}               % altura del pie de p�gina
+{2cm}               % espaci\title{Determinitzaci� d'un aut�mat finit}
+
+
+\author{José Miguel Avellana López}
+\date{25 de Marzo del 2021}
+
+\def\contentsname{Index}
+\begin{document}
+	
+	\setcounter{tocdepth}{4}
+	\setcounter{secnumdepth}{4}
+	
+	\begin{titlepage}
+		\begin{figure}[htb]
+			\begin{center}
+				\includegraphics[width=7cm]{logoUDL.png}
+				\vspace*{\stretch{1.0}}
+				\\
+				\medskip
+				\begin{center}
+					\noindent\rule{16.5cm}{0.4pt}
+					\linebreak 
+					\\
+					\Huge\textbf {La Cristaleria}
+					\noindent\rule{16.5cm}{0.4pt}
+					\hfill\\
+					\Large\textbf\textit{Projecte Final de Grau}
+					%\noindent\rule{16.5cm}{0.4pt}
+					\\
+					\bigskip
+					\hfill\\
+					\hfill\\
+					\hfill\\
+					\hfill\\
+					\hfill\\
+					\hfill\\
+					\hfill\\
+					\setlength{\parskip}{1em}
+				\end{center}
+				\vspace*{\stretch{2.0}}
+			\end{center}
+		\end{figure}
+		\begin{flushright}
+			Universitat de Lleida
+			\\
+			Escola Politcnica Superior
+			\\
+			Grau en Enginyeria Informica
+			\\
+			Memòria Treball Fi de Grau
+			\\
+			\medskip
+			\hfill\\
+			\normalsize\textbf{Autor:}
+			\\
+			\large\textit{Jass}
+			\\
+			\normalsize\textbf{Director:}
+			\\
+			\large{Afra Pascual}
+		\end{flushright}
+		\thispagestyle{empty} 
+	\end{titlepage}
+	\tableofcontents
+	\thispagestyle{empty}
+	\newpage
+	\renewcommand*\listfigurename{Index de figures}
+	\listoffigures
+	\thispagestyle{empty}
+	\renewcommand*\listtablename{Index de taules}
+	\listoftables
+	\thispagestyle{empty}
+	\newpage
+	
+	\section{InformeInicial}
+	\setcounter{page}{1}
+	\subfile{InformeInicial.tex}
+	
+\end{document}
+
+
+
