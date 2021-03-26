@@ -1,0 +1,3 @@
+
+Package hyperref Warning: old lof file detected, not used; run LaTeX again.
+
