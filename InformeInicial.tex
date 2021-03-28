@@ -16,7 +16,6 @@
 \usepackage{float}
 \setlength\parindent{0pt}
 
-
 \setpapersize{A4}
 \setmargins{2.5cm}  % margen izquierdo
 {1.5cm}             % margen superior
@@ -70,7 +69,7 @@
 		\begin{flushright}
 			Universitat de Lleida
 			\\
-			Escola Politcnica Superior
+			Escola Politécnica Superior
 			\\
 			Grau en Enginyeria Informática
 			\\
@@ -80,23 +79,139 @@
 			\\
 			\large\textit{Jose Miguel Avellana López}
 			\\
-			\normalsize\textbf{Director:}
+			\normalsize\textbf{Codirector:}
 			\\
-			\large{Afra Pascual}
+			\large{Josep Luis Lérida Monsó}
+			\\
+			\normalsize\textbf{Codirector:}
+			\\
+			\large{Josep Argelich Romá}
 		\end{flushright}
 		\thispagestyle{empty} 
 	\end{titlepage}
 	\thispagestyle{empty}
 	\newpage
-	\renewcommand*\listfigurename{Index de figures}
-	\thispagestyle{empty}
-	\renewcommand*\listtablename{Index de taules}
-	\thispagestyle{empty}
+		\renewcommand*\listfigurename{Index de figures}
+		\thispagestyle{empty}
+		\renewcommand*\listtablename{Index de taules}
+		\thispagestyle{empty}
 	\newpage
 	
-	\section{InformeInicial}
-	\setcounter{page}{1}
-	
+	\section{Introducion}
+	\section{Objetivos del trabajo}
+		\begin{itemize}
+			\item Diseño de la especificacion de un servicio.
+			\item Desarrollo de un nodo con capacidad para:
+			\begin{itemize}
+				\item Construir y ejecutar servicios.
+				\item Compartir servicios con el resto de los nodos de la red.
+				\item Balancear la carga de servicios entre sí mismo y el resto de nodos de la red.
+			\end{itemize}
+			\item Desarrollo de un servicio de clasificación y seleccion de servicios que 
+			resuelven SAT. Este debe ser capaz de:
+			\begin{itemize}
+				\item Cargar especificaciones de SAT-solvers, pedirle al nodo que le devuelva
+				 instancias de los mismos, mantenerrlos (comprobar que siguen activos).
+				\item Clasificar los SAT-solvers que se le han especificado mediante regresion.
+				\item Seleccionar un SAT-solver en funcion de un CNF dado.
+			\end{itemize}
+		\end{itemize}
+	\section{Índice de la memoria}
+		\begin{enumerate}
+			\item Resumen de la tarea realizada en el TFG
+			\item Introducción, contexto y objetivos del proyecto.
+			\item Estado del arte y conocimientos previos.
+			\item Descripción del desarrollo técnico y de diseño del trabajo.
+			\item Problemas encontrados.
+			\item Conclusiones.
+			\item Bibliografía y fuentes consultadas.
+		\end{enumerate}
+	\section{Tareas a realizar}
+		\subsection{FASE 1}
+			\begin{itemize}
+				\item Definir las responsabilidades que tienen tanto los nodos como los servicios.
+				\item Concretar que debe de especificar la definición de un servicio, como se obtiene el 
+					identificador del mismo y que tipo de función se utiliza y el tipo de serialización que
+					se debe de usar.
+			\end{itemize}
+		\subsection{FASE 2}
+			\begin{itemize}
+				\item Desarrollar las funciones básicas de un nodo:
+				\begin{itemize}
+					\item Compilar a la especificación de un servicio.
+					\item Construcción de la especificación de un servicio. \\
+						Dada la especificación de un servicio, debe ser capaz de construir un contenedor del mismo,
+						abrir los puertos necesarios y añadirle las variables de entorno dadas, si es el caso.
+					\item Servicio local con la finalidad de atender las peticiones de los servicios. \\
+						Las peticiones básicas son: la inicializacion de un servicio, y su detencion.
+						Al especificarle un servicio, el servicio local del nodo le devolverá al cliente la dirección 
+						de la instancia del servicio demandado y un token con el que efectuar acciones u obtener informacion 
+						sobre él (como detenerlo).
+				\end{itemize}
+				\item Desarrollar servicios SAT-solver y sus especificaciones.
+			\end{itemize}
+		\subsection{FASE 3}
+			\begin{itemize}
+				\item Desarrollar un servicio de clasificación de SAT-solvers. \\
+				Por un lado se ha de desarrollar un sistema que genere CNFs aleatorios, 
+				pruebe cada uno de los solvers y recoja datos de ello. 
+				A partir de los datos obtenidos previamente se deben clasificar los solvers mediante algun tipo de regresión.
+				\\
+				Por otra parte, el servicio debe de tener la capacidad de, a partir de un CNF dado, 
+				resolverlo dando uso del solver que mejor se adapte a ese CNF en concreto.
+			\end{itemize}
+		\subsection{FASE 4}
+			\begin{itemize}
+				\item Balanceo de carga. \\
+					Como es el nodo el que tiene la responsabilidad de construir y ejecutar los servicios demandados,
+					este puede derivar a otros nodos de la red la tarea de construir y ejecutar un servicio. \\
+					Es por ello que se requiere un servicio que decida donde ejecutar un servicio determinado (si en local o en otro nodo)
+					en función del coste que conlleve en cada uno.
+			\end{itemize}
+	\section{Planificación temporal de tareas}
+			\begin{itemize}
+				\item Fase 1: Ya realizada.
+				\item Fase 2: Ya realizada.
+				\item Fase 3: Marzo.
+				\item Fase 4: Entre Abril y Mayo.
+				\item Memoria final: Entre Mayo y Junio.
+			\end{itemize}
+	\section{Relacion de fuentes y bibliografia consultada}
+			\begin{itemize}
+				\item \href{https://docs.python.org/3/}{Documentación de Python}
+				\item \href{https://docs.ipfs.io/}{Documentación IPFS}
+				\item \href{https://medium.com/predict/hashes-are-unique-9af14fe3796a}{Hashes are Unique}
+				\item \href{https://rico-schmidt.name/pymotw-3/threading/}{Gestionar las operaciones concurrentes dentro de un proceso.}
+				\item \href{https://gunicorn.org/#docs}{Documentacion Gunicorn}
+				\item \href{https://www.nginx.com/}{Documentación NGNIX}
+				\item \href{https://developers.google.com/protocol-buffers}{Protocol Buffers  |  Google Developers}
+				\item \href{https://isa-specs.readthedocs.io/en/latest/isajson.html}{ ISA Model and Serialization Specifications}
+				\item \href{https://flask.palletsprojects.com/en/1.1.x/}{Documentación Flask (1.1.x)}
+				\item \href{https://grpc.io/docs/}{Cocumentación gRPC}
+				\item \href{https://google.github.io/flatbuffers/}{Documentación Flatbuffers}
+				\item \href{https://es.accentsconagua.com/articles/code/rest-vs-grpc-battle-of-the-apis.html}{Comparativa gRPC REST}
+				\item \href{https://www.envoyproxy.io/}{Documentación Envoy}
+				\item \href{https://www.digitalocean.com/community/tutorials/como-preparar-aplicaciones-de-flask-con-gunicorn-y-nginx-en-ubuntu-18-04-es}
+							{Cómo preparar aplicaciones de Flask con Gunicorn y Nginx en Ubuntu 18.04}
+			
+				\item \href{https://docs.docker.com/}{Documentación Docker}
+				\item \href{https://gregoryszorc.com/blog/2014/10/13/deterministic-and-minimal-docker-images/}{Deterministic and minimal Docker images}
+				\item \href{https://thenewstack.io/understanding-the-docker-cache-for-faster-builds/}{Understanding the Docker Cache for Faster Builds}
+				\item \href{https://jfrog.com/knowledge-base/a-beginners-guide-to-understanding-and-building-docker-images/}
+							{A Beginner's Guide to Understanding and Building Docker Images}
+				\item \href{https://windsock.io/explaining-docker-image-ids/}{Explaining Docker Image IDs}
+				\item \href{https://podman.io/}{podman}
+				\item \href{https://kubernetes.io/es/docs/concepts/overview/what-is-kubernetes/}{¿Que es kubernetes?}
+				\item \href{https://www.redhat.com/es/topics/cloud-native-apps/stateful-vs-stateless}{Sistemas con y sin estado. RetHat}
+				\item \href{https://github.com/kubernetes/community/blob/master/contributors/design-proposals/multicluster/federation.md}
+							{Ubernetes. Kubernetes Cluster Federation}
+				\item \href{https://opencontainers.org/}{Open Container Iniciative}
+
+				\item \href{https://scikit-learn.org/stable/}{Documentación scikit-learn}
+				\item \href{https://www.cs.toronto.edu/~frossard/post/linear_regression/}{Linear regression with NumPy}
+				\item \href{https://realpython.com/linear-regression-in-python/}{Linear regression in Python}
+				\item \href{https://onnx.ai/}{Documentacion ONNX}
+			\end{itemize}
 \end{document}
 
 
