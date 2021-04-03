@@ -1,0 +1,167 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[catalan]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{multirow}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{pgfgantt}
+\usepackage{vmargin}
+\usepackage{wrapfig}
+\usepackage{enumitem}
+\usepackage{subfiles}
+\usepackage{multirow}
+\usepackage{float}
+\setlength\parindent{0pt}
+
+\setpapersize{A4}
+\setmargins{2.5cm}  % margen izquierdo
+{1.5cm}             % margen superior
+{16.5cm}            % anchura del texto
+{23.42cm}           % altura del texto
+{10pt}              % altura de los encabezados
+{1cm}               % espacio entre el texto y los encabezados
+{0pt}               % altura del pie de p�gina
+{2cm}               % espaci\title{Determinitzaci� d'un aut�mat finit}
+
+
+\definecolor{barblue}{RGB}{153,204,254}
+\definecolor{groupblue}{RGB}{51,102,254}
+\definecolor{linkred}{RGB}{165,0,33} 
+
+\author{José Miguel Avellana López}
+\date{25 de Marzo del 2021}
+
+\def\contentsname{Index}
+\begin{document}
+	
+	\setcounter{tocdepth}{4}
+	\setcounter{secnumdepth}{4}
+	
+	\begin{titlepage}
+		\begin{figure}[htb]
+			\begin{center}
+				\includegraphics[width=7cm]{logoUDL.png}
+				\vspace*{\stretch{1.0}}
+				\\
+				\medskip
+				\begin{center}
+					\noindent\rule{16.5cm}{0.4pt}
+					\linebreak 
+					\\
+					\Huge\textbf {Sistema distribuido para la resolución de problemas SAT}
+					\noindent\rule{16.5cm}{0.4pt}
+					\hfill\\
+					\Large\textbf\textit{Memoria Final}
+					%\noindent\rule{16.5cm}{0.4pt}
+					\\
+					\bigskip
+					\hfill\\
+					\hfill\\
+					\hfill\\
+					\hfill\\
+					\hfill\\
+					\hfill\\
+					\hfill\\
+					\setlength{\parskip}{1em}
+				\end{center}
+				\vspace*{\stretch{2.0}}
+			\end{center}
+		\end{figure}
+		\begin{flushright}
+			Universitat de Lleida
+			\\
+			Escola Politécnica Superior
+			\\
+			Grau en Enginyeria Informática
+			\\
+			\medskip
+			\hfill\\
+			\normalsize\textbf{Autor:}
+			\\
+			\large\textit{Jose Miguel Avellana López}
+			\\
+			\normalsize\textbf{Codirector:}
+			\\
+			\large{Josep Luis Lérida Monsó}
+			\\
+			\normalsize\textbf{Codirector:}
+			\\
+			\large{Josep Argelich Romá}
+		\end{flushright}
+		\thispagestyle{empty} 
+	\end{titlepage}
+	\thispagestyle{empty}
+	\newpage
+		\renewcommand*\listfigurename{Index de figures}
+		\thispagestyle{empty}
+		\renewcommand*\listtablename{Index de taules}
+		\thispagestyle{empty}
+	\newpage
+	
+	\section{Introdución}
+        En 1970, el matemático británico John Horton Conway diseño un automata celular al que llamo El Juego de la Vida.
+        Un autómata celular es un modelo matemático y computacional para un sistema dinámico que evoluciona en pasos discretos.
+        \\
+        El juego de la vida viene a decir que, a partir de un conjunto de reglas simples, se pueden generar estructuras complejas.
+        Un sistema compuesto de un conjunto de agentes ( o células), que ocupan un lugar en él, que poseen una serie de reglas 
+        que definen como interaccionan con el resto de agentes.
+        \\
+        Y es que, en cierto modo, asi es como funciona la evolucion de un ecosistema de seres vivos, mejorando y optimizando sus procesos sin que exista
+        una intención consciente de ello por parte de sus agentes.\\
+        \\
+        Bajo este mismo principio se puede entender la capacidad de los sistemas económicos basados en la competencia para mejorar sus procesos. 
+        Cuando una empresa se dedica a investigar nuevas tecnologías para abaratar costes, no lo hace por el bien común, lo hace para vencer a sus rivales,
+        pero, de manera inconsciente, sirve al bien común. Será el mercado el que dictará si esta nueva forma de realizar dicha tarea es más optima o no.
+        \\
+        Por lo tanto, es la competencia de ideas, de procesos y formas de actuación la que
+        nos permite mejorar la forma en que vivimos.\\
+        Teniendo en mente, por ejemplo, procesos industriales o logísticos, 
+        si a alguien se le ocurre una forma más eficiente de hacer algo creará una empresa que realice esta labor en la manera que propone, 
+        si realmente es mejor que el método tradicional, 
+        terminará abarcando un cada vez mayor porcentaje de su mercado e imponiendose al método anterior. 
+        \\
+        Pero esta es una forma muy lenta de evolucionar debido a que el tiempo para observar resultados es el de un escenario real.
+        Sin embargo, podemos observar nuevas propuestas de actuación en entornos simulados, en mucho menor tiempo y barajando más opciones, y de esta forma aplicar
+        la mejor forma de actuación practicamente al instante.\\
+        \\
+		La revolución informática de las ultimas décadas nos da la posibilidad de simular y automatizar procesos. 
+		Hemos construido una red de ordenadores con estas capacidades, y su potencial es enorme.\\
+		Tecnologías de vanguardia como la inteligencia artificial nos prometen
+		una significativa mejora en nuestra calidad de vida, principalmente por su potencial para automatizar tareas como nunca antes se había imaginado. \\
+		\\
+		Por ello considero interesante un sistema distribuido de servicios. Desde mi punto de vista, existen dos componentes clave:
+		\begin{itemize}
+			\item Un servicio es un contendor de software que realiza una tarea especifica, puede entenderse como una ``caja negra'', existe una especificación del mismo en 
+				formato binario, donde se especifica todo lo necesario para construirlo y comunicarse con él.
+			\item Un nodo es un computador que forma parte de la red, debe de tener la capacidad de encontrar otros nodos y comunicarse con ellos, compartir y construir servicios
+				y delegar la sobrecarga de servicios a sus pares.
+		\end{itemize}
+
+		\section{Arquitectura de servicios propuesta para SAT}
+
+			A continuación expongo los servicios para SAT:
+			\begin{itemize}
+				\item Clasificador: Es el servicio principal, se encarga de clasificar una serie de SAT-solvers, de manera que si le das un CNF, lo resuelva 
+					usando el mejor solver que tenga.
+				\item RandomCNF: No tiene parámetro de entrada, retorna un CNF generado de manera aleatoria.
+				\item Regression: Recibe datos sobre el rendimiento de los solvers y retorna un modelo de regresion lineal de cada uno con el que poder predecir
+					que resultados darán con un CNF concreto.
+				\item Trainer: Toma un conjunto de solvers, los prueba generando CNF's aleatorios y retorna los datos recogidos.
+				\item RequestsBalancer: Recibe como variable de entorno la API con la que el cliente usaría las instancias, 
+					recibe por API un conjunto de solvers con su configuracion, permite aumentar y disminuir el número de instancias de cada solver,
+					solicita a su nodo instancias de cada solver y se encarga de balancear la carga a cada uno.
+				\item ServicesBalancer: Cuando el servicio local de un nodo recibe la solicitud para crear la instancia de un servicio, es este el que decide se creará en local
+					o en algun nodo adyacente.\\
+			\end{itemize}
+
+			Esquema del sistema:\\
+			\includegraphics[width=17cm]{esquema_borrador.jpeg}
+
+\end{document}
+
+
+
