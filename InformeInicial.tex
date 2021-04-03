@@ -8,6 +8,7 @@
 \usepackage[table,xcdraw]{xcolor}
 \usepackage{listings}
 \usepackage{hyperref}
+\usepackage{pgfgantt}
 \usepackage{vmargin}
 \usepackage{wrapfig}
 \usepackage{enumitem}
@@ -26,6 +27,10 @@
 {0pt}               % altura del pie de p�gina
 {2cm}               % espaci\title{Determinitzaci� d'un aut�mat finit}
 
+
+\definecolor{barblue}{RGB}{153,204,254}
+\definecolor{groupblue}{RGB}{51,102,254}
+\definecolor{linkred}{RGB}{165,0,33} 
 
 \author{José Miguel Avellana López}
 \date{25 de Marzo del 2021}
@@ -97,8 +102,56 @@
 		\thispagestyle{empty}
 	\newpage
 	
-	\section{Introducion}
+	\section{Introdución}
+		En 1970, el matemático británico John Horton Conway diseño un automata celular al que llamo El Juego de la Vida.
+		Un autómata celular es un modelo matemático y computacional para un sistema dinámico que evoluciona en pasos discretos.
+		\\
+		El juego de la vida viene a decir que, a partir de un conjunto de reglas simples, se pueden generar estructuras complejas,
+		un sistema compuesto de un conjunto de agentes ( o células), que ocupan un lugar en él, que poseen una serie de reglas que 
+		los definen y que definen como interaccionan con el resto de agentes.
+		\\
+		Y es que, en cierto modo, asi es como funciona, por ejemplo, la evolucion de un ecosistema de seres vivos, va mejorando y optimizando sus procesos sin que exista
+		una intención consciente de ello por parte de sus agentes.\\
+		\\
+		Bajo este mismo principio se puede entender la capacidad de los sistemas económicos basados en la competencia para mejorar sus procesos. 
+		Cuando una empresa se dedica a investigar nuevas tecnologías para abaratar costes, no lo hace por el bien común, lo hace para vencer a sus rivales,
+		pero, de manera inconsciente, sirve al bien común, y será el mercado el que dictará si esta nueva forma de realizar dicha tarea es más optima o no.
+		\\
+		Por lo tanto, es la competencia de ideas, de procesos y formas de actuación la que
+		nos permite mejorar la forma en que vivimos.\\
+		Teniendo en mente, por ejemplo, procesos industriales o logísticos, 
+		si a alguien se le ocurre una forma más eficiente de hacer algo creará una empresa que realice esta labor en la manera que propone, 
+		si realmente es mejor que el método tradicional, 
+		terminará abarcando un cada vez mayor porcentaje de su mercado e imponiendose al método anterior. 
+		\\
+		Pero esta es una forma muy lenta de evolucionar debido a que el tiempo para observar resultados es el real.
+		Sin embargo, podemos observar nuevas propuestas de actuación en entornos simulados, en mucho menor tiempo y barajando más opciones, y de esta forma aplicar
+		la mejor forma de actuación practicamente al instante.\\
+		\\
+		La revolución informática de las ultimas décadas nos da la posibilidad de simular y automatizar procesos. 
+		Hemos construido una red de ordenadores con estas capacidades, y su potencial es enorme.\\
+		Tecnologías de vanguardia como la inteligencia artificial nos prometen
+		una significativa mejora en nuestra calidad de vida, principalmente por su potencial para automatizar tareas como nunca antes se había imaginado. \\
+		\\
+		\\
+		Por ello considero interesante un sistema distribuido de servicios. Desde mi punto de vista, existen dos componentes clave:
+		\begin{itemize}
+			\item Servicios: realizan una tarea especifica, se pueden entender como "cajas negras", tienen una forma definida de como construirlas,
+				como comunicarse con ellas, etc... pero no importa como funcionan internamente.
+			\item  Nodos: comparten servicios entre sí y permiten construirlos, 
+				para ello proporcionan un servicio propio que escucha las peticiones de otros servicios (normalmente los propios que esta alojando).
+		\end{itemize}
+
 	\section{Objetivos del trabajo}
+		Este trabajo pretende dos cosas:
+		\begin{itemize}
+			\item Definir, de manera simple, 
+				las reglas básicas de cada uno de los componentes de un sistema distribuido de servicios,
+				y como se definen e interaccionan entre sí.
+			\item Dar uso del sistema para realizar una prueba concepto sobre un problema concreto, la resolución de problemas SAT.
+		\end{itemize}
+
+		Más concretamente, los objetivos son:
 		\begin{itemize}
 			\item Diseño de la especificacion de un servicio.
 			\item Desarrollo de un nodo con capacidad para:
@@ -116,6 +169,7 @@
 				\item Seleccionar un SAT-solver en funcion de un CNF dado.
 			\end{itemize}
 		\end{itemize}
+
 	\section{Índice de la memoria}
 		\begin{enumerate}
 			\item Resumen de la tarea realizada en el TFG
@@ -123,59 +177,113 @@
 			\item Estado del arte y conocimientos previos.
 			\item Descripción del desarrollo técnico y de diseño del trabajo.
 			\item Problemas encontrados.
+			\item Resultados.
 			\item Conclusiones.
 			\item Bibliografía y fuentes consultadas.
 		\end{enumerate}
+
 	\section{Tareas a realizar}
-		\subsection{FASE 1}
-			\begin{itemize}
-				\item Definir las responsabilidades que tienen tanto los nodos como los servicios.
-				\item Concretar que debe de especificar la definición de un servicio, como se obtiene el 
-					identificador del mismo y que tipo de función se utiliza y el tipo de serialización que
-					se debe de usar.
-			\end{itemize}
-		\subsection{FASE 2}
-			\begin{itemize}
-				\item Desarrollar las funciones básicas de un nodo:
+		\begin{enumerate}
+			\item Estudio previo
+			\item Reuniones de valoración
+			\item Análisis de requisitos
 				\begin{itemize}
-					\item Compilar a la especificación de un servicio.
-					\item Construcción de la especificación de un servicio. \\
-						Dada la especificación de un servicio, debe ser capaz de construir un contenedor del mismo,
-						abrir los puertos necesarios y añadirle las variables de entorno dadas, si es el caso.
-					\item Servicio local con la finalidad de atender las peticiones de los servicios. \\
-						Las peticiones básicas son: la inicializacion de un servicio, y su detencion.
-						Al especificarle un servicio, el servicio local del nodo le devolverá al cliente la dirección 
-						de la instancia del servicio demandado y un token con el que efectuar acciones u obtener informacion 
-						sobre él (como detenerlo).
+					\item Definir las responsabilidades que tienen tanto los nodos como los servicios.
+					\item Concretar que debe de especificar la definición de un servicio, como se obtiene el 
+						identificador del mismo y que tipo de función se utiliza y el tipo de serialización que
+						se debe de usar.
 				\end{itemize}
-				\item Desarrollar servicios SAT-solver y sus especificaciones.
-			\end{itemize}
-		\subsection{FASE 3}
-			\begin{itemize}
-				\item Desarrollar un servicio de clasificación de SAT-solvers. \\
-				Por un lado se ha de desarrollar un sistema que genere CNFs aleatorios, 
-				pruebe cada uno de los solvers y recoja datos de ello. 
-				A partir de los datos obtenidos previamente se deben clasificar los solvers mediante algun tipo de regresión.
-				\\
-				Por otra parte, el servicio debe de tener la capacidad de, a partir de un CNF dado, 
-				resolverlo dando uso del solver que mejor se adapte a ese CNF en concreto.
-			\end{itemize}
-		\subsection{FASE 4}
-			\begin{itemize}
-				\item Balanceo de carga. \\
-					Como es el nodo el que tiene la responsabilidad de construir y ejecutar los servicios demandados,
-					este puede derivar a otros nodos de la red la tarea de construir y ejecutar un servicio. \\
-					Es por ello que se requiere un servicio que decida donde ejecutar un servicio determinado (si en local o en otro nodo)
-					en función del coste que conlleve en cada uno.
-			\end{itemize}
+			\item Primera fase de desarrollo
+				\begin{itemize}
+					\item Desarrollar las funciones básicas de un nodo:
+					\begin{itemize}
+						\item Compilar a la especificación de un servicio.
+						\item Construcción de la especificación de un servicio. \\
+							Dada la especificación de un servicio, debe ser capaz de construir un contenedor del mismo,
+							abrir los puertos necesarios y añadirle las variables de entorno dadas, si es el caso.
+						\item Servicio local con la finalidad de atender las peticiones de los servicios. \\
+							Las peticiones básicas son: la inicializacion de un servicio, y su detencion.
+							Al especificarle un servicio, el servicio local del nodo le devolverá al cliente la dirección 
+							de la instancia del servicio demandado y un token con el que efectuar acciones u obtener informacion 
+							sobre él (como detenerlo).
+					\end{itemize}
+					\item Desarrollar servicios SAT-solver y sus especificaciones.
+				\end{itemize}
+			\item Segunda fase de desarrollo
+				\begin{itemize}
+					\item Desarrollar un servicio de clasificación de SAT-solvers. \\
+					Por un lado se ha de desarrollar un sistema que genere CNFs aleatorios, 
+					pruebe cada uno de los solvers y recoja datos de ello. 
+					A partir de los datos obtenidos previamente se deben clasificar los solvers mediante algun tipo de regresión.
+					\\
+					Por otra parte, el servicio debe de tener la capacidad de, a partir de un CNF dado, 
+					resolverlo dando uso del solver que mejor se adapte a ese CNF en concreto.
+				\end{itemize}
+			\item Tercera fase de desarrollo
+				\begin{itemize}
+					\item Balanceo de carga de instancias. \\
+						Como es el nodo el que tiene la responsabilidad de construir y ejecutar los servicios demandados,
+						este puede derivar a otros nodos de la red la tarea de construir y ejecutar un servicio. \\
+						Es por ello que se requiere un servicio que decida donde ejecutar un servicio determinado (si en local o en otro nodo)
+						en función del coste que conlleve en cada uno.
+					\item Balanceo de carga de solicitudes. \\
+						El clasificador deberá tener un balanceador de carga O BIEN POR CADA SAT-SOLVER O BIEN UNO MÁS COMPLEJO QUE SE OCUPE DE TODOS, \\
+						con el que se repartirán las peticiones para resolver CNF's.
+					\item Distribucion de contenedores.
+				\end{itemize}
+			\item Testing del sistema
+				\\ Tras cada fase de desarrollo.
+			\item Redacción de la memoria
+		\end{enumerate}
+
 	\section{Planificación temporal de tareas}
-			\begin{itemize}
-				\item Fase 1: Ya realizada.
-				\item Fase 2: Ya realizada.
-				\item Fase 3: Marzo.
-				\item Fase 4: Entre Abril y Mayo.
-				\item Memoria final: Entre Mayo y Junio.
-			\end{itemize}
+		\begin{ganttchart}[
+			canvas/.append style={fill=none, draw=black!5, line width=.75pt},
+			hgrid style/.style={draw=black!5, line width=0.75pt},
+			vgrid={*1{draw=black!5, line width=.75pt}},
+			today=10,
+			today rule/.style={
+				draw=black!64,
+				dash pattern=on 3.5pt off 4.5pt,
+				line width=1pt
+			},
+			today label font=\tiny,
+			title/.style={
+				draw=none, 
+				fill=none
+			},
+			title label font=\tiny,
+			title label node/.append style={below=7pt},
+			include title in canvas=false,
+			bar label font=\mdseries\small\color{black!70},
+			bar/.append style={
+				draw=none, 
+				fill=barblue
+			},
+			bar progress label font=\mdseries\footnotesize\color{black!70},
+		]{1}{18}
+			\gantttitle{Noviem.}{2}
+			\gantttitle{Diciem.}{2}
+			\gantttitle{Enero}{2}
+			\gantttitle{Febrero}{2}
+			\gantttitle{Marzo}{2}
+			\gantttitle{Abril}{2}
+			\gantttitle{Mayo}{2}
+			\gantttitle{Junio}{2}
+			\gantttitle{Julio}{2}\\
+			\ganttbar[]{\textbf{Estudio previo}}{1}{2} \\
+			\ganttbar[]{\textbf{Analisis de requisitos}}{3}{3} \\
+			\ganttbar[]{\textbf{Primera fase de desarrollo}}{4}{6} \\
+			\ganttbar[]{\textbf{Segunda fase de desarrollo}}{7}{10} \\
+			\ganttbar[]{\textbf{Reunion inicial}}{10}{10} \\
+			\ganttbar[]{\textbf{Tercera fase de desarrollo}}{11}{14} \\
+			\ganttbar[]{\textbf{Reunion de Seguimiento}}{15}{15} \\
+			\ganttbar[]{\textbf{Testing del sistema}}{7}{16} \\
+			\ganttbar[]{\textbf{Redacción de la memoria}}{16}{18} \\
+			\ganttbar[]{\textbf{Reunion final}}{17}{17} \\
+
+		\end{ganttchart}
+		
 	\section{Relacion de fuentes y bibliografia consultada}
 			\begin{itemize}
 				\item \href{https://docs.python.org/3/}{Documentación de Python}
@@ -193,7 +301,8 @@
 				\item \href{https://www.envoyproxy.io/}{Documentación Envoy}
 				\item \href{https://www.digitalocean.com/community/tutorials/como-preparar-aplicaciones-de-flask-con-gunicorn-y-nginx-en-ubuntu-18-04-es}
 							{Cómo preparar aplicaciones de Flask con Gunicorn y Nginx en Ubuntu 18.04}
-			
+				\item \href{https://www.semantics3.com/blog/a-simplified-guide-to-grpc-in-python-6c4e25f0c506/}{A simplified guide to gRPC in Python}
+
 				\item \href{https://docs.docker.com/}{Documentación Docker}
 				\item \href{https://gregoryszorc.com/blog/2014/10/13/deterministic-and-minimal-docker-images/}{Deterministic and minimal Docker images}
 				\item \href{https://thenewstack.io/understanding-the-docker-cache-for-faster-builds/}{Understanding the Docker Cache for Faster Builds}
@@ -206,6 +315,7 @@
 				\item \href{https://github.com/kubernetes/community/blob/master/contributors/design-proposals/multicluster/federation.md}
 							{Ubernetes. Kubernetes Cluster Federation}
 				\item \href{https://opencontainers.org/}{Open Container Iniciative}
+				\item \href{https://blog.phusion.nl/2015/01/20/docker-and-the-pid-1-zombie-reaping-problem/}{Docker and the PID1 zombie reaping problem}
 
 				\item \href{https://scikit-learn.org/stable/}{Documentación scikit-learn}
 				\item \href{https://www.cs.toronto.edu/~frossard/post/linear_regression/}{Linear regression with NumPy}
