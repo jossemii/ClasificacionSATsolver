@@ -1,50 +1,69 @@
 This is BibTeX, Version 0.99d
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: out\InformeInicial.aux
-Reallocating 'name_of_file' (item size: 1) to 17 items.
+Reallocating 'name_of_file' (item size: 1) to 12 items.
 Reallocating 'name_of_file' (item size: 1) to 6 items.
 The style file: plain.bst
-I found no \citation commands---while reading file out\InformeInicial.aux
-Database file #1: bibliografia.bib
-You've used 0 entries,
+Database file #1: referencies.bib
+Warning--to sort, need author or key in isa-json-format
+Warning--to sort, need author or key in jfrog_2021
+Warning--to sort, need author or key in gregory
+Warning--to sort, need author or key in docker
+Warning--to sort, need author or key in nginx_2021
+Warning--to sort, need author or key in grpc
+Warning--to sort, need author or key in envoy
+Warning--to sort, need author or key in flatbuffers
+Warning--to sort, need author or key in gunicorn
+Warning--to sort, need author or key in ipfs
+Warning--to sort, need author or key in open_container_initiative
+Warning--to sort, need author or key in onnx
+Warning--to sort, need author or key in google
+Warning--to sort, need author or key in python_doc
+Warning--to sort, need author or key in restvsgrpc
+Warning--to sort, need author or key in scikit
+Warning--to sort, need author or key in red_hat
+Warning--to sort, need author or key in threading
+Warning--to sort, need author or key in flask
+Warning--to sort, need author or key in kubernetes_2020
+You've used 26 entries,
             2118 wiz_defined-function locations,
-            497 strings with 4025 characters,
-and the built_in function-call counts, 18 in all, are:
-= -- 0
-> -- 0
+            614 strings with 7161 characters,
+and the built_in function-call counts, 4479 in all, are:
+= -- 421
+> -- 62
 < -- 0
-+ -- 0
-- -- 0
-* -- 2
-:= -- 7
-add.period$ -- 0
-call.type$ -- 0
-change.case$ -- 0
++ -- 40
+- -- 12
+* -- 162
+:= -- 562
+add.period$ -- 57
+call.type$ -- 26
+change.case$ -- 84
 chr.to.int$ -- 0
-cite$ -- 0
-duplicate$ -- 0
-empty$ -- 1
-format.name$ -- 0
-if$ -- 1
+cite$ -- 46
+duplicate$ -- 182
+empty$ -- 593
+format.name$ -- 12
+if$ -- 1078
 int.to.chr$ -- 0
-int.to.str$ -- 0
+int.to.str$ -- 26
 missing$ -- 0
-newline$ -- 3
-num.names$ -- 0
-pop$ -- 0
+newline$ -- 112
+num.names$ -- 12
+pop$ -- 208
 preamble$ -- 1
-purify$ -- 0
+purify$ -- 58
 quote$ -- 0
-skip$ -- 1
+skip$ -- 199
 stack$ -- 0
-substring$ -- 0
-swap$ -- 0
+substring$ -- 132
+swap$ -- 26
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 0
-warning$ -- 0
-while$ -- 0
-width$ -- 0
-write$ -- 2
-(There was 1 error message)
+type$ -- 104
+warning$ -- 20
+while$ -- 12
+width$ -- 28
+write$ -- 204
+(There were 20 warnings)

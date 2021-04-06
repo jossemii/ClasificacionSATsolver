@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.3.25)  6 APR 2021 19:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.3.25)  6 APR 2021 19:43
 entering extended mode
 **c:/Users/jse/Desktop/TFG/InformeInicial.tex
 (c:/Users/jse/Desktop/TFG/InformeInicial.tex
@@ -502,26 +502,26 @@ File: l3backend-pdftex.def 2021-03-02 L3 backend support: PDF output (pdfTeX)
 ) (c:\Users\jse\Desktop\TFG\out\InformeInicial.aux)
 \openout1 = `InformeInicial.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Info: Redefining \l on input line 39.
-LaTeX Info: Redefining \L on input line 39.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Info: Redefining \l on input line 41.
+LaTeX Info: Redefining \L on input line 41.
  (C:\Users\jse\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count328
@@ -542,7 +542,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
 \c@lstlisting=\count334
-Package hyperref Info: Link coloring OFF on input line 39.
+Package hyperref Info: Link coloring OFF on input line 41.
  (C:\Users\jse\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
  (C:\Users\jse\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcount.sty
@@ -552,9 +552,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count335
 )
-LaTeX Info: Redefining \ref on input line 39.
-LaTeX Info: Redefining \pageref on input line 39.
-LaTeX Info: Redefining \nameref on input line 39.
+LaTeX Info: Redefining \ref on input line 41.
+LaTeX Info: Redefining \pageref on input line 41.
+LaTeX Info: Redefining \nameref on input line 41.
  (c:\Users\jse\Desktop\TFG\out\InformeInicial.out) (c:\Users\jse\Desktop\TFG\out\InformeInicial.out)
 \@outlinefile=\write4
 \openout4 = `InformeInicial.out'.
@@ -562,39 +562,76 @@ LaTeX Info: Redefining \nameref on input line 39.
 <logoUDL.png, id=26, 1284.8pt x 1009.7725pt>
 File: logoUDL.png Graphic file (type png)
 <use logoUDL.png>
-Package pdftex.def Info: logoUDL.png  used on input line 47.
+Package pdftex.def Info: logoUDL.png  used on input line 49.
 (pdftex.def)             Requested size: 199.16928pt x 156.52852pt.
  [1
 
 {C:/Users/jse/AppData/Local/MiKTeX/pdftex/config/pdftex.map} <./logoUDL.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 106--113
+Underfull \hbox (badness 10000) in paragraph at lines 108--115
 
  []
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.152 			\item D
+l.154 			\item D
                 escripci√≥n del desarrollo t√©cnico y de dise√±o del trabajo. [1] [2] (c:\Users\jse\Desktop\TFG\out\InformeInicial.bbl
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 6.
+ (C:\Users\jse\AppData\Local\Programs\MiKTeX\tex/latex/base\t1cmtt.fd
+File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.95> on input line 6.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 6.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 6.
+ [3]
+Underfull \hbox (badness 10000) in paragraph at lines 49--52
+[]\T1/cmr/m/n/10.95 Rest vs grpc.  []$\T1/cmtt/m/n/10.95 https : / / es . accentsconagua . com / articles / code /
+ []
 
-LaTeX Warning: Empty `thebibliography' environment on input line 3.
 
-) [3] (c:\Users\jse\Desktop\TFG\out\InformeInicial.aux)
+Underfull \hbox (badness 10000) in paragraph at lines 70--74
+[]\T1/cmr/m/n/10.95 æquÈ es ku-ber-ne-tes?  []$\T1/cmtt/m/n/10.95 https : / / kubernetes . io / es / docs / concepts / overview /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 76--80
+\T1/cmtt/m/n/10.95 knowledge-[]base / a-[]beginners-[]guide-[]to-[]understanding-[]and-[]building-[]docker-[]images/$[]\T1/cmr/m/n/10.95 ,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 97--100
+[]\T1/cmr/m/n/10.95 Nigel Brown.  Ex-plai-ning docker ima-ge ids.  []$\T1/cmtt/m/n/10.95 https : / / windsock . io /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 108--112
+[]\T1/cmr/m/n/10.95 Mano lin-gam.  Has-hes are uni-que.  []$\T1/cmtt/m/n/10.95 https : / / medium . com / predict /
+ []
+
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 121--124
+[]\T1/cmr/m/n/10.95 Real Pyt-hon.  Li-ne-ar re-gres-si-on in pyt-hon.  []$\T1/cmtt/m/n/10.95 https : / / realpython . com /
+ []
+
+) [5] (c:\Users\jse\Desktop\TFG\out\InformeInicial.aux)
 Package rerunfilecheck Info: File `InformeInicial.out' has not changed.
 (rerunfilecheck)             Checksum: 48A9A90DE8CC3C17D287B7D51BB357E8;759.
  ) 
 Here is how much of TeX's memory you used:
- 23431 strings out of 479324
- 443402 string characters out of 2857765
- 748458 words of memory out of 3000000
- 40460 multiletter control sequences out of 15000+600000
- 413166 words of font info for 41 fonts, out of 8000000 for 9000
+ 23522 strings out of 479324
+ 444942 string characters out of 2857765
+ 749305 words of memory out of 3000000
+ 40513 multiletter control sequences out of 15000+600000
+ 415919 words of font info for 50 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  102i,7n,102p,459b,822s stack positions out of 5000i,500n,10000p,200000b,80000s
- <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1000.pk> <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0600.pk> <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1095.pk> <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1200.pk> <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk> <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2488.pk>
-Output written on c:\Users\jse\Desktop\TFG\out\InformeInicial.pdf (4 pages, 140143 bytes).
+ <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1095.pk> <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1000.pk> <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0600.pk> <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1095.pk> <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1200.pk> <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk> <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2488.pk>
+Output written on c:\Users\jse\Desktop\TFG\out\InformeInicial.pdf (6 pages, 172975 bytes).
 PDF statistics:
- 344 PDF objects out of 1000 (max. 8388607)
- 26 named destinations out of 1000 (max. 500000)
+ 479 PDF objects out of 1000 (max. 8388607)
+ 54 named destinations out of 1000 (max. 500000)
  58 words of extra memory for PDF output out of 10000 (max. 10000000)
 

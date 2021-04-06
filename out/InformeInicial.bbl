@@ -1,3 +1,125 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{10}
+
+\bibitem{gregory}
+Deterministic and minimal docker images.
+\newblock
+  \url{https://gregoryszorc.com/blog/2014/10/13/deterministic-and-minimal-docker-images/}.
+
+\bibitem{grpc}
+Documentation grpc.
+\newblock \url{https://grpc.io/docs/}.
+
+\bibitem{envoy}
+Envoy proxy.
+\newblock \url{https://www.envoyproxy.io/}.
+
+\bibitem{flatbuffers}
+Flatbuffers documentation.
+\newblock \url{https://google.github.io/flatbuffers}.
+
+\bibitem{gunicorn}
+Gunicorn python.
+\newblock \url{https://gunicorn.org/#docs}.
+
+\bibitem{ipfs}
+Ipfs documentation.
+\newblock \url{https://docs.ipfs.io/}.
+
+\bibitem{isa-json-format}
+Isa-json format.
+\newblock \url{https://isa-specs.readthedocs.io/en/latest/isajson.html}.
+
+\bibitem{open_container_initiative}
+Open container initiative.
+\newblock \url{https://opencontainers.org/}.
+
+\bibitem{onnx}
+Open neural network exchange.
+\newblock \url{https://onnx.ai/}.
+
+\bibitem{google}
+Protocol buffers | google developers.
+\newblock \url{https://developers.google.com/protocol-buffers}.
+
+\bibitem{python_doc}
+Python 3.9.3 documentation.
+\newblock \url{https://docs.python.org/3/}.
+
+\bibitem{restvsgrpc}
+Rest vs grpc.
+\newblock
+  \url{https://es.accentsconagua.com/articles/code/rest-vs-grpc-battle-of-the-apis.html}.
+
+\bibitem{scikit}
+Scikit-learn.
+
+\bibitem{red_hat}
+Sistemas con estado y sin estado.
+\newblock
+  \url{https://www.redhat.com/es/topics/cloud-native-apps/stateful-vs-stateless}.
+
+\bibitem{threading}
+threading - gestionar operaciones concurrentes dentro de un proceso.
+\newblock \url{https://rico-schmidt.name/pymotw-3/threading/}.
+
+\bibitem{flask}
+Welcome to flask.
+\newblock \url{https://flask.palletsprojects.com/en/1.1.x/}.
+
+\bibitem{kubernetes_2020}
+¿qué es kubernetes?
+\newblock
+  \url{https://kubernetes.io/es/docs/concepts/overview/what-is-kubernetes/},
+  Jun 2020.
+
+\bibitem{jfrog_2021}
+A beginner's guide to understanding and building docker images.
+\newblock
+  \url{https://jfrog.com/knowledge-base/a-beginners-guide-to-understanding-and-building-docker-images/},
+  Mar 2021.
+
+\bibitem{docker}
+Docker documentation.
+\newblock \url{https://docs.docker.com/}, Apr 2021.
+
+\bibitem{nginx_2021}
+Documentacion ngnix.
+\newblock \url{https://www.nginx.com/}, Apr 2021.
+
+\bibitem{balakrishnan_2019}
+Ramanan Balakrishnan.
+\newblock A simplified guide to grpc in python.
+\newblock
+  \url{https://www.semantics3.com/blog/a-simplified-guide-to-grpc-in-python-6c4e25f0c506/},
+  Jan 2019.
+
+\bibitem{brown_2018}
+Nigel Brown.
+\newblock Explaining docker image ids.
+\newblock \url{https://windsock.io/explaining-docker-image-ids/}, Apr 2018.
+
+\bibitem{frossard_2016}
+Davi Frossard.
+\newblock Linear regression with numpy.
+\newblock \url{https://www.cs.toronto.edu/~frossard/post/linear_regression/},
+  May 2016.
+
+\bibitem{lingam_2019}
+Mano lingam.
+\newblock Hashes are unique.
+\newblock \url{https://medium.com/predict/hashes-are-unique-9af14fe3796a}, Apr
+  2019.
+
+\bibitem{minnihan_2021}
+John Minnihan.
+\newblock Understanding the docker cache for faster builds.
+\newblock
+  \url{https://thenewstack.io/understanding-the-docker-cache-for-faster-builds/},
+  Mar 2021.
+
+\bibitem{linear_regression}
+Real Python.
+\newblock Linear regression in python.
+\newblock \url{https://realpython.com/linear-regression-in-python/}, Mar 2021.
 
 \end{thebibliography}
