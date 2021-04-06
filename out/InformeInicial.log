@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.3.25)  3 APR 2021 22:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.3.25)  6 APR 2021 19:08
 entering extended mode
-**c:/Users/jse/Desktop/TFG/Memoria.tex
-(c:/Users/jse/Desktop/TFG/Memoria.tex
+**c:/Users/jse/Desktop/TFG/InformeInicial.tex
+(c:/Users/jse/Desktop/TFG/InformeInicial.tex
 LaTeX2e <2020-10-01> patch level 4
 L3 programming layer <2021-02-18> (C:\Users\jse\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
 Document Class: article 2020/04/10 v1.4m Standard LaTeX document class
@@ -499,8 +499,8 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 File: l3backend-pdftex.def 2021-03-02 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count327
 \l__pdf_internal_box=\box68
-) (c:\Users\jse\Desktop\TFG\out\Memoria.aux)
-\openout1 = `Memoria.aux'.
+) (c:\Users\jse\Desktop\TFG\out\InformeInicial.aux)
+\openout1 = `InformeInicial.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 39.
 LaTeX Font Info:    ... okay on input line 39.
@@ -555,11 +555,11 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 39.
 LaTeX Info: Redefining \pageref on input line 39.
 LaTeX Info: Redefining \nameref on input line 39.
- (c:\Users\jse\Desktop\TFG\out\Memoria.out) (c:\Users\jse\Desktop\TFG\out\Memoria.out)
+ (c:\Users\jse\Desktop\TFG\out\InformeInicial.out) (c:\Users\jse\Desktop\TFG\out\InformeInicial.out)
 \@outlinefile=\write4
-\openout4 = `Memoria.out'.
+\openout4 = `InformeInicial.out'.
 
-<logoUDL.png, id=14, 1284.8pt x 1009.7725pt>
+<logoUDL.png, id=26, 1284.8pt x 1009.7725pt>
 File: logoUDL.png Graphic file (type png)
 <use logoUDL.png>
 Package pdftex.def Info: logoUDL.png  used on input line 47.
@@ -567,55 +567,34 @@ Package pdftex.def Info: logoUDL.png  used on input line 47.
  [1
 
 {C:/Users/jse/AppData/Local/MiKTeX/pdftex/config/pdftex.map} <./logoUDL.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 106--138
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 106--138
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 106--138
+Underfull \hbox (badness 10000) in paragraph at lines 106--113
 
  []
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.150 				\item R
-                 andomCNF: No tiene parámetro de entrada, retorna un CNF ge... [1]
-Underfull \hbox (badness 10000) in paragraph at lines 157--159
+l.152 			\item D
+                escripción del desarrollo técnico y de diseño del trabajo. [1] [2] (c:\Users\jse\Desktop\TFG\out\InformeInicial.bbl
 
- []
+LaTeX Warning: Empty `thebibliography' environment on input line 3.
 
-<esquema_borrador.jpeg, id=33, 1001.99344pt x 645.16031pt>
-File: esquema_borrador.jpeg Graphic file (type jpg)
-<use esquema_borrador.jpeg>
-Package pdftex.def Info: esquema_borrador.jpeg  used on input line 162.
-(pdftex.def)             Requested size: 483.69684pt x 311.4454pt.
-
-Overfull \hbox (14.22638pt too wide) in paragraph at lines 161--163
-[] 
- []
-
-[2 <./esquema_borrador.jpeg>] (c:\Users\jse\Desktop\TFG\out\Memoria.aux)
-Package rerunfilecheck Info: File `Memoria.out' has not changed.
-(rerunfilecheck)             Checksum: 5F3974FB7A937ECFB00AC9ED9A67D88F;379.
+) [3] (c:\Users\jse\Desktop\TFG\out\InformeInicial.aux)
+Package rerunfilecheck Info: File `InformeInicial.out' has not changed.
+(rerunfilecheck)             Checksum: 48A9A90DE8CC3C17D287B7D51BB357E8;759.
  ) 
 Here is how much of TeX's memory you used:
- 23030 strings out of 479324
- 434568 string characters out of 2857765
- 739410 words of memory out of 3000000
- 40084 multiletter control sequences out of 15000+600000
- 410861 words of font info for 38 fonts, out of 8000000 for 9000
+ 23431 strings out of 479324
+ 443402 string characters out of 2857765
+ 748458 words of memory out of 3000000
+ 40460 multiletter control sequences out of 15000+600000
+ 413166 words of font info for 41 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 102i,6n,102p,452b,433s stack positions out of 5000i,500n,10000p,200000b,80000s
- <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1095.pk> <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1200.pk> <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk> <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2488.pk>
-Output written on c:\Users\jse\Desktop\TFG\out\Memoria.pdf (3 pages, 362249 bytes).
+ 102i,7n,102p,459b,822s stack positions out of 5000i,500n,10000p,200000b,80000s
+ <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1000.pk> <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0600.pk> <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1095.pk> <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1200.pk> <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk> <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\jse\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2488.pk>
+Output written on c:\Users\jse\Desktop\TFG\out\InformeInicial.pdf (4 pages, 140143 bytes).
 PDF statistics:
- 233 PDF objects out of 1000 (max. 8388607)
- 5 named destinations out of 1000 (max. 500000)
- 39 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 344 PDF objects out of 1000 (max. 8388607)
+ 26 named destinations out of 1000 (max. 500000)
+ 58 words of extra memory for PDF output out of 10000 (max. 10000000)
 
