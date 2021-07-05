@@ -4,7 +4,9 @@ FROM ubuntu:18.10
 ENV DEBIAN_FRONTEND=noninteractive
 
 # installing texlive and utils
-RUN apt-get update && \
+RUN grep -E 'archive.ubuntu.com|security.ubuntu.com' /etc/apt/sources.list.d/*  \
+    && grep -E 'archive.ubuntu.com|security.ubuntu.com' /etc/apt/sources.list.d/*  \
+    && apt-get update && \
     apt-get -y install --no-install-recommends pandoc texlive texlive-latex-extra texlive-generic-extra texlive-extra-utils texlive-fonts-extra texlive-bibtex-extra biber latexmk make git procps locales curl && \
     rm -rf /var/lib/apt/lists/*
 
