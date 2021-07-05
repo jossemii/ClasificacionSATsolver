@@ -1,13 +1,12 @@
-FROM ubuntu:18.10
+FROM ubuntu:latest
 
 # non interactive frontend for locales
 ENV DEBIAN_FRONTEND=noninteractive
 
 # installing texlive and utils
-RUN grep -E 'archive.ubuntu.com|security.ubuntu.com' /etc/apt/sources.list.d/*  \
-    && grep -E 'archive.ubuntu.com|security.ubuntu.com' /etc/apt/sources.list.d/*  \
-    && apt-get update && \
-    apt-get -y install --no-install-recommends pandoc texlive texlive-latex-extra texlive-generic-extra texlive-extra-utils texlive-fonts-extra texlive-bibtex-extra biber latexmk make git procps locales curl && \
+RUN  apt-get update && \
+    apt-get -y install --no-install-recommends pandoc texlive \
+    biber latexmk make git procps locales curl && \
     rm -rf /var/lib/apt/lists/*
 
 # generating locales
