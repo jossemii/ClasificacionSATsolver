@@ -4,9 +4,8 @@ FROM ubuntu:latest
 ENV DEBIAN_FRONTEND=noninteractive
 
 # installing texlive and utils
-RUN  apt-get update && \
-    apt-get -y install --no-install-recommends pandoc texlive \
-    biber latexmk make git procps locales curl && \
+RUN apt-get update && \
+    apt-get -y install --no-install-recommends pandoc texlive texlive-latex-extra texlive-extra-utils texlive-fonts-extra texlive-bibtex-extra biber latexmk make git procps locales curl && \
     rm -rf /var/lib/apt/lists/*
 
 # generating locales

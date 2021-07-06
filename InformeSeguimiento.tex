@@ -1,6 +1,5 @@
 \documentclass[11pt]{article}
 \usepackage[T1]{fontenc}
-\usepackage[catalan]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{multirow}
 \usepackage{graphicx}
@@ -105,23 +104,21 @@
 	\newpage
 	
 	\section{Evolución del trabajo}
-		\\
 		Los puntos principales en los que se dividió el proyecto durante el informe inicial fueron:
 		\begin{itemize}
 			\item Definir, de manera simple, 
 				las reglas básicas de cada uno de los componentes de un sistema distribuido de servicios,
 				y como se definen e interaccionan entre sí.
-			\item Dar uso del sistema para realizar una prueba concepto sobre un problema concreto, la resolución de problemas SAT.
+			\item Dar uso del sistema para realizar una prueba concepto sobre un problema concreto, la resolución de problemas SAT. \leavevmode \\
 		\end{itemize}
-		\\
 		De esto, el primer punto, la especificación de las reglas básicas del sistema, se puede dar por terminado, puesto que,
 		aunque es posible que se requiera alguna modificación durante el périodo restante,
-		se ha desarrollado hasta el punto de permitir la ejecución del segundo punto. \\
-		\\
+		se ha desarrollado hasta el punto de permitir la ejecución del segundo punto. 
+
 		El segundo punto, el desarrollo de una solución a un problema concreto (resolución de SAT), ha sido desarrollado parcialmente.
 		Recordemos que esto cubre dos desarrollos paralelos, por un lado el aplicativo del nodo y por otro los servicios para Clasificar
-		y resolver solvers.\\
-		\\
+		y resolver solvers.
+
 		Por la parte del nodo, actualmente es posible construir y ejecutar servicios. A su vez, se ha implementado la lógica requerida para registrar
 		todos los servicios levantados por el nodo, creando un árbol de dependencias para poder detener aquellos cuyo padre haya sido detenido, tanto para 
 		servicios solicitados localmente como por pares (otros nodos).
@@ -130,7 +127,7 @@
 			\item Encontrar e identificar otros nodos de la red.
 			\item Balancear la solicitud de nuevas instancias de servicios.
 		\end{itemize}
-		\\
+
 		Por la parte del servicio de clasificación, se han completado los tres puntos acordados en el informe inicial, estos eran:
 		\begin{itemize}
 			\item Cargar especificaciones de SAT-solvers, pedirle al nodo que le devuelva
@@ -141,38 +138,37 @@
 		Conviene la realización de varios puntos más, a saber:
 		\begin{itemize}
 			\item Balanceo de carga de las solicitudes sobre la resolución de cnf's.
-			\item Comprobar, dando uso de solvers modificados para realizar la prueba, el correcto funcionamiento tanto de la 
-				clasificación como de la regresión del modelo.
+			\item Comprobar, dando uso de solvers modificados para realizar la prueba, el correcto funcionamiento tanto de la clasificación como de la regresión del modelo. \leavevmode \\
 		\end{itemize}
-		\\
+
 		Sobre el balanceo de instancias y peticioens en el clasificador, se debe de tener en cuenta que:
 		\begin{itemize}
-			\item Por un lado, el clasificador debe de levantar tantas instancias de un solver como se necesite, entre el nodo local y sus pares. 
+			\item Por un lado, el clasificador debe de levantar tantas instancias de un solver como se necesite, entre el nodo local y sus pares.
 				(Decir que el balanceo de instancias es
 				responsabilidad del nodo, él decide en que nodo de la red se ejecuta cada instancia.)
-			\item Por otro lado, el balanceo de peticiones para resolver cnf's corre a cargo del servicio de clasificación, ya que es a este al que lo solicita
+			\item Por otro lado, el balanceo de peticiones para resolver cnf's corre a cargo del servicio de clasificación, ya que es a este al que lo solicita 
 				el cliente.
 				El servicio de clasificación, por tanto, deberá seleccionar el solver más optimo para el cnf dado, y, tras esto, seleccionar la instancia de dicho
 				solver con menos carga en ese momento.
 		\end{itemize}
-		\\
-		Además de lo mencionado anteriormente, tambien cabría tener en cuenta la necesidad de
-		realizar múltiples solicitudes al servicio de clasificación.Sobre esto cabe preguntarse: \\
 
-		¿Cómo realizan múltiples clientes solicitudes al servicio de clasificación? \\
-		\\
+		Además de lo mencionado anteriormente, tambien cabría tener en cuenta la necesidad de
+		realizar múltiples solicitudes al servicio de clasificación.Sobre esto cabe preguntarse:
+	
+		¿Cómo realizan múltiples clientes solicitudes al servicio de clasificación?
+
 		En base a la arquitectura anteriormente desarrollada, si un cliente quiere dar uso de un servicio, este solicita la creación de una instancia del mismo a su nodo,
 		por lo tanto, si n clientes quieren dar uso del servicio, serán necesarias n instancias de este, a fin de cuentas, la instancia de un servicio, un contenedor, no es
-		más que un hilo aislado. \\
+		más que un hilo aislado. 
 		Por lo tanto, el paradigma cliente/servidor se ve alterado al hablar de servicios distribuidos. En vez de un servidor atendiendo múltiples clientes, un cliente solicita
-		el despliegue de un servicio. \\
+		el despliegue de un servicio. 
 		En terminos de rendimiento no debería existir una gran diferencia entre un esquema y otro, puesto que el servidor centralizado termina ejecutando n hilos para n solicitudes
 		de clientes, en los servicios distribuidos estos hilos se aislan (esto puede ser un punto negativo sobre el uso de memoria compartida) y se reparten entre los nodos de la red.
-		\\
+
 		Ahora bien, en caso de querer realizar un servicio web, al que poder, tal vez, conectar con un frontend en un navegador, será necesario un nuevo servicio el cual se encargue
-		de recibir las solicitudes de los clientes y desplegar y dar uso del servicio de clasificación. \\
+		de recibir las solicitudes de los clientes y desplegar y dar uso del servicio de clasificación. 
 		Este servicio por tanto, puede ser comprendido como un puente entre la "web tradicional" y una red de servicios distribuidos.
-		\\ ESQUEMA \\
+		ESQUEMA
 
 	\section{Decisiones técnicas que se han tomado}
 		\begin{itemize}
@@ -187,7 +183,7 @@
 			\item Definir, de manera simple, 
 				las reglas básicas de cada uno de los componentes de un sistema distribuido de servicios,
 				y como se definen e interaccionan entre sí.
-			\item Dar uso del sistema para realizar una prueba concepto sobre un problema concreto, la resolución de problemas SAT.
+			\item Dar uso del sistema para realizar una prueba concepto sobre un problema concreto, la resolución de problemas SAT. \leavevmode \\
 		\end{itemize}
 
 		Más concretamente, los objetivos son:

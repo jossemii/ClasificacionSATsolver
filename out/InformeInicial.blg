@@ -1,8 +1,6 @@
-This is BibTeX, Version 0.99d
+This is BibTeX, Version 0.99d (TeX Live 2019/Debian)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
-The top-level auxiliary file: out\InformeInicial.aux
-Reallocating 'name_of_file' (item size: 1) to 12 items.
-Reallocating 'name_of_file' (item size: 1) to 6 items.
+The top-level auxiliary file: InformeInicial.aux
 The style file: plain.bst
 Database file #1: referencies.bib
 Warning--to sort, need author or key in isa-json-format
@@ -27,7 +25,7 @@ Warning--to sort, need author or key in flask
 Warning--to sort, need author or key in kubernetes_2020
 You've used 26 entries,
             2118 wiz_defined-function locations,
-            614 strings with 7161 characters,
+            614 strings with 7153 characters,
 and the built_in function-call counts, 4479 in all, are:
 = -- 421
 > -- 62
