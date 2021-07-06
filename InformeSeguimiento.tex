@@ -113,11 +113,11 @@
 		\end{itemize}
 		De esto, el primer punto, la especificación de las reglas básicas del sistema, se puede dar por terminado, puesto que,
 		aunque es posible que se requiera alguna modificación durante el périodo restante,
-		se ha desarrollado hasta el punto de permitir la ejecución del segundo punto. 
+		se ha desarrollado hasta el punto de permitir la ejecución del segundo punto. \\ 
 
 		El segundo punto, el desarrollo de una solución a un problema concreto (resolución de SAT), ha sido desarrollado parcialmente.
 		Recordemos que esto cubre dos desarrollos paralelos, por un lado el aplicativo del nodo y por otro los servicios para Clasificar
-		y resolver solvers.
+		y resolver solvers. \\
 
 		Por la parte del nodo, actualmente es posible construir y ejecutar servicios. A su vez, se ha implementado la lógica requerida para registrar
 		todos los servicios levantados por el nodo, creando un árbol de dependencias para poder detener aquellos cuyo padre haya sido detenido, tanto para 
@@ -125,7 +125,7 @@
 		Queda, por tanto, implementar la lógica para que los nodos sean capaces de:
 		\begin{itemize}
 			\item Encontrar e identificar otros nodos de la red.
-			\item Balancear la solicitud de nuevas instancias de servicios.
+			\item Balancear la solicitud de nuevas instancias de servicios. \\
 		\end{itemize}
 
 		Por la parte del servicio de clasificación, se han completado los tres puntos acordados en el informe inicial, estos eran:
@@ -141,7 +141,7 @@
 			\item Comprobar, dando uso de solvers modificados para realizar la prueba, el correcto funcionamiento tanto de la clasificación como de la regresión del modelo. \leavevmode \\
 		\end{itemize}
 
-		Sobre el balanceo de instancias y peticioens en el clasificador, se debe de tener en cuenta que:
+		Sobre el balanceo de instancias y peticiones en el clasificador, se debe de tener en cuenta que:
 		\begin{itemize}
 			\item Por un lado, el clasificador debe de levantar tantas instancias de un solver como se necesite, entre el nodo local y sus pares.
 				(Decir que el balanceo de instancias es
@@ -155,7 +155,7 @@
 		Además de lo mencionado anteriormente, tambien cabría tener en cuenta la necesidad de
 		realizar múltiples solicitudes al servicio de clasificación.Sobre esto cabe preguntarse:
 	
-		¿Cómo realizan múltiples clientes solicitudes al servicio de clasificación?
+		¿Cómo realizan múltiples clientes solicitudes al servicio de clasificación? \\
 
 		En base a la arquitectura anteriormente desarrollada, si un cliente quiere dar uso de un servicio, este solicita la creación de una instancia del mismo a su nodo,
 		por lo tanto, si n clientes quieren dar uso del servicio, serán necesarias n instancias de este, a fin de cuentas, la instancia de un servicio, un contenedor, no es
@@ -163,49 +163,40 @@
 		Por lo tanto, el paradigma cliente/servidor se ve alterado al hablar de servicios distribuidos. En vez de un servidor atendiendo múltiples clientes, un cliente solicita
 		el despliegue de un servicio. 
 		En terminos de rendimiento no debería existir una gran diferencia entre un esquema y otro, puesto que el servidor centralizado termina ejecutando n hilos para n solicitudes
-		de clientes, en los servicios distribuidos estos hilos se aislan (esto puede ser un punto negativo sobre el uso de memoria compartida) y se reparten entre los nodos de la red.
+		de clientes, en los servicios distribuidos estos hilos se aislan (esto puede ser un punto negativo sobre el uso de memoria compartida) 
+		y se reparten entre los nodos de la red. \\
 
 		Ahora bien, en caso de querer realizar un servicio web, al que poder, tal vez, conectar con un frontend en un navegador, será necesario un nuevo servicio el cual se encargue
 		de recibir las solicitudes de los clientes y desplegar y dar uso del servicio de clasificación. 
 		Este servicio por tanto, puede ser comprendido como un puente entre la "web tradicional" y una red de servicios distribuidos.
+		
 		ESQUEMA
 
 	\section{Decisiones técnicas que se han tomado}
-		\begin{itemize}
-			\item Varias instancias no pueden compartir depencencias.
-			\item Comunicación nodo-servicio.
-			\item Serialización y topología de la especificación de un servicio.
-			\item Json vs GRPC
-		\end{itemize}
+		\subsection{Varias instancias no pueden compartir depencencias}
+			lsdkfndapifkdav kdnañfm 
+		\subsection{Comunicación nodo-servicio}
+			akfnadlnfndafiea 
+		\subsection{Serialización y topología de la especificación de un servicio}
+			adfkdafda 
+		\subsection{Json vs GRPC} 
+			Json se ha combertido en prácticamente un estandar a la hora de compartir información en la web debido a que es el sistema de Serialización de Javascript, y este, a su vez,
+			es el lenguaje estandarizado para ejecutar en los navegadorres web. \\
+
+			Pero en una red de microservicios, donde los entornos de ejecución son virtualizados, Javascript pierde protagonismo y, por tanto, Json también.
+			Es por esto que cabe preguntarse cual es la mejor forma de serializar las comunicaciones entre servicios. Al ser evidente que no existe un protocolo capaz de
+			liderar en cualquier ámbito indefinidamente cada Slot de un servicio definirá el protocolo soportado. \\
+
+			Concretamente, para este proyecto, se dará uso de Grpc. Principalmente se da uso de esta tecnología por dos razones:
+			\begin{itemize}
+				\item Protobuf, su lenguaje de serialización, consigue comprimir bytes de manera muy eficiente enfocando los buffers a cada topología de mensajes.
+				\item Utiliza Http/2, por lo que está preparado para realizar streaming bidireccional de manera eficiente.
+			\end{itemize}
+			Otros protocolos tambien a tener en cuenta podrían ser Flatbuffers o Capt'n proto.
+
 	\section{Evaluación crítica del estado del trabajo}
-		Este trabajo pretende dos cosas:
-		\begin{itemize}
-			\item Definir, de manera simple, 
-				las reglas básicas de cada uno de los componentes de un sistema distribuido de servicios,
-				y como se definen e interaccionan entre sí.
-			\item Dar uso del sistema para realizar una prueba concepto sobre un problema concreto, la resolución de problemas SAT. \leavevmode \\
-		\end{itemize}
 
-		Más concretamente, los objetivos son:
-		\begin{itemize}
-			\item Diseño de la especificacion de un servicio.
-			\item Desarrollo de un nodo con capacidad para:
-			\begin{itemize}
-				\item Construir y ejecutar servicios.
-				\item Compartir servicios con el resto de los nodos de la red.
-				\item Balancear la carga de servicios entre sí mismo y el resto de nodos de la red.
-			\end{itemize}
-			\item Desarrollo de un servicio de clasificación y seleccion de servicios que 
-			resuelven SAT. Este debe ser capaz de:
-			\begin{itemize}
-				\item Cargar especificaciones de SAT-solvers, pedirle al nodo que le devuelva
-				 instancias de los mismos, mantenerlos (comprobar que siguen activos).
-				\item Clasificar los SAT-solvers que se le han especificado.
-				\item Seleccionar un SAT-solver en funcion de un CNF dado.
-			\end{itemize}
-		\end{itemize}
-
-	\end{document}
+\end{document}
 
 
 
