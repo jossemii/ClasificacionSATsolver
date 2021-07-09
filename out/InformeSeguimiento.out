@@ -1,6 +1,6 @@
 \BOOKMARK [1][-]{section.1}{Evoluci\363n del trabajo}{}% 1
 \BOOKMARK [1][-]{section.2}{Decisiones t\351cnicas que se han tomado}{}% 2
-\BOOKMARK [2][-]{subsection.2.1}{Varias instancias no pueden compartir depencencias}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.1}{Varias instancias no pueden compartir dependencias}{section.2}% 3
 \BOOKMARK [2][-]{subsection.2.2}{Comunicaci\363n nodo-servicio}{section.2}% 4
 \BOOKMARK [2][-]{subsection.2.3}{Serializaci\363n y topolog\355a de la especificaci\363n de un servicio}{section.2}% 5
 \BOOKMARK [2][-]{subsection.2.4}{Json vs GRPC}{section.2}% 6

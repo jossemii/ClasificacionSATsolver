@@ -111,8 +111,8 @@
 				y como se definen e interaccionan entre sí.
 			\item Dar uso del sistema para realizar una prueba concepto sobre un problema concreto, la resolución de problemas SAT. \leavevmode \\
 		\end{itemize}
-		De esto, el primer punto, la especificación de las reglas básicas del sistema, se puede dar por terminado, puesto que,
-		aunque es posible que se requiera alguna modificación durante el périodo restante,
+		De esto, el primer punto, la especificación de las reglas básicas del sistema, se puede dar por terminado puesto que,
+		aunque es posible que se requiera alguna modificación durante el período restante,
 		se ha desarrollado hasta el punto de permitir la ejecución del segundo punto. \\ 
 
 		El segundo punto, el desarrollo de una solución a un problema concreto (resolución de SAT), ha sido desarrollado parcialmente.
@@ -125,15 +125,15 @@
 		Queda, por tanto, implementar la lógica para que los nodos sean capaces de:
 		\begin{itemize}
 			\item Encontrar e identificar otros nodos de la red.
-			\item Balancear la solicitud de nuevas instancias de servicios. \\
+			\item Balancear la construcción de nuevas instancias de servicios. \\
 		\end{itemize}
 
 		Por la parte del servicio de clasificación, se han completado los tres puntos acordados en el informe inicial, estos eran:
 		\begin{itemize}
 			\item Cargar especificaciones de SAT-solvers, pedirle al nodo que le devuelva
-			 instancias de los mismos, mantenerlos (comprobar que siguen activos).
+			 instancias de los mismos y mantenerlos (comprobar que siguen activos).
 			\item Clasificar los SAT-solvers que se le han especificado.
-			\item Seleccionar un SAT-solver en funcion de un CNF dado.
+			\item Seleccionar un SAT-solver en función de un cnf dado.
 		\end{itemize}
 		Conviene la realización de varios puntos más, a saber:
 		\begin{itemize}
@@ -143,26 +143,26 @@
 
 		Sobre el balanceo de instancias y peticiones en el clasificador, se debe de tener en cuenta que:
 		\begin{itemize}
-			\item Por un lado, el clasificador debe de levantar tantas instancias de un solver como se necesite, entre el nodo local y sus pares.
-				(Decir que el balanceo de instancias es
+			\item Por un lado, el clasificador debe de levantar tantas instancias de un solver como se necesite entre el nodo local y sus pares.
+				(El balanceo de instancias es
 				responsabilidad del nodo, él decide en que nodo de la red se ejecuta cada instancia).
-			\item Por otro lado, el balanceo de peticiones para resolver cnf's corre a cargo del servicio de clasificación, ya que es a este al que lo solicita 
+			\item Por otro lado, el balanceo de peticiones para resolver cnf's corre a cargo del servicio de clasificación, ya que es a éste al que lo solicita 
 				el cliente.
-				El servicio de clasificación, por tanto, deberá seleccionar el solver más optimo para el cnf dado, y, tras esto, seleccionar la instancia de dicho
+				El servicio de clasificación, por tanto, deberá seleccionar el solver más óptimo para el cnf dado y, tras esto, seleccionar la instancia de dicho
 				solver con menos carga en ese momento.
 		\end{itemize}
 
-		Además de lo mencionado anteriormente, tambien cabría tener en cuenta la necesidad de
-		realizar múltiples solicitudes al servicio de clasificación.Sobre esto cabe preguntarse:
+		Además de lo mencionado anteriormente, también hay que tener en cuenta la necesidad de
+		realizar múltiples solicitudes al servicio de clasificación. Sobre esto cabe preguntarse:
 	
 		¿Cómo realizan múltiples clientes solicitudes al servicio de clasificación? \\
 
-		En base a la arquitectura anteriormente desarrollada, si un cliente quiere dar uso de un servicio, este solicita la creación de una instancia del mismo a su nodo,
-		por lo tanto, si n clientes quieren dar uso del servicio, serán necesarias n instancias de este, a fin de cuentas, la instancia de un servicio, un contenedor, no es
+		En base a la arquitectura anteriormente desarrollada, si un cliente quiere dar uso de un servicio, éste solicita la creación de una instancia del mismo a su nodo,
+		por lo tanto, si n clientes quieren dar uso del servicio, serán necesarias n instancias de éste, a fin de cuentas, la instancia de un servicio, un contenedor, no es
 		más que un hilo aislado. 
 		Por lo tanto, el paradigma cliente/servidor se ve alterado al hablar de servicios distribuidos. En vez de un servidor atendiendo múltiples clientes, un cliente solicita
 		el despliegue de un servicio. 
-		En terminos de rendimiento no debería existir una gran diferencia entre un esquema y otro, puesto que el servidor centralizado termina ejecutando n hilos para n solicitudes
+		En términos de rendimiento no debería existir una gran diferencia entre un esquema y otro, puesto que el servidor centralizado termina ejecutando n hilos para n solicitudes
 		de clientes, en los servicios distribuidos estos hilos se aislan (esto puede ser un punto negativo sobre el uso de memoria compartida) 
 		y se reparten entre los nodos de la red. \\
 
@@ -173,39 +173,40 @@
 		\includegraphics[width=16cm]{Esquema_puente.jpg}
 
 	\section{Decisiones técnicas que se han tomado}
-		\subsection{Varias instancias no pueden compartir depencencias}
+		\subsection{Varias instancias no pueden compartir dependencias}
 			La naturaleza que adopta la red crea una jerarquía de instancias de servicios repartidas entre los nodos de la mísma. \\
-			Esto significa que, cuando una instancia (padre) solicita una instancia de otro servicio (hijo) este último
+			Esto significa que, cuando una instancia (padre) solicita una instancia de otro servicio (hijo), este último
 			pasará a ser dependiente del primero, adoptando el padre el derecho a decidir cuando debe de morir el hijo y la responsabilidad
 			sobre su consumo (en caso en que un nodo realice un seguimiento del consumo de cada instancia, podrá tener en cuenta el de sus dependencias).
-			De esta forma, si se mata al padre, el nodo donde se ejecute su hijo podrá matar a este. \\
+			De esta forma, si se mata al padre, el nodo donde se este ejecutando su hijo podrá matarlo. \\
 			Si no fuera asi, un nodo no sabría que instancias quedan en estado 'zombie' ya que ninguno de sus clientes 
 			(instancias padre) se haría responsable.
 
 		\subsection{Comunicación nodo-servicio}
-			Definir como debe comportarse el sistema requiere abordar cuales son los deberes y derechos de sus componentes. \\
+			Definir como debe comportarse un sistema requiere abordar cuales son los deberes y derechos de sus componentes. \\
 
-			Un nodo debe de proporcionar una interfaz con la que los servicios puedan comunicarse, esta incluye la dirección
-			a la que el servicio le realizará sus solicitudes. La forma en la que el nodo carga este y otros componentes en una nueva instancia
-			es mediante un archivo binario en la raiz del sistema de ficheros del servicio, esto es así ya que el servicio podría requerir de
+			Un nodo debe de proporcionar una interfaz con la que los servicios puedan comunicarse, junto con la dirección
+			a la que el servicio le realizará sus solicitudes. La forma en la que el nodo carga estos componentes en una nueva instancia
+			es mediante un archivo binario en la raiz del sistema de ficheros del servicio. Esto es así ya que el servicio podría requerir de
 			estos datos antes de levantar su servidor. \\
 
-			Ante la solicitud de una nueva instancia, un nodo tiene el derecho de, o bien, construir esta instancia localmente, o bien, solicitarle la instancia
-			a un par (otro nodo). Así mismo, el nodo tiene el deber de retornar tanto una dirección con la que comunicarse con la nueva instancia como un token
-			para realizar acciones sobre ella al solicitante. \\
+			Ante la solicitud de una nueva instancia, un nodo tiene el derecho de, o bien construir esta instancia localmente, o bien solicitarle la instancia
+			a un par (otro nodo). Así mismo, el nodo tiene el deber de retornar tanto una dirección con la que comunicarse con la nueva instancia, como un token
+			para realizar acciones sobre ella al solicitante.
 			En caso de crear la dependencia de un servicio en un par, el nodo debe de asegurarse que el solicitante tenga acceso a la dirección que le otorga para
 			comunicarse con su dependencia. \\
 
-			Esta arquitectura permite a un servicio no preocuparse del nodo donde se ejecutará cada dependencia, del mismo modo que los nodos no se preocuparán de
-			la utilidad que puedan tener las instancias que ejecuta. \\
+			Esta arquitectura permite a un servicio no preocuparse del nodo donde se ejecutará cada dependencia. Del mismo modo que los nodos no se preocuparán de
+			la utilidad que puedan tener las instancias que ejecutan. \\
 			
-			Por tanto, para resumir, durante la construccion de la instancia de un servicio, el nodo añade en su raiz un binario que contiene como comunicarse con él.
-			Si el servicio quiere dar uso de una dependecia, le enviará la especificación de esta al nodo, y este le devolverá una dirección con la que comunicarse y
-			token para poder matarla. Será el nodo el que busque donde construir esa dependencia, si localmente, o en alguno de sus pares. También será el nodo el que,
+			Por tanto, para resumir, durante la construcción de la instancia de un servicio, el nodo añade en su raiz un binario que contiene como comunicarse con él.
+			Si el servicio quiere dar uso de una dependencia, le enviará la especificación de ésta al nodo, y éste le devolverá una dirección con la que comunicarse y
+			un token para poder matarla. Será el nodo el que busque donde construir esa dependencia, si localmente o en alguno de sus pares. También será el nodo el que,
 			en caso de matar a la primera instancia, acabe con la segunda.
 
 		\subsection{Serialización y topología de la especificación de un servicio}
 			La especificación de un servico se serializa en un binario Protobuf. \\
+
 			Está compuesto por los siguientes elementos:
 			\begin{itemize}
 				\item hash: Lista de hashes (del tipo sha256:913ref3...) sobre el binario del resto de la especificación.
@@ -215,26 +216,29 @@
 						\item la arquitectura, define el hardware y el kernel donde se debe de ejecutar el servicio.
 						\item el punto de entrada, define la ruta del primer ejecutable del servicio.
 						\item el sistema de archivos, representado en un árbol donde las hojas son los archivos en binario.
-						\item las variables de entorno, lista compuesta por llave y definicion del campo de cada variable. 
+						\item las variables de entorno, lista compuesta por llave y definición del campo de cada variable. 
 					\end{itemize} 
-				\item Api: Define cómo se puede interactuar con el servicio, toma forma de lista de slots, cada uno compuesto por los siguentes elementos:
+				\item Api: Define cómo se puede interactuar con el servicio, constituida por:
 					\begin{itemize}
-						\item puerto donde escucha.
-						\item protocolos de comunicación que soporta (HTTP/2, GRPC, ...)
 						\item interfaz de la aplicación (mensajes, métodos y errores y respuestas de cada uno).
-					\end{itemize}
-				\item Tensor:
-				\item Ledger:
+						\item lista de slots, cada uno compuesto por los siguentes elementos:
+							\begin{itemize}
+								\item puerto donde escucha.
+								\item protocolo de comunicación que soporta (HTTP/2, GRPC ...).
+							\end{itemize}
+					\end{itemize} 
+				\item Tensor: Opcional. Definie la topología del modelo que entrena el servicio. Un servicio podría solicitar al nodo que le retorne las instancias
+					de aquellos servicios que tengan un tensor determinado y con ellas realizar solicitudes a servicios que ya tienen el modelo entrenado.
 			\end{itemize}
 		\subsection{Json vs GRPC} 
-			Json se ha combertido en prácticamente un estandar a la hora de compartir información en la web debido a que es el sistema de Serialización de Javascript, y este, a su vez,
-			es el lenguaje estandarizado para ejecutar en los navegadorres web. \\
+			Json se ha convertido en prácticamente un estandar a la hora de compartir información en la web, debido a que es el sistema de serialización de Javascript, y éste, a su vez,
+			es el lenguaje estandarizado para ejecutarse en los navegadores web. \\
 
 			Pero en una red de microservicios, donde los entornos de ejecución son virtualizados, Javascript pierde protagonismo y, por tanto, Json también.
 			Es por esto que cabe preguntarse cual es la mejor forma de serializar las comunicaciones entre servicios. Al ser evidente que no existe un protocolo capaz de
-			liderar en cualquier ámbito indefinidamente cada Slot de un servicio definirá el protocolo soportado. \\
+			liderar ni en cualquier ámbito ni indefinidamente, cada Slot de un servicio definirá el protocolo soportado. \\
 
-			Concretamente, para este proyecto, se dará uso de Grpc. Principalmente se da uso de esta tecnología por dos razones:
+			Concretamente para este proyecto se dará uso de Grpc, principalmente por dos razones:
 			\begin{itemize}
 				\item Protobuf, su lenguaje de serialización, consigue comprimir bytes de manera muy eficiente enfocando los buffers a cada topología de mensajes.
 				\item Utiliza Http/2, por lo que está preparado para realizar streaming bidireccional de manera eficiente.
@@ -242,7 +246,10 @@
 			Otros protocolos tambien a tener en cuenta podrían ser Flatbuffers o Capt'n proto.
 
 	\section{Evaluación crítica del estado del trabajo}
-		
+		En base a la planificación temporal del informe inicial, podemos concluir que existe cierto retraso en cuanto a la tercera 
+		fase de desarrollo, la cual cubre todo lo mencionado anteriormente (balanceo de instancias, balanceo de solicitudes y conexión de nodos).
+
+		Por lo tanto, con el fin de dejar margen a la redacción de la memoria, sería necesario terminar el desarrollo del trabajo en el mes de Julio.
 \end{document}
 
 
