@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex out/InformeInicial"] 1628070956 "out/InformeInicial.aux" "out/InformeInicial.bbl" "out/InformeInicial" 1628070959
+["bibtex out/InformeInicial"] 1628091362 "out/InformeInicial.aux" "out/InformeInicial.bbl" "out/InformeInicial" 1628091489
   "/usr/share/texlive/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "out/InformeInicial.aux" 1628070959 1979 491ee342e8156e6a02987f34c2255b8d "pdflatex"
+  "out/InformeInicial.aux" 1628091488 1979 491ee342e8156e6a02987f34c2255b8d "pdflatex"
   "referencies.bib" 1625408918 4844 afa1ce7939756283a9b1509eba888e36 ""
   (generated)
   "out/InformeInicial.bbl"
   "out/InformeInicial.blg"
-["pdflatex"] 1628070956 "/workspaces/TFG/InformeInicial.tex" "out/InformeInicial.pdf" "InformeInicial" 1628070959
+["pdflatex"] 1628091485 "/workspaces/TFG/InformeInicial.tex" "out/InformeInicial.pdf" "InformeInicial" 1628091489
   "/etc/texmf/web2c/texmf.cnf" 1627907346 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk" 1627913831 25396 233f28375bac6d9c5f5786d95f35b2ce ""
   "/root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk" 1627913839 28952 8405b8dea1fde23fbcc72dd021693b56 ""
@@ -177,14 +177,14 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1581979058 38841 ce3692aa899bb693b90b87eaa5d4d84e ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1627907366 4338190 ccf23483f29b6bdb7012ae3a472369b6 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1627907374 4791331 3af588c0323212be6a096a0d7c9db9d0 ""
-  "/workspaces/TFG/InformeInicial.tex" 1628070950 10010 b96e6797ad1631ec2c6ef95e023a1f37 ""
-  "InformeInicial.tex" 1628070950 10010 b96e6797ad1631ec2c6ef95e023a1f37 ""
-  "logoUDL.png" 1625408918 54916 91d6c0ac60e5498c70d0a6df71d1f6f4 ""
-  "out/InformeInicial.aux" 1628070959 1979 491ee342e8156e6a02987f34c2255b8d "pdflatex"
-  "out/InformeInicial.bbl" 1628070956 3298 0e417d1a14365a89823bebacd243c060 "bibtex out/InformeInicial"
-  "out/InformeInicial.out" 1628070959 286 cf4dce3e3accc21e04a0170a4a2a0762 "pdflatex"
+  "/workspaces/TFG/InformeInicial.tex" 1628091483 10014 d0b783815f14b31483bd81e955d54766 ""
+  "InformeInicial.tex" 1628091483 10014 d0b783815f14b31483bd81e955d54766 ""
+  "img/logoUDL.png" 1628091337 35418 6c677a9abca593331753216d953bc773 ""
+  "out/InformeInicial.aux" 1628091488 1979 491ee342e8156e6a02987f34c2255b8d "pdflatex"
+  "out/InformeInicial.bbl" 1628091362 3298 0e417d1a14365a89823bebacd243c060 "bibtex out/InformeInicial"
+  "out/InformeInicial.out" 1628091488 286 cf4dce3e3accc21e04a0170a4a2a0762 "pdflatex"
   (generated)
-  "out/InformeInicial.aux"
   "out/InformeInicial.log"
   "out/InformeInicial.out"
   "out/InformeInicial.pdf"
+  "out/InformeInicial.aux"

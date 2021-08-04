@@ -242,9 +242,9 @@ OUTPUT out/InformeSeguimiento.pdf
 INPUT out/InformeSeguimiento.out
 INPUT out/InformeSeguimiento.out
 OUTPUT out/InformeSeguimiento.out
-INPUT logoUDL.png
-INPUT ./logoUDL.png
-INPUT ./logoUDL.png
+INPUT img/logoUDL.png
+INPUT ./img/logoUDL.png
+INPUT ./img/logoUDL.png
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm2488.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecbx2488.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm1440.tfm
@@ -255,9 +255,9 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm1200.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecti1200.tfm
 INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm
-INPUT Esquema_puente.jpg
-INPUT ./Esquema_puente.jpg
-INPUT ./Esquema_puente.jpg
+INPUT img/Esquema_puente.jpg
+INPUT ./img/Esquema_puente.jpg
+INPUT ./img/Esquema_puente.jpg
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecbx1200.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm0600.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm1000.tfm

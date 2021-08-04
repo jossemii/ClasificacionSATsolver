@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.8.2)  4 AUG 2021 10:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.8.2)  4 AUG 2021 15:39
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -531,14 +531,14 @@ LaTeX Info: Redefining \nameref on input line 40.
 \openout4 = `InformeSeguimiento.out'.
 
  ABD: EveryShipout initializing macros
-<logoUDL.png, id=35, 1284.8pt x 1009.7725pt>
-File: logoUDL.png Graphic file (type png)
-<use logoUDL.png>
-Package pdftex.def Info: logoUDL.png  used on input line 48.
-(pdftex.def)             Requested size: 199.16928pt x 156.52852pt.
+<img/logoUDL.png, id=35, 714.41907pt x 610.53094pt>
+File: img/logoUDL.png Graphic file (type png)
+<use img/logoUDL.png>
+Package pdftex.def Info: img/logoUDL.png  used on input line 48.
+(pdftex.def)             Requested size: 199.16928pt x 170.20222pt.
  [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./logoUDL.png>]
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./img/logoUDL.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 112--113
 
  []
@@ -549,104 +549,104 @@ Underfull \hbox (badness 10000) in paragraph at lines 114--117
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 129--132
+Underfull \hbox (badness 10000) in paragraph at lines 131--134
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 139--140
-
- []
-
-
-Overfull \hbox (6.59285pt too wide) in paragraph at lines 152--153
-[]\T1/cmr/m/n/10.95 Comprobar, dando uso de solvers mod-i-fi-ca-dos para re-alizar la prueba, el cor-recto fun-cionamiento
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 152--153
+Underfull \hbox (badness 10000) in paragraph at lines 141--142
 
  []
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.153 		\end{itemize}
-                      [1]
-Underfull \hbox (badness 10000) in paragraph at lines 169--170
+l.154 			\item C
+                omprobar, dando uso de solvers modificados para realizar la ... [1]
+Overfull \hbox (6.59285pt too wide) in paragraph at lines 154--155
+[]\T1/cmr/m/n/10.95 Comprobar, dando uso de solvers mod-i-fi-ca-dos para re-alizar la prueba, el cor-recto fun-cionamiento
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 154--155
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 171--179
+Underfull \hbox (badness 10000) in paragraph at lines 171--172
 
  []
 
-<Esquema_puente.jpg, id=54, 963.6pt x 722.7pt>
-File: Esquema_puente.jpg Graphic file (type jpg)
-<use Esquema_puente.jpg>
-Package pdftex.def Info: Esquema_puente.jpg  used on input line 184.
+
+Underfull \hbox (badness 10000) in paragraph at lines 173--181
+
+ []
+
+<img/Esquema_puente.jpg, id=54, 963.6pt x 722.7pt>
+File: img/Esquema_puente.jpg Graphic file (type jpg)
+<use img/Esquema_puente.jpg>
+Package pdftex.def Info: img/Esquema_puente.jpg  used on input line 186.
 (pdftex.def)             Requested size: 455.24408pt x 341.43344pt.
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 197--198
+Underfull \hbox (badness 10000) in paragraph at lines 199--200
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 199--203
+Underfull \hbox (badness 10000) in paragraph at lines 201--205
 
  []
 
-[3 <./Esquema_puente.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 204--209
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 210--212
+[3 <./img/Esquema_puente.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 206--211
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 219--220
+Underfull \hbox (badness 10000) in paragraph at lines 212--214
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 245--247
+Underfull \hbox (badness 10000) in paragraph at lines 221--222
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 247--249
 
  []
 
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 248--251
+Underfull \hbox (badness 10000) in paragraph at lines 250--253
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 263--265
+Underfull \hbox (badness 10000) in paragraph at lines 265--267
 
  []
 
 [5] [6]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 314.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 314.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 316.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 316.
  (out/InformeSeguimiento.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 314.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 314.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 316.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 316.
 Package rerunfilecheck Info: File `InformeSeguimiento.out' has not changed.
 (rerunfilecheck)             Checksum: EC7F96091550C6517E757782941C8AD2;573.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 314.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 316.
  ) 
 Here is how much of TeX's memory you used:
- 19975 strings out of 483183
- 390194 string characters out of 5966293
- 634711 words of memory out of 5000000
+ 19976 strings out of 483183
+ 390230 string characters out of 5966293
+ 633708 words of memory out of 5000000
  34590 multiletter control sequences out of 15000+600000
  542850 words of font info for 39 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  68i,7n,69p,453b,822s stack positions out of 5000i,500n,10000p,200000b,80000s
  </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0600.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2488.600pk>
-Output written on out/InformeSeguimiento.pdf (7 pages, 168693 bytes).
+Output written on out/InformeSeguimiento.pdf (7 pages, 153880 bytes).
 PDF statistics:
  394 PDF objects out of 1000 (max. 8388607)
  108 compressed objects within 2 object streams

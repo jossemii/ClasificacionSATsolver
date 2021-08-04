@@ -242,9 +242,9 @@ OUTPUT out/InformeInicial.pdf
 INPUT out/InformeInicial.out
 INPUT out/InformeInicial.out
 OUTPUT out/InformeInicial.out
-INPUT logoUDL.png
-INPUT ./logoUDL.png
-INPUT ./logoUDL.png
+INPUT img/logoUDL.png
+INPUT ./img/logoUDL.png
+INPUT ./img/logoUDL.png
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm2488.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecbx2488.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm1440.tfm

@@ -3,7 +3,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{multirow}
 \usepackage{graphicx}
-\graphicspath{ {images/} }
+\graphicspath{ {img/} }
 \usepackage[table,xcdraw]{xcolor}
 \usepackage{listings}
 \usepackage{hyperref}
@@ -124,6 +124,8 @@
 				y orquestar los servicios entre él y otros nodos.
 
 			\item Tanto los servicios como los nodos ejecutarán servidores con los que atender solicitudes, concretamente en el proyecto servidores Grpc. 
+		
+			\item La especificación de un servicio se refiere a un buffer de bytes que define el servicio, esto es, como esta formado y como comunicarse con él, y no se refiere a como construirlo.
 		\end{itemize}
 
 		El segundo punto, el desarrollo de una solución a un problema concreto (resolución de SAT), ha sido desarrollado parcialmente.
