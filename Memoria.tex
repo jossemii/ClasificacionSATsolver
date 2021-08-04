@@ -109,8 +109,7 @@
 	\printindex
 
 	\section{Introdución}
-		\subsection{Contexto}
-		\subsection{¿Contexto y? Motivación}
+		\subsection{Contexto y motivación}
 			En 1970, el matemático británico John Horton Conway diseño un automata celular al que llamo El Juego de la Vida.
 			Un autómata celular es un modelo matemático y computacional para un sistema dinámico que evoluciona en pasos discretos.
 
@@ -177,7 +176,28 @@
 				\end{itemize}
 			\end{itemize}
 
-	\section{Estado del arte}
+	\section{"State of the art"}
+		Dentro de un escrito académico técnico (y por calco del lenguaje académico que se nutre del inglés), se denomina estado del Arte a la base teórica sobre la que se sustenta el escrito, 
+		o la cual se rebate en el desarrollo posterior en el escrito y que forma parte introductoria del mismo. 
+		Es frecuente que el segundo capítulo de una tesis doctoral en ingenierías se denomine "Estado del arte" 
+		donde se hace un repaso de las técnicas relacionadas con dicha tesis doctoral. Este capítulo es fundamental para explicar los aportes al conocimiento que 
+		realiza la tesis al estado del conocimiento actual. \\
+		El origen de la expresión, muy probablemente, se debe a Aristóteles en el libro primero de Metafísica, donde clasifica el conocimiento en ciencia, arte y experiencia.
+		
+		\begin{itemize}
+			\item La ciencia busca el conocimiento por la mera curiosidad innata del ser humano. 
+			De hecho el libro primero de Metafísica de Aristóteles comienza con su famosa frase «Todos los hombres tienen por naturaleza el deseo de saber» (Elcho Pan, 1988:45). 
+			La ciencia no busca ninguna utilidad en la búsqueda del conocimiento, sino satisfacer la propia curiosidad innata del ser humano. 
+			Así pues son ciencias la filosofía, las matemáticas, la física, la biología, la química, etc.
+			\item El arte, a diferencia de la ciencia, busca una utilidad a la búsqueda del nuevo conocimiento, cómo hacer mejores puentes con un menor coste de materiales y fabricación, 
+			cómo curar ciertas enfermedades o cómo poner un hombre en la luna. Así pues, según la clasificación aristotélica, arte es la medicina, la arquitectura, la informática y el resto de ingenierías,
+			pero también la música, la poesía, la pintura, etc. Sin embargo, son estas últimas las que se han adueñado en la actualidad del término y son las que todo el mundo entiende por arte.
+			\item Finalmente, Aristóteles se refiere a la experiencia como el conocimiento que poseen los diferentes oficios, pescador, agricultor, carpintero, etc.
+		\end{itemize}
+		Esto explica que en las tesis doctorales realizadas en ciencias, dicho capítulo se llame Estado de la Ciencia y en ingenierías en general Estado del arte. \\	
+	\section{Analisis de requisitos}
+		En la Ingeniería de software, un Análisis de Requerimientos es una tarea que cubre el hueco entre la definición del software a nivel sistema y el diseño del mismo.
+
 		Los conceptos principales que se han definido son:
 		\begin{itemize}
 			\item Un servicio es un contenedor de software que realiza una tarea especifica, puede entenderse como una ``caja negra'', existe una especificación del mismo en 
@@ -187,12 +207,9 @@
 				y orquestar los servicios entre él y otros nodos.
 
 			\item Tanto los servicios como los nodos ejecutarán servidores con los que atender solicitudes, concretamente en el proyecto servidores Grpc. 
-		
+
 			\item La especificación de un servicio se refiere a un buffer de bytes que define el servicio, esto es, como esta formado y como comunicarse con él, y no se refiere a como construirlo.
 		\end{itemize}
-	
-	\section{Analisis de requisitos}
-
 	\section{Desarrollo}
 		\subsection{Planificación temporal del trabajo}
 		El trabajo puede ser dividido en las siguientes partes:
@@ -216,7 +233,7 @@
 				\item Segunda fase de desarrollo
 					\begin{itemize}
 						\item Desarrollar un servicio de clasificación de SAT-solvers. \\
-						Por un lado se ha de desarrollar un sistema que genere CNFs aleatorios, 
+						Por un lado se ha de desarrollar un sistema que genere CNFs aleatorios,
 						pruebe cada uno de los solvers y recoja datos de ello. 
 						A partir de los datos obtenidos previamente se deben clasificar los solvers mediante algun tipo de regresión.
 						\\
@@ -281,7 +298,6 @@
 	
 			\end{ganttchart}
 		\subsection{Primera fase de desarrollo}
-
 		\subsection{Segunda fase de desarrollo}
 		\subsection{Tercera fase de desarrollo}
 	
