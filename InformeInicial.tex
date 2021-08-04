@@ -103,15 +103,15 @@
 		\thispagestyle{empty}
 	\newpage
 	
-	\section{Introdución}
-		La revolución informática de las ultimas décadas nos da la posibilidad de simular y automatizar procesos. 
+	\section{Introducción}
+		La revolución informática de las últimas décadas nos da la posibilidad de simular y automatizar procesos. 
 		Hemos construido una red de ordenadores con estas capacidades, y su potencial es enorme.\\
 		Tecnologías de vanguardia como la inteligencia artificial nos prometen
 		una significativa mejora en nuestra calidad de vida, principalmente por su potencial para automatizar tareas como nunca antes se había imaginado. \\
 		\\
 		Por ello considero interesante un sistema distribuido de servicios. Desde mi punto de vista, existen dos componentes clave:
 		\begin{itemize}
-			\item Un servicio es un contendor de software que realiza una tarea especifica, puede entenderse como una ``caja negra'', existe una especificación del mismo en 
+			\item Un servicio es un contenedor de software que realiza una tarea especifica, puede entenderse como una ``caja negra'', existe una especificación del mismo en 
 				formato binario, donde se especifica todo lo necesario para construirlo y comunicarse con él.
 			\item Un nodo es un computador que forma parte de la red, debe de tener la capacidad de encontrar otros nodos y comunicarse con ellos, compartir y construir servicios
 				y delegar la sobrecarga de servicios a sus pares.
@@ -128,20 +128,20 @@
 
 		Más concretamente, los objetivos son:
 		\begin{itemize}
-			\item Diseño de la especificacion de un servicio.
+			\item Diseño de la especificación de un servicio.
 			\item Desarrollo de un nodo con capacidad para:
 			\begin{itemize}
 				\item Construir y ejecutar servicios.
 				\item Compartir servicios con el resto de los nodos de la red.
 				\item Balancear la carga de servicios entre sí mismo y el resto de nodos de la red.
 			\end{itemize}
-			\item Desarrollo de un servicio de clasificación y seleccion de servicios que 
+			\item Desarrollo de un servicio de clasificación y selección de servicios que 
 			resuelven SAT. Este debe ser capaz de:
 			\begin{itemize}
 				\item Cargar especificaciones de SAT-solvers, pedirle al nodo que le devuelva
 				 instancias de los mismos, mantenerlos (comprobar que siguen activos).
 				\item Clasificar los SAT-solvers que se le han especificado.
-				\item Seleccionar un SAT-solver en funcion de un CNF dado.
+				\item Seleccionar un SAT-solver en función de un CNF dado.
 			\end{itemize}
 		\end{itemize}
 
@@ -177,9 +177,9 @@
 							Dada la especificación de un servicio, debe ser capaz de construir un contenedor del mismo,
 							abrir los puertos necesarios y añadirle las variables de entorno dadas, si es el caso.
 						\item Servicio local con la finalidad de atender las peticiones de los servicios. \\
-							Las peticiones básicas son: la inicializacion de un servicio, y su detencion.
+							Las peticiones básicas son: la inicialización de un servicio, y su detención.
 							Al especificarle un servicio, el servicio local del nodo le devolverá al cliente la dirección 
-							de la instancia del servicio demandado y un token con el que efectuar acciones u obtener informacion 
+							de la instancia del servicio demandado y un token con el que efectuar acciones u obtener información 
 							sobre él (como detenerlo).
 					\end{itemize}
 					\item Desarrollar servicios SAT-solver y sus especificaciones.

@@ -115,6 +115,17 @@
 		aunque es posible que se requiera alguna modificación durante el período restante,
 		se ha desarrollado hasta el punto de permitir la ejecución del segundo punto. \\ 
 
+		Los conceptos principales que se han definido son:
+		\begin{itemize}
+			\item Un servicio es un contenedor de software que realiza una tarea especifica, puede entenderse como una ``caja negra'', existe una especificación del mismo en 
+				formato binario, donde se especifica todo lo necesario para construirlo y comunicarse con él que hace innecesario conocer su funcionamiento interno.
+
+			\item Un nodo es un computador que forma parte de la red, debe de tener la capacidad de encontrar otros nodos y comunicarse con ellos, compartir y construir servicios
+				y orquestar los servicios entre él y otros nodos.
+
+			\item Tanto los servicios como los nodos ejecutarán servidores con los que atender solicitudes, concretamente en el proyecto servidores Grpc. 
+		\end{itemize}
+
 		El segundo punto, el desarrollo de una solución a un problema concreto (resolución de SAT), ha sido desarrollado parcialmente.
 		Esto cubre dos desarrollos paralelos, por un lado el aplicativo del nodo y por otro los servicios para clasificar
 		y resolver solvers. \\
@@ -157,7 +168,7 @@
 	
 		¿Cómo realizan múltiples clientes solicitudes al servicio de clasificación? \\
 
-		En base a la arquitectura anteriormente desarrollada, si un cliente quiere dar uso de un servicio, éste solicita la creación de una instancia del mismo a su nodo,
+		Basándose en la arquitectura anteriormente desarrollada, si un cliente quiere dar uso de un servicio, éste solicita la creación de una instancia del mismo a su nodo,
 		por lo tanto, si n clientes quieren dar uso del servicio, serán necesarias n instancias de éste, a fin de cuentas, la instancia de un servicio, un contenedor, no es
 		más que un hilo aislado. 
 		Por lo tanto, el paradigma cliente/servidor se ve alterado al hablar de servicios distribuidos. En vez de un servidor atendiendo múltiples clientes, un cliente solicita
@@ -187,7 +198,7 @@
 
 			Un nodo debe de proporcionar una interfaz con la que los servicios puedan comunicarse, junto con la dirección
 			a la que el servicio le realizará sus solicitudes. La forma en la que el nodo carga estos componentes en una nueva instancia
-			es mediante un archivo binario en la raiz del sistema de ficheros del servicio. Esto es así ya que el servicio podría requerir de
+			es mediante un archivo binario en la raíz del sistema de ficheros del servicio. Esto es así ya que el servicio podría requerir de
 			estos datos antes de levantar su servidor. \\
 
 			Ante la solicitud de una nueva instancia, un nodo tiene el derecho de, o bien construir esta instancia localmente, o bien solicitarle la instancia
@@ -199,7 +210,7 @@
 			Esta arquitectura permite a un servicio no preocuparse del nodo donde se ejecutará cada dependencia. Del mismo modo que los nodos no se preocuparán de
 			la utilidad que puedan tener las instancias que ejecutan. \\
 			
-			Por tanto, para resumir, durante la construcción de la instancia de un servicio, el nodo añade en su raiz un binario que contiene como comunicarse con él.
+			Por tanto, para resumir, durante la construcción de la instancia de un servicio, el nodo añade en su raíz un binario que contiene como comunicarse con él.
 			Si el servicio quiere dar uso de una dependencia, le enviará la especificación de ésta al nodo, y éste le devolverá una dirección con la que comunicarse y
 			un token para poder matarla. Será el nodo el que busque donde construir esa dependencia, si localmente o en alguno de sus pares. También será el nodo el que,
 			en caso de matar a la primera instancia, acabe con la segunda.
@@ -231,7 +242,7 @@
 					de aquellos servicios que tengan un tensor determinado y con ellas realizar solicitudes a servicios que ya tienen el modelo entrenado.
 			\end{itemize}
 		\subsection{Json vs GRPC} 
-			Json se ha convertido en prácticamente un estandar a la hora de compartir información en la web, debido a que es el sistema de serialización de Javascript, y éste, a su vez,
+			Json se ha convertido en prácticamente un estándar a la hora de compartir información en la web, debido a que es el sistema de serialización de Javascript, y éste, a su vez,
 			es el lenguaje estandarizado para ejecutarse en los navegadores web. \\
 
 			Pero en una red de microservicios, donde los entornos de ejecución son virtualizados, Javascript pierde protagonismo y, por tanto, Json también.
@@ -243,7 +254,7 @@
 				\item Protobuf, su lenguaje de serialización, consigue comprimir bytes de manera muy eficiente enfocando los buffers a cada topología de mensajes.
 				\item Utiliza Http/2, por lo que está preparado para realizar streaming bidireccional de manera eficiente.
 			\end{itemize}
-			Otros protocolos tambien a tener en cuenta podrían ser Flatbuffers o Capt'n proto.
+			Otros protocolos también a tener en cuenta podrían ser Flatbuffers o Capt'n proto.
 
 	\section{Evaluación crítica del estado del trabajo}
 		En base a la planificación temporal del informe inicial, podemos concluir que existe cierto retraso en cuanto a la tercera 
