@@ -177,22 +177,19 @@
 				\end{itemize}
 			\end{itemize}
 
-			A continuación expongo la arquitectura de servicios propuesta para SAT:
-			\begin{itemize}
-				\item Clasificador: Es el servicio principal, se encarga de clasificar una serie de SAT-solvers, de manera que si le das un CNF, lo resuelva 
-					usando el mejor solver que tenga.
-				\item RandomCNF: No tiene parámetro de entrada, retorna un CNF generado de manera aleatoria.
-				\item Regression: Recibe datos sobre el rendimiento de los solvers y retorna un modelo de regresion lineal de cada uno con el que poder predecir
-					que resultados darán con un CNF concreto.
-				\item Trainer: Toma un conjunto de solvers, los prueba generando CNF's aleatorios y retorna los datos recogidos.
-				\item RequestsBalancer: Recibe como variable de entorno la API con la que el cliente usaría las instancias, 
-					recibe por API un conjunto de solvers con su configuracion, permite aumentar y disminuir el número de instancias de cada solver,
-					solicita a su nodo instancias de cada solver y se encarga de balancear la carga a cada uno.
-				\item ServicesBalancer: Cuando el servicio local de un nodo recibe la solicitud para crear la instancia de un servicio, es este el que decide se creará en local o en algun nodo adyacente.
-			\end{itemize}
-
 	\section{Estado del arte}
-		Desarrollar conceptos.
+		Los conceptos principales que se han definido son:
+		\begin{itemize}
+			\item Un servicio es un contenedor de software que realiza una tarea especifica, puede entenderse como una ``caja negra'', existe una especificación del mismo en 
+				formato binario, donde se especifica todo lo necesario para construirlo y comunicarse con él que hace innecesario conocer su funcionamiento interno.
+
+			\item Un nodo es un computador que forma parte de la red, debe de tener la capacidad de encontrar otros nodos y comunicarse con ellos, compartir y construir servicios
+				y orquestar los servicios entre él y otros nodos.
+
+			\item Tanto los servicios como los nodos ejecutarán servidores con los que atender solicitudes, concretamente en el proyecto servidores Grpc. 
+		
+			\item La especificación de un servicio se refiere a un buffer de bytes que define el servicio, esto es, como esta formado y como comunicarse con él, y no se refiere a como construirlo.
+		\end{itemize}
 	
 	\section{Analisis de requisitos}
 
@@ -242,18 +239,11 @@
 					\\ Tras cada fase de desarrollo.
 			\end{enumerate}
 
-			Diagrama de Gantt:
+			Diagrama de Gantt: \\
 			\begin{ganttchart}[
 				canvas/.append style={fill=none, draw=black!5, line width=.75pt},
 				hgrid style/.style={draw=black!5, line width=0.75pt},
 				vgrid={*1{draw=black!5, line width=.75pt}},
-				today=18,
-				today rule/.style={
-					draw=black!64,
-					dash pattern=on 3.5pt off 4.5pt,
-					line width=1pt
-				},
-				today label font=\tiny,
 				title/.style={
 					draw=none, 
 					fill=none
@@ -291,10 +281,25 @@
 	
 			\end{ganttchart}
 		\subsection{Primera fase de desarrollo}
+
 		\subsection{Segunda fase de desarrollo}
 		\subsection{Tercera fase de desarrollo}
 	
-	\section{Problemas encontrados y decisiones técnicas}
+	\section{Problemas encontrados y decisiones técnicas tomadas}
+		\subsection{¿Cómo realizan múltiples clientes solicitudes al servicio de clasificación?}
+			Basándose en la arquitectura anteriormente desarrollada, si un cliente quiere dar uso de un servicio, éste solicita la creación de una instancia del mismo a su nodo,
+			por lo tanto, si n clientes quieren dar uso del servicio, serán necesarias n instancias de éste, a fin de cuentas, la instancia de un servicio, un contenedor, no es
+			más que un hilo aislado. 
+			Por lo tanto, el paradigma cliente/servidor se ve alterado al hablar de servicios distribuidos. En vez de un servidor atendiendo múltiples clientes, un cliente solicita
+			el despliegue de un servicio. 
+			En términos de rendimiento no debería existir una gran diferencia entre un esquema y otro, puesto que el servidor centralizado termina ejecutando n hilos para n solicitudes
+			de clientes, en los servicios distribuidos estos hilos se aislan (esto puede ser un punto negativo sobre el uso de memoria compartida) 
+			y se reparten entre los nodos de la red. \\
+			Ahora bien, en caso de querer realizar un servicio web, al que poder, tal vez, conectar con un frontend en un navegador, será necesario un nuevo servicio el cual se encargue
+			de recibir las solicitudes de los clientes y desplegar y dar uso del servicio de clasificación. 
+			Este servicio por tanto, puede ser comprendido como un puente entre la "web tradicional" y una red de servicios distribuidos.
+			
+			\includegraphics[width=16cm]{Esquema_puente.jpg}
 		\subsection{Varias instancias no pueden compartir dependencias}
 			La naturaleza que adopta la red crea una jerarquía de instancias de servicios repartidas entre los nodos de la mísma. \\
 			Esto significa que, cuando una instancia (padre) solicita una instancia de otro servicio (hijo), este último
@@ -306,21 +311,17 @@
 
 		\subsection{Comunicación nodo-servicio}
 			Definir como debe comportarse un sistema requiere abordar cuales son los deberes y derechos de sus componentes. \\
-
 			Un nodo debe de proporcionar una interfaz con la que los servicios puedan comunicarse, junto con la dirección
 			a la que el servicio le realizará sus solicitudes. La forma en la que el nodo carga estos componentes en una nueva instancia
 			es mediante un archivo binario en la raíz del sistema de ficheros del servicio. Esto es así ya que el servicio podría requerir de
 			estos datos antes de levantar su servidor. \\
-
 			Ante la solicitud de una nueva instancia, un nodo tiene el derecho de, o bien construir esta instancia localmente, o bien solicitarle la instancia
 			a un par (otro nodo). Así mismo, el nodo tiene el deber de retornar tanto una dirección con la que comunicarse con la nueva instancia, como un token
 			para realizar acciones sobre ella al solicitante.
 			En caso de crear la dependencia de un servicio en un par, el nodo debe de asegurarse que el solicitante tenga acceso a la dirección que le otorga para
 			comunicarse con su dependencia. \\
-
 			Esta arquitectura permite a un servicio no preocuparse del nodo donde se ejecutará cada dependencia. Del mismo modo que los nodos no se preocuparán de
 			la utilidad que puedan tener las instancias que ejecutan. \\
-			
 			Por tanto, para resumir, durante la construcción de la instancia de un servicio, el nodo añade en su raíz un binario que contiene como comunicarse con él.
 			Si el servicio quiere dar uso de una dependencia, le enviará la especificación de ésta al nodo, y éste le devolverá una dirección con la que comunicarse y
 			un token para poder matarla. Será el nodo el que busque donde construir esa dependencia, si localmente o en alguno de sus pares. También será el nodo el que,
