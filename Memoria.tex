@@ -308,18 +308,53 @@
 				\item Tanto los servicios como los nodos ejecutarán servidores con los que atender solicitudes, concretamente en el proyecto servidores Grpc. 
 	
 				\item La especificación de un servicio se refiere a un buffer de bytes que define el servicio, esto es, como esta formado y como comunicarse con él, y no se refiere a como construirlo.
+					La especificación de un servico se serializa en un binario Protobuf.
 				
 				\item La imágen de un servicio se refiere a la imágen del contenedor de un servicio, asi como un contendor se refiere a la instancia de la imagen de un servicio.
 				
-				\item El concepto implementación del nodo pretende remarcar aquellas decisiones sobre la lógica del nodo que son independientes del funcionamiento general de la red y, por tanto, otros nodos pueden no
-					adoptar.
+				\item El concepto implementación del nodo pretende remarcar aquellas decisiones sobre la lógica del nodo que son independientes del funcionamiento general de la red y,
+					por tanto, otros nodos pueden no adoptar.
 			\end{itemize}
 	
-			La parte más extensa de la definición del sistema es la especificación de un servicio, este se compone de los siguientes atributos:
+			Definir como debe comportarse un sistema requiere abordar cuales son los deberes y derechos de sus componentes. \\
+			Un nodo debe de proporcionar una interfaz con la que los servicios puedan comunicarse, junto con la dirección
+			a la que el servicio le realizará sus solicitudes. La forma en la que el nodo carga estos componentes en una nueva instancia
+			es mediante un archivo binario en la raíz del sistema de ficheros del servicio. Esto es así ya que el servicio podría requerir de
+			estos datos antes de levantar su servidor. \\
+			Ante la solicitud de una nueva instancia, un nodo tiene el derecho de, o bien construir esta instancia localmente, o bien solicitarle la instancia
+			a un par (otro nodo). Así mismo, el nodo tiene el deber de retornar tanto una dirección con la que comunicarse con la nueva instancia, como un token
+			para realizar acciones sobre ella al solicitante.
+			En caso de crear la dependencia de un servicio en un par, el nodo debe de asegurarse que el solicitante tenga acceso a la dirección que le otorga para
+			comunicarse con su dependencia. \\
+			Esta arquitectura permite a un servicio no preocuparse del nodo donde se ejecutará cada dependencia. Del mismo modo que los nodos no se preocuparán de
+			la utilidad que puedan tener las instancias que ejecutan. \\
+			Por tanto, para resumir, durante la construcción de la instancia de un servicio, el nodo añade en su raíz un binario que contiene como comunicarse con él.
+			Si el servicio quiere dar uso de una dependencia, le enviará la especificación de ésta al nodo, y éste le devolverá una dirección con la que comunicarse y
+			un token para poder matarla. Será el nodo el que busque donde construir esa dependencia, si localmente o en alguno de sus pares. También será el nodo el que,
+			en caso de matar a la primera instancia, acabe con la segunda.\\
+
+			La parte más extensa de la definición del sistema es la especificación de un servicio, este se compone de los siguientes atributos:\\
 			\begin{itemize}
-				\item Api
-				\item Container
-				\item Tensor
+				\item hash: Lista de hashes (del tipo sha256:913ref3...) sobre el binario del resto de la especificación.
+				\item Syntax: Sintaxis de la especificación.
+				\item Container: Especifica el contenedor donde se ejecuta el servicio, esto es:
+					\begin{itemize}
+						\item la arquitectura, define el hardware y el kernel donde se debe de ejecutar el servicio.
+						\item el punto de entrada, define la ruta del primer ejecutable del servicio.
+						\item el sistema de archivos, representado en un árbol donde las hojas son los archivos en binario.
+						\item las variables de entorno, lista compuesta por llave y definición del campo de cada variable. 
+					\end{itemize} 
+				\item Api: Define cómo se puede interactuar con el servicio, constituida por:
+					\begin{itemize}
+						\item interfaz de la aplicación (mensajes, métodos y errores y respuestas de cada uno).
+						\item lista de slots, cada uno compuesto por los siguentes elementos:
+							\begin{itemize}
+								\item puerto donde escucha.
+								\item protocolo de comunicación que soporta (HTTP/2, GRPC ...).
+							\end{itemize}
+					\end{itemize} 
+				\item Tensor: Opcional. Definie la topología del modelo que entrena el servicio. Un servicio podría solicitar al nodo que le retorne las instancias
+					de aquellos servicios que tengan un tensor determinado y con ellas realizar solicitudes a servicios que ya tienen el modelo entrenado.
 			\end{itemize}
 
 			Despues de especifiar los componentes del sistema y a que se dedica cada uno se ha realizado una implementación de cada uno de ellos para materializar la descripción de este. \\
@@ -410,50 +445,6 @@
 			Si no fuera asi, un nodo no sabría que instancias quedan en estado 'zombie' ya que ninguno de sus clientes 
 			(instancias padre) se haría responsable.
 
-		\subsection{Comunicación nodo-servicio}
-			Definir como debe comportarse un sistema requiere abordar cuales son los deberes y derechos de sus componentes. \\
-			Un nodo debe de proporcionar una interfaz con la que los servicios puedan comunicarse, junto con la dirección
-			a la que el servicio le realizará sus solicitudes. La forma en la que el nodo carga estos componentes en una nueva instancia
-			es mediante un archivo binario en la raíz del sistema de ficheros del servicio. Esto es así ya que el servicio podría requerir de
-			estos datos antes de levantar su servidor. \\
-			Ante la solicitud de una nueva instancia, un nodo tiene el derecho de, o bien construir esta instancia localmente, o bien solicitarle la instancia
-			a un par (otro nodo). Así mismo, el nodo tiene el deber de retornar tanto una dirección con la que comunicarse con la nueva instancia, como un token
-			para realizar acciones sobre ella al solicitante.
-			En caso de crear la dependencia de un servicio en un par, el nodo debe de asegurarse que el solicitante tenga acceso a la dirección que le otorga para
-			comunicarse con su dependencia. \\
-			Esta arquitectura permite a un servicio no preocuparse del nodo donde se ejecutará cada dependencia. Del mismo modo que los nodos no se preocuparán de
-			la utilidad que puedan tener las instancias que ejecutan. \\
-			Por tanto, para resumir, durante la construcción de la instancia de un servicio, el nodo añade en su raíz un binario que contiene como comunicarse con él.
-			Si el servicio quiere dar uso de una dependencia, le enviará la especificación de ésta al nodo, y éste le devolverá una dirección con la que comunicarse y
-			un token para poder matarla. Será el nodo el que busque donde construir esa dependencia, si localmente o en alguno de sus pares. También será el nodo el que,
-			en caso de matar a la primera instancia, acabe con la segunda.
-
-		\subsection{Serialización y topología de la especificación de un servicio}
-			La especificación de un servico se serializa en un binario Protobuf. \\
-
-			Está compuesto por los siguientes elementos:
-			\begin{itemize}
-				\item hash: Lista de hashes (del tipo sha256:913ref3...) sobre el binario del resto de la especificación.
-				\item Syntax: Sintaxis de la especificación.
-				\item Container: Especifica el contenedor donde se ejecuta el servicio, esto es:
-					\begin{itemize}
-						\item la arquitectura, define el hardware y el kernel donde se debe de ejecutar el servicio.
-						\item el punto de entrada, define la ruta del primer ejecutable del servicio.
-						\item el sistema de archivos, representado en un árbol donde las hojas son los archivos en binario.
-						\item las variables de entorno, lista compuesta por llave y definición del campo de cada variable. 
-					\end{itemize} 
-				\item Api: Define cómo se puede interactuar con el servicio, constituida por:
-					\begin{itemize}
-						\item interfaz de la aplicación (mensajes, métodos y errores y respuestas de cada uno).
-						\item lista de slots, cada uno compuesto por los siguentes elementos:
-							\begin{itemize}
-								\item puerto donde escucha.
-								\item protocolo de comunicación que soporta (HTTP/2, GRPC ...).
-							\end{itemize}
-					\end{itemize} 
-				\item Tensor: Opcional. Definie la topología del modelo que entrena el servicio. Un servicio podría solicitar al nodo que le retorne las instancias
-					de aquellos servicios que tengan un tensor determinado y con ellas realizar solicitudes a servicios que ya tienen el modelo entrenado.
-			\end{itemize}
 		\subsection{Json vs GRPC} 
 			Json se ha convertido en prácticamente un estándar a la hora de compartir información en la web, debido a que es el sistema de serialización de Javascript, y éste, a su vez,
 			es el lenguaje estandarizado para ejecutarse en los navegadores web. \\
@@ -468,6 +459,12 @@
 				\item Utiliza Http/2, por lo que está preparado para realizar streaming bidireccional de manera eficiente.
 			\end{itemize}
 			Otros protocolos también a tener en cuenta podrían ser Flatbuffers o Capt'n proto.
+		
+		\subsection{¿Porque contener todo el sistema de ficheros en la especificación de un servicio?}
+
+		\subsection{¿Porque no añadir el Dockerfile en la especificación de un servicio?}
+
+		\subsection{Identificación del algoritmo hash}
 
 	\section{Resultados y conclusiones}
 	\section{Trabajo futuro}

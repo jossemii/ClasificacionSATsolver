@@ -15,8 +15,9 @@
 \BOOKMARK [1][-]{section.5}{Problemas encontrados y decisiones t\351cnicas tomadas}{}% 15
 \BOOKMARK [2][-]{subsection.5.1}{\277C\363mo realizan m\372ltiples clientes solicitudes al servicio de clasificaci\363n?}{section.5}% 16
 \BOOKMARK [2][-]{subsection.5.2}{Varias instancias no pueden compartir dependencias}{section.5}% 17
-\BOOKMARK [2][-]{subsection.5.3}{Comunicaci\363n nodo-servicio}{section.5}% 18
-\BOOKMARK [2][-]{subsection.5.4}{Serializaci\363n y topolog\355a de la especificaci\363n de un servicio}{section.5}% 19
-\BOOKMARK [2][-]{subsection.5.5}{Json vs GRPC}{section.5}% 20
-\BOOKMARK [1][-]{section.6}{Resultados y conclusiones}{}% 21
-\BOOKMARK [1][-]{section.7}{Trabajo futuro}{}% 22
+\BOOKMARK [2][-]{subsection.5.3}{Json vs GRPC}{section.5}% 18
+\BOOKMARK [2][-]{subsection.5.4}{\277Porque contener todo el sistema de ficheros en la especificaci\363n de un servicio?}{section.5}% 19
+\BOOKMARK [2][-]{subsection.5.5}{\277Porque no a\361adir el Dockerfile en la especificaci\363n de un servicio?}{section.5}% 20
+\BOOKMARK [2][-]{subsection.5.6}{Identificaci\363n de algoritmo hash}{section.5}% 21
+\BOOKMARK [1][-]{section.6}{Resultados y conclusiones}{}% 22
+\BOOKMARK [1][-]{section.7}{Trabajo futuro}{}% 23
