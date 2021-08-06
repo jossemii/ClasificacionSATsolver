@@ -23,45 +23,46 @@ Warning--to sort, need author or key in red_hat
 Warning--to sort, need author or key in threading
 Warning--to sort, need author or key in flask
 Warning--to sort, need author or key in kubernetes_2020
-You've used 26 entries,
+Warning--to sort, need author or key in bitcoin_key_generation
+You've used 27 entries,
             2118 wiz_defined-function locations,
-            614 strings with 7139 characters,
-and the built_in function-call counts, 4479 in all, are:
-= -- 421
-> -- 62
+            618 strings with 7361 characters,
+and the built_in function-call counts, 4644 in all, are:
+= -- 437
+> -- 63
 < -- 0
-+ -- 40
++ -- 41
 - -- 12
-* -- 162
-:= -- 562
-add.period$ -- 57
-call.type$ -- 26
-change.case$ -- 84
+* -- 170
+:= -- 580
+add.period$ -- 59
+call.type$ -- 27
+change.case$ -- 87
 chr.to.int$ -- 0
-cite$ -- 46
-duplicate$ -- 182
-empty$ -- 593
+cite$ -- 48
+duplicate$ -- 189
+empty$ -- 616
 format.name$ -- 12
-if$ -- 1078
+if$ -- 1119
 int.to.chr$ -- 0
-int.to.str$ -- 26
+int.to.str$ -- 27
 missing$ -- 0
-newline$ -- 112
+newline$ -- 116
 num.names$ -- 12
-pop$ -- 208
+pop$ -- 216
 preamble$ -- 1
-purify$ -- 58
+purify$ -- 60
 quote$ -- 0
-skip$ -- 199
+skip$ -- 206
 stack$ -- 0
-substring$ -- 132
-swap$ -- 26
+substring$ -- 137
+swap$ -- 27
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 104
-warning$ -- 20
+type$ -- 108
+warning$ -- 21
 while$ -- 12
-width$ -- 28
-write$ -- 204
-(There were 20 warnings)
+width$ -- 29
+write$ -- 212
+(There were 21 warnings)

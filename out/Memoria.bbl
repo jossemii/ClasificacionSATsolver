@@ -66,6 +66,12 @@ threading - gestionar operaciones concurrentes dentro de un proceso.
 Welcome to flask.
 \newblock \url{https://flask.palletsprojects.com/en/1.1.x/}.
 
+\bibitem{bitcoin_key_generation}
+Bitcoin key generation.
+\newblock
+  \url{https://www.oreilly.com/library/view/mastering-bitcoin-2nd/9781491954379/ch04.html#:~:text=The%20bitcoin%20private%20key%20is,generated%20from%20the%20private%20key.},
+  Jun 2020.
+
 \bibitem{kubernetes_2020}
 ¿qué es kubernetes?
 \newblock
