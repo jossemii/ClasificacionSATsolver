@@ -2,17 +2,21 @@
 \BOOKMARK [2][-]{subsection.1.1}{Contexto y motivaci\363n}{section.1}% 2
 \BOOKMARK [2][-]{subsection.1.2}{Objetivos del proyecto}{section.1}% 3
 \BOOKMARK [1][-]{section.2}{"State of the art"}{}% 4
-\BOOKMARK [1][-]{section.3}{Analisis de requisitos}{}% 5
-\BOOKMARK [1][-]{section.4}{Desarrollo}{}% 6
+\BOOKMARK [1][-]{section.3}{An\341lisis de requisitos}{}% 5
+\BOOKMARK [1][-]{section.4}{Definici\363n y desarrollo}{}% 6
 \BOOKMARK [2][-]{subsection.4.1}{Planificaci\363n temporal del trabajo}{section.4}% 7
-\BOOKMARK [2][-]{subsection.4.2}{Primera fase de desarrollo}{section.4}% 8
-\BOOKMARK [2][-]{subsection.4.3}{Segunda fase de desarrollo}{section.4}% 9
-\BOOKMARK [2][-]{subsection.4.4}{Tercera fase de desarrollo}{section.4}% 10
-\BOOKMARK [1][-]{section.5}{Problemas encontrados y decisiones t\351cnicas tomadas}{}% 11
-\BOOKMARK [2][-]{subsection.5.1}{\277C\363mo realizan m\372ltiples clientes solicitudes al servicio de clasificaci\363n?}{section.5}% 12
-\BOOKMARK [2][-]{subsection.5.2}{Varias instancias no pueden compartir dependencias}{section.5}% 13
-\BOOKMARK [2][-]{subsection.5.3}{Comunicaci\363n nodo-servicio}{section.5}% 14
-\BOOKMARK [2][-]{subsection.5.4}{Serializaci\363n y topolog\355a de la especificaci\363n de un servicio}{section.5}% 15
-\BOOKMARK [2][-]{subsection.5.5}{Json vs GRPC}{section.5}% 16
-\BOOKMARK [1][-]{section.6}{Resultados y conclusiones}{}% 17
-\BOOKMARK [1][-]{section.7}{Trabajo futuro}{}% 18
+\BOOKMARK [2][-]{subsection.4.2}{Definici\363n del sistema}{section.4}% 8
+\BOOKMARK [2][-]{subsection.4.3}{Primera fase de desarrollo}{section.4}% 9
+\BOOKMARK [3][-]{paragraph.4.3.0.1}{compile.py}{subsection.4.3}% 10
+\BOOKMARK [4][-]{paragraph.4.3.0.2}{build.py}{paragraph.4.3.0.1}% 11
+\BOOKMARK [4][-]{paragraph.4.3.0.3}{gateway.py}{paragraph.4.3.0.1}% 12
+\BOOKMARK [2][-]{subsection.4.4}{Segunda fase de desarrollo}{section.4}% 13
+\BOOKMARK [2][-]{subsection.4.5}{Tercera fase de desarrollo}{section.4}% 14
+\BOOKMARK [1][-]{section.5}{Problemas encontrados y decisiones t\351cnicas tomadas}{}% 15
+\BOOKMARK [2][-]{subsection.5.1}{\277C\363mo realizan m\372ltiples clientes solicitudes al servicio de clasificaci\363n?}{section.5}% 16
+\BOOKMARK [2][-]{subsection.5.2}{Varias instancias no pueden compartir dependencias}{section.5}% 17
+\BOOKMARK [2][-]{subsection.5.3}{Comunicaci\363n nodo-servicio}{section.5}% 18
+\BOOKMARK [2][-]{subsection.5.4}{Serializaci\363n y topolog\355a de la especificaci\363n de un servicio}{section.5}% 19
+\BOOKMARK [2][-]{subsection.5.5}{Json vs GRPC}{section.5}% 20
+\BOOKMARK [1][-]{section.6}{Resultados y conclusiones}{}% 21
+\BOOKMARK [1][-]{section.7}{Trabajo futuro}{}% 22

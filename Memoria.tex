@@ -194,26 +194,22 @@
 			pero también la música, la poesía, la pintura, etc. Sin embargo, son estas últimas las que se han adueñado en la actualidad del término y son las que todo el mundo entiende por arte.
 			\item Finalmente, Aristóteles se refiere a la experiencia como el conocimiento que poseen los diferentes oficios, pescador, agricultor, carpintero, etc.
 		\end{itemize}
-		Esto explica que en las tesis doctorales realizadas en ciencias, dicho capítulo se llame Estado de la Ciencia y en ingenierías en general Estado del arte. \\	
-	\section{Analisis de requisitos}
+		Esto explica que en las tesis doctorales realizadas en ciencias, dicho capítulo se llame Estado de la Ciencia y en ingenierías en general Estado del arte.	
+	
+	\section{Análisis de requisitos}
 		En la Ingeniería de software, un Análisis de Requerimientos es una tarea que cubre el hueco entre la definición del software a nivel sistema y el diseño del mismo.
 
-		Los conceptos principales que se han definido son:
-		\begin{itemize}
-			\item Un servicio es un contenedor de software que realiza una tarea especifica, puede entenderse como una ``caja negra'', existe una especificación del mismo en 
-				formato binario, donde se especifica todo lo necesario para construirlo y comunicarse con él que hace innecesario conocer su funcionamiento interno.
-
-			\item Un nodo es un computador que forma parte de la red, debe de tener la capacidad de encontrar otros nodos y comunicarse con ellos, compartir y construir servicios
-				y orquestar los servicios entre él y otros nodos.
-
-			\item Tanto los servicios como los nodos ejecutarán servidores con los que atender solicitudes, concretamente en el proyecto servidores Grpc. 
-
-			\item La especificación de un servicio se refiere a un buffer de bytes que define el servicio, esto es, como esta formado y como comunicarse con él, y no se refiere a como construirlo.
-		\end{itemize}
-	\section{Desarrollo}
+	\section{Definición y desarrollo}
 		\subsection{Planificación temporal del trabajo}
 		El trabajo puede ser dividido en las siguientes partes:
 			\begin{enumerate}
+				\item Definición del sistema
+					\begin{itemize}
+						\item Definir las responsabilidades que tienen tanto los nodos como los servicios.
+						\item Concretar que debe de especificar la definición de un servicio, como se obtiene el 
+							identificador del mismo y el tipo de serialización que
+							se debe de usar.
+					\end{itemize}
 				\item Primera fase de desarrollo
 					\begin{itemize}
 						\item Desarrollar las funciones básicas de un nodo:
@@ -226,7 +222,7 @@
 								Las peticiones básicas son: la inicialización de un servicio, y su detención.
 								Al especificarle un servicio, el servicio local del nodo le devolverá al cliente la dirección 
 								de la instancia del servicio demandado y un token con el que efectuar acciones u obtener información 
-								sobre él (como detenerlo).
+								sobre él (como detenerlo, por ejemplo).
 						\end{itemize}
 						\item Desarrollar servicios SAT-solver y sus especificaciones.
 					\end{itemize}
@@ -297,7 +293,96 @@
 				\ganttbar[]{\textbf{Reunion final}}{20}{20} \\
 	
 			\end{ganttchart}
+	
+		\subsection{Definición del sistema}
+			Los conceptos principales que se han definido son:
+			\begin{itemize}
+				\item Un servicio es un contenedor de software que realiza una tarea especifica, puede entenderse como una ``caja negra'', existe una especificación del mismo en 
+					formato binario, donde se especifica todo lo necesario para construirlo y comunicarse con él que hace innecesario conocer su funcionamiento interno.
+	
+				\item Un nodo es un computador que forma parte de la red, debe de tener la capacidad de encontrar otros nodos y comunicarse con ellos, compartir y construir servicios
+					y orquestar los servicios entre él y otros nodos.
+	
+				\item El término instancia se refiere a la instancia de un determinado servicio, es decir, un contendor que ejecuta siguiendo los critérios de la especificación de dicho servicio.
+	
+				\item Tanto los servicios como los nodos ejecutarán servidores con los que atender solicitudes, concretamente en el proyecto servidores Grpc. 
+	
+				\item La especificación de un servicio se refiere a un buffer de bytes que define el servicio, esto es, como esta formado y como comunicarse con él, y no se refiere a como construirlo.
+				
+				\item La imágen de un servicio se refiere a la imágen del contenedor de un servicio, asi como un contendor se refiere a la instancia de la imagen de un servicio.
+				
+				\item El concepto implementación del nodo pretende remarcar aquellas decisiones sobre la lógica del nodo que son independientes del funcionamiento general de la red y, por tanto, otros nodos pueden no
+					adoptar.
+			\end{itemize}
+	
+			La parte más extensa de la definición del sistema es la especificación de un servicio, este se compone de los siguientes atributos:
+			\begin{itemize}
+				\item Api
+				\item Container
+				\item Tensor
+			\end{itemize}
+
+			Despues de especifiar los componentes del sistema y a que se dedica cada uno se ha realizado una implementación de cada uno de ellos para materializar la descripción de este. \\
 		\subsection{Primera fase de desarrollo}
+			La primera fase de desarrollo abarca la lógica detras de un nodo, esto es, la compilación y construcción de servicios y el manejo de solicitudes de los mismos.
+			El entorno donde se ejecuta esta implementación del nodo será Python3 sobre Ubuntu(Linux), dando uso, además, del sistema de base de datos MongoDB y el motor de 
+			contenerización DockerEngine. El uso obligatorio de Linux se debe principalmente a que dentro de la lógica implementada en Python se da uso de comandos Bash.
+			Además de eso, se da uso de Systemd para correr tres demonios de manera intermitente e indefinida: docker, mongo y gateway.py. \\
+
+			Por lo tanto la lógica detras del nodo se puede dividir en tres ficheros principales: compile.py, build.py y gateway.py. Además de esto, existen dos directorios, 
+			registry y hycache, en registry se almacenan las descripciones de servicios provenientes, o bien de su compilación (compile.py) o bien una solicitud de 
+			otro servicio interno o externo (gateway.py), y el directorio hycache sirve para almacenar datos durante diferentes operaciones, ya sea para almacenar el contenedor 
+			comprimido de un servico al ser solicitado a otro nodo (build.py), guardar la configuracion de una nueva instancia para copiarla dentro de su contenedor (gateway.py)
+			o para almacenar y calcular la hash de un sistema de archivos durante la compilación de un servicio (compile.py). \\
+
+			Una vez definidos los componentes principales del nodo se definen más en detalle cada una:
+			\paragraph{compile.py}
+				El objetivo de este script de Python es obtener la descripción de un servicio a partir de un directorio llamado .service/, ubicado en la raiz de un repositorio git, 
+				que contenga la información necesaria para ello, esto es: un archivo Dockerfile y distintos otra información contenida en un archivo Json. \\
+				Por lo tanto, desde la terminal de un nodo, el comando python3 /home/hy/node/compile.py <direccion del repositorio>::<rama del repositorio> generará la descripción del servicio
+				en registry como <sha256 del servicio>.service y la imagen del contendor en el registro de Docker con nombre <sha256 del servicio>.service. \\
+				El formato antes de la compilacion (Dockerfile y Json en un directorio .service en la raiz de un repositorio git) tiene como objetivo facilitar la compilación para un desarrollo que
+				de uso de la herramienta Git, la definición del servicio es totalmente independiente de este, por lo que la compilación desde otro formato es facilmente implementable. \\
+				El sistema permite la compilación simultanea al generar un identificador aleatorio por cada ejecución, de esta forma el almacenamiento de datos en hycache ocurre dentro de un subdirectorio
+				distinto por cada una. El script ejecuta comandos de docker mediante bash, dando uso del método os.system de Python. \\
+
+				Al iniciarse la compilación se descarga el repositorio aportado en hycache, generar la descripción de un servicio requiere obtener sus atributos y calcular su hash.
+				Gran parte de los atributos fueron almacenados en el archivo Json (Api, Envs, Entrypoint ...), lo único que se debe de hacer es leer el archivo Json y almacenarlos en un objeto Protobuf.
+				Para el sistema de ficheros (que es un subatributo de container) será necesario construir su contenedor mediante el Dockerfile
+				para obtener su sistema de ficheros (esto lo realiza el método parseFilesys), dar uso del método save de docker y comprimirlo en un archivo .tar para posteriormente extraer el sistema de ficheros.
+				Docker divide la imagen de un contendor por capas, aunque cumple su función al contenerizar, es indiferente a la hora de definir el servicio puesto que distintas combinaciones de capas son posibles para un mismo servicio.
+				Es por ello que el archivo .tar donde Docker almacenó el contendor es en realidad un directorio con cada una de las capas comprimidas, para obtener el sistema de ficheros completo se debe de descomprimir cada una y 
+				adjuntar todas en el mismo directorio. Finalmente se añade el sistema de ficheros al objeto Protobuf.\\
+				Una vez esté el objeto Protobuf completo se puede proceder a calcular las hashes de este para, posteriormente, añadirlas al mismo. Esta implementación del nodo da uso de varios algoritmos hash, 
+				aunque es el sha3-256 el que toma como referencia para identificar la descripción y el contenedor en todo el sistema. 
+				Tras calcular las hashes se vacía el atributo referente al sistema de ficheros de la especificación del servicio (objeto Protobuf) para no hacerlo
+				tan pesado, no estar completo supone que al compartirlo no será posible verificar sus hashes.
+				Para finalizar la compilación el nodo guarda el objeto Protobuf, referente a la especificación del servicio, en registry y elimina los archivos pertinentes a la operación de hycache (subdirectorio con el identificador generado
+				aleatoriamente al inicio).
+
+			\paragraph{build.py}
+				Se compone de un único método (build) el cual recibe la especificación de un servicio (objeto ipss.Service) y construye la imágen docker para permitir generar instancias de este. Tomando la hash sha3-256 de
+				la especificación del servicio (en la llamada al método se debe de asegurar que se encuentra esta hash, de no ser así el método no hace nada) verifica que se encuentre su respectiva imágen en el registro de Docker. \\
+
+				En caso de que no se encuentre la imágen se deberá buscar en otros nodos, por lo que se toman las instancias de otros nodos y dará uso del método GetServiceTar (supone que el resto de nodos lo implementan). 
+				El nodo de la red que posea el contenedor se lo devuelve mediante el streaming de lotes del archivo .tar del mismo, los cuales son almacenados en un archivo en hycache. Una vez que se ha descargado todo el archivo
+				Docker se encarga de cargarlo en un contenedor y se le da el nombre correspondiente a su identificador (<hash sha3-256>.service). \\
+
+				Sería posible verificar la imagen obtenida de la red dando uso del método verify() ???\\
+
+			\paragraph{gateway.py}
+				Se trata del servidor Grpc encargado de atender las solicitudes tanto de las instancias que ejecuta el nodo como de otros nodos de la red.
+				Su labor principal es ser capaz de generar instancias de servicios y destruirlas mientras gestiona de que instancia o nodo es dependiente cada una, 
+				esto es de vital importancia debido a que no puede fiarse del resto de agentes (nodos e instancias)
+				por lo que si un nodo se desconecta o destruye una instancia deberá destruir todas sus dependencias. 
+				También es responsable de decidir si un determinado servicio se instancia localmente o solicita la instancia del servicio a otro nodo de la red (balanceo de instancias de servicios). 
+				De responder las solicitudes de otros nodos para obtener la imagen del contenedor de un servicio o su especificación y de presentarse a otros nodos de la red. \\
+
+				En esta primera fase de desarrollo solo se aborda la comunicación con instancas, esto es, crear dependencias y destruirlas.\\
+				Para ello las instancias se almacenan en Python3, dando uso de un diccionario seguro ante concurrencia con el del objeto threading.Lock de Python, con el formato descrito a continuación:
+				%\includegraphics[width=16cm]{gestion_de_instancias.jpg}
+
+				
 		\subsection{Segunda fase de desarrollo}
 		\subsection{Tercera fase de desarrollo}
 	
