@@ -117,7 +117,7 @@
 			Un sistema compuesto de un conjunto de agentes ( o células), que ocupan un lugar en él, que poseen una serie de reglas 
 			que definen como interaccionan con el resto de agentes.
 
-			Y es que, en cierto modo, asi es como funciona la evolucion de un ecosistema de seres vivos, mejorando y optimizando sus procesos sin que exista
+			Y es que, en cierto modo, asi es como funciona la evolución de un ecosistema de seres vivos, mejorando y optimizando sus procesos sin que exista
 			una intención consciente de ello por parte de sus agentes.
 
 			Bajo este mismo principio se puede entender la capacidad de los sistemas económicos basados en la competencia para mejorar sus procesos. 
@@ -140,6 +140,9 @@
 			Tecnologías de vanguardia como la inteligencia artificial nos prometen
 			una significativa mejora en nuestra calidad de vida, principalmente por su potencial para automatizar tareas como nunca antes se había imaginado. 
 			
+			En un automata celular, a menor número y/o complejidad de las reglas sobre la interacción de sus agentes mayor será el espectro de complejidad que pueda alcanzar el autómata.
+			Contra más reglas le pones más se limita. ¿?
+
 			Por ello considero interesante un sistema distribuido de servicios. Desde mi punto de vista, existen dos componentes clave:
 			\begin{itemize}
 				\item Un servicio es un contendor de software que realiza una tarea especifica, puede entenderse como una ``caja negra'', existe una especificación del mismo en 
@@ -319,53 +322,57 @@
 			Definir como debe comportarse un sistema requiere abordar cuales son los deberes y derechos de sus componentes. \\
 			Un nodo debe de proporcionar una interfaz con la que los servicios puedan comunicarse, junto con la dirección
 			a la que el servicio le realizará sus solicitudes. La forma en la que el nodo carga estos componentes en una nueva instancia
-			es mediante un archivo binario en la raíz del sistema de ficheros del servicio. Esto es así ya que el servicio podría requerir de
+			es mediante un archivo binario en la raíz del sistema de ficheros del servicio (\_\_config\_\_). Esto es así ya que el servicio podría requerir de
 			estos datos antes de levantar su servidor. \\
-			Ante la solicitud de una nueva instancia, un nodo tiene el derecho de, o bien construir esta instancia localmente, o bien solicitarle la instancia
-			a un par (otro nodo). Así mismo, el nodo tiene el deber de retornar tanto una dirección con la que comunicarse con la nueva instancia, como un token
-			para realizar acciones sobre ella al solicitante.
-			En caso de crear la dependencia de un servicio en un par, el nodo debe de asegurarse que el solicitante tenga acceso a la dirección que le otorga para
+			Ante la solicitud de una nueva instancia, un nodo tiene el deber de, o bien construir esta instancia localmente, o bien solicitarle la instancia
+			a un par (otro nodo), y retornar al solicitante tanto una dirección con la que comunicarse con la nueva instancia como un token
+			con el que realizar acciones sobre ella.
+			En caso de crear la dependencia de un servicio en otro nodo, el nodo debe de asegurarse que el solicitante tenga acceso a la dirección que le otorga para
 			comunicarse con su dependencia. \\
 			Esta arquitectura permite a un servicio no preocuparse del nodo donde se ejecutará cada dependencia. Del mismo modo que los nodos no se preocuparán de
 			la utilidad que puedan tener las instancias que ejecutan. \\
 			Por tanto, para resumir, durante la construcción de la instancia de un servicio, el nodo añade en su raíz un binario que contiene como comunicarse con él.
 			Si el servicio quiere dar uso de una dependencia, le enviará la especificación de ésta al nodo, y éste le devolverá una dirección con la que comunicarse y
-			un token para poder matarla. Será el nodo el que busque donde construir esa dependencia, si localmente o en alguno de sus pares. También será el nodo el que,
-			en caso de matar a la primera instancia, acabe con la segunda.\\
+			un token para poder matarla en un futuro. Será el nodo el que busque donde construir esa dependencia, si localmente o en alguno de sus pares. También será el nodo el que,
+			en caso de matar a la primera instancia, acabe con la segunda (ya que es dependencia de la primera).\\
 
 			La parte más extensa de la definición del sistema es la especificación de un servicio, este se compone de los siguientes atributos:\\
 			\begin{itemize}
-				\item hash: Lista de hashes (del tipo sha256:913ref3...) sobre el binario del resto de la especificación.
+				\item hash: Lista de hashes (del tipo 'sha256':913ref3...) sobre el binario del resto de la especificación.
 				\item Syntax: Sintaxis de la especificación.
 				\item Container: Especifica el contenedor donde se ejecuta el servicio, esto es:
 					\begin{itemize}
 						\item la arquitectura, define el hardware y el kernel donde se debe de ejecutar el servicio.
 						\item el punto de entrada, define la ruta del primer ejecutable del servicio.
-						\item el sistema de archivos, representado en un árbol donde las hojas son los archivos en binario.
-						\item las variables de entorno, lista compuesta por llave y definición del campo de cada variable. 
+						\item el sistema de archivos, representado en un árbol donde las ramas pueden ser o bien un archivo binario, o un link a otro elemento del árbol, o otro árbol,
+							y donde cada elemento se identifica con un nombre.
+						\item las variables de entorno, lista compuesta por llave y definición del campo de cada variable.
 					\end{itemize} 
+					No abarca como se debe de construir (Dockerfile, capas de Docker ...), así cada nodo puede hacerlo de manera distinta.
 				\item Api: Define cómo se puede interactuar con el servicio, constituida por:
 					\begin{itemize}
-						\item interfaz de la aplicación (mensajes, métodos y errores y respuestas de cada uno).
-						\item lista de slots, cada uno compuesto por los siguentes elementos:
+						\item interfaz de la aplicación (mensajes y métodos junto con errores y respuestas de cada uno).
+						\item lista de slots. El motivo de requerir slots es el de permitir comunicarse con un servicio en distintos protocolos.
+						Cada slot está compuesto por los siguentes elementos:
 							\begin{itemize}
-								\item puerto donde escucha.
+								\item puerto donde escucha (desde el servicio, de solicitarselo a otro nodo éste podría dar otro).
 								\item protocolo de comunicación que soporta (HTTP/2, GRPC ...).
 							\end{itemize}
 					\end{itemize} 
-				\item Tensor: Opcional. Definie la topología del modelo que entrena el servicio. Un servicio podría solicitar al nodo que le retorne las instancias
+				\item Tensor: Opcional. Definie la topología del modelo que entrena el servicio. Un servicio puede solicitar al nodo que le retorne las instancias
 					de aquellos servicios que tengan un tensor determinado y con ellas realizar solicitudes a servicios que ya tienen el modelo entrenado.
 			\end{itemize}
 
 			Despues de especifiar los componentes del sistema y a que se dedica cada uno se ha realizado una implementación de cada uno de ellos para materializar la descripción de este. \\
 		\subsection{Primera fase de desarrollo}
 			La primera fase de desarrollo abarca la lógica detras de un nodo, esto es, la compilación y construcción de servicios y el manejo de solicitudes de los mismos.
-			El entorno donde se ejecuta esta implementación del nodo será Python3 sobre Ubuntu(Linux), dando uso, además, del sistema de base de datos MongoDB y el motor de 
-			contenerización DockerEngine. El uso obligatorio de Linux se debe principalmente a que dentro de la lógica implementada en Python se da uso de comandos Bash.
-			Además de eso, se da uso de Systemd para correr tres demonios de manera intermitente e indefinida: docker, mongo y gateway.py. \\
-
-			Por lo tanto la lógica detras del nodo se puede dividir en tres ficheros principales: compile.py, build.py y gateway.py. Además de esto, existen dos directorios, 
-			registry y hycache, en registry se almacenan las descripciones de servicios provenientes, o bien de su compilación (compile.py) o bien una solicitud de 
+			El entorno donde se ejecuta esta implementación del nodo será Python3 sobre Ubuntu(Linux), dando uso, además, del sistema de base de datos MongoDB, donde se almacenan
+			la información relativa a otros nodos de la red, y el motor de contenerización DockerEngine, con el que ejecutar instancias de servicios.
+			El uso obligatorio de Linux se debe principalmente a que dentro de la lógica implementada en Python se da uso de comandos Bash.
+			Además de eso, se da uso de Systemd para correr tres demonios de manera intermitente e indefinida: docker, mongo y gateway.py. La lógica detras del nodo se puede dividir
+			en tres ficheros principales: compile.py, build.py y gateway.py. \\
+			
+			Existen, además, dos directorios, registry y hycache, en registry se almacenan las descripciones de servicios provenientes, o bien de su compilación (compile.py) o bien una solicitud de 
 			otro servicio interno o externo (gateway.py), y el directorio hycache sirve para almacenar datos durante diferentes operaciones, ya sea para almacenar el contenedor 
 			comprimido de un servico al ser solicitado a otro nodo (build.py), guardar la configuracion de una nueva instancia para copiarla dentro de su contenedor (gateway.py)
 			o para almacenar y calcular la hash de un sistema de archivos durante la compilación de un servicio (compile.py). \\
@@ -375,10 +382,10 @@
 				El objetivo de este script de Python es obtener la descripción de un servicio a partir de un directorio llamado .service/, ubicado en la raiz de un repositorio git, 
 				que contenga la información necesaria para ello, esto es: un archivo Dockerfile y distintos otra información contenida en un archivo Json. \\
 				Por lo tanto, desde la terminal de un nodo, el comando python3 /home/hy/node/compile.py <direccion del repositorio>::<rama del repositorio> generará la descripción del servicio
-				en registry como <sha256 del servicio>.service y la imagen del contendor en el registro de Docker con nombre <sha256 del servicio>.service. \\
+				en registry con nombre <sha256 del servicio>.service y la imagen del contendor en el registro de Docker con nombre <sha256 del servicio>.service. \\
 				El formato antes de la compilacion (Dockerfile y Json en un directorio .service en la raiz de un repositorio git) tiene como objetivo facilitar la compilación para un desarrollo que
 				de uso de la herramienta Git, la definición del servicio es totalmente independiente de este, por lo que la compilación desde otro formato es facilmente implementable. \\
-				El sistema permite la compilación simultanea al generar un identificador aleatorio por cada ejecución, de esta forma el almacenamiento de datos en hycache ocurre dentro de un subdirectorio
+				El sistema permite la compilación simultánea al generar un identificador aleatorio por cada ejecución, de esta forma el almacenamiento de datos en hycache ocurre dentro de un subdirectorio
 				distinto por cada una. El script ejecuta comandos de docker mediante bash, dando uso del método os.system de Python. \\
 
 				Al iniciarse la compilación se descarga el repositorio aportado en hycache, generar la descripción de un servicio requiere obtener sus atributos y calcular su hash.
@@ -387,7 +394,7 @@
 				para obtener su sistema de ficheros (esto lo realiza el método parseFilesys), dar uso del método save de docker y comprimirlo en un archivo .tar para posteriormente extraer el sistema de ficheros.
 				Docker divide la imagen de un contendor por capas, aunque cumple su función al contenerizar, es indiferente a la hora de definir el servicio puesto que distintas combinaciones de capas son posibles para un mismo servicio.
 				Es por ello que el archivo .tar donde Docker almacenó el contendor es en realidad un directorio con cada una de las capas comprimidas, para obtener el sistema de ficheros completo se debe de descomprimir cada una y 
-				adjuntar todas en el mismo directorio. Finalmente se añade el sistema de ficheros al objeto Protobuf.\\
+				adjuntar todas en el mismo directorio. Finalmente se añade el sistema de ficheros al objeto Protobuf. \\
 				Una vez esté el objeto Protobuf completo se puede proceder a calcular las hashes de este para, posteriormente, añadirlas al mismo. Esta implementación del nodo da uso de varios algoritmos hash, 
 				aunque es el sha3-256 el que toma como referencia para identificar la descripción y el contenedor en todo el sistema. 
 				Tras calcular las hashes se vacía el atributo referente al sistema de ficheros de la especificación del servicio (objeto Protobuf) para no hacerlo
@@ -403,7 +410,7 @@
 				El nodo de la red que posea el contenedor se lo devuelve mediante el streaming de lotes del archivo .tar del mismo, los cuales son almacenados en un archivo en hycache. Una vez que se ha descargado todo el archivo
 				Docker se encarga de cargarlo en un contenedor y se le da el nombre correspondiente a su identificador (<hash sha3-256>.service). \\
 
-				Sería posible verificar la imagen obtenida de la red dando uso del método verify() ???\\
+				Sería posible verificar la imagen obtenida de la red dando uso del método verify() ??? \\
 
 			\paragraph{gateway.py}
 				Se trata del servidor Grpc encargado de atender las solicitudes tanto de las instancias que ejecuta el nodo como de otros nodos de la red.
@@ -411,11 +418,31 @@
 				esto es de vital importancia debido a que no puede fiarse del resto de agentes (nodos e instancias)
 				por lo que si un nodo se desconecta o destruye una instancia deberá destruir todas sus dependencias. 
 				También es responsable de decidir si un determinado servicio se instancia localmente o solicita la instancia del servicio a otro nodo de la red (balanceo de instancias de servicios). 
-				De responder las solicitudes de otros nodos para obtener la imagen del contenedor de un servicio o su especificación y de presentarse a otros nodos de la red. \\
+				Además de responder las solicitudes de otros nodos para obtener la imagen del contenedor de un servicio o su especificación y de presentarse a otros nodos de la red. \\
 
-				En esta primera fase de desarrollo solo se aborda la comunicación con instancas, esto es, crear dependencias y destruirlas.\\
-				Para ello las instancias se almacenan en Python3, dando uso de un diccionario seguro ante concurrencia con el del objeto threading.Lock de Python, con el formato descrito a continuación:
-				%\includegraphics[width=16cm]{gestion_de_instancias.jpg}
+				En esta primera fase de desarrollo solo se aborda la comunicación con instancias, esto es, crear dependencias y destruirlas.\\
+				Para ello las instancias se almacenan en Python3, dando uso de un diccionario seguro ante concurrencia con el objeto threading.Lock de Python, con el formato descrito a continuación:\\
+				\includegraphics[width=12cm]{gestion_de_instancias.jpg}\\
+				Antes de explicar cada uno de los elementos de la imágen se debe de recalcar la diferencia entre dependencia interna y externa.
+				\begin{itemize}
+					\item una dependencia interna es aquella que el nodo decide ejecutar localmente.
+					\item una dependencia externa es aquella que el nodo decide solicitar a otro nodo de la red.
+				\end{itemize}
+				Donde:
+				\begin{itemize}
+					\item peer\_ip Se refiere al solicitante (servicio o nodo) de la instancia.
+					\item container\_ip Se refiere a la dirección ip que posee el contenedor de la instancia. Se da en caso de que la dependencia sea interna.
+					\item container\_id Se refiere al identificador que posee el contenedor de la instancia. Se da en caso de que la dependencia sea interna.
+					\item node\_ip:node\_port Es la uri del nodo donde se ha solicitado la instancia. Se da en caso de que la dependencia sea externa.
+					\item his\_token Se refiere al token que posee la instancia en el nodo donde se le solicitó. Se da en caso de que la dependencia sea externa.
+						Este formato del token varía entre unos nodos y otros, por lo que podría tener otro formato al que se describe acontinuación.
+				\end{itemize}
+				
+				El token de una instancia posee el formato:
+				\begin{itemize}
+					\item peer\_ip\#\#container\_ip\#\#container\_id en caso de una dependencia interna.
+					\item peer\_ip\#\#node\_ip:node\_port\#\#his\_token en caso de una dependencia externa.
+				\end{itemize}
 
 				
 		\subsection{Segunda fase de desarrollo}
