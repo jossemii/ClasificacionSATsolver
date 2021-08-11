@@ -198,7 +198,9 @@
 			\item Finalmente, Aristóteles se refiere a la experiencia como el conocimiento que poseen los diferentes oficios, pescador, agricultor, carpintero, etc.
 		\end{itemize}
 		Esto explica que en las tesis doctorales realizadas en ciencias, dicho capítulo se llame Estado de la Ciencia y en ingenierías en general Estado del arte.	
-	
+		
+		Solvers satisfactibles insatisfactibles, que es SAT, regresión lineal, microservicios, hilos y concurrencia, 
+
 	\section{Análisis de requisitos}
 		En la Ingeniería de software, un Análisis de Requerimientos es una tarea que cubre el hueco entre la definición del software a nivel sistema y el diseño del mismo.
 
@@ -317,6 +319,8 @@
 				
 				\item El concepto implementación del nodo pretende remarcar aquellas decisiones sobre la lógica del nodo que son independientes del funcionamiento general de la red y,
 					por tanto, otros nodos pueden no adoptar.
+
+				\item  La configuración de un servicio se refiere a las variables de entorno usadas con este. Sirve para identificar una 'versión' concreta de un mismo servicio.
 			\end{itemize}
 	
 			Definir como debe comportarse un sistema requiere abordar cuales son los deberes y derechos de sus componentes. \\
@@ -365,7 +369,7 @@
 
 			Despues de especifiar los componentes del sistema y a que se dedica cada uno se ha realizado una implementación de cada uno de ellos para materializar la descripción de este. \\
 		\subsection{Primera fase de desarrollo}
-			La primera fase de desarrollo abarca la lógica detras de un nodo, esto es, la compilación y construcción de servicios y el manejo de solicitudes de los mismos.
+			La primera fase de desarrollo abarca la lógica detrás de un nodo, esto es, la compilación y construcción de servicios y el manejo de solicitudes de los mismos.
 			El entorno donde se ejecuta esta implementación del nodo será Python3 sobre Ubuntu(Linux), dando uso, además, del sistema de base de datos MongoDB, donde se almacenan
 			la información relativa a otros nodos de la red, y el motor de contenerización DockerEngine, con el que ejecutar instancias de servicios.
 			El uso obligatorio de Linux se debe principalmente a que dentro de la lógica implementada en Python se da uso de comandos Bash.
@@ -446,6 +450,97 @@
 
 				
 		\subsection{Segunda fase de desarrollo}
+			La segunda fase consiste en desarrollar el servicio de clasificación de solvers, este tiene la finalidad de: por un lado atender solicitudes para resolver cnf's, y por otro realizar un entrenamiento
+			con cnf's aleatorios para clasificar diferentes servicios SATsolvers, esto con la intencion de utilizar el SATsorter más adecuado para cada cnf durante las solicitudes reales. \\
+
+			El servicio realiza varias tareas de manera simultanea, al igual que el nodo, se ha optado por dar uso de Python3 como tecnología sobre la que desarrollar su lógica. El punto de entrada del servicio es el
+			fichero start.py, donde se inicia el servidor Grpc tras acceder a la configuración inicial del servicio (archivo \_\_config\_\_ proporcionado por el nodo), tomar las variables de entorno e iniciar diferentes
+			procesos secundarios. \\
+			Da uso de un servicio con el que obtener cnfs random, por lo que solicita una instancia de este en cada sesión de entrenamiento y la mata al finalizar la sesión. Además de esta dependencia también se le añade cada
+			uno de los solvers, los cuales pueden ser añadidos por el cliente a través del servidor Grpc. 
+			El servicio de obtención de cnfs random no ha sido desarrollado durante el proyecto, solo adaptado, se da uso de un código
+			del profesor Josep Argelich, por lo que su lógica no será desarrollada en la memoria, retorna un cnf de cualquier tipo, satisfactible o insatisfactible. \\
+
+			El servidor Grpc posee una serie de métodos con los que atender las solicitudes del cliente, estos son:
+			\begin{itemize}
+				\item StartTrain, inicia una sesion de entrenamiento si no está ya inicializada.
+				\item StopTrain, si existe, detiene la sesión de entrenamiento. 
+				\item UploadSolver, recive la especificación de un servicio de resolución de SAT y la añade al sistema.
+				\item StreamLogs, retorna los 'logs' del sistema mediante streaming.
+				\item Solve, recive un cnf, calcula cual es el mejor solver con el que resolverlo y lo resuelve dando uso del mismo y finalmente retorna el resultado.
+			\end{itemize}
+
+			Las partes principales en las que se divide la lógica del servicio son:
+			\paragraph{regresion.py}
+				Se trata de un hilo independiente iniciado desde start.py antes de ejecutar el servidor Grpc. Se encarga de calcular la regresión lineal de cada set de datos enviado desde la sesión de entrenamiento 
+				lo almacena como tensor de Onnx en un fichero tensor.onnx.
+				Si no esta la sesión de entrenamiento activa no se realiza la regresión porque no detecta cambios en el set de datos, la detección de cambios en el set de datos funciona usando un algoritmo hash sobre
+				él. \\
+				Por lo tanto, cada cierto periodo de tiempo (TIME\_FOR\_EACH\_REGRESSION\_LOOP: 900 segundos por defecto si en la variable de entorno no se indica lo contrario) se ejecutará, en caso de haber habido cambios,
+				la regresión de los datos recogidos por cada solver. La regresión de cada solver consiste en realidad en una regresión por cada grado hasta un máximo estipulado (MAX\_DEGREE: 100 por defecto 
+				si en la variable de entorno no se indica lo contrario)
+				y escoger aquella función que se ajuste más a los datos. De esta forma se realizan un total de <número de solvers> * MAX\_DEGREE regresiones cada TIME\_FOR\_EACH\_REGRESSION\_LOOP segundos,
+				siempre y cuando se realicen cambios en el set de datos. \\
+				El tensor posee el formato de una lista de tensores de Onnx (Intercambio de Redes Neuronales Abierto), un ecosistema de inteligencia artificial de código abierto, asociados cada uno a un SAT solver (especificación del servicio).
+				Se da uso del estandar Onnx por ser un estandar abierto para compartir modelos de redes neuronales entre distintas librerías (TensorFlow o PyCharm), aunque en este caso se utiliza para compartir modelos de regresión lineal,
+				y permite así que otro servicio de clasificación continue el modelo entrenado por el clasificador sin tener que utilizar la librería de la él da uso (Sklearn). \\
+				%\includegraphics[width=12cm]{esquema_de_regresion.jpg}\\
+
+				Sobre el set de datos del que da uso el proceso de regresión, la sesión de entrenamientos vuelca cada cierto tiempo los datos recogidos en un fichero (solvers\_dataset.bin) al cual nos referimos como el set de datos.
+				El formato del set de datos consiste en una puntuación por cada tipo de cnf (número de instancias * número de clausulas) por cada solver con una configuración determinada, cuya especificación se encuentra también en el set de datos.
+				%\includegraphics[width=12cm]{set_de_datos_de_entrenamiento.jpg}\\
+
+			\paragraph{train.py}
+				Durante el inicio del proceso principal (start.py) se obtiene el objeto trainer.Session, el cual sigue el patrón Singleton, este objeto es usado durante toda la vida del servicio. \\
+				El objeto train.Session se ocupa de:
+				\begin{itemize}
+					\item Gestionar el uso del servicio de obtención de cnfs random.
+					\item ejecutar la sesión de entrenamiento.
+					\item detener la sesión de entrenamiento.
+					\item Recoger los datos de la sesión de entrenamiento en un dataset (solvers\_dataset) y volcarla en el archivo solvers\_dataset.bin cada cierto número de iteraciones (SAVE\_TRAIN\_DATA: 2 por defecto).
+				\end{itemize} 
+
+				Cuando se inicia una sesión de entrenamiento (método start) desde el hilo principal se crea un hilo que ejecuta el método init, en el siguiente diagrama se expone su funcionamiento: \\
+				%\includegraphics[width=12cm]{train_init_diagram.jpg}\\
+				
+				Sobre el sistema de puntuación de los solvers, la puntuación que un solver recibe de la resolución de un cnf es inversamente proporcional al tiempo que el solver tarda en responder. 
+				En caso de que tarde en responder demasiado (existe un 'timeout' aplicado en la llamada Grpc de la variable de entorno TRAIN\_SOLVERS\_TIMEOUT, 30 segundos por defecto) 
+				se puntua en negativo (-1/time\_out).
+				En caso de que devuelva una interpretación se comprueba que esta sí satisface el cnf (operación con coste polinomial), 
+				si lo satisface puntua en positivo (+1/time) y registra que se demostro la satisfactibilidad del cnf, si no la satisface puntua en negativo (-1/time). 
+				En caso de que responda que el cnf es insatisfactible se guarda en una lista que ese solver tardo x tiempo en decir que era insatisfactible, 
+				al terminar de probar todos los solvers con ese cnf se comprueba si hubo alguno que demostrara su satisfactibilidad, de no ser asi, 
+				los solvers que lo dieron como insatisfactible puntuan en positivo (+1/time) y si se demostró la satisfactibilidad puntuan en negativo (-1/time). \\
+
+				Sobre la gestión del servicio de generación de cnfs random, se crea una instancia al iniciar cada sesión de entrenamiento y se destruye al finalizarla. Además de eso es necesario solicitar
+				una nueva instancia en caso de que la instancia actual del servicio acumule una cantidad determinada de errores (CONNECTION\_ERRORS: por defecto 5), originados al solicitar un nuevo cnf ya sea
+				por un error de Grpc o porque salta su 'timeout'.
+
+			\paragraph{\_solve.py}
+				Durante el inicio del proceso principal (start.py) se obtiene el objeto solve.Session, el cual sigue el patrón Singleton, este objeto es usado durante toda la vida del servicio. \\
+				El objeto solve.Session se ocupa de:
+				\begin{itemize}
+					\item gestionar las instancias de todos los solvers
+					\item solicitar a un solver determinado que resuelva un cnf determinado
+					\item balancear las solicitudes entre las distintas instancias de un mismo solver en caso de ser necesario (este punto se aborda durante la tercera fase de desarrollo).
+				\end{itemize}
+
+				Al solicitar el objeto solve.Session por primera vez se iniciará un hilo dedicado a mantener las instancias de los solvers denomidado Maintainer. Este comprueba, cada cierto periodo
+				de tiempo (MAINTENANCE\_SLEEP\_TIME: 100 segundos por defecto), si las instancias siguen activas resolviendo un cnf básico ([[1,],]), en caso de obtener un error se encarga de matar la instancia. \\
+
+				El objeto solve.Session también posee un método con el que añadir nuevos solvers a su registro, estos se almacenan en un diccionario del tipo identificador:SolverConfig. El objeto SolverConfig detalla
+				la definición de un servicio junto con una configuración del mismo determinada. \\
+
+				Finalmente, el objeto solve.Session permite resolver cnfs dado un cnf, el identificador de un solver con una configuración determinada, y con la posibilidad de especificar el timeout de la operación y 
+				proporcionar la especificación del solver junto con su configuración, por si con el identificador no se encuentra. En caso de que ese solver se encontrara en el registro, se resuelve el cnf y se retorna
+				la respuesta junto con el tiempo que tomó resolverla. En caso de que no se encuentre y se halla proporcionado una especificación la añadirá al registro y retornará error. \\
+
+				El manejo y control de las instancias de cada solver se desarrolla más adelante, en la tercera fase, puesto que su arquitectura se ve fuertemente influenciada por la necesidad de permitir varias instancias
+				por solver. \\
+
+			El patrón singleton o instancia única es un patrón de diseño que permite restringir la creación de objetos pertenecientes a una clase o el valor de un tipo a un único objeto. De esta forma se limita a que 
+			solo pueda haber una instancia de las clases train.Session y solve.Session.
+
 		\subsection{Tercera fase de desarrollo}
 	
 	\section{Problemas encontrados y decisiones técnicas tomadas}
