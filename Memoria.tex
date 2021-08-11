@@ -366,6 +366,7 @@
 				\item Tensor: Opcional. Definie la topología del modelo que entrena el servicio. Un servicio puede solicitar al nodo que le retorne las instancias
 					de aquellos servicios que tengan un tensor determinado y con ellas realizar solicitudes a servicios que ya tienen el modelo entrenado.
 			\end{itemize}
+			\includegraphics[width=16cm]{ipss.png}\\ \\
 
 			Despues de especifiar los componentes del sistema y a que se dedica cada uno se ha realizado una implementación de cada uno de ellos para materializar la descripción de este. \\
 		\subsection{Primera fase de desarrollo}
@@ -469,6 +470,7 @@
 				\item StreamLogs, retorna los 'logs' del sistema mediante streaming.
 				\item Solve, recive un cnf, calcula cual es el mejor solver con el que resolverlo y lo resuelve dando uso del mismo y finalmente retorna el resultado.
 			\end{itemize}
+			\includegraphics[width=16cm]{start_grpc_server.png} \\ \\
 
 			Las partes principales en las que se divide la lógica del servicio son:
 			\paragraph{regresion.py}
@@ -484,11 +486,13 @@
 				El tensor posee el formato de una lista de tensores de Onnx (Intercambio de Redes Neuronales Abierto), un ecosistema de inteligencia artificial de código abierto, asociados cada uno a un SAT solver (especificación del servicio).
 				Se da uso del estandar Onnx por ser un estandar abierto para compartir modelos de redes neuronales entre distintas librerías (TensorFlow o PyCharm), aunque en este caso se utiliza para compartir modelos de regresión lineal,
 				y permite así que otro servicio de clasificación continue el modelo entrenado por el clasificador sin tener que utilizar la librería de la él da uso (Sklearn). \\
-				%\includegraphics[width=12cm]{esquema_de_regresion.jpg}\\
+				\includegraphics[width=16cm]{esquema_regresion.png} \\  Se toma el modelo con el R2 más alto. \\ \\ 
 
-				Sobre el set de datos del que da uso el proceso de regresión, la sesión de entrenamientos vuelca cada cierto tiempo los datos recogidos en un fichero (solvers\_dataset.bin) al cual nos referimos como el set de datos.
-				El formato del set de datos consiste en una puntuación por cada tipo de cnf (número de instancias * número de clausulas) por cada solver con una configuración determinada, cuya especificación se encuentra también en el set de datos.
-				%\includegraphics[width=12cm]{set_de_datos_de_entrenamiento.jpg}\\
+				Sobre el set de datos del que da uso el proceso de regresión, la sesión de entrenamientos vuelca cada cierto tiempo los datos recogidos en
+				un fichero (solvers\_dataset.bin) al cual nos referimos como el set de datos.
+				El formato del set de datos consiste en una puntuación por cada tipo de cnf (número de instancias * número de clausulas) por cada solver con una configuración determinada, 
+				cuya especificación se encuentra también en el set de datos. \\
+				\includegraphics[width=16cm]{set_de_datos_de_entrenamiento.png}\\ \\
 
 			\paragraph{train.py}
 				Durante el inicio del proceso principal (start.py) se obtiene el objeto trainer.Session, el cual sigue el patrón Singleton, este objeto es usado durante toda la vida del servicio. \\
@@ -500,8 +504,8 @@
 					\item Recoger los datos de la sesión de entrenamiento en un dataset (solvers\_dataset) y volcarla en el archivo solvers\_dataset.bin cada cierto número de iteraciones (SAVE\_TRAIN\_DATA: 2 por defecto).
 				\end{itemize} 
 
-				Cuando se inicia una sesión de entrenamiento (método start) desde el hilo principal se crea un hilo que ejecuta el método init, en el siguiente diagrama se expone su funcionamiento: \\
-				%\includegraphics[width=12cm]{train_init_diagram.jpg}\\
+				Cuando se inicia una sesión de entrenamiento (método start) desde el hilo principal se crea un hilo que ejecuta el método init, este inicia un servicio de cnfs random y, en cada iteración, genera un cnf y lo prueba
+				en cada uno de los solvers. Solo se detiene con la señal de la variable do\_stop.
 				
 				Sobre el sistema de puntuación de los solvers, la puntuación que un solver recibe de la resolución de un cnf es inversamente proporcional al tiempo que el solver tarda en responder. 
 				En caso de que tarde en responder demasiado (existe un 'timeout' aplicado en la llamada Grpc de la variable de entorno TRAIN\_SOLVERS\_TIMEOUT, 30 segundos por defecto) 
@@ -514,7 +518,13 @@
 
 				Sobre la gestión del servicio de generación de cnfs random, se crea una instancia al iniciar cada sesión de entrenamiento y se destruye al finalizarla. Además de eso es necesario solicitar
 				una nueva instancia en caso de que la instancia actual del servicio acumule una cantidad determinada de errores (CONNECTION\_ERRORS: por defecto 5), originados al solicitar un nuevo cnf ya sea
-				por un error de Grpc o porque salta su 'timeout'.
+				por un error de Grpc o porque salta su 'timeout'. \\
+
+				Sobre el mecanismo para detener el entrenamiento, hay que tener en cuenta que para evitar que la instrucción stop, usada por el método StopTrain del servidor Grpc en start.py,
+				mate el hilo durante un entrenamiento el método stop emite el mensaje de que se debe de parar el entrenamiento en la siguiente vuelta,
+				y a continuación espera a que el entrenamiento salga del bucle y termine. De esta forma se asegura que no deja instancias fuera de pila y por tanto servicios zombie 
+				(la pila se aborda en la fase tres). \\
+
 
 			\paragraph{\_solve.py}
 				Durante el inicio del proceso principal (start.py) se obtiene el objeto solve.Session, el cual sigue el patrón Singleton, este objeto es usado durante toda la vida del servicio. \\
@@ -537,6 +547,12 @@
 
 				El manejo y control de las instancias de cada solver se desarrolla más adelante, en la tercera fase, puesto que su arquitectura se ve fuertemente influenciada por la necesidad de permitir varias instancias
 				por solver. \\
+			
+			\paragraph{\_get.py}
+				Trara de seleccionar el solver que mejor rendimiento va a dar para un cnf determinado. Carga el tensor del archivo tensor.onnx y realiza inferencia sobre el modelo de regresión lineal
+				de cada uno de los solvers contenidos en tensor.onnx. \\
+				La inferencia es el proceso por el cual se derivan conclusiones a partir de premisas, es decir, a partir de un modelo de regresión lineal 
+				se supone la puntuación que se obtendría para un cnf determinado. Para la inferencia se da uso de la libreria ONNX-Runtime de Microsoft. \\ \\
 
 			El patrón singleton o instancia única es un patrón de diseño que permite restringir la creación de objetos pertenecientes a una clase o el valor de un tipo a un único objeto. De esta forma se limita a que 
 			solo pueda haber una instancia de las clases train.Session y solve.Session.

@@ -1,17 +1,17 @@
 # Fdb version 3
-["bibtex out/Memoria"] 1628694627 "out/Memoria.aux" "out/Memoria.bbl" "out/Memoria" 1628694631
+["bibtex out/Memoria"] 1628709424 "out/Memoria.aux" "out/Memoria.bbl" "out/Memoria" 1628714125
   "/usr/share/texlive/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "out/Memoria.aux" 1628694630 4921 dbf09aeb05761b19f3c441f4e86356cc "pdflatex"
+  "out/Memoria.aux" 1628714124 5044 ecc56a935134270d83da5d890a7636af "pdflatex"
   "referencies.bib" 1628110271 5142 5275fead0b2475f88ff377790b2c8d7f ""
   (generated)
-  "out/Memoria.blg"
   "out/Memoria.bbl"
-["makeindex out/Memoria.idx"] 1628694624 "out/Memoria.idx" "out/Memoria.ind" "out/Memoria" 1628694631
-  "out/Memoria.idx" 1628694629 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "out/Memoria.blg"
+["makeindex out/Memoria.idx"] 1628709197 "out/Memoria.idx" "out/Memoria.ind" "out/Memoria" 1628714125
+  "out/Memoria.idx" 1628714122 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   (generated)
   "out/Memoria.ind"
   "out/Memoria.ilg"
-["pdflatex"] 1628694628 "/workspaces/TFG/Memoria.tex" "out/Memoria.pdf" "Memoria" 1628694631
+["pdflatex"] 1628714119 "/workspaces/TFG/Memoria.tex" "out/Memoria.pdf" "Memoria" 1628714125
   "/etc/texmf/web2c/texmf.cnf" 1627907346 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk" 1627913831 25396 233f28375bac6d9c5f5786d95f35b2ce ""
   "/root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk" 1627913839 28952 8405b8dea1fde23fbcc72dd021693b56 ""
@@ -185,18 +185,22 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1581979058 38841 ce3692aa899bb693b90b87eaa5d4d84e ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1627907366 4338190 ccf23483f29b6bdb7012ae3a472369b6 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1627907374 4791331 3af588c0323212be6a096a0d7c9db9d0 ""
-  "/workspaces/TFG/Memoria.tex" 1628694622 43528 eef06d7a0bb7d3cf6677d1e2d4c2aa93 ""
-  "Memoria.tex" 1628694622 43528 eef06d7a0bb7d3cf6677d1e2d4c2aa93 ""
+  "/workspaces/TFG/Memoria.tex" 1628714117 44881 e0c2629a8cd52564cf4071335191f705 ""
+  "Memoria.tex" 1628714117 44881 e0c2629a8cd52564cf4071335191f705 ""
   "img/Esquema_puente.jpg" 1628091334 30506 1b16774c14f210c7fc2c50e81b999c71 ""
+  "img/esquema_regresion.png" 1628709061 98096 3489bba8503164a60c69b9aca7513369 ""
   "img/gestion_de_instancias.jpg" 1628524136 47726 088a2969223a95f66c796f56177f2cec ""
+  "img/ipss.png" 1628697605 223490 d1e6e67a60d111ab5f903d9cc903c5d8 ""
   "img/logoUDL.png" 1628091337 35418 6c677a9abca593331753216d953bc773 ""
-  "out/Memoria.aux" 1628694630 4921 dbf09aeb05761b19f3c441f4e86356cc "pdflatex"
-  "out/Memoria.bbl" 1628694627 3553 6d504e53d2a3be8fdbc2a36908367ab4 "bibtex out/Memoria"
-  "out/Memoria.ind" 1628694624 0 d41d8cd98f00b204e9800998ecf8427e "makeindex out/Memoria.idx"
-  "out/Memoria.out" 1628694630 2024 39eb7a2e8cf41834cb0f5bbff1ff13b1 "pdflatex"
+  "img/set_de_datos_de_entrenamiento.png" 1628706126 50204 ea405507cc6d745dff8ec5eb797d2b35 ""
+  "img/start_grpc_server.png" 1628708615 49561 568524762ea2a44ad8cd1dd667986226 ""
+  "out/Memoria.aux" 1628714124 5044 ecc56a935134270d83da5d890a7636af "pdflatex"
+  "out/Memoria.bbl" 1628709424 3553 6d504e53d2a3be8fdbc2a36908367ab4 "bibtex out/Memoria"
+  "out/Memoria.ind" 1628709197 0 d41d8cd98f00b204e9800998ecf8427e "makeindex out/Memoria.idx"
+  "out/Memoria.out" 1628714124 2095 a773955f40d20d1baf5832c654273f46 "pdflatex"
   (generated)
-  "out/Memoria.pdf"
-  "out/Memoria.aux"
-  "out/Memoria.idx"
   "out/Memoria.log"
+  "out/Memoria.idx"
+  "out/Memoria.aux"
   "out/Memoria.out"
+  "out/Memoria.pdf"
