@@ -199,7 +199,14 @@
 		\end{itemize}
 		Esto explica que en las tesis doctorales realizadas en ciencias, dicho capítulo se llame Estado de la Ciencia y en ingenierías en general Estado del arte.	
 		
-		Solvers satisfactibles insatisfactibles, que es SAT, regresión lineal, microservicios, hilos y concurrencia, 
+		\begin{itemize}
+			\item Solvers satisfactibles insatisfactibles
+			\item que es SAT
+			\item regresión lineal
+			\item microservicios
+			\item hilos y concurrencia
+			\item beneficios de un sistema distribuido
+		\end{itemize}
 
 	\section{Análisis de requisitos}
 		En la Ingeniería de software, un Análisis de Requerimientos es una tarea que cubre el hueco entre la definición del software a nivel sistema y el diseño del mismo.
@@ -244,14 +251,14 @@
 				\item Tercera fase de desarrollo
 					\begin{itemize}
 						\item Balanceo de carga de instancias. \\
-							Como es el nodo el que tiene la responsabilidad de construir y ejecutar los servicios demandados,
+							Al ser el nodo el que tiene la responsabilidad de construir y ejecutar los servicios demandados,
 							este puede derivar a otros nodos de la red la tarea de construir y ejecutar un servicio. \\
-							Es por ello que se requiere un servicio que decida donde ejecutar un servicio determinado (si en local o en otro nodo)
-							en función del coste que conlleve en cada uno.
+							Se debe de desarrollar la lógica necesaria para que lo haga.
 						\item Balanceo de carga de solicitudes. \\
 							El clasificador deberá tener un balanceador de carga
-							con el que se repartirán las peticiones para resolver CNF's.
-						\item Distribución de contenedores.
+							con el que se repartirán las peticiones para resolver CNF's entre varias instancias de un mismo solver.
+						\item Distribución de contenedores. \\
+						\item Busqueda de otro nodos en la red.
 					\end{itemize}
 				\item Testing del sistema
 					\\ Tras cada fase de desarrollo.
@@ -321,6 +328,8 @@
 					por tanto, otros nodos pueden no adoptar.
 
 				\item  La configuración de un servicio se refiere a las variables de entorno usadas con este. Sirve para identificar una 'versión' concreta de un mismo servicio.
+				
+				\item Una instancia zombie es aquella cuyo servicio padre, quien la solicitó, ha perdido su token y por tanto no puede matarla, o bien el servicio que la solicito ya ha muerto.
 			\end{itemize}
 	
 			Definir como debe comportarse un sistema requiere abordar cuales son los deberes y derechos de sus componentes. \\
@@ -335,6 +344,7 @@
 			comunicarse con su dependencia. \\
 			Esta arquitectura permite a un servicio no preocuparse del nodo donde se ejecutará cada dependencia. Del mismo modo que los nodos no se preocuparán de
 			la utilidad que puedan tener las instancias que ejecutan. \\
+			Si un nodo posee una función con la que obtener el coste de ejecutar la instancia de un determiando servicio. Sin especificar en que debe de basarse este coste. \\ \\
 			Por tanto, para resumir, durante la construcción de la instancia de un servicio, el nodo añade en su raíz un binario que contiene como comunicarse con él.
 			Si el servicio quiere dar uso de una dependencia, le enviará la especificación de ésta al nodo, y éste le devolverá una dirección con la que comunicarse y
 			un token para poder matarla en un futuro. Será el nodo el que busque donde construir esa dependencia, si localmente o en alguno de sus pares. También será el nodo el que,
@@ -555,10 +565,65 @@
 				se supone la puntuación que se obtendría para un cnf determinado. Para la inferencia se da uso de la libreria ONNX-Runtime de Microsoft. \\ \\
 
 			El patrón singleton o instancia única es un patrón de diseño que permite restringir la creación de objetos pertenecientes a una clase o el valor de un tipo a un único objeto. De esta forma se limita a que 
-			solo pueda haber una instancia de las clases train.Session y solve.Session.
+			solo pueda haber una instancia de las clases train.Session y solve.Session. \\
+
+			Para enviar la especificación de un servicio por Grpc se utiliza el mensaje ServiceExtended, este optimiza el proceso enviando por streaming cada hash de la especificación (una por una) y finalmente la
+			especificación completa, además de enviar la configuración (en caso de usarse para solicitar una instancia) en tan solo uno de las partes. Cuando el servidor recive el stream comprueba con las hashes si
+			ya posee el servicio, si lo posee para el stream y no es necesario enviar la especificación. \\
+			\includegraphics[width=16cm]{service_extended_diagram.png}\\ \\
 
 		\subsection{Tercera fase de desarrollo}
+			La tercera fase cubre tres desarrollos paralelos:
+			\begin{itemize}
+				\item el balanceo de carga de instancias en el nodo.
+				\item el balanceo de carga de solicitudes en el clasificador.
+				\item la distribución de contenedores en el nodo.
+				\item añadir nuevos nodos de la red en el nodo.
+			\end{itemize}
+
+			\paragraph{Balanceo de instancias}
+				Cuando el nodo recibe una solicitud para instanciar un servicio es este el que decidirá en que nodo de la red se debe de instanciar, localmente o en otro nodo. Para ello compara el coste
+				de ejecución de la instancia en cada uno de los nodos que posee el registro (MongoDB) con el número de contenedores que se están ejecutando en ese momento y escoge el de menor coste. 
+				Ese mismo coste local, el número de contenedores que se están ejecutando, es el que retornará a otros métodos cuando le pregunten por el coste de ejecutar una instancia
+				(método Grpc GetServiceCost), sin importar que instancia sea. \\
+
+			\paragraph{Balanceo de solicitudes}
+				En el supuesto de que el cliente realiza, al mismo tiempo, multitud de solicitudes para resolver solvers, podría darse el caso de que, en un mismo instante de tiempo, se requiera dar uso de 
+				un solver en concreto. 
+				El solver en cuestion podría ser capaz de resolver varios cnfs simultaneamente, dentro del mismo contenedor, aunque de esa forma no se aprobechan las ventajas del sistema distribuido.
+				Con el objetivo de que un varios cnfs se resuelvan simultaneamente por un mismo solver el clasificador crea distintas instancias de este cuando es necesario, de esta forma el nodo se encargará de 
+				instanciar el servicio entre los distintos nodos de la red. \\ 
+
+				Antes de entrar en detalle sobre la estructura sobre la que se manejan las instancias se debe de exponer el diagrama de clases siguiente: \\
+				\includegraphics[width=12cm]{diagrama_de_clases_de_solve.png}\\ \\
+
+				Como se puede observar en el diagrama anterior, para manejar las instancias de cada solver, se adopta una estructura de un diccionario de solvers (<solver config. id>:<solver config objet>), 
+				donde cada objeto SolverConfig posee una lista de instancias (objeto SolverInstance). Cuando se requiere la instancia de un solver determinado se quita de la lista y cuando se deja de usar
+				se vuelve a introducir en la lista. El acceso a todo el diccionario se proteje contra la concurrencia mediante el uso de un objeto threading.Lock. \\
+				%\includegraphics[width=16cm]{esquema_instancias_solvers.jpg}\\ \\
+
+				Hay dos métodos que obtienen e introducen instancias en las listas, resolver un cnf (Session.cnf) y el del hilo de mantenimiento (Session.mainteance). \\
+				El método para resolver un cnf da uso de la lista como si se tratara de una pila normal, es decir, toma el elemento que se encuentra en el índice más elevado de la lista y coloca el elemento
+				en el índice más elevado de la lista. \\ El método de mantenimiento da uso de la lista como si se tratara de una pila inversa, es decir, toma el elemento que se encuentra en la primera posición
+				de la lista y coloca el elemento en la primera posición también. \\
+				El motivo de adoptar esta configuración es que las instancias tienen contadores sobre el último tiempo en que se usaron, estos solo se actualizan al solicitar resolver cnfs (el método Session.cnf),
+				por lo que cuando el mantenedor de instancias la toma comprueba si se paso de tiempo en deshuso, si es asi no lo vuelve a cargar en la lista, de lo contrario la deja en primera posición.
+
+				Si se toma una instancia, se debe de asegurar que al terminar de usarla, o bien se agrega a su lista correspondiente, o bien se para. No asegurar esto ocasiona un bug importante
+				ya que la instancia quedaría en estado zombie hasta que el clasificador fuera eliminado (en el supuesto en que el nodo donde se instancio matara dependencias que fueran a quedar zombies).
+
+			\paragraph{Distribución de contenedores}
+				Con el fin de atender las solicitudes de obtención de un contenedor el nodo proporciona un método Grpc (método Grpc GetServiceTar), este recive la especificación de un servicio y, si puede 
+				proporcionarlo, comprime el contenedor y envía el archivo en formato .tar dividiendolo en trozos y enviandolos en streaming, en caso de no poder proporconar el contenedor salta una Excepción que
+				recive el cliente.\\
+				Para la busqueda de contenedores, el nodo solo debe de iterar entre sus pares (resto de nodos de la red) y comprobar si alguno posee el contenedor dando uso del método anteriormente definido. \\
+				
+				Para la distribución de especificaciones de servicios se utilizan métodos Grpc con mecánicas similares.
 	
+			\paragraph{Conexión con nuevos nodos}
+				Al añadir un nuevo nodo a la red se debe de usar el comando 'python3 zeroconf.py <uri del nuevo nodo>' desde la consola de cada nodo, el nodo donde se ejecuta el comando ejecutará el método Grpc HyNode
+				en el supuesto nuevo nodo, si este le responde con un objeto Instance, el nodo le retornará su instancia y lo tomará como un nodo completamente operativo, si no responde olvidará la solicitud.
+
 	\section{Problemas encontrados y decisiones técnicas tomadas}
 		\subsection{¿Cómo realizan múltiples clientes solicitudes al servicio de clasificación?}
 			Basándose en la arquitectura anteriormente desarrollada, si un cliente quiere dar uso de un servicio, éste solicita la creación de una instancia del mismo a su nodo,
@@ -603,6 +668,10 @@
 		\subsection{¿Porque no añadir el Dockerfile en la especificación de un servicio?}
 
 		\subsection{Identificación del algoritmo hash}
+
+		\subsection{Sobre el mecanismo de coste de ejecución de instancias de servicios}
+
+		\subsection{Uso de cola en el mantenedor de instancias}
 
 	\section{Resultados y conclusiones}
 	\section{Trabajo futuro}
