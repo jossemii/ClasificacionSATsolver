@@ -496,7 +496,7 @@
 				El tensor posee el formato de una lista de tensores de Onnx (Intercambio de Redes Neuronales Abierto), un ecosistema de inteligencia artificial de código abierto, asociados cada uno a un SAT solver (especificación del servicio).
 				Se da uso del estandar Onnx por ser un estandar abierto para compartir modelos de redes neuronales entre distintas librerías (TensorFlow o PyCharm), aunque en este caso se utiliza para compartir modelos de regresión lineal,
 				y permite así que otro servicio de clasificación continue el modelo entrenado por el clasificador sin tener que utilizar la librería de la él da uso (Sklearn). \\
-				\includegraphics[width=16cm]{esquema_regresion.png} \\  Se toma el modelo con el R2 más alto. \\ \\ 
+				\includegraphics[width=12cm]{esquema_regresion.png} \\  Se toma el modelo con el R2 más alto. \\ \\ 
 
 				Sobre el set de datos del que da uso el proceso de regresión, la sesión de entrenamientos vuelca cada cierto tiempo los datos recogidos en
 				un fichero (solvers\_dataset.bin) al cual nos referimos como el set de datos.
@@ -567,10 +567,10 @@
 			El patrón singleton o instancia única es un patrón de diseño que permite restringir la creación de objetos pertenecientes a una clase o el valor de un tipo a un único objeto. De esta forma se limita a que 
 			solo pueda haber una instancia de las clases train.Session y solve.Session. \\
 
-			Para enviar la especificación de un servicio por Grpc se utiliza el mensaje ServiceExtended, este optimiza el proceso enviando por streaming cada hash de la especificación (una por una) y finalmente la
+			Para enviar la especificación de un servicio por Grpc se utiliza el mensaje Grpc ServiceTransport, este optimiza el proceso enviando por streaming cada hash de la especificación (una por una) y finalmente la
 			especificación completa, además de enviar la configuración (en caso de usarse para solicitar una instancia) en tan solo uno de las partes. Cuando el servidor recive el stream comprueba con las hashes si
 			ya posee el servicio, si lo posee para el stream y no es necesario enviar la especificación. \\
-			\includegraphics[width=16cm]{service_extended_diagram.png}\\ \\
+			\includegraphics[width=16cm]{service_transport_diagram.png}\\ \\
 
 		\subsection{Tercera fase de desarrollo}
 			La tercera fase cubre tres desarrollos paralelos:
@@ -597,10 +597,12 @@
 				Antes de entrar en detalle sobre la estructura sobre la que se manejan las instancias se debe de exponer el diagrama de clases siguiente: \\
 				\includegraphics[width=12cm]{diagrama_de_clases_de_solve.png}\\ \\
 
-				Como se puede observar en el diagrama anterior, para manejar las instancias de cada solver, se adopta una estructura de un diccionario de solvers (<solver config. id>:<solver config objet>), 
+				Como se puede observar en el diagrama anterior, para manejar las instancias de cada solver, se adopta una estructura de un diccionario de solvers (<solver config. id>:< objeto SolverConfig>), 
 				donde cada objeto SolverConfig posee una lista de instancias (objeto SolverInstance). Cuando se requiere la instancia de un solver determinado se quita de la lista y cuando se deja de usar
-				se vuelve a introducir en la lista. El acceso a todo el diccionario se proteje contra la concurrencia mediante el uso de un objeto threading.Lock. \\
-				%\includegraphics[width=16cm]{esquema_instancias_solvers.jpg}\\ \\
+				se vuelve a introducir en la lista. El acceso a todo el diccionario se proteje contra la concurrencia mediante el uso de un objeto threading.Lock. El identificador de un objeto SolverConfig 
+				se obtiene mediante el algoritmo hash sha3-256 de su binario.\\
+				En el siguente esquema se expone el uso de la pila de instancias de un único solver: \\
+				\includegraphics[width=16cm]{esquema_instancias_solvers.jpg}\\ \\
 
 				Hay dos métodos que obtienen e introducen instancias en las listas, resolver un cnf (Session.cnf) y el del hilo de mantenimiento (Session.mainteance). \\
 				El método para resolver un cnf da uso de la lista como si se tratara de una pila normal, es decir, toma el elemento que se encuentra en el índice más elevado de la lista y coloca el elemento
@@ -661,21 +663,45 @@
 				\item Protobuf, su lenguaje de serialización, consigue comprimir bytes de manera muy eficiente enfocando los buffers a cada topología de mensajes.
 				\item Utiliza Http/2, por lo que está preparado para realizar streaming bidireccional de manera eficiente.
 			\end{itemize}
-			Otros protocolos también a tener en cuenta podrían ser Flatbuffers o Capt'n proto.
+			Otros protocolos también a tener en cuenta podrían ser Flatbuffers o Capt'n proto. \\
 		
 		\subsection{¿Porque contener todo el sistema de ficheros en la especificación de un servicio?}
+			La especificación de un servicio debe de definirlo de manera completa para evitar redundancia entre distintos servicios.
+			Aunque puede acarrear problemas como el tamaño de la especificación, se puede resolver en una capa de abstracción más alta, es decir,
+			es posible implementar, por ejemplo, la compresión de la especificación de una cierta manera. \\
 
 		\subsection{¿Porque no añadir el Dockerfile en la especificación de un servicio?}
+			Igual que el problema sobre el tamaño del sistema de ficheros, especificar como se debe de construir el servicio debe de ser tratado en una capa
+			de abstracción superior a la especificación del servicio. \\
 
 		\subsection{Identificación del algoritmo hash}
+			Para evitar colisiones al identificar diferentes algoritmos hash estos son identificados aplicando su propio algoritmo a una entrada vacía.
+			Por ejemplo:
+			\begin{itemize}
+				\item sha256 / sha2-256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+				\item sha3-256: a7ffc6f8bf1ed76651c14756a061d662f580ff4de43b49fa82d80a4b80f8434a
+				\item shake-256 of 200bits: 46b9dd2b0ba88d13233b3feb743eeb243fcd52ea62b81b82b50c27646ed5762f
+			\end{itemize}
+
+			De esta forma el formato es <id hash>:<hash value>.
+			Por lo que la palabra "nodo" sería:
+			\begin{itemize}
+				\item e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855:755c967353885b8b5096b5492b317fa25f77384e7c57afa05748f2238a9141d9
+				\item a7ffc6f8bf1ed76651c14756a061d662f580ff4de43b49fa82d80a4b80f8434a:2837075229aa23bf8a4139715ac8369a62c2beb0e868df5bd32a2ca6d8e56d2a
+				\item 46b9dd2b0ba88d13233b3feb743eeb243fcd52ea62b81b82b50c27646ed5762f:77b532f14d889b55c5e1c5f309ceb43cec543be21a0372fa56fc09afb4bb594a
+			\end{itemize}
+			De esta forma no se requiere centralizar un registro para acordar que identificador corresponde a un algoritmo concreto. \\
 
 		\subsection{Sobre el mecanismo de coste de ejecución de instancias de servicios}
-
+			
 		\subsection{Uso de cola en el mantenedor de instancias}
 
 	\section{Resultados y conclusiones}
+		
 	\section{Trabajo futuro}
-
+		IPFS al compartir especificaciones de servicios, contenedores, tensores \dots
+		zeroconf
+		Regresion fuera de clasificador
 	\bibliography{referencies}
 	\bibliographystyle{plain}
 	\nocite{*}
