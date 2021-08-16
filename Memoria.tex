@@ -118,7 +118,7 @@
 			que definen como interaccionan con el resto de agentes.
 
 			Y es que, en cierto modo, asi es como funciona la evolución de un ecosistema de seres vivos, mejorando y optimizando sus procesos sin que exista
-			una intención consciente de ello por parte de sus agentes.
+			una intención consciente por su parte. \\
 
 			Bajo este mismo principio se puede entender la capacidad de los sistemas económicos basados en la competencia para mejorar sus procesos. 
 			Cuando una empresa se dedica a investigar nuevas tecnologías para abaratar costes, no lo hace por el bien común, lo hace para vencer a sus rivales,
@@ -132,24 +132,19 @@
 			terminará abarcando un cada vez mayor porcentaje de su mercado e imponiendose al método anterior. 
 
 			Pero esta es una forma muy lenta de evolucionar debido a que el tiempo para observar resultados es el de un escenario real.
-			Sin embargo, podemos observar nuevas propuestas de actuación en entornos simulados, en mucho menor tiempo y barajando más opciones, y de esta forma aplicar
-			la mejor forma de actuación practicamente al instante.
+			Sin embargo, se pueden observar nuevas propuestas de actuación en entornos simulados, en mucho menor tiempo y barajando más opciones, y de esta forma aplicar
+			la mejor forma de actuación practicamente al instante. \\
 			
 			La revolución informática de las ultimas décadas nos da la posibilidad de simular y automatizar procesos. 
-			Hemos construido una red de ordenadores con estas capacidades, y su potencial es enorme.
+			Se ha construido una red de ordenadores con estas capacidades, y su potencial es enorme.
 			Tecnologías de vanguardia como la inteligencia artificial nos prometen
-			una significativa mejora en nuestra calidad de vida, principalmente por su potencial para automatizar tareas como nunca antes se había imaginado. 
+			una significativa mejora en nuestra calidad de vida, principalmente por su potencial para automatizar tareas como nunca antes se había imaginado. \\
 			
 			En un automata celular, a menor número y/o complejidad de las reglas sobre la interacción de sus agentes mayor será el espectro de complejidad que pueda alcanzar el autómata.
-			Contra más reglas le pones más se limita. ¿?
+			Contra más reglas tiene más se limita. ¿? 
 
-			Por ello considero interesante un sistema distribuido de servicios. Desde mi punto de vista, existen dos componentes clave:
-			\begin{itemize}
-				\item Un servicio es un contendor de software que realiza una tarea especifica, puede entenderse como una ``caja negra'', existe una especificación del mismo en 
-					formato binario, donde se especifica todo lo necesario para construirlo y comunicarse con él.
-				\item Un nodo es un computador que forma parte de la red, debe de tener la capacidad de encontrar otros nodos y comunicarse con ellos, compartir y construir servicios
-					y delegar la sobrecarga de servicios a sus pares.
-			\end{itemize}
+			Por ello considero interesante un sistema distribuido de servicios, entendidos como formas de actuación determinadas para resolver un problema concreto, 
+			donde prevalezca siempre el más competitivo y eficiente.
 
 		\subsection{Objetivos del proyecto}
 			Este trabajo pretende dos cosas:
@@ -180,13 +175,13 @@
 			\end{itemize}
 
 	\section{"State of the art"}
+		¿Qué es estado del arte? \\
 		Dentro de un escrito académico técnico (y por calco del lenguaje académico que se nutre del inglés), se denomina estado del Arte a la base teórica sobre la que se sustenta el escrito, 
 		o la cual se rebate en el desarrollo posterior en el escrito y que forma parte introductoria del mismo. 
 		Es frecuente que el segundo capítulo de una tesis doctoral en ingenierías se denomine "Estado del arte" 
 		donde se hace un repaso de las técnicas relacionadas con dicha tesis doctoral. Este capítulo es fundamental para explicar los aportes al conocimiento que 
 		realiza la tesis al estado del conocimiento actual. \\
 		El origen de la expresión, muy probablemente, se debe a Aristóteles en el libro primero de Metafísica, donde clasifica el conocimiento en ciencia, arte y experiencia.
-		
 		\begin{itemize}
 			\item La ciencia busca el conocimiento por la mera curiosidad innata del ser humano. 
 			De hecho el libro primero de Metafísica de Aristóteles comienza con su famosa frase «Todos los hombres tienen por naturaleza el deseo de saber» (Elcho Pan, 1988:45). 
@@ -197,19 +192,46 @@
 			pero también la música, la poesía, la pintura, etc. Sin embargo, son estas últimas las que se han adueñado en la actualidad del término y son las que todo el mundo entiende por arte.
 			\item Finalmente, Aristóteles se refiere a la experiencia como el conocimiento que poseen los diferentes oficios, pescador, agricultor, carpintero, etc.
 		\end{itemize}
-		Esto explica que en las tesis doctorales realizadas en ciencias, dicho capítulo se llame Estado de la Ciencia y en ingenierías en general Estado del arte.	
+		Esto explica que en las tesis doctorales realizadas en ciencias, dicho capítulo se llame Estado de la Ciencia y en ingenierías en general Estado del arte. \\
 		
-		\begin{itemize}
-			\item Solvers satisfactibles insatisfactibles
-			\item que es SAT
-			\item regresión lineal
-			\item microservicios
-			\item hilos y concurrencia
-			\item beneficios de un sistema distribuido
-		\end{itemize}
+		\paragraph{¿Qué es SAT?}
+			En teoría de la complejidad computacional, el Problema de satisfacibilidad booleana (también llamado SAT) fue el primer problema identificado como perteneciente a la clase de complejidad NP-completo.
+			El problema SAT es el problema de saber si, dada una expresión booleana con variables y sin cuantificadores, hay alguna asignación de valores para sus variables que hace que la expresión sea verdadera. 
+			Por ejemplo, una instancia de SAT sería el saber si existen valores para \({\displaystyle x_{1},\,x_{2},\,x_{3},\,x_{4}}{\displaystyle x_{1},\,x_{2},\,x_{3},\,x_{4}}\) tales que la expresión: \\
+
+			\({\displaystyle (x_{1}\lor \neg x_{3})\land (\neg x_{2}\lor x_{3}\lor \neg x_{4})}{\displaystyle (x_{1}\lor \neg x_{3})\land (\neg x_{2}\lor x_{3}\lor \neg x_{4})}\)
+			sea cierta.
+		
+		\paragraph{¿Qué es un SAT solver?}
+		Un SAT solver es una herramienta que toma como entrada una fórmula CNF y genera una asignación booleana satisfactoria a las variables utilizadas en la fórmula CNF si la fórmula es satisfactible o no.
+
+		\paragraph{Regresión lineal}
+			La regresión lineal es una técnica de modelado estadístico que se emplea para describir una variable de respuesta continua como una función de una o varias variables predictoras.
+
+		\paragraph{Microservicios}
+			Los microservicios son tanto un estilo de arquitectura como un modo de programar software. 
+			Con los microservicios, las aplicaciones se dividen en sus elementos más pequeños e independientes entre sí.
+
+		\paragraph{Sistema distribuido}
+			Un sistema distribuido es un sistema de software cuyos componentes están separados físicamente y conectados entre sí por una red de computadoras, 
+			se comunican y coordinan entre ellos pasando mensajes. Dichos componentes interactúan entre ellos para lograr una meta común.
+
+		\paragraph{Contenerización de software}
+			La contenerización de aplicaciones es un método de virtualización de nivel de sistema operativo (nivel OS) para implementar y ejecutar aplicaciones distribuidas
+			sin lanzar una máquina virtual completa (VM) para cada aplicación.
+			En su lugar, varios sistemas aislados se ejecutan en un único host de control y acceden a un único kernel. 
+			Los contenedores de aplicaciones contienen los componentes, como archivos, variables de entorno y bibliotecas, necesarios para ejecutar el software deseado.
+			Debido a que los recursos se comparten de esta manera, se pueden crear contenedores de aplicaciones que ponen menos presión a los recursos globales disponibles. 
+			Por ejemplo, si se desea una variación de la imagen estándar, se puede crear un contenedor que contenga solo la nueva biblioteca.
+
+		\paragraph{Tensor}
+			En matemáticas y en física, un tensor es cierta clase de entidad algebraica de varios componentes que generaliza los conceptos de escalar, vector y matriz 
+			de una manera que sea independiente de cualquier sistema de coordenadas elegido.
 
 	\section{Análisis de requisitos}
 		En la Ingeniería de software, un Análisis de Requerimientos es una tarea que cubre el hueco entre la definición del software a nivel sistema y el diseño del mismo.
+
+		¿Aqui se debería de redactar la especificación del sistema y no durante el desarrollo?
 
 	\section{Definición y desarrollo}
 		\subsection{Planificación temporal del trabajo}
@@ -329,7 +351,7 @@
 
 				\item  La configuración de un servicio se refiere a las variables de entorno usadas con este. Sirve para identificar una 'versión' concreta de un mismo servicio.
 				
-				\item Una instancia zombie es aquella cuyo servicio padre, quien la solicitó, ha perdido su token y por tanto no puede matarla, o bien el servicio que la solicito ya ha muerto.
+				\item Una instancia zombie es aquella cuyo servicio padre, quien la solicitó, ha perdido su token y por tanto no puede matarla, o bien el servicio que la solicitó ya ha muerto.
 			\end{itemize}
 	
 			Definir como debe comportarse un sistema requiere abordar cuales son los deberes y derechos de sus componentes. \\
@@ -352,7 +374,7 @@
 
 			La parte más extensa de la definición del sistema es la especificación de un servicio, este se compone de los siguientes atributos:\\
 			\begin{itemize}
-				\item hash: Lista de hashes (del tipo 'sha256':913ref3...) sobre el binario del resto de la especificación.
+				\item hash: Lista de hashes (del tipo <'sha256' id>:913ref3...) sobre el binario del resto de la especificación.
 				\item Syntax: Sintaxis de la especificación.
 				\item Container: Especifica el contenedor donde se ejecuta el servicio, esto es:
 					\begin{itemize}
@@ -488,6 +510,7 @@
 				lo almacena como tensor de Onnx en un fichero tensor.onnx.
 				Si no esta la sesión de entrenamiento activa no se realiza la regresión porque no detecta cambios en el set de datos, la detección de cambios en el set de datos funciona usando un algoritmo hash sobre
 				él. \\
+
 				Por lo tanto, cada cierto periodo de tiempo (TIME\_FOR\_EACH\_REGRESSION\_LOOP: 900 segundos por defecto si en la variable de entorno no se indica lo contrario) se ejecutará, en caso de haber habido cambios,
 				la regresión de los datos recogidos por cada solver. La regresión de cada solver consiste en realidad en una regresión por cada grado hasta un máximo estipulado (MAX\_DEGREE: 100 por defecto 
 				si en la variable de entorno no se indica lo contrario)
@@ -498,10 +521,10 @@
 				y permite así que otro servicio de clasificación continue el modelo entrenado por el clasificador sin tener que utilizar la librería de la él da uso (Sklearn). \\
 				\includegraphics[width=12cm]{esquema_regresion.png} \\  Se toma el modelo con el R2 más alto. \\ \\ 
 
-				Sobre el set de datos del que da uso el proceso de regresión, la sesión de entrenamientos vuelca cada cierto tiempo los datos recogidos en
+				Sobre el set de datos del que da uso el proceso de regresión la sesión de entrenamientos vuelca cada cierto tiempo los datos recogidos en
 				un fichero (solvers\_dataset.bin) al cual nos referimos como el set de datos.
 				El formato del set de datos consiste en una puntuación por cada tipo de cnf (número de instancias * número de clausulas) por cada solver con una configuración determinada, 
-				cuya especificación se encuentra también en el set de datos. \\
+				su especificación se encuentra también en el set de datos. \\
 				\includegraphics[width=16cm]{set_de_datos_de_entrenamiento.png}\\ \\
 
 			\paragraph{train.py}
@@ -559,17 +582,17 @@
 				por solver. \\
 			
 			\paragraph{\_get.py}
-				Trara de seleccionar el solver que mejor rendimiento va a dar para un cnf determinado. Carga el tensor del archivo tensor.onnx y realiza inferencia sobre el modelo de regresión lineal
+				Trata de seleccionar el solver que mejor rendimiento va a dar para un cnf determinado. Carga el tensor del archivo tensor.onnx y realiza inferencia sobre el modelo de regresión lineal
 				de cada uno de los solvers contenidos en tensor.onnx. \\
-				La inferencia es el proceso por el cual se derivan conclusiones a partir de premisas, es decir, a partir de un modelo de regresión lineal 
-				se supone la puntuación que se obtendría para un cnf determinado. Para la inferencia se da uso de la libreria ONNX-Runtime de Microsoft. \\ \\
+				La inferencia es el proceso por el cual se derivan conclusiones a partir de premisas, es decir, a partir del modelo obtenido mediante regresión lineal 
+				se supone la puntuación que se obtendría para un cnf determinado. Para realizar la inferencia se da uso de la libreria ONNX-Runtime de Microsoft. \\ \\ \\
 
 			El patrón singleton o instancia única es un patrón de diseño que permite restringir la creación de objetos pertenecientes a una clase o el valor de un tipo a un único objeto. De esta forma se limita a que 
 			solo pueda haber una instancia de las clases train.Session y solve.Session. \\
 
 			Para enviar la especificación de un servicio por Grpc se utiliza el mensaje Grpc ServiceTransport, este optimiza el proceso enviando por streaming cada hash de la especificación (una por una) y finalmente la
-			especificación completa, además de enviar la configuración (en caso de usarse para solicitar una instancia) en tan solo uno de las partes. Cuando el servidor recive el stream comprueba con las hashes si
-			ya posee el servicio, si lo posee para el stream y no es necesario enviar la especificación. \\
+			especificación completa, además de enviar la configuración (en caso de usarse para solicitar una instancia) en tan solo una de las partes. Cuando el servidor recive el stream comprueba con las hashes si
+			ya posee el servicio, si lo posee para el stream y no es necesario enviar la especificación completa. \\
 			\includegraphics[width=16cm]{service_transport_diagram.png}\\ \\
 
 		\subsection{Tercera fase de desarrollo}
@@ -600,7 +623,7 @@
 				Como se puede observar en el diagrama anterior, para manejar las instancias de cada solver, se adopta una estructura de un diccionario de solvers (<solver config. id>:< objeto SolverConfig>), 
 				donde cada objeto SolverConfig posee una lista de instancias (objeto SolverInstance). Cuando se requiere la instancia de un solver determinado se quita de la lista y cuando se deja de usar
 				se vuelve a introducir en la lista. El acceso a todo el diccionario se proteje contra la concurrencia mediante el uso de un objeto threading.Lock. El identificador de un objeto SolverConfig 
-				se obtiene mediante el algoritmo hash sha3-256 de su binario.\\
+				se obtiene mediante el algoritmo hash sha3-256 de su binario Protobuf.\\
 				En el siguente esquema se expone el uso de la pila de instancias de un único solver: \\
 				\includegraphics[width=16cm]{esquema_instancias_solvers.jpg}\\ \\
 
@@ -609,21 +632,23 @@
 				en el índice más elevado de la lista. \\ El método de mantenimiento da uso de la lista como si se tratara de una pila inversa, es decir, toma el elemento que se encuentra en la primera posición
 				de la lista y coloca el elemento en la primera posición también. \\
 				El motivo de adoptar esta configuración es que las instancias tienen contadores sobre el último tiempo en que se usaron, estos solo se actualizan al solicitar resolver cnfs (el método Session.cnf),
-				por lo que cuando el mantenedor de instancias la toma comprueba si se paso de tiempo en deshuso, si es asi no lo vuelve a cargar en la lista, de lo contrario la deja en primera posición.
+				por lo que cuando el mantenedor de instancias la toma comprueba si se paso de tiempo en deshuso, si es asi no lo vuelve a cargar en la lista, de lo contrario la deja en primera posición. De esta forma
+				se sabe seguro que las instancias en posiciones superiores llevan menos tiempo desde su último uso.\\
 
-				Si se toma una instancia, se debe de asegurar que al terminar de usarla, o bien se agrega a su lista correspondiente, o bien se para. No asegurar esto ocasiona un bug importante
+				Si se toma una instancia, se debe de asegurar que al terminar de usarla, o bien se agrega a su lista correspondiente, o bien se solicita al nodo detenerla. 
+				No asegurar esto ocasiona un bug importante
 				ya que la instancia quedaría en estado zombie hasta que el clasificador fuera eliminado (en el supuesto en que el nodo donde se instancio matara dependencias que fueran a quedar zombies).
 
 			\paragraph{Distribución de contenedores}
-				Con el fin de atender las solicitudes de obtención de un contenedor el nodo proporciona un método Grpc (método Grpc GetServiceTar), este recive la especificación de un servicio y, si puede 
-				proporcionarlo, comprime el contenedor y envía el archivo en formato .tar dividiendolo en trozos y enviandolos en streaming, en caso de no poder proporconar el contenedor salta una Excepción que
+				Con el fin de atender las solicitudes de obtención de un contenedor el nodo proporciona un método Grpc denominado método Grpc GetServiceTar. Éste recive la especificación de un servicio y, si puede 
+				proporcionarlo, comprime el contenedor y envía el archivo en formato .tar dividiendolo en trozos y enviandolos en streaming, en caso de no poder proporconar el contenedor salta una excepción que
 				recive el cliente.\\
-				Para la busqueda de contenedores, el nodo solo debe de iterar entre sus pares (resto de nodos de la red) y comprobar si alguno posee el contenedor dando uso del método anteriormente definido. \\
+				Para la busqueda de contenedores, el nodo debe de iterar entre sus pares (resto de nodos de la red) y comprobar si alguno posee el contenedor dando uso del método anteriormente definido. \\
 				
 				Para la distribución de especificaciones de servicios se utilizan métodos Grpc con mecánicas similares.
 	
 			\paragraph{Conexión con nuevos nodos}
-				Al añadir un nuevo nodo a la red se debe de usar el comando 'python3 zeroconf.py <uri del nuevo nodo>' desde la consola de cada nodo, el nodo donde se ejecuta el comando ejecutará el método Grpc HyNode
+				Al añadir un nuevo nodo a la red se debe de usar el comando 'python3 zeroconf.py <uri del nuevo nodo>' desde la consola de un nodo, el comando ejecutará el método Grpc HyNode
 				en el supuesto nuevo nodo, si este le responde con un objeto Instance, el nodo le retornará su instancia y lo tomará como un nodo completamente operativo, si no responde olvidará la solicitud.
 
 	\section{Problemas encontrados y decisiones técnicas tomadas}
@@ -675,20 +700,33 @@
 			de abstracción superior a la especificación del servicio. \\
 
 		\subsection{Identificación del algoritmo hash}
-			Para evitar colisiones al identificar diferentes algoritmos hash estos son identificados aplicando su propio algoritmo a una entrada vacía.
+			Para evitar colisiones al identificar diferentes algoritmos hash estos son identificados aplicando su propio algoritmo a una entrada vacía, es decir,
+			una cadena de bits vacía.
 			Por ejemplo:
 			\begin{itemize}
 				\item sha256 / sha2-256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 				\item sha3-256: a7ffc6f8bf1ed76651c14756a061d662f580ff4de43b49fa82d80a4b80f8434a
-				\item shake-256 of 200bits: 46b9dd2b0ba88d13233b3feb743eeb243fcd52ea62b81b82b50c27646ed5762f
-			\end{itemize}
+				\item shake-256 of 200bits: 46b9dd2b0ba88d13233b3feb743eeb243fcd52ea62b81b82b50c27646ed5762f \\
+			\end{itemize} 
 
 			De esta forma el formato es <id hash>:<hash value>.
 			Por lo que la palabra "nodo" sería:
 			\begin{itemize}
-				\item e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855:755c967353885b8b5096b5492b317fa25f77384e7c57afa05748f2238a9141d9
-				\item a7ffc6f8bf1ed76651c14756a061d662f580ff4de43b49fa82d80a4b80f8434a:2837075229aa23bf8a4139715ac8369a62c2beb0e868df5bd32a2ca6d8e56d2a
-				\item 46b9dd2b0ba88d13233b3feb743eeb243fcd52ea62b81b82b50c27646ed5762f:77b532f14d889b55c5e1c5f309ceb43cec543be21a0372fa56fc09afb4bb594a
+				\item sha256 / sha2-256:
+					\begin{itemize}
+						\item type: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+						\item value: 755c967353885b8b5096b5492b317fa25f77384e7c57afa05748f2238a9141d9
+					\end{itemize}
+					\item sha3-256:
+					\begin{itemize}
+						\item type: a7ffc6f8bf1ed76651c14756a061d662f580ff4de43b49fa82d80a4b80f8434a
+						\item value: 2837075229aa23bf8a4139715ac8369a62c2beb0e868df5bd32a2ca6d8e56d2a
+					\end{itemize}
+					\item  shake-256 of 200bits:
+					\begin{itemize}
+						\item type: 46b9dd2b0ba88d13233b3feb743eeb243fcd52ea62b81b82b50c27646ed5762f
+						\item value: 77b532f14d889b55c5e1c5f309ceb43cec543be21a0372fa56fc09afb4bb594a
+					\end{itemize}
 			\end{itemize}
 			De esta forma no se requiere centralizar un registro para acordar que identificador corresponde a un algoritmo concreto. \\
 
@@ -696,12 +734,16 @@
 			
 		\subsection{Uso de cola en el mantenedor de instancias}
 
+		\subsection{Formato de hash}
+
 	\section{Resultados y conclusiones}
+		Resultados de los tests realizados sobre el sistema y conclusiones de los mismos.
 		
 	\section{Trabajo futuro}
-		IPFS al compartir especificaciones de servicios, contenedores, tensores \dots
-		zeroconf
-		Regresion fuera de clasificador
+		IPFS al compartir especificaciones de servicios, contenedores, tensores \dots \\
+		zeroconfiguration network \\
+		Regresión fuera de clasificador \\
+		\dots
 	\bibliography{referencies}
 	\bibliographystyle{plain}
 	\nocite{*}
