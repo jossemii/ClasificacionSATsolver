@@ -349,7 +349,7 @@
 				\item El concepto implementación del nodo pretende remarcar aquellas decisiones sobre la lógica del nodo que son independientes del funcionamiento general de la red y,
 					por tanto, otros nodos pueden no adoptar.
 
-				\item  La configuración de un servicio se refiere a las variables de entorno usadas con este. Sirve para identificar una 'versión' concreta de un mismo servicio.
+				\item La configuración de un servicio se refiere a las variables de entorno usadas con este. Sirve para identificar una 'versión' concreta de un mismo servicio.
 				
 				\item Una instancia zombie es aquella cuyo servicio padre, quien la solicitó, ha perdido su token y por tanto no puede matarla, o bien el servicio que la solicitó ya ha muerto.
 			\end{itemize}
@@ -374,7 +374,7 @@
 
 			La parte más extensa de la definición del sistema es la especificación de un servicio, este se compone de los siguientes atributos:\\
 			\begin{itemize}
-				\item hash: Lista de hashes (del tipo <'sha256' id>:913ref3...) sobre el binario del resto de la especificación.
+				\item Hashtag: Hashes (del tipo <'sha256' id>:913ref3...) sobre el binario del resto de la especificación.
 				\item Syntax: Sintaxis de la especificación.
 				\item Container: Especifica el contenedor donde se ejecuta el servicio, esto es:
 					\begin{itemize}
@@ -414,7 +414,7 @@
 			comprimido de un servico al ser solicitado a otro nodo (build.py), guardar la configuracion de una nueva instancia para copiarla dentro de su contenedor (gateway.py)
 			o para almacenar y calcular la hash de un sistema de archivos durante la compilación de un servicio (compile.py). \\
 
-			Una vez definidos los componentes principales del nodo se definen más en detalle cada una:
+			Una vez definidos los componentes principales del nodo se definen más en detalle cada uno:
 			\paragraph{compile.py}
 				El objetivo de este script de Python es obtener la descripción de un servicio a partir de un directorio llamado .service/, ubicado en la raiz de un repositorio git, 
 				que contenga la información necesaria para ello, esto es: un archivo Dockerfile y distintos otra información contenida en un archivo Json. \\
@@ -511,21 +511,34 @@
 				Si no esta la sesión de entrenamiento activa no se realiza la regresión porque no detecta cambios en el set de datos, la detección de cambios en el set de datos funciona usando un algoritmo hash sobre
 				él. \\
 
-				Por lo tanto, cada cierto periodo de tiempo (TIME\_FOR\_EACH\_REGRESSION\_LOOP: 900 segundos por defecto si en la variable de entorno no se indica lo contrario) se ejecutará, en caso de haber habido cambios,
-				la regresión de los datos recogidos por cada solver. La regresión de cada solver consiste en realidad en una regresión por cada grado hasta un máximo estipulado (MAX\_DEGREE: 100 por defecto 
-				si en la variable de entorno no se indica lo contrario)
-				y escoger aquella función que se ajuste más a los datos. De esta forma se realizan un total de <número de solvers> * MAX\_DEGREE regresiones cada TIME\_FOR\_EACH\_REGRESSION\_LOOP segundos,
-				siempre y cuando se realicen cambios en el set de datos. \\
+				Por lo tanto, cada cierto periodo de tiempo (TIME\_FOR\_EACH\_REGRESSION\_LOOP: 900 segundos por defecto si en la variable de entorno no se indica lo contrario) se ejecutará
+				la regresión de los datos recogidos por cada solver siempre y cuando se haya modificado el dataset. 
+				
+				La regresión de cada solver consiste en realidad en una regresión por cada grado hasta un máximo estipulado (MAX\_DEGREE: 100 por defecto si en la variable de entorno no se indica lo contrario)
+				y escoger aquella función que se ajuste más a los datos, esto con el fin de evitar tanto un sobreajuste como un subajuste en la función del modelo. 
+				De esta forma se realizan un total de <número de solvers> * MAX\_DEGREE regresiones cada TIME\_FOR\_EACH\_REGRESSION\_LOOP segundos. \\
 				El tensor posee el formato de una lista de tensores de Onnx (Intercambio de Redes Neuronales Abierto), un ecosistema de inteligencia artificial de código abierto, asociados cada uno a un SAT solver (especificación del servicio).
 				Se da uso del estandar Onnx por ser un estandar abierto para compartir modelos de redes neuronales entre distintas librerías (TensorFlow o PyCharm), aunque en este caso se utiliza para compartir modelos de regresión lineal,
 				y permite así que otro servicio de clasificación continue el modelo entrenado por el clasificador sin tener que utilizar la librería de la él da uso (Sklearn). \\
-				\includegraphics[width=12cm]{esquema_regresion.png} \\  Se toma el modelo con el R2 más alto. \\ \\ 
+				\includegraphics[width=12cm]{esquema_regresion.png} \\  Se toma la función con mayor ajuste a los datos. \\ \\ 
 
 				Sobre el set de datos del que da uso el proceso de regresión la sesión de entrenamientos vuelca cada cierto tiempo los datos recogidos en
 				un fichero (solvers\_dataset.bin) al cual nos referimos como el set de datos.
-				El formato del set de datos consiste en una puntuación por cada tipo de cnf (número de instancias * número de clausulas) por cada solver con una configuración determinada, 
+				El formato del set de datos consiste en una puntuación por cada tipo de cnf (número de instancias * número de clausulas) junto con el número de entradas de cada puntuación 
+				por cada solver con una configuración determinada, 
 				su especificación se encuentra también en el set de datos. \\
 				\includegraphics[width=16cm]{set_de_datos_de_entrenamiento.png}\\ \\
+				
+				El incremento de la puntuación para un cnf concreto de un solver concreto es: \\
+				\begin{equation}
+					\frac{\sum_{i=1}^{i} S + S_{i+1}}{i+1}=\overline{S_{i+1}} \Longrightarrow \frac{i*\overline{S_i} + S_{i+1}}{i+1}=\overline{S_{i+1}}
+				\end{equation} \\
+				
+				Para realizar la union de dos datasets la formula queda: \\
+				\begin{equation}
+					\frac{i*\overline{S_i} + j*\overline{S_j}} {i+1} = \overline{S_{i+j}}
+				\end{equation} \\ \\
+				
 
 			\paragraph{train.py}
 				Durante el inicio del proceso principal (start.py) se obtiene el objeto trainer.Session, el cual sigue el patrón Singleton, este objeto es usado durante toda la vida del servicio. \\
