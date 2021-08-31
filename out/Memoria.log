@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.8.2)  29 AUG 2021 16:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.8.2)  30 AUG 2021 17:04
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -989,14 +989,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 127--130
  []
 
 ) [22]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 763.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 763.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 765.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 765.
  (out/Memoria.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 763.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 763.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 765.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 765.
 Package rerunfilecheck Info: File `Memoria.out' has not changed.
 (rerunfilecheck)             Checksum: 7D687F9D73DC4F11A7B4E48D3B6BC568;3270.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 763.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 765.
  ) 
 Here is how much of TeX's memory you used:
  20223 strings out of 483183
@@ -1007,7 +1007,7 @@ Here is how much of TeX's memory you used:
  14 hyphenation exceptions out of 8191
  68i,8n,69p,442b,814s stack positions out of 5000i,500n,10000p,200000b,80000s
  </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1095.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0600.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2488.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on out/Memoria.pdf (23 pages, 850074 bytes).
+Output written on out/Memoria.pdf (23 pages, 850124 bytes).
 PDF statistics:
  860 PDF objects out of 1000 (max. 8388607)
  408 compressed objects within 5 object streams
