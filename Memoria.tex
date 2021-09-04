@@ -108,145 +108,171 @@
 	
 	\printindex
 
-	\section{Introdución, contexto y motivación}
-		En 1970, el matemático británico John Horton Conway diseño un automata celular al que llamo El Juego de la Vida.
-		Un autómata celular es un modelo matemático y computacional para un sistema dinámico que evoluciona en pasos discretos.
+	\section{Conceptos previos}
+		\subsection{Sistemas distribuidos}
+			% Evolución de los sistemas distribuidos.
+			Un sistema distribuido es un sistema de software cuyos componentes están separados físicamente y conectados entre sí por una red de computadoras, 
+			se comunican y coordinan entre ellos pasando mensajes. Dichos componentes interactúan entre ellos para lograr una meta común.
+			Los sistemas distribuidos permiten la disponibilidad y la facilidad de acceso a la información, trasferencia de datos a grandes velocidades, 
+			control al acceso a transmisión de información y administran e integran información.
 
-		El juego de la vida viene a decir que, a partir de un conjunto de reglas simples, se pueden generar estructuras complejas.
-		Un sistema compuesto de un conjunto de agentes ( o células), que ocupan un lugar en él, que poseen una serie de reglas 
-		que definen como interaccionan con el resto de agentes.
+			Los inicios de esta tecnología comenzó en los años 70, usa de las principales características de los sistemas distribuidos eran los mainframes (super computadoras de alta capacidad y eficiencia), 
+			pero en esta época se usaban redes WANDS, de transmisión muy lenta, y por tanto el proceso muchas veces
+			se veía limitado por su capacidad de transmisión. Poseían una velocidad de transmisión de 2400 a 9600 bits por segundo.
+			En los años 80 se añadieron los PC de escritorio y se comienzan a usar redes LANS, estas permitieron velocidades de transmisión de 4 a 16 millones de bits por segundo (casi 2 megas.) y
+			de 56 kilobytes a 1.54 megabytes en redes WANS.
+			Durante los años 90 los sistemas de proceso de información se vuelven mucho menos cerrados, lo que permite hacer sistemas distribuidos con diferentes máquinas de diferentes fabricantes
+			conectadas por red desde diferentes áreas geográficas. Además se implementa un gran avance llamado Procesamiento Cooperativo distribuido, este permite el intercambio de la información
+			interactivamente entre los procesadores de diferentes computadores, por ejemplo, la computación cliente-servidor. Las redes de transferencia de datos en esta época son iguales o mayores
+			a 100 megas para redes LAN, MAN y WAN.
+			Actualmente los sistemas distribuidos abarcan desde redes de ordenadores personales donde compartir información, como BitTorrent, o sistemas monetarios, como Bitcoin, hasta los grandes
+			centros de datos que sobre los que funcionan los servicios de Internet más usados, ya que en estos centros se conectan gran cantidad de ordenadores entre sí.\\
 
-		Y es que, en cierto modo, asi es como funciona la evolución de un ecosistema de seres vivos, mejorando y optimizando sus procesos sin que exista
-		una intención consciente por su parte. \\
+			% Software de gestion de gran cantidad de recursos heterogeneos.
+			También se han dado grandes avances en la capacidad del software para gestionar gran cantidad de recursos sobre sistemas distribuidos, permitiendo una mayor tolerancia ante fallas bizantinas
+			(resistencia ante la caída o mal comportamiento de parte de la red) y un balanceo más eficiente de la carga de trabajo entre las distintas computadoras de la red. \\
 
-		Bajo este mismo principio se puede entender la capacidad de los sistemas económicos basados en la competencia para mejorar sus procesos. 
-		Cuando una empresa se dedica a investigar nuevas tecnologías para abaratar costes, no lo hace por el bien común, lo hace para vencer a sus rivales,
-		pero, de manera inconsciente, sirve al bien común. Será el mercado el que dictará si esta nueva forma de realizar dicha tarea es más optima o no.
+			% Concepto de virtualización.
+			Parte de esta mejora en el software de gestion de recursos en sistemas distribuidos se debe al concepto de virtualización. Este consiste en imitar las características del hardware y crear
+			un sistema informático virtual, permitiendo ejecutar más de un sistema operativo o aplicación por servidor.
+			La virtualización ofrece una serie de beneficios sobre los sistemas clásicos como una una mayor seguridad ante accesos no confiables a través de firewalls o el aislamiento de los hilos de
+			ejecución y la memoria del sistema ante sistemas maliciosos.
 
-		Por lo tanto, es la competencia de ideas, de procesos y formas de actuación la que
-		nos permite mejorar la forma en que vivimos.
-		Teniendo en mente, por ejemplo, procesos industriales o logísticos, 
-		si a alguien se le ocurre una forma más eficiente de hacer algo creará una empresa que realice esta labor en la manera que propone, 
-		si realmente es mejor que el método tradicional, 
-		terminará abarcando un cada vez mayor porcentaje de su mercado e imponiendose al método anterior. 
+			% Concepto de contenerización.
+			Sobre este concepto nació otro, la contenerización de software, este es un método de virtualización de nivel de sistema operativo (nivel OS) para implementar y ejecutar aplicaciones distribuidas
+			sin lanzar una máquina virtual completa (VM) para cada aplicación.
+			En lugar de virtualizar sistemas independientes, varios sistemas aislados se ejecutan en un único host de control y acceden a un único kernel. 
+			Los contenedores de aplicaciones contienen los componentes, como archivos, variables de entorno y bibliotecas, necesarios para ejecutar el software deseado.
+			Debido a que los recursos se comparten de esta manera, se pueden crear contenedores de aplicaciones que ponen menos presión a los recursos globales disponibles. 
+			Por ejemplo, si se desea una variación de la imagen estándar (una imagen es un archivo que representa el contenedor), se puede crear un contenedor que contenga solo la nueva biblioteca.
+			En la actualidad son muchos los centros de datos y supercomputadores, ambos sistemas distribuidos compuestos por diversas máquinas, que se basan en esta tecnología, la contenerización, a la hora
+			de optimizar sus recursos, balanceando la carga de los distintos contenedores entre sus nodos. Los sistemas más notorios sobre este campo son Docker, el cual permite automatizar el despliegue de
+			contenedores, y Kubernetes, que permite, además, escalar y balancear la carga de contenedores en un sistema distribuido. \\
 
-		Pero esta es una forma muy lenta de evolucionar debido a que el tiempo para observar resultados es el de un escenario real.
-		Sin embargo, se pueden observar nuevas propuestas de actuación en entornos simulados, en mucho menor tiempo y barajando más opciones, y de esta forma aplicar
-		la mejor forma de actuación practicamente al instante. \\
+			% Comentar paradigmas basados en servicios y explicar paradigmas de microservicios, FaaS, Serverless, etc ...
+			En un servidor tradicional, todos los componentes de una aplicación son desarrollados y ejecutados sobre una misma base (sistema operativo, plataforma, ...), lo que provoca una menor adaptabilidad y
+			una mayor rigidez del sistema, este tipo de arquitectura se denomina monolítica.
+			En contraste, la contenerización de aplicaciones en sistemas distribuidos ha permitido paso a nuevos tipos de arquitecturas sobre la manera de usar servicios de software, ya sean microservicios, FaaS o
+			Serverless.
+
+			Los microservicios son tanto un estilo de arquitectura como un modo de programar software. 
+			Con los microservicios, las aplicaciones se dividen en sus elementos más pequeños e independientes entre sí, permitiendo a cada uno de sus componentes ser desarrollados de manera más aislada y ejecutados
+			en contenedores sobre sistemas distribuidos, adoptando asi las ventajas de estas tecnologías anteriormente argumentadas.
+
+			La función como servicio, o FaaS, es un modelo de ejecución informática que se basa en eventos y se ejecuta en contenedores sin estado. 
+			Esas funciones son las que gestionan la lógica y el estado de los servidores a través del uso de servicios. Gracias a la FaaS, los desarrolladores pueden diseñar, ejecutar y gestionar esos paquetes de
+			aplicaciones como funciones, sin tener que mantener su propia infraestructura.
+			La FaaS es una forma de implementar la informática sin servidor (Serverless), donde los desarrolladores escriben la lógica empresarial que luego se ejecuta en los contenedores de Linux totalmente
+			gestionados por una plataforma. Las plataformas más destacadas son AWS, Google Cloud o Azure.
+
+			Ambos paradigmas son, habitualmente, complementarios, permitiendo una mayor flexbilidad en el desarrollo y despliegue de aplicaciones. \\
+
+		\subsection{Problema SAT}
+			% Explicación del problema SAT.
+			Los problemas NP-completo son los más complicados de la clase NP, en el sentido que si Q' es un problema de decisión en NP y Q es un problema NP-completo, 
+			entonces todas las instancias de Q' son polinomialmente reducibles a una instancia de Q. 
+			El problema de satisfacibilidad (SAT) fue el primer problema identificado como perteneciente a la clase de complejidad NP-completo por Stephen Cook en el año 1971.
+			El problema consiste en saber si, dada una expresión booleana con variables y sin cuantificadores, hay alguna asignación de valores para sus variables que hace que la expresión sea verdadera. 
+			Por ejemplo, una instancia de SAT sería el saber si existen valores para \({\displaystyle x_{1},\,x_{2},\,x_{3},\,x_{4}}{\displaystyle x_{1},\,x_{2},\,x_{3},\,x_{4}}\) tales que la expresión:
+			\begin{equation}
+				{\displaystyle (x_{1}\lor \neg x_{3})\land (\neg x_{2}\lor x_{3}\lor \neg x_{4})}{\displaystyle (x_{1}\lor \neg x_{3})\land (\neg x_{2}\lor x_{3}\lor \neg x_{4})}
+			\end{equation}
+			sea cierta.
+			Los algoritmos eficientes y escalables para SAT se desarrollaron en la última década y han contribuido a avances dramáticos en nuestra capacidad de 
+			resolver automáticamente instancias de problemas que involucran decenas de miles de variables y millones de restricciones (es decir, cláusulas). 
+			Sobre esto, un SAT solver es una herramienta que toma como entrada una fórmula CNF y genera una asignación booleana satisfactoria a las variables utilizadas en 
+			la fórmula CNF si la fórmula es satisfactible o no. \\
+
+			La clasificación más comun sobre algoritmos que resuelven SAT es si son completos o incompletos.
+
+			El algoritmo completo busca el espacio de solución de un problema SAT dado basándose en mecanismos de búsqueda de enumeración y retroceso. 
+			Si el problema es satisfactorio, entonces se dará la solución de la fórmula lógica, y si no, se dará prueba de que está completo. 
+			De hecho, en el segundo caso, es extremadamente importante y práctico dar prueba de
+			integridad, ya que muchos casos insatisfactorios requieren prueba de que no pueden satisfacerse. El algoritmo completo
+			determina el valor de las variables en la lógica proposicional una por una hasta que se asignan todas las variables y el valor de
+			la fórmula es verdadera, o se intentan todas las asignaciones posibles pero quedan insatisfechas.
+			La ventaja del algoritmo completo es que puede garantizar la solución del problema SAT correspondiente 
+			o probar que la fórmula no es satisfactoria. Desafortunadamente, la eficiencia del algoritmo completo es extremadamente baja.
+			Aunque la complejidad de tiempo promedio es un nivel polinomial, la complejidad de tiempo del peor de los casos es exponencial.
+			El algoritmo completo es un proceso de búsqueda en profundidad de todo el espacio de la solución, el espacio de búsqueda es muy grande, lo que
+			puede hacer que la computadora no pueda devolver los resultados en un tiempo aceptable. \\
+
+			Por otro lado, el algoritmo de búsqueda local es el más utilizado en el algoritmo incompleto. Este método utiliza cierta
+			estrategia para buscar aleatoriamente en el espacio de asignación de la variable, y se acerca gradualmente a la solución final bajo
+			la guía de la función objetivo. Hay dos tipos de funciones objetivas: una es minimizar el número de cláusulas con el valor verdadero de falso,
+			y el otro es satisfacer el número máximo de cláusulas de restricción. 
+			La ventaja del algoritmo incompleto es una mayor eficiencia a la hora de encontrar interpretaciones válidas siempre y cuando existan, de no ser asi
+			el algoritmo nunca dará con una solución. \\
+
+			Otra forma de resolver problemas SAT es transformar el problema de satisfacibilidad en otro problema en otro
+			campo, que se puede resolver rápidamente, como el algoritmo genético, el algoritmo de recocido simulado o la propagación
+			de encuestas. \\
+			% Aunque no puedes acabar la sección con este párrafo.
+
+	\section{Introdución}
+		\subsection{Contexto}
+			En 1970, el matemático británico John Horton Conway diseño un automata celular al que llamo El Juego de la Vida.
+			Un autómata celular es un modelo matemático y computacional para un sistema dinámico que evoluciona en pasos discretos.
+
+			El juego de la vida viene a decir que, a partir de un conjunto de reglas simples, se pueden generar estructuras complejas.
+			Un sistema compuesto de un conjunto de agentes ( o células), que ocupan un lugar en él, que poseen una serie de reglas 
+			que definen como interaccionan con el resto de agentes.
+
+			Y es que, en cierto modo, asi es como funciona la evolución de un ecosistema de seres vivos, mejorando y optimizando sus procesos sin que exista
+			una intención consciente por su parte. \\
+
+			Bajo este mismo principio se puede entender la capacidad de los sistemas económicos basados en la competencia para mejorar sus procesos. 
+			Cuando una empresa se dedica a investigar nuevas tecnologías para abaratar costes, no lo hace por el bien común, lo hace para vencer a sus rivales,
+			pero, de manera inconsciente, sirve al bien común. Será el mercado el que dictará si esta nueva forma de realizar dicha tarea es más optima o no.
+
+			Por lo tanto, es la competencia de ideas, de procesos y formas de actuación la que
+			nos permite mejorar la forma en que vivimos.
+			Teniendo en mente, por ejemplo, procesos industriales o logísticos, 
+			si a alguien se le ocurre una forma más eficiente de hacer algo creará una empresa que realice esta labor en la manera que propone, 
+			si realmente es mejor que el método tradicional, 
+			terminará abarcando un cada vez mayor porcentaje de su mercado e imponiendose al método anterior. 
+
+			Pero esta es una forma muy lenta de evolucionar debido a que el tiempo para observar resultados es el de un escenario real.
+			Sin embargo, se pueden observar nuevas propuestas de actuación en entornos simulados, en mucho menor tiempo y barajando más opciones, y de esta forma aplicar
+			la mejor forma de actuación practicamente al instante. \\
+			
+			La revolución informática de las ultimas décadas nos da la posibilidad de simular y automatizar procesos. 
+			Se ha construido una red de ordenadores con estas capacidades, y su potencial es enorme.
+			Tecnologías de vanguardia como la inteligencia artificial nos prometen
+			una significativa mejora en nuestra calidad de vida, principalmente por su potencial para automatizar tareas como nunca antes se había imaginado. \\
+			
+			En un automata celular, a menor número y/o complejidad de las reglas sobre la interacción de sus agentes mayor será el espectro de complejidad que pueda alcanzar el autómata.
+			Es decir, contra más reglas tiene más se limita. \\
+
+		\subsection{Motivación}
+			% Debido a ello se decide realizar el trabajo.
+			Por ello se considera interesante el analisis y diseño de un sistema compuesto por servicios, entendidos como formas de actuación determinadas para resolver un problema concreto, 
+			donde prevalezca siempre el más competitivo y eficiente, y ejecutados sobre una red de nodos sin confianza gracias a la tecnología previamente mencionada.
+			El sistema contará con un conjunto de servicios que resuelven un problema determiando además de otro que se dedica a compararlos o clasificarlos. Como problema a resolver se escoje
+			el de satisfactibilidad (SAT) por ser un problema NP-completo.
+
+			% ¿Que ventajas tienes, ejecutar este problema que propones  a través de servicios?
 		
-		La revolución informática de las ultimas décadas nos da la posibilidad de simular y automatizar procesos. 
-		Se ha construido una red de ordenadores con estas capacidades, y su potencial es enorme.
-		Tecnologías de vanguardia como la inteligencia artificial nos prometen
-		una significativa mejora en nuestra calidad de vida, principalmente por su potencial para automatizar tareas como nunca antes se había imaginado. \\
-		
-		En un automata celular, a menor número y/o complejidad de las reglas sobre la interacción de sus agentes mayor será el espectro de complejidad que pueda alcanzar el autómata.
-		Es decir, contra más reglas tiene más se limita. \\
-
-		% Evolución de los sistemas distribuidos.
-		Un sistema distribuido es un sistema de software cuyos componentes están separados físicamente y conectados entre sí por una red de computadoras, 
-		se comunican y coordinan entre ellos pasando mensajes. Dichos componentes interactúan entre ellos para lograr una meta común.
-		Los sistemas distribuidos permiten la disponibilidad y la facilidad de acceso a la información, trasferencia de datos a grandes velocidades, 
-		control al acceso a transmisión de información y administran e integran información.
-
-		Los inicios de esta tecnología comenzó en los años 70, usa de las principales características de los sistemas distribuidos eran los mainframes (super computadoras de alta capacidad y eficiencia), 
-		pero en esta época se usaban redes WANDS, de transmisión muy lenta, y por tanto el proceso muchas veces
-		se veía limitado por su capacidad de transmisión. Poseían una velocidad de transmisión de 2400 a 9600 bits por segundo.
-		En los años 80 se añadieron los PC de escritorio y se comienzan a usar redes LANS, estas permitieron velocidades de transmisión de 4 a 16 millones de bits por segundo (casi 2 megas.) y
-		de 56 kilobytes a 1.54 megabytes en redes WANS.
-		Durante los años 90 los sistemas de proceso de información se vuelven mucho menos cerrados, lo que permite hacer sistemas distribuidos con diferentes máquinas de diferentes fabricantes
-		conectadas por red desde diferentes áreas geográficas. Además se implementa un gran avance llamado Procesamiento Cooperativo distribuido, este permite el intercambio de la información
-		interactivamente entre los procesadores de diferentes computadores, por ejemplo, la computación cliente-servidor. Las redes de transferencia de datos en esta época son iguales o mayores
-		a 100 megas para redes LAN, MAN y WAN.
-		Actualmente los sistemas distribuidos abarcan desde redes de ordenadores personales donde compartir información, como BitTorrent, o sistemas monetarios, como Bitcoin, hasta los grandes
-		centros de datos que sobre los que funcionan los servicios de Internet más usados, ya que en estos centros se conectan gran cantidad de ordenadores entre sí.\\
-
-		% Software de gestion de gran cantidad de recursos heterogeneos.
-		También se han dado grandes avances en la capacidad del software para gestionar gran cantidad de recursos sobre sistemas distribuidos, permitiendo una mayor tolerancia ante fallas bizantinas
-		(resistencia ante la caída o mal comportamiento de parte de la red) y un balanceo más eficiente de la carga de trabajo entre las distintas computadoras de la red. \\
-
-		% Concepto de virtualización.
-		Parte de esta mejora en el software de gestion de recursos en sistemas distribuidos se debe al concepto de virtualización. Este consiste en imitar las características del hardware y crear
-		un sistema informático virtual, permitiendo ejecutar más de un sistema operativo o aplicación por servidor.
-		Sobre este concepto nació otro, la contenerización de software, este es un método de virtualización de nivel de sistema operativo (nivel OS) para implementar y ejecutar aplicaciones distribuidas
-		sin lanzar una máquina virtual completa (VM) para cada aplicación.
-		En lugar de virtualizar sistemas independientes, varios sistemas aislados se ejecutan en un único host de control y acceden a un único kernel. 
-		Los contenedores de aplicaciones contienen los componentes, como archivos, variables de entorno y bibliotecas, necesarios para ejecutar el software deseado.
-		Debido a que los recursos se comparten de esta manera, se pueden crear contenedores de aplicaciones que ponen menos presión a los recursos globales disponibles. 
-		Por ejemplo, si se desea una variación de la imagen estándar, se puede crear un contenedor que contenga solo la nueva biblioteca.
-		En la actualidad son muchos los centros de datos y supercomputadores, ambos sistemas distribuidos compuestos por diversas máquinas, que se basan en esta tecnología, la contenerización, a la hora
-		de optimizar sus recursos, balanceando la carga de los distintos contenedores entre sus nodos. Los sistemas más notorios sobre este campo son Docker, el cual permite automatizar el despliegue de
-		contenedores, y Kubernetes, que permite, además, escalar y balancear la carga de contenedores en un sistema distribuido. \\
-
-		% Comentar paradigmas basados en servicios y explicar paradigmas de microservicios, FaaS, Serverless, etc ...
-		En un servidor tradicional, todos los componentes de una aplicación son desarrollados y ejecutados sobre una misma base (sistema operativo, plataforma, ...), lo que provoca una menor adaptabilidad y
-		una mayor rigidez del sistema, este tipo de arquitectura se denomina monolítica.
-		En contraste, la contenerización de aplicaciones en sistemas distribuidos ha permitido paso a nuevos tipos de arquitecturas sobre la manera de usar servicios de software, ya sean microservicios, FaaS o
-		Serverless.
-
-		Los microservicios son tanto un estilo de arquitectura como un modo de programar software. 
-		Con los microservicios, las aplicaciones se dividen en sus elementos más pequeños e independientes entre sí, permitiendo a cada uno de sus componentes ser desarrollados de manera más aislada y ejecutados
-		en contenedores sobre sistemas distribuidos, adoptando asi las ventajas de estas tecnologías anteriormente argumentadas.
-
-		La función como servicio, o FaaS, es un modelo de ejecución informática que se basa en eventos y se ejecuta en contenedores sin estado. 
-		Esas funciones son las que gestionan la lógica y el estado de los servidores a través del uso de servicios. Gracias a la FaaS, los desarrolladores pueden diseñar, ejecutar y gestionar esos paquetes de
-		aplicaciones como funciones, sin tener que mantener su propia infraestructura.
-		La FaaS es una forma de implementar la informática sin servidor (Serverless), donde los desarrolladores escriben la lógica empresarial que luego se ejecuta en los contenedores de Linux totalmente
-		gestionados por una plataforma. Las plataformas más destacadas son AWS, Google Cloud o Azure.
-
-		Ambos paradigmas son, habitualmente, complementarios, permitiendo una mayor flexbilidad en el desarrollo y despliegue de aplicaciones. \\
-
-
-		% Debido a ello se decide realizar el trabajo.
-		Por ello se considera interesante el analisis y diseño de un sistema compuesto por servicios, entendidos como formas de actuación determinadas para resolver un problema concreto, 
-		donde prevalezca siempre el más competitivo y eficiente, y ejecutados sobre una red de nodos sin confianza gracias a la tecnología previamente mencionada.
-		El sistema contará con un conjunto de servicios que resuelven un problema determiando además de otro que se dedica a compararlos o clasificarlos. Como problema a resolver se escoje
-		el de satisfactibilidad (SAT) por ser un problema NP-completo.
-		
-		% Explicación del problema SAT.
-		Los problemas NP-completo son los más complicados de la clase NP, en el sentido que si Q' es un problema de decisión en NP y Q es un problema NP-completo, 
-		entonces todas las instancias de Q' son polinomialmente reducibles a una instancia de Q. 
-		El problema de satisfacibilidad (SAT) fue el primer problema identificado como perteneciente a la clase de complejidad NP-completo por Stephen Cook en el año 1971.
-		El problema consiste en saber si, dada una expresión booleana con variables y sin cuantificadores, hay alguna asignación de valores para sus variables que hace que la expresión sea verdadera. 
-		Por ejemplo, una instancia de SAT sería el saber si existen valores para \({\displaystyle x_{1},\,x_{2},\,x_{3},\,x_{4}}{\displaystyle x_{1},\,x_{2},\,x_{3},\,x_{4}}\) tales que la expresión:
-		\begin{equation}
-			{\displaystyle (x_{1}\lor \neg x_{3})\land (\neg x_{2}\lor x_{3}\lor \neg x_{4})}{\displaystyle (x_{1}\lor \neg x_{3})\land (\neg x_{2}\lor x_{3}\lor \neg x_{4})}
-		\end{equation}
-		sea cierta.
-		Los algoritmos eficientes y escalables para SAT se desarrollaron en la última década y han contribuido a avances dramáticos en nuestra capacidad de 
-		resolver automáticamente instancias de problemas que involucran decenas de miles de variables y millones de restricciones (es decir, cláusulas). 
-		Sobre esto, un SAT solver es una herramienta que toma como entrada una fórmula CNF y genera una asignación booleana satisfactoria a las variables utilizadas en 
-		la fórmula CNF si la fórmula es satisfactible o no. \\
-		
-		Por tanto el objetivo general del proyecto es diseñar un servicio que clasifique y seleccione el SAT solver más eficiente para un CNF concreto. \\
+		\subsection{Objetivos}
+			Por tanto el objetivo general del proyecto es diseñar un servicio que clasifique y seleccione el SAT solver más eficiente para un CNF concreto.
+			Este trabajo pretende, principalmente, dos cosas:
+			\begin{itemize}
+				\item Definir, de manera simple, 
+					las reglas básicas de cada uno de los componentes de un sistema distribuido de servicios,
+					y como se definen e interaccionan entre sí.
+				\item Dar uso del sistema para realizar una prueba concepto sobre un problema concreto, la resolución de problemas SAT.
+			\end{itemize}
+			El sistema debe de, en última instancia, ser capaz de resolver un problema SAT escogiendo, en función del CNF de entrada, el más eficiente de una serie de algoritmos que lo resuelvan.
+			Sistema en el cual, tanto el clasificador como cada uno de los algoritmos (SAT solvers) son servicios independientes i aislados interaccionando en un entorno sin confianza, los unos con los otros 
+			y con los nodos, los cuales, además, se encargan de balancear su carga con el resto de nodos sin que exista un nodo central que supervise el balanceo. \\
+	
+			Con esto debería de ser posible acoplar nuevas funciones o características, tanto a los nodos como a los servicios, sin que el resto de componentes se vieran afectados. Por ejemplo, añadir un nuevo algoritmo
+			para resolver SAT, añadir un sistema de clasificación distinto o modificar las políticas de balanceo de carga de uno de los nodos. \\
 
 	\section{Estado del Arte}
 		% Como se resuelven los problemas SAT actualmente.
-		La clasificación más comun sobre algoritmos que resuelven SAT es si son completos o incompletos.
-
-		El algoritmo completo busca el espacio de solución de un problema SAT dado basándose en mecanismos de búsqueda de enumeración y retroceso. 
-		Si el problema es satisfactorio, entonces se dará la solución de la fórmula lógica, y si no, se dará prueba de que está completo. 
-		De hecho, en el segundo caso, es extremadamente importante y práctico dar prueba de
-		integridad, ya que muchos casos insatisfactorios requieren prueba de que no pueden satisfacerse. El algoritmo completo
-		determina el valor de las variables en la lógica proposicional una por una hasta que se asignan todas las variables y el valor de
-		la fórmula es verdadera, o se intentan todas las asignaciones posibles pero quedan insatisfechas.
-		La ventaja del algoritmo completo es que puede garantizar la solución del problema SAT correspondiente 
-		o probar que la fórmula no es satisfactoria. Desafortunadamente, la eficiencia del algoritmo completo es extremadamente baja.
-		Aunque la complejidad de tiempo promedio es un nivel polinomial, la complejidad de tiempo del peor de los casos es exponencial.
-		El algoritmo completo es un proceso de búsqueda en profundidad de todo el espacio de la solución, el espacio de búsqueda es muy grande, lo que
-		puede hacer que la computadora no pueda devolver los resultados en un tiempo aceptable. \\
-
-		Por otro lado, el algoritmo de búsqueda local es el más utilizado en el algoritmo incompleto. Este método utiliza cierta
-		estrategia para buscar aleatoriamente en el espacio de asignación de la variable, y se acerca gradualmente a la solución final bajo
-		la guía de la función objetivo. Hay dos tipos de funciones objetivas: una es minimizar el número de cláusulas con el valor verdadero de falso,
-		y el otro es satisfacer el número máximo de cláusulas de restricción. 
-		La ventaja del algoritmo incompleto es una mayor eficiencia a la hora de encontrar interpretaciones válidas siempre y cuando existan, de no ser asi
-		el algoritmo nunca dará con una solución. \\
-
-		Otra forma de resolver problemas SAT es transformar el problema de satisfacibilidad en otro problema en otro
-		campo, que se puede resolver rápidamente, como el algoritmo genético, el algoritmo de recocido simulado o la propagación
-		de encuestas. \\
-		
-		El rendimiento o eficiencia de un algoritmo puede variar segun el tipo de CNF. Por tanto se pretende clasificar cualquier tipo de los algoritmos anteriormente
+		Como se ha expuesto con anteriordad (conceptos previos), actualmente los problemas SAT se resuelven, principamente: con algoritmos completos, incompletos o transformando el problema en otro.
+		El rendimiento o eficiencia de un algoritmo puede variar segun el tipo de CNF. Por tanto se pretende clasificar cualquier tipo de los algoritmos que resuelven SAT anteriormente
 		mencionados a partir del tiempo que tardan en resolver un CNF concreto, es decir, en función del rendimiento
 		que poseen ante un tipo u otro de CNF (de mayor o menor número de clausulas o literales).
 		Por ejemplo, que en un algoritmo incompleto prevalezca un determinado grado de aleatoriedad frente a otro o una función objetivo ante otra 
@@ -254,7 +280,7 @@
 		de literales por cláusula. Por tanto, saber de antemano que algoritmo obtuvo un mejor rendimiento con un CNF similar podría brindar una ventaja al seleccionar 
 		el más oportuno. \\
 		
-		% Tecnologías computacionales de las que se disponen.
+		% Tecnologías computacionales de las que se dispone.
 		Para realizar la tarea de clasificación se opta por dar uso del método de regresión lineal.
 		La regresión lineal es un algoritmo de aprendizaje automático basado en el aprendizaje supervisado. 
 		Realiza una tarea de regresión. La regresión modela un valor de predicción objetivo basado en variables independientes. 
@@ -268,28 +294,25 @@
 			Y = \beta_0 + \sum \beta_i \chi_i + \epsilon_i
 		\end{equation} \\
 		donde \(\beta\) representa las estimaciones de parámetros lineales que se deben calcular y \(\epsilon\) representa los términos de error. \\
-		En el caso de la clasificación de algoritmos SAT (o solvers) la variable dependiente sería el grado de eficiencia del algoritmo y las variables independientes el número de 
+		En el caso de la clasificación de algoritmos SAT (o SAT solvers) la variable dependiente del modelo sería el grado de eficiencia del algoritmo y las variables independientes el número de 
 		clausulas y literales del CNF. \\
 
 		El servicio que se encarga de realizar la regresión lineal da uso de la librería de Sklearn. Scikit-learn es una biblioteca para aprendizaje automático de software libre para el 
 		lenguaje de programación Python, incluye varios algoritmos de clasificación, regresión y análisis de grupos. \\
 
 		% A partir de las tecnologías disponibles se pretende hacer esto para resolver el problema.
-		Para realizar la tarea de construcción y gestion de servicios, virtualización o contenerización de cada servicio, se da uso de la plataforma Docker, principalmente por ser la más extendida
+		En el contexto de la los sistemas distribuidos y la computación en la nube, la virtualización es una técnica que crea un ecosistema virtual de dispositivos de almacenamiento 
+		y sistemas operativos del servidor, facilitando la escalabilidad y reduciendo la necesidad de un sistema físico. Desde la externalización del hardware utilizado y la reducción 
+		de la implementación de fuentes específicas, hasta la eliminación de costos adicionales de energía, la virtualización es una técnica muy utilizada en este tipo de entornos (sistemas
+		distribuidos y computación en la nube). \\
+
+		Para realizar la tarea de construcción y gestion de servicios, virtualización o contenerización de cada uno, se da uso de la plataforma Docker, principalmente por ser la más extendida
 		y con mayor comunidad en su nicho. Docker es un proyecto de código abierto que automatiza el despliegue de aplicaciones dentro de contenedores de software, este permite construir y ejecutar
 		cada uno de los servicios que componen todo el sistema. Otra plataforma muy usada en el contexto de la contenerización de software es Kubernetes, esta puede integrase con Docker para escalar y
 		balancear contenedores en red. \\
 
 	\section{Análisis de requisitos}
 		% Que debe resolver? De que funciones la debes dotar para hacer esto? 
-		Este trabajo pretende, principalmente, dos cosas:
-		\begin{itemize}
-			\item Definir, de manera simple, 
-				las reglas básicas de cada uno de los componentes de un sistema distribuido de servicios,
-				y como se definen e interaccionan entre sí.
-			\item Dar uso del sistema para realizar una prueba concepto sobre un problema concreto, la resolución de problemas SAT.
-		\end{itemize}
-
 		Más concretamente, los objetivos son (algunos conceptos se desarrollan más adelante):
 		\begin{itemize}
 			\item Diseño de la especificación de un servicio.
@@ -307,14 +330,7 @@
 				\item Clasificar los SAT-solvers que se le han especificado.
 				\item Seleccionar un SAT-solver en función de un CNF dado.
 			\end{itemize}
-		\end{itemize}
-
-		El sistema debe de, en última instancia, ser capaz de resolver un problema SAT escogiendo, en función del CNF de entrada, el más eficiente de una serie de algoritmos que lo resuelvan.
-		Sistema en el cual, tanto el clasificador como cada uno de los algoritmos (SAT solvers) son servicios independientes i aislados interaccionando en un entorno sin confianza, los unos con los otros 
-		y con los nodos, los cuales, además, se encargan de balancear su carga con el resto de nodos sin que exista un nodo central que supervise. \\
-
-		Con esto debería de ser posible acoplar nuevas funciones o características, tanto a los nodos como a los servicios, sin que el resto de componentes se vieran afectados. Por ejemplo, añadir un nuevo algoritmo
-		para resolver SAT, añadir un sistema de clasificación distinto o modificar las políticas de balanceo de carga de uno de los nodos. \\
+		\end{itemize} 
 
 		% Que requisitos le das a la solución(Transparencia, escalabilidad, tolerancia a fallos, tiempo de respuesta, etc)?
 
@@ -331,26 +347,35 @@
 							identificador del mismo y el tipo de serialización que
 							se debe de usar.
 					\end{itemize}
-				\item Reunion inicial
+				\item Reunion inicial \\
 					Se evalua la idea del trabajo en terminos generales y se estudian los requisitos y tiempos estimados del proyecto. 
-				\item Primera fase de desarrollo
+				\item Reunion de seguimiento. \\
+					Se analizan las tareas ya realizadas del trabajo, se reajusta la planificación temporal y se debate como llevar a cabo 
+					el balanceo de instancias y solicitudes.
+				\item Reunión final. \\
+					Se estudian y analizan las conclusiones y resultados del trabajo.
+				\item Fase de desarrollo del nodo \\
+					Desarrollar las funciones básicas de un nodo:
 					\begin{itemize}
-						\item Desarrollar las funciones básicas de un nodo:
-						\begin{itemize}
-							\item Compilar a la especificación de un servicio.
-							\item Construir la especificación de un servicio. \\
-								Dada la especificación de un servicio, debe ser capaz de construir un contenedor del mismo,
-								abrir los puertos necesarios y añadirle las variables de entorno dadas, si es el caso.
-							\item Servicio local con la finalidad de atender las peticiones de los servicios. \\
-								Las peticiones básicas son: la inicialización de un servicio, y su detención.
-								Al especificarle un servicio, el servicio local del nodo le devolverá al cliente la dirección 
-								de la instancia del servicio demandado y un token con el que efectuar acciones u obtener información 
-								sobre él (como detenerlo, por ejemplo).
-						\end{itemize}
-						\item Desarrollar servicios SAT-solver y sus especificaciones.
+						\item Compilar a la especificación de un servicio.
+						\item Construir la especificación de un servicio. \\
+							Dada la especificación de un servicio, debe ser capaz de construir un contenedor del mismo,
+							abrir los puertos necesarios y añadirle las variables de entorno dadas, si es el caso.
+						\item Servicio local con la finalidad de atender las peticiones de los servicios. \\
+							Las peticiones básicas son: la inicialización de un servicio, y su detención.
+							Al especificarle un servicio, el servicio local del nodo le devolverá al cliente la dirección 
+							de la instancia del servicio demandado y un token con el que efectuar acciones u obtener información 
+							sobre él (como detenerlo, por ejemplo).
+						\item Balanceo de carga de instancias. \\
+							Al ser el nodo el que tiene la responsabilidad de construir y ejecutar los servicios demandados,
+							este puede derivar a otros nodos de la red la tarea de construir y ejecutar un servicio. \\
+							Se debe de desarrollar la lógica necesaria para que lo haga.
+						\item Distribución de contenedores. \\
+						\item Busqueda de otro nodos en la red.
 					\end{itemize}
-				\item Segunda fase de desarrollo
+				\item Fase de desarrollo de los servicios
 					\begin{itemize}
+						\item Desarrollar servicios SAT-solver y sus especificaciones.
 						\item Desarrollar un servicio de clasificación de SAT-solvers. \\
 						Por un lado se ha de desarrollar un sistema que genere CNFs aleatorios,
 						pruebe cada uno de los solvers y recoja datos de ello.
@@ -358,27 +383,18 @@
 						\\
 						Por otra parte, el servicio debe de tener la capacidad de, a partir de un CNF dado, 
 						resolverlo dando uso del solver que mejor se adapte a ese CNF en concreto.
-					\end{itemize}
-				\item Reunion de seguimiento.
-					Se analizan las tareas ya realizadas del trabajo, se reajusta la planificación temporal y debate como llevar a cabo 
-					el balanceo de instancias y solicitudes de la tercera fase.
-				\item Tercera fase de desarrollo
-					\begin{itemize}
-						\item Balanceo de carga de instancias. \\
-							Al ser el nodo el que tiene la responsabilidad de construir y ejecutar los servicios demandados,
-							este puede derivar a otros nodos de la red la tarea de construir y ejecutar un servicio. \\
-							Se debe de desarrollar la lógica necesaria para que lo haga.
 						\item Balanceo de carga de solicitudes. \\
-							El clasificador deberá tener un balanceador de carga
-							con el que se repartirán las peticiones para resolver CNF's entre varias instancias de un mismo solver.
-						\item Distribución de contenedores. \\
-						\item Busqueda de otro nodos en la red.
+						El clasificador deberá tener un balanceador de carga
+						con el que se repartirán las peticiones para resolver CNF's entre varias instancias de un mismo solver.
+							sobre él (como detenerlo, por ejemplo).
 					\end{itemize}
-				\item Tras realizar pruebas sobre el sistema completo se decide separar la función de regresión sobre el servicio de clasificación.
-				\item Testing del sistema
-					\\ Tras cada fase de desarrollo.
-			\end{enumerate}
+				\item Fase de testing del sistema \\
+					Se comprueba el comportamiento del sistema en su conjunto, balanceo de carga, conexión entre nodos, respuesta ante la caida de servicios \dots, además de su eficiencia.
+			\end{enumerate} 
 
+			Ambas fases de desarrollo se abarcan de manera paralela, su distinción se debe a la abstracción entre nodo y servicio el cual permite un desarrollo de este tipo, es decir, aislar cada 
+			parte y desarrollarla sin preocuparse demasiado de la otra. \\
+			
 			\begin{ganttchart}[
 				canvas/.append style={fill=none, draw=black!5, line width=.75pt},
 				hgrid style/.style={draw=black!5, line width=0.75pt},
@@ -410,18 +426,16 @@
 				\ganttbar[]{\textbf{Estudio previo}}{1}{2} \\
 				\ganttbar[]{\textbf{Reunion inicial}}{3}{3} \\
 				\ganttbar[]{\textbf{Analisis de requisitos}}{3}{3} \\
-				\ganttbar[]{\textbf{Primera fase de desarrollo}}{4}{6} \\
-				\ganttbar[]{\textbf{Segunda fase de desarrollo}}{7}{11} \\
+				\ganttbar[]{\textbf{Fase de desarrollo del nodo}}{4}{16} \\
+				\ganttbar[]{\textbf{Fase de desarrollo de servicios}}{7}{18} \\
 				\ganttbar[]{\textbf{Reunion de seguimiento}}{15}{15} \\
-				\ganttbar[]{\textbf{Tercera fase de desarrollo}}{15}{18} \\
-				\ganttbar[]{\textbf{Testing del sistema}}{7}{19} \\
-				\ganttbar[]{\textbf{Fase de desarrollo extra}}{19}{19} \\
+				\ganttbar[]{\textbf{Fase de pruebas del sistema}}{16}{19} \\
 				\ganttbar[]{\textbf{Redacción de la memoria}}{18}{20} \\
 				\ganttbar[]{\textbf{Reunion final}}{20}{20} \\
 
-			\end{ganttchart}
-			Diagrama de Gantt, Figura: XXX \\
+			\end{ganttchart} \\
 
+			% Retrasos o inconvenientes.
 			Sobre retrasos o inconvenientes en el desarrollo en base a la planificación estipulada.
 			Cambio de Json a Grpc, separación del hilo de regresión del clasificador ...
 
@@ -498,22 +512,25 @@
 			\end{itemize}
 			\includegraphics[width=16cm]{ipss.png}\\ \\
 
+
+			
 		Despues de especifiar los componentes del sistema y a que se dedica cada uno se ha realizado una implementación de cada uno de ellos para materializar la descripción de este. \\
-		\subsection{Primera fase de desarrollo}
-			La primera fase de desarrollo abarca la lógica detrás de un nodo, esto es, la compilación y construcción de servicios y el manejo de solicitudes de los mismos.
+		\subsection{Fase de desarrollo del nodo}
+			Esta fase de desarrollo abarca la lógica detrás de un nodo, esto es, la compilación y construcción de servicios y el manejo de solicitudes de los mismos.
 			El entorno donde se ejecuta esta implementación del nodo será Python3 sobre Ubuntu(Linux), dando uso, además, del sistema de base de datos MongoDB, donde se almacenan
 			la información relativa a otros nodos de la red, y el motor de contenerización DockerEngine, con el que ejecutar instancias de servicios.
 			El uso obligatorio de Linux se debe principalmente a que dentro de la lógica implementada en Python se da uso de comandos Bash.
 			Además de eso, se da uso de Systemd para correr tres demonios de manera intermitente e indefinida: docker, mongo y gateway.py. La lógica detras del nodo se puede dividir
-			en tres ficheros principales: compile.py, build.py y gateway.py. \\
+			en tres componentes principales: Compilador, Constructor y Gateway. \\
 			
-			Existen, además, dos directorios, registry y hycache, en registry se almacenan las descripciones de servicios provenientes, o bien de su compilación (compile.py) o bien una solicitud de 
-			otro servicio interno o externo (gateway.py), y el directorio hycache sirve para almacenar datos durante diferentes operaciones, ya sea para almacenar el contenedor 
-			comprimido de un servico al ser solicitado a otro nodo (build.py), guardar la configuracion de una nueva instancia para copiarla dentro de su contenedor (gateway.py)
-			o para almacenar y calcular la hash de un sistema de archivos durante la compilación de un servicio (compile.py). \\
+			Existen, además, dos directorios, registry y hycache, en registry se almacenan las descripciones de servicios provenientes, o bien de su compilación (Compilador) o bien una solicitud de 
+			otro servicio interno o externo (Gateway), y el directorio hycache sirve para almacenar datos durante diferentes operaciones, ya sea para almacenar el contenedor 
+			comprimido de un servico al ser solicitado a otro nodo (Constructor), guardar la configuracion de una nueva instancia para copiarla dentro de su contenedor (Gateway)
+			o para almacenar y calcular la hash de un sistema de archivos durante la compilación de un servicio (Compilador). \\
 
 			Una vez definidos los componentes principales del nodo se definen más en detalle cada uno:
-			\paragraph{compile.py}
+			\paragraph{Compilador}
+				Ubicado en el archivo compile.py
 				El objetivo de este script de Python es obtener la descripción de un servicio a partir de un directorio llamado .service/, ubicado en la raiz de un repositorio git, 
 				que contenga la información necesaria para ello, esto es: un archivo Dockerfile y distintos otra información contenida en un archivo Json. \\
 				Por lo tanto, desde la terminal de un nodo, el comando python3 /home/hy/node/compile.py <direccion del repositorio>::<rama del repositorio> generará la descripción del servicio
@@ -537,7 +554,8 @@
 				Para finalizar la compilación el nodo guarda el objeto Protobuf, referente a la especificación del servicio, en registry y elimina los archivos pertinentes a la operación de hycache (subdirectorio con el identificador generado
 				aleatoriamente al inicio).
 
-			\paragraph{build.py}
+			\paragraph{Constructor}
+				Ubicado en el archivo build.py
 				Se compone de un único método (build) el cual recibe la especificación de un servicio (objeto ipss.Service) y construye la imágen docker para permitir generar instancias de este. Tomando la hash sha3-256 de
 				la especificación del servicio (en la llamada al método se debe de asegurar que se encuentra esta hash, de no ser así el método no hace nada) verifica que se encuentre su respectiva imágen en el registro de Docker. \\
 
@@ -547,7 +565,8 @@
 
 				Sería posible verificar la imagen obtenida de la red dando uso del método verify() ??? \\
 
-			\paragraph{gateway.py}
+			\paragraph{Gateway}
+				Ubicado en el archivo gateway.py
 				Se trata del servidor Grpc encargado de atender las solicitudes tanto de las instancias que ejecuta el nodo como de otros nodos de la red.
 				Su labor principal es ser capaz de generar instancias de servicios y destruirlas mientras gestiona de que instancia o nodo es dependiente cada una, 
 				esto es de vital importancia debido a que no puede fiarse del resto de agentes (nodos e instancias)
@@ -578,138 +597,6 @@
 					\item peer\_ip\#\#container\_ip\#\#container\_id en caso de una dependencia interna.
 					\item peer\_ip\#\#node\_ip:node\_port\#\#his\_token en caso de una dependencia externa.
 				\end{itemize}
-
-				
-		\subsection{Segunda fase de desarrollo}
-			La segunda fase consiste en desarrollar el servicio de clasificación de solvers, este tiene la finalidad de: por un lado atender solicitudes para resolver cnf's, y por otro realizar un entrenamiento
-			con cnf's aleatorios para clasificar diferentes servicios SATsolvers, esto con la intencion de utilizar el SATsorter más adecuado para cada cnf durante las solicitudes reales. \\
-
-			El servicio realiza varias tareas de manera simultanea, al igual que el nodo, se ha optado por dar uso de Python3 como tecnología sobre la que desarrollar su lógica. El punto de entrada del servicio es el
-			fichero start.py, donde se inicia el servidor Grpc tras acceder a la configuración inicial del servicio (archivo \_\_config\_\_ proporcionado por el nodo), tomar las variables de entorno e iniciar diferentes
-			procesos secundarios. \\
-			Da uso de un servicio con el que obtener cnfs random, por lo que solicita una instancia de este en cada sesión de entrenamiento y la mata al finalizar la sesión. Además de esta dependencia también se le añade cada
-			uno de los solvers, los cuales pueden ser añadidos por el cliente a través del servidor Grpc. 
-			El servicio de obtención de cnfs random no ha sido desarrollado durante el proyecto, solo adaptado, se da uso de un código
-			del profesor Josep Argelich, por lo que su lógica no será desarrollada en la memoria, retorna un cnf de cualquier tipo, satisfactible o insatisfactible.\\
-			También da uso de un servicio con el que obtener un modelo de regresión lineal a partir de un set de datos. Este se desarrolla más adelante. \\
-
-			El servidor Grpc posee una serie de métodos con los que atender las solicitudes del cliente, estos son:
-			\begin{itemize}
-				\item StartTrain, inicia una sesion de entrenamiento si no está ya inicializada.
-				\item StopTrain, si existe, detiene la sesión de entrenamiento. 
-				\item UploadSolver, recive la especificación de un servicio de resolución de SAT y la añade al sistema.
-				\item StreamLogs, retorna los 'logs' del sistema mediante streaming.
-				\item Solve, recive un cnf, calcula cual es el mejor solver con el que resolverlo y lo resuelve dando uso del mismo y finalmente retorna el resultado.
-				\item GetTensor, recive el modelo de regresión lineal entrenado.
-				\item AddTensor, permite añadir un modelo para combinarlo con el que se encuentra ya en el servicio. Este método no esta implementado.
-				\item GetDataSet, obtiene el set de datos que se han obtenido del entrenamiento utilizados para entrenar el modelo. 
-				\item AddDataSet, recibe un nuevo set de datos y lo combina con el que ya tiene el servicio.
-			\end{itemize}
-			\includegraphics[width=16cm]{start_grpc_server.png} \\ \\
-
-			Las partes principales en las que se divide la lógica del servicio son:
-			\paragraph{Interfaz de regresión}
-				Ubicado en el archivo regresion.py. 
-				Durante el inicio del proceso principal (start.py) se obtiene el objeto regresion.Session, el cual sigue el patrón Singleton, este objeto es usado durante toda la vida del servicio.
-				Se encarga de instanciar y proporcionar los métodos con los que dar uso del servicio que realiza la regresión lineal y mantenerlo, esto es: control de errores y solicitud de creación
-				y suspensión de instancias al nodo, a cierto número de errores destruye la instancia y solicita otra. 
-				Posee una función de mantenimiento del servicio encargada de guardar en el servicio de clasificación el set de datos que posee el servicio de regresión, esta se ejecuta en el hilo de mantenimiento. \\
-
-			\paragraph{Sistema de entrenamiento}
-				Ubicado en el archivo train.py. Durante el inicio del proceso principal (start.py) se obtiene el objeto trainer.Session, el cual sigue el patrón Singleton, este objeto es usado durante toda la vida del servicio. \\
-				El objeto train.Session se ocupa de:
-				\begin{itemize}
-					\item Gestionar el uso del servicio de obtención de cnfs random.
-					\item ejecutar la sesión de entrenamiento.
-					\item detener la sesión de entrenamiento.
-					\item Enviar el set de datos al servicio de regresión.
-				\end{itemize} 
-
-				Cuando se inicia una sesión de entrenamiento (método StartTrain) desde el hilo principal se crea un hilo que ejecuta el método init, este inicia un servicio de cnfs random y, en cada iteración, genera un cnf y lo prueba
-				en cada uno de los solvers. Solo se detiene con la señal de la variable do\_stop generado desde el hilo principal por el método StopTrain.
-				
-				Sobre el sistema de puntuación de los solvers, la puntuación que un solver recibe de la resolución de un cnf es inversamente proporcional al tiempo que el solver tarda en responder. 
-				En caso de que tarde en responder demasiado (existe un 'timeout' aplicado en la llamada Grpc de la variable de entorno TRAIN\_SOLVERS\_TIMEOUT, 30 segundos por defecto) 
-				se puntua en negativo (-1/time\_out).
-				En caso de que devuelva una interpretación se comprueba que esta sí satisface el cnf (operación con coste polinomial), 
-				si lo satisface puntua en positivo (+1/time) y registra que se demostro la satisfactibilidad del cnf, si no la satisface puntua en negativo (-1/time). 
-				En caso de que responda que el cnf es insatisfactible se guarda en una lista que ese solver tardo x tiempo en decir que era insatisfactible, 
-				al terminar de probar todos los solvers con ese cnf se comprueba si hubo alguno que demostrara su satisfactibilidad, de no ser asi, 
-				los solvers que lo dieron como insatisfactible puntuan en positivo (+1/time) y si se demostró la satisfactibilidad puntuan en negativo (-1/time). \\
-
-				El incremento de la puntuación para un cnf concreto de un solver determinado es: \\
-				\begin{equation}
-					\frac{\sum_{i=1}^{i} S + S_{i+1}}{i+1}=\overline{S_{i+1}} \Longrightarrow \frac{i*\overline{S_i} + S_{i+1}}{i+1}=\overline{S_{i+1}}
-				\end{equation} \\
-
-				Cada cierto número de iteraciones en el entrenamiento (SAVE\_TRAIN\_DATA: 10 por defecto si la variable de entorno no indica lo contrario) envia el set de datos al servicio de regresión, mediante la interfaz
-				mencionada anteriormente, y elimina los datos generados. No resetear los datos cada vez que se envían al servicio de regresión provocaría desajustar la media de cada punto dando más importancia a
-				los más antiguos. \\
-
-				Sobre la gestión del servicio de generación de cnfs random, se crea una instancia al iniciar cada sesión de entrenamiento y se destruye al finalizarla. Además de eso es necesario solicitar
-				una nueva instancia en caso de que la instancia actual del servicio acumule una cantidad determinada de errores (CONNECTION\_ERRORS: por defecto 5), originados al solicitar un nuevo cnf ya sea
-				por un error de Grpc o porque salta su 'timeout'. \\
-
-				Sobre el mecanismo para detener el entrenamiento, hay que tener en cuenta que para evitar que el método stop, usada por el método StopTrain del servidor Grpc en start.py,
-				mate el hilo durante un entrenamiento el método stop emite el mensaje de que se debe de parar el entrenamiento en la siguiente vuelta,
-				y a continuación espera a que el entrenamiento salga del bucle y termine. De esta forma se asegura que no deja instancias fuera de pila y por tanto instancias zombie 
-				(la pila se aborda en la tercera fase de desarrollo). \\
-
-			\paragraph{Administrador de solvers}
-				Ubicado en el archivo \_solve.py. Durante el inicio del proceso principal (start.py) se obtiene el objeto solve.Session, el cual sigue el patrón Singleton, este objeto es usado durante toda la vida del servicio. \\
-				El objeto solve.Session se ocupa de:
-				\begin{itemize}
-					\item gestionar las instancias de todos los solvers
-					\item solicitar a un solver determinado que resuelva un cnf determinado
-					\item balancear las solicitudes entre las distintas instancias de un mismo solver en caso de ser necesario (este punto se aborda durante la tercera fase de desarrollo).
-				\end{itemize}
-
-				Posee una funcion dedicada a controlar el estado de las instancias de los solvers, ejecutada en el hilo de mantenimiento. Comprueba 
-				si las instancias siguen activas resolviendo un cnf básico ([[1,]]), en caso de obtener un error se encarga de destruir la instancia. \\
-
-				El objeto solve.Session también posee un método con el que añadir nuevos solvers a su registro, estos se almacenan en un diccionario del tipo identificador:SolverConfig. El objeto SolverConfig detalla
-				la definición de un servicio junto con una configuración del mismo determinada. \\
-
-				Finalmente, el objeto solve.Session permite resolver cnfs dado un cnf, el identificador de un solver con una configuración determinada, y con la posibilidad de especificar el timeout de la operación y 
-				proporcionar la especificación del solver junto con su configuración, por si con el identificador no se encuentra. En caso de que ese solver se encontrara en el registro, se resuelve el cnf y se retorna
-				la respuesta junto con el tiempo que tomó resolverla. En caso de que no se encuentre y se halla proporcionado una especificación la añadirá al registro y retornará error. \\
-
-				El manejo y control de las instancias de cada solver se desarrolla más adelante, en la tercera fase, puesto que su arquitectura se ve fuertemente influenciada por la necesidad de permitir varias instancias
-				por solver. \\
-			
-			\paragraph{Sistema de inferencia}
-				Ubicado en el archivo \_get.py. Trata de seleccionar el solver que mejor rendimiento va a dar para un cnf determinado. Solicita el tensor al servicio de regresión y realiza inferencia sobre el modelo de regresión lineal
-				de cada uno de los solvers contenidos en él. \\
-				La inferencia es el proceso por el cual se derivan conclusiones a partir de premisas, es decir, a partir del modelo obtenido mediante regresión lineal 
-				se supone la puntuación que se obtendría para un cnf determinado. Para realizar la inferencia se da uso de la libreria ONNX-Runtime de Microsoft. \\
-
-			\paragraph{Hilo de mantenimiento}
-				Se trata de un hilo independiente iniciado desde start.py antes de ejecutar el servidor Grpc. Ejecuta tanto el método de mantenimiento del administrador de solvers como del de regresión 
-				cada cierto periodo de tiempo (MAINTENANCE\_SLEEP\_TIME: 100 segundos por defecto). El mantenimiento de regresión se realiza cada 10 mantenimientos de solvers por defecto (modificable con
-				variable de entorno). \\ \\ \\
-
-			El patrón singleton o instancia única es un patrón de diseño que permite restringir la creación de objetos pertenecientes a una clase o el valor de un tipo a un único objeto. De esta forma se limita a que 
-			solo pueda haber una instancia de las clases train.Session, regresion.Session y solve.Session. \\
-
-			Para enviar la especificación de un servicio por Grpc se utiliza el mensaje Grpc ServiceTransport, este optimiza el proceso enviando por streaming cada hash de la especificación (una por una) y finalmente la
-			especificación completa, además de enviar la configuración (en caso de usarse para solicitar una instancia) en tan solo una de las partes. Cuando el servidor recive el stream comprueba con las hashes si
-			ya posee el servicio, si lo posee para el stream y no es necesario enviar la especificación completa. \\
-			\includegraphics[width=16cm]{service_transport_diagram.png}\\ \\
-
-		\subsection{Tercera fase de desarrollo}
-			La tercera fase cubre tres desarrollos paralelos:
-			\begin{itemize}
-				\item el balanceo de carga de instancias en el nodo.
-				\item el balanceo de carga de solicitudes en el clasificador.
-				\item la distribución de contenedores en el nodo.
-				\item añadir nuevos nodos de la red en el nodo.
-			\end{itemize}
-
-			\paragraph{Balanceo de instancias}
-				Cuando el nodo recibe una solicitud para instanciar un servicio es este el que decidirá en que nodo de la red se debe de instanciar, localmente o en otro nodo. Para ello compara el coste
-				de ejecución de la instancia en cada uno de los nodos que posee el registro (MongoDB) con el número de contenedores que se están ejecutando en ese momento y escoge el de menor coste. 
-				Ese mismo coste local, el número de contenedores que se están ejecutando, es el que retornará a otros métodos cuando le pregunten por el coste de ejecutar una instancia
-				(método Grpc GetServiceCost), sin importar que instancia sea. \\
 
 			\paragraph{Balanceo de solicitudes}
 				En el supuesto de que el cliente realiza, al mismo tiempo, multitud de solicitudes para resolver solvers, podría darse el caso de que, en un mismo instante de tiempo, se requiera dar uso de 
@@ -752,59 +639,183 @@
 				Al añadir un nuevo nodo a la red se debe de usar el comando 'python3 zeroconf.py <uri del nuevo nodo>' desde la consola de un nodo, el comando ejecutará el método Grpc HyNode
 				en el supuesto nuevo nodo, si este le responde con un objeto Instance, el nodo le retornará su instancia y lo tomará como un nodo completamente operativo, si no responde olvidará la solicitud.
 
-		\subsection{Fase de desarrollo extra}
-			\paragraph{Motivación}
-				Tras realizar pruebas sobre el sistema completo se decide separar la función de regresión sobre el servicio de clasificación con el fin de mejorar la eficiencia del entrenamiento y resolución de 
-				SAT cuando se realiza la regresión del set de datos. Principalmente permite que el peso del clasificador se balancee, ejecutando la regresión en otro servicio da la posibilidad de que se ejecute 
+				
+		\subsection{Fase de desarrollo de servicios}
+			Esta fase consiste principalmente en desarrollar el servicio de clasificación de solvers, este tiene la finalidad de: por un lado atender solicitudes para resolver CNF's, y por otro realizar un entrenamiento
+			con cnf's aleatorios para clasificar diferentes servicios SATsolvers, esto con la intencion de utilizar el SATsorter más adecuado para cada CNF durante las solicitudes reales. \\
+
+			\paragraph{Servicio de clasificación}
+				El servicio realiza varias tareas de manera simultanea, al igual que el nodo, se ha optado por dar uso de Python3 como tecnología sobre la que desarrollar su lógica. El punto de entrada del servicio es el
+				fichero start.py, donde se inicia el servidor Grpc tras acceder a la configuración inicial del servicio (archivo \_\_config\_\_ proporcionado por el nodo), tomar las variables de entorno e iniciar diferentes
+				procesos secundarios. \\
+				Da uso de un servicio con el que obtener cnfs random, por lo que solicita una instancia de este en cada sesión de entrenamiento y la mata al finalizar la sesión. Además de esta dependencia también se le añade cada
+				uno de los solvers, los cuales pueden ser añadidos por el cliente a través del servidor Grpc. 
+				El servicio de obtención de cnfs random no ha sido desarrollado durante el proyecto, solo adaptado, se da uso de un código
+				del profesor Josep Argelich, por lo que su lógica no será desarrollada en la memoria, retorna un cnf de cualquier tipo, satisfactible o insatisfactible.\\
+				También da uso de un servicio con el que obtener un modelo de regresión lineal a partir de un set de datos. Este se desarrolla más adelante. \\
+
+				El servidor Grpc posee una serie de métodos con los que atender las solicitudes del cliente, estos son:
+				\begin{itemize}
+					\item StartTrain, inicia una sesion de entrenamiento si no está ya inicializada.
+					\item StopTrain, si existe, detiene la sesión de entrenamiento. 
+					\item UploadSolver, recive la especificación de un servicio de resolución de SAT y la añade al sistema.
+					\item StreamLogs, retorna los 'logs' del sistema mediante streaming.
+					\item Solve, recive un cnf, calcula cual es el mejor solver con el que resolverlo y lo resuelve dando uso del mismo y finalmente retorna el resultado.
+					\item GetTensor, recive el modelo de regresión lineal entrenado.
+					\item AddTensor, permite añadir un modelo para combinarlo con el que se encuentra ya en el servicio. Este método no esta implementado.
+					\item GetDataSet, obtiene el set de datos que se han obtenido del entrenamiento utilizados para entrenar el modelo. 
+					\item AddDataSet, recibe un nuevo set de datos y lo combina con el que ya tiene el servicio.
+				\end{itemize}
+				\includegraphics[width=16cm]{start_grpc_server.png} \\ \\
+
+				Las partes principales en las que se divide la lógica del servicio son:
+				\subparagraph{Interfaz de regresión}
+					Ubicado en el archivo regresion.py. 
+					Durante el inicio del proceso principal (start.py) se obtiene el objeto regresion.Session, el cual sigue el patrón Singleton, este objeto es usado durante toda la vida del servicio.
+					Se encarga de instanciar y proporcionar los métodos con los que dar uso del servicio que realiza la regresión lineal y mantenerlo, esto es: control de errores y solicitud de creación
+					y suspensión de instancias al nodo, a cierto número de errores destruye la instancia y solicita otra. 
+					Posee una función de mantenimiento del servicio encargada de guardar en el servicio de clasificación el set de datos que posee el servicio de regresión, esta se ejecuta en el hilo de mantenimiento. \\
+
+				\subparagraph{Sistema de entrenamiento}
+					Ubicado en el archivo train.py. Durante el inicio del proceso principal (start.py) se obtiene el objeto trainer.Session, el cual sigue el patrón Singleton, este objeto es usado durante toda la vida del servicio. \\
+					El objeto train.Session se ocupa de:
+					\begin{itemize}
+						\item Gestionar el uso del servicio de obtención de cnfs random.
+						\item ejecutar la sesión de entrenamiento.
+						\item detener la sesión de entrenamiento.
+						\item Enviar el set de datos al servicio de regresión.
+					\end{itemize} 
+
+					Cuando se inicia una sesión de entrenamiento (método StartTrain) desde el hilo principal se crea un hilo que ejecuta el método init, este inicia un servicio de cnfs random y, en cada iteración, genera un cnf y lo prueba
+					en cada uno de los solvers. Solo se detiene con la señal de la variable do\_stop generado desde el hilo principal por el método StopTrain.
+					
+					Sobre el sistema de puntuación de los solvers, la puntuación que un solver recibe de la resolución de un cnf es inversamente proporcional al tiempo que el solver tarda en responder. 
+					En caso de que tarde en responder demasiado (existe un 'timeout' aplicado en la llamada Grpc de la variable de entorno TRAIN\_SOLVERS\_TIMEOUT, 30 segundos por defecto) 
+					se puntua en negativo (-1/time\_out).
+					En caso de que devuelva una interpretación se comprueba que esta sí satisface el cnf (operación con coste polinomial), 
+					si lo satisface puntua en positivo (+1/time) y registra que se demostro la satisfactibilidad del cnf, si no la satisface puntua en negativo (-1/time). 
+					En caso de que responda que el cnf es insatisfactible se guarda en una lista que ese solver tardo x tiempo en decir que era insatisfactible, 
+					al terminar de probar todos los solvers con ese cnf se comprueba si hubo alguno que demostrara su satisfactibilidad, de no ser asi, 
+					los solvers que lo dieron como insatisfactible puntuan en positivo (+1/time) y si se demostró la satisfactibilidad puntuan en negativo (-1/time). \\
+
+					El incremento de la puntuación para un cnf concreto de un solver determinado es: \\
+					\begin{equation}
+						\frac{\sum_{i=1}^{i} S + S_{i+1}}{i+1}=\overline{S_{i+1}} \Longrightarrow \frac{i*\overline{S_i} + S_{i+1}}{i+1}=\overline{S_{i+1}}
+					\end{equation} \\
+
+					Cada cierto número de iteraciones en el entrenamiento (SAVE\_TRAIN\_DATA: 10 por defecto si la variable de entorno no indica lo contrario) envia el set de datos al servicio de regresión, mediante la interfaz
+					mencionada anteriormente, y elimina los datos generados. No resetear los datos cada vez que se envían al servicio de regresión provocaría desajustar la media de cada punto dando más importancia a
+					los más antiguos. \\
+
+					Sobre la gestión del servicio de generación de cnfs random, se crea una instancia al iniciar cada sesión de entrenamiento y se destruye al finalizarla. Además de eso es necesario solicitar
+					una nueva instancia en caso de que la instancia actual del servicio acumule una cantidad determinada de errores (CONNECTION\_ERRORS: por defecto 5), originados al solicitar un nuevo cnf ya sea
+					por un error de Grpc o porque salta su 'timeout'. \\
+
+					Sobre el mecanismo para detener el entrenamiento, hay que tener en cuenta que para evitar que el método stop, usada por el método StopTrain del servidor Grpc en start.py,
+					mate el hilo durante un entrenamiento el método stop emite el mensaje de que se debe de parar el entrenamiento en la siguiente vuelta,
+					y a continuación espera a que el entrenamiento salga del bucle y termine. De esta forma se asegura que no deja instancias fuera de pila y por tanto instancias zombie 
+					(la pila se aborda en la tercera fase de desarrollo). \\
+
+				\subparagraph{Administrador de solvers}
+					Ubicado en el archivo \_solve.py. Durante el inicio del proceso principal (start.py) se obtiene el objeto solve.Session, el cual sigue el patrón Singleton, este objeto es usado durante toda la vida del servicio. \\
+					El objeto solve.Session se ocupa de:
+					\begin{itemize}
+						\item gestionar las instancias de todos los solvers
+						\item solicitar a un solver determinado que resuelva un cnf determinado
+						\item balancear las solicitudes entre las distintas instancias de un mismo solver en caso de ser necesario (este punto se aborda durante la tercera fase de desarrollo).
+					\end{itemize}
+
+					Posee una funcion dedicada a controlar el estado de las instancias de los solvers, ejecutada en el hilo de mantenimiento. Comprueba 
+					si las instancias siguen activas resolviendo un cnf básico ([[1,]]), en caso de obtener un error se encarga de destruir la instancia. \\
+
+					El objeto solve.Session también posee un método con el que añadir nuevos solvers a su registro, estos se almacenan en un diccionario del tipo identificador:SolverConfig. El objeto SolverConfig detalla
+					la definición de un servicio junto con una configuración del mismo determinada. \\
+
+					Finalmente, el objeto solve.Session permite resolver cnfs dado un cnf, el identificador de un solver con una configuración determinada, y con la posibilidad de especificar el timeout de la operación y 
+					proporcionar la especificación del solver junto con su configuración, por si con el identificador no se encuentra. En caso de que ese solver se encontrara en el registro, se resuelve el cnf y se retorna
+					la respuesta junto con el tiempo que tomó resolverla. En caso de que no se encuentre y se halla proporcionado una especificación la añadirá al registro y retornará error. \\
+
+
+					Sobre el balanceo de instancias, cuando el nodo recibe una solicitud para instanciar un servicio es este el que decidirá en que nodo de la red se debe de instanciar, localmente o en otro nodo. 
+					Para ello compara el coste de ejecución de la instancia en cada uno de los nodos que posee el registro (MongoDB) con el número de contenedores que se están ejecutando en ese momento y 
+					escoge el de menor coste. 
+					Ese mismo coste local, el número de contenedores que se están ejecutando, es el que retornará a otros métodos cuando le pregunten por el coste de ejecutar una instancia
+					(método Grpc GetServiceCost), sin importar que instancia sea. \\
+				
+				\subparagraph{Sistema de inferencia}
+					Ubicado en el archivo \_get.py. Trata de seleccionar el solver que mejor rendimiento va a dar para un cnf determinado. Solicita el tensor al servicio de regresión y realiza inferencia sobre el modelo de regresión lineal
+					de cada uno de los solvers contenidos en él. \\
+					La inferencia es el proceso por el cual se derivan conclusiones a partir de premisas, es decir, a partir del modelo obtenido mediante regresión lineal 
+					se supone la puntuación que se obtendría para un cnf determinado. Para realizar la inferencia se da uso de la libreria ONNX-Runtime de Microsoft. \\
+
+				\subparagraph{Hilo de mantenimiento}
+					Se trata de un hilo independiente iniciado desde start.py antes de ejecutar el servidor Grpc. Ejecuta tanto el método de mantenimiento del administrador de solvers como del de regresión 
+					cada cierto periodo de tiempo (MAINTENANCE\_SLEEP\_TIME: 100 segundos por defecto). El mantenimiento de regresión se realiza cada 10 mantenimientos de solvers por defecto (modificable con
+					variable de entorno). \\ \\ \\
+
+				El patrón singleton o instancia única es un patrón de diseño que permite restringir la creación de objetos pertenecientes a una clase o el valor de un tipo a un único objeto. De esta forma se limita a que 
+				solo pueda haber una instancia de las clases train.Session, regresion.Session y solve.Session. \\
+
+				Para enviar la especificación de un servicio por Grpc se utiliza el mensaje Grpc ServiceTransport, este optimiza el proceso enviando por streaming cada hash de la especificación (una por una) y finalmente la
+				especificación completa, además de enviar la configuración (en caso de usarse para solicitar una instancia) en tan solo una de las partes. Cuando el servidor recive el stream comprueba con las hashes si
+				ya posee el servicio, si lo posee para el stream y no es necesario enviar la especificación completa. \\
+				\includegraphics[width=16cm]{service_transport_diagram.png}\\ \\
+			
+			\paragraph{Servicio de regresión}
+				Sobre el servicio de regresión, este se ocupa parte de la tarea del servicio de clasificación, el cual lo instancia.
+				Este recive sets de datos, los combina y cada cierto periodo de tiempo obtiene un modelo a partir del set de datos principal.
+				Se compone de tres partes:
+				\subparagraph{Servidor Grpc}
+					Ubicado en el archivo start.py.
+					El servidor Grpc posee una serie de métodos con los que atender las solicitudes del cliente, estos son:
+					\begin{itemize}
+						\item StreamLogs, retorna los 'logs' del sistema mediante streaming.
+						\item GetTensor, recive el modelo de regresión lineal entrenado.
+						\item GetDataSet, obtiene el set de datos que se ha ido acumulando.
+						\item AddDataSet, recibe un nuevo set de datos y lo combina con el que ya tiene el servicio.
+					\end{itemize}
+				
+				\subparagraph{Sesión de regresión}
+					Ubicado en el archivo session.py.
+					Durante el inicio del proceso principal (start.py) se obtiene el objeto Session, el cual sigue el patrón Singleton, este objeto es usado durante toda la vida del servicio. \\
+					El objeto Session se ocupa de:
+					\begin{itemize}
+						\item Almacenar el set de datos y el modelo de regresión lineal (se almacena en la memoria del intérprete).
+						\item Combinar nuevos sets de datos al set de datos principal.
+						\item Realizar la regresión cada cierto periodo de tiempo (TIME\_FOR\_EACH\_REGRESSION\_LOOP: 900 segundos por defecto si en la variable de entorno no se indica lo contrario)
+							dando uso de la función de regresión (explicada más adelante).
+					\end{itemize} 
+					La regresión se ejecutará a través de un hilo secundario siempre que se haya modificado el set de datos. La detección de cambios en el set de datos funciona usando un algoritmo hash sobre él. \\
+					
+					Para realizar la union de dos datasets la formula queda: \\
+					\begin{equation}
+						\frac{i*\overline{S_i} + j*\overline{S_j}} {i+1} = \overline{S_{i+j}}
+					\end{equation} \\ \\
+
+				\subparagraph{Función de regresión}
+					Ubicado en el archivo regresion.py
+					La regresión de cada solver consiste en realidad en una regresión por cada grado hasta un máximo estipulado (MAX\_DEGREE: 100 por defecto si en la variable de entorno no se indica lo contrario)
+					y escoger aquella función que se ajuste más a los datos, esto con el fin de maximizar el ajuste en la función del modelo sobre los datos. 
+					De esta forma se realizan un total de <número de solvers> * MAX\_DEGREE regresiones cada TIME\_FOR\_EACH\_REGRESSION\_LOOP segundos. \\
+					El tensor posee el formato de una lista de tensores de ONNX (Intercambio de Redes Neuronales Abierto), un ecosistema de inteligencia artificial de código abierto, asociados cada uno a un SAT solver (especificación del servicio).
+					Se da uso del estandar Onnx por ser un estandar abierto para compartir modelos de redes neuronales entre distintas librerías de inteligencia artificial (TensorFlow, PyCharm, Sklearn \dots), 
+					aunque en este caso se utiliza para compartir modelos de regresión lineal,
+					permite que otro servicio de clasificación continue el modelo entrenado por el clasificador sin tener que utilizar la librería de la él da uso (Sklearn). \\
+					\includegraphics[width=12cm]{esquema_regresion.png} \\  Se toma la función con mayor ajuste sobre los datos. \\ \\ 
+
+					El formato del set de datos consiste en una puntuación por cada tipo de cnf (número de instancias * número de clausulas) junto con el número de entradas de cada puntuación 
+					por cada solver con una configuración determinada, 
+					su especificación se encuentra también en el set de datos. \\
+					\includegraphics[width=16cm]{set_de_datos_de_entrenamiento.png}\\ \\
+				
+				La motivación de ejecutar la regresión de modelo en un servicio independiente es que: 
+				tras realizar pruebas sobre el sistema completo (clasificación y regresión en un mismo servicio) se decide separar la función de regresión sobre el servicio de clasificación 
+				con el fin de mejorar la eficiencia del entrenamiento y resolución de 
+				SAT cuando se está realizando la regresión del set de datos. Principalmente permite que el peso del clasificador se balancee, ejecutando la regresión en otro servicio da la posibilidad de que se ejecute 
 				en un nodo distinto si el balanceo de los nodos lo considera conveniente. Por tanto, el punto positivo de separar las funciones de un servico en varios es que se vuelven más livianos y, por tanto,
 				da la posibilidad a los nodos para distribuir mejor su ejecución. El punto negativo es que se requiere ejecutar más procesos, dos más en este caso, para el servidor del nuevo servicio y para que mantenga
 				la regresión, además de que se está, en última instancia, almacenando el set de datos dos veces en vez de una, debido a que la neturaleza de los servicios les origina tal aislamiento que imposibilita que 
 				compartan memoria (esto último puede ser un punto de estudio futuro como parte de la extension de la especificación de un servicio). \\
-				
-			Se trata de un servicio dependiente del servicio de clasificación. Recive sets de datos, los combina y cada cierto periodo de tiempo obtiene un modelo a partir del set de datos principal.
-			Se compone de tres partes:
-			\paragraph{Servidor Grpc}
-				Ubicado en el archivo start.py.
-				El servidor Grpc posee una serie de métodos con los que atender las solicitudes del cliente, estos son:
-				\begin{itemize}
-					\item StreamLogs, retorna los 'logs' del sistema mediante streaming.
-					\item GetTensor, recive el modelo de regresión lineal entrenado.
-					\item GetDataSet, obtiene el set de datos que se ha ido acumulando.
-					\item AddDataSet, recibe un nuevo set de datos y lo combina con el que ya tiene el servicio.
-				\end{itemize}
-			
-			\paragraph{Sesión de regresión}
-				Ubicado en el archivo session.py.
-				Durante el inicio del proceso principal (start.py) se obtiene el objeto Session, el cual sigue el patrón Singleton, este objeto es usado durante toda la vida del servicio. \\
-				El objeto Session se ocupa de:
-				\begin{itemize}
-					\item Almacenar el set de datos y el modelo de regresión lineal (se almacena en la memoria del intérprete).
-					\item Combinar nuevos sets de datos al set de datos principal.
-					\item Realizar la regresión cada cierto periodo de tiempo (TIME\_FOR\_EACH\_REGRESSION\_LOOP: 900 segundos por defecto si en la variable de entorno no se indica lo contrario)
-						 dando uso de la función de regresión (explicada más adelante).
-				\end{itemize} 
-				La regresión se ejecutará a través de un hilo secundario siempre que se haya modificado el set de datos. La detección de cambios en el set de datos funciona usando un algoritmo hash sobre él. \\
-				
-				Para realizar la union de dos datasets la formula queda: \\
-				\begin{equation}
-					\frac{i*\overline{S_i} + j*\overline{S_j}} {i+1} = \overline{S_{i+j}}
-				\end{equation} \\ \\
-
-			\paragraph{Función de regresión}
-				Ubicado en el archivo regresion.py
-				La regresión de cada solver consiste en realidad en una regresión por cada grado hasta un máximo estipulado (MAX\_DEGREE: 100 por defecto si en la variable de entorno no se indica lo contrario)
-				y escoger aquella función que se ajuste más a los datos, esto con el fin de maximizar el ajuste en la función del modelo sobre los datos. 
-				De esta forma se realizan un total de <número de solvers> * MAX\_DEGREE regresiones cada TIME\_FOR\_EACH\_REGRESSION\_LOOP segundos. \\
-				El tensor posee el formato de una lista de tensores de ONNX (Intercambio de Redes Neuronales Abierto), un ecosistema de inteligencia artificial de código abierto, asociados cada uno a un SAT solver (especificación del servicio).
-				Se da uso del estandar Onnx por ser un estandar abierto para compartir modelos de redes neuronales entre distintas librerías de inteligencia artificial (TensorFlow, PyCharm, Sklearn \dots), 
-				aunque en este caso se utiliza para compartir modelos de regresión lineal,
-				permite que otro servicio de clasificación continue el modelo entrenado por el clasificador sin tener que utilizar la librería de la él da uso (Sklearn). \\
-				\includegraphics[width=12cm]{esquema_regresion.png} \\  Se toma la función con mayor ajuste sobre los datos. \\ \\ 
-
-				El formato del set de datos consiste en una puntuación por cada tipo de cnf (número de instancias * número de clausulas) junto con el número de entradas de cada puntuación 
-				por cada solver con una configuración determinada, 
-				su especificación se encuentra también en el set de datos. \\
-				\includegraphics[width=16cm]{set_de_datos_de_entrenamiento.png}\\ \\
 
 	\section{Problemas encontrados y decisiones técnicas tomadas}
 		\subsection{¿Cómo realizan múltiples clientes solicitudes al servicio de clasificación?}
