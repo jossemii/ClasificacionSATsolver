@@ -167,6 +167,23 @@
 
 			Ambos paradigmas son, habitualmente, complementarios, permitiendo una mayor flexbilidad en el desarrollo y despliegue de aplicaciones. \\
 
+		\subsection{Funciones hash}
+			Una herramienta criptográfica destacable en muchos sistemas distribuidos, sobre todo si no hay confianza, son las funciones hash.
+			Las funciones de resumen o funciones hash son algoritmos que consiguen crear a partir de una entrada (ya sea un texto, una contraseña o un archivo, por ejemplo) 
+			una salida alfanumérica de longitud normalmente fija que representa un resumen de toda la información que se le ha dado 
+			(es decir, a partir de los datos de la entrada crea una cadena que solo puede volverse a crear con esos mismos datos).
+			Estas se encargan de representar de forma compacta un archivo o conjunto de datos que normalmente es de mayor tamaño que el hash independientemente del propósito de su uso. \\
+
+			Este sistema de criptografía usa algoritmos que aseguran que con la respuesta (o hash) nunca se podrá saber cuales han sido los datos insertados, 
+			lo que indica que es una función unidireccional. Sabiendo que se puede generar cualquier resumen a partir de cualquier dato nos podemos preguntar si se podrían repetir estos resúmenes (hash) 
+			y la respuesta es que teóricamente si, podría haber colisiones, ya que no es fácil tener una función hash perfecta (que consiga que no se repita la respuesta), pero esto no supone un problema,
+			ya que si se consiguieran (con un buen algoritmo) dos hash iguales los contenidos serían totalmente distintos. \\
+			
+			Por tanto, las características que hacen que una función hash sea util en este trabajo es que son deterministas y unidireccionales. De manera que con una misma entrada siempre da la misma salida,
+			con la salida no se puede obtener la entrada (facilmente) y una pequeña modificación de la entrada supone una salida totalmente distinta. Permitiendo de esta manera la identificación e integridad
+			de información en sistemas distribuidos sin confianza entre sus pares. \\ \\
+			\includegraphics[width=10cm]{hash-example.png} \\ \\
+
 		\subsection{Problema SAT}
 			% Explicación del problema SAT.
 			Los problemas NP-completo son los más complicados de la clase NP, en el sentido que si Q' es un problema de decisión en NP y Q es un problema NP-completo, 
@@ -247,12 +264,14 @@
 		\subsection{Motivación}
 			% Debido a ello se decide realizar el trabajo.
 			Por ello se considera interesante el analisis y diseño de un sistema compuesto por servicios, entendidos como formas de actuación determinadas para resolver un problema concreto, 
-			donde prevalezca siempre el más competitivo y eficiente, y ejecutados sobre una red de nodos sin confianza gracias a la tecnología previamente mencionada.
+			donde prevalezca siempre el más competitivo y eficiente, ejecutados sobre una red de nodos sin confianza gracias a la tecnología previamente mencionada.
 			El sistema contará con un conjunto de servicios que resuelven un problema determiando además de otro que se dedica a compararlos o clasificarlos. Como problema a resolver se escoje
-			el de satisfactibilidad (SAT) por ser un problema NP-completo.
+			el de satisfactibilidad (SAT) por ser un problema interesante en el campo de la IA.
 
 			% ¿Que ventajas tienes, ejecutar este problema que propones  a través de servicios?
-		
+			De forma que, ante la necesidad de resolver SAT, no sea necesario escojer un algoritmo concreto (forma de actuación determinada) si no que el sistema escoja la mejor de forma autónoma
+			incluso con el paso del tiempo, pudiendo el usuario añadir posteriormente nuevos algoritmos (SAT-solvers) que compitan con el resto.
+
 		\subsection{Objetivos}
 			Por tanto el objetivo general del proyecto es diseñar un servicio que clasifique y seleccione el SAT solver más eficiente para un CNF concreto.
 			Este trabajo pretende, principalmente, dos cosas:
@@ -313,27 +332,26 @@
 
 	\section{Análisis de requisitos}
 		% Que debe resolver? De que funciones la debes dotar para hacer esto? 
-		Más concretamente, los objetivos son (algunos conceptos se desarrollan más adelante):
+		% Que requisitos le das a la solución(Transparencia, escalabilidad, tolerancia a fallos, tiempo de respuesta, etc)?
+		Más concretamente, los objetivos propuestos son (algunos conceptos se desarrollan más adelante):
 		\begin{itemize}
-			\item Diseño de la especificación de un servicio.
+			\item Diseño de la especificación de un servicio, de manera que una función hash pueda identificarlo sin dejar de lado ninguna de sus partes.
 			\item Desarrollo de un nodo con capacidad para:
 			\begin{itemize}
-				\item Construir y ejecutar servicios.
-				\item Compartir servicios con el resto de los nodos de la red.
-				\item Balancear la carga de servicios entre sí mismo y el resto de nodos de la red.
+				\item Construir y ejecutar servicios de manera autónoma.
+				\item Compartir servicios con el resto de los nodos de la red y solicitarlos cuando no disponga de ellos.
+				\item Balancear la carga de las instancias de servicios que se le solicita ejecutar entre sí mismo y el resto de nodos de la red sin obedecer un nodo central. Buscando la mayor eficiencia
+					de sus recursos.
 			\end{itemize}
 			\item Desarrollo de un servicio de clasificación y selección de servicios que 
 			resuelven SAT. Este debe ser capaz de:
 			\begin{itemize}
 				\item Cargar especificaciones de SAT-solvers, pedirle al nodo que le devuelva
-				instancias de los mismos, mantenerlos (comprobar que siguen activos).
-				\item Clasificar los SAT-solvers que se le han especificado.
-				\item Seleccionar un SAT-solver en función de un CNF dado.
+					instancias de los mismos y mantenerlos (comprobar que siguen activos).
+				\item Clasificar los SAT-solvers que se le han especificado de manera que asegure una buena selección de estos.
+				\item Seleccionar un SAT-solver en función de un CNF dado para que lo resuelva y retornar la solución.
 			\end{itemize}
 		\end{itemize} 
-
-		% Que requisitos le das a la solución(Transparencia, escalabilidad, tolerancia a fallos, tiempo de respuesta, etc)?
-
 
 	\section{Definición y desarrollo}
 		\subsection{Planificación temporal del trabajo}
@@ -512,8 +530,6 @@
 			\end{itemize}
 			\includegraphics[width=16cm]{ipss.png}\\ \\
 
-
-			
 		Despues de especifiar los componentes del sistema y a que se dedica cada uno se ha realizado una implementación de cada uno de ellos para materializar la descripción de este. \\
 		\subsection{Fase de desarrollo del nodo}
 			Esta fase de desarrollo abarca la lógica detrás de un nodo, esto es, la compilación y construcción de servicios y el manejo de solicitudes de los mismos.

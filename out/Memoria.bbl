@@ -125,6 +125,12 @@ Weiwei Gong and Xu~Zhou.
 \newblock A survey of sat solver.
 \newblock \url{https://aip.scitation.org/doi/pdf/10.1063/1.4981999}.
 
+\bibitem{hash-function}
+Pedro Gutiérrez.
+\newblock Para que sirven las functiones hash.
+\newblock
+  \url{https://www.genbeta.com/desarrollo/que-son-y-para-que-sirven-los-hash-funciones-de-resumen-y-firmas-digitales}.
+
 \bibitem{lingam_2019}
 Mano lingam.
 \newblock Hashes are unique.

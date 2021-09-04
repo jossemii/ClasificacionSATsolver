@@ -26,45 +26,45 @@ Warning--to sort, need author or key in kubernetes_2020
 Warning--to sort, need author or key in bitcoin_key_generation
 Warning--to sort, need author or key in evolución-de-los-sistemas-distribuidos
 Warning--to sort, need author or key in faas
-You've used 30 entries,
+You've used 31 entries,
             2118 wiz_defined-function locations,
-            628 strings with 7727 characters,
-and the built_in function-call counts, 5204 in all, are:
-= -- 489
-> -- 78
+            633 strings with 7913 characters,
+and the built_in function-call counts, 5408 in all, are:
+= -- 508
+> -- 85
 < -- 0
-+ -- 49
-- -- 16
-* -- 189
-:= -- 654
-add.period$ -- 66
-call.type$ -- 30
-change.case$ -- 98
++ -- 52
+- -- 18
+* -- 194
+:= -- 688
+add.period$ -- 69
+call.type$ -- 31
+change.case$ -- 102
 chr.to.int$ -- 0
-cite$ -- 53
-duplicate$ -- 210
-empty$ -- 684
-format.name$ -- 16
-if$ -- 1251
+cite$ -- 54
+duplicate$ -- 217
+empty$ -- 706
+format.name$ -- 18
+if$ -- 1296
 int.to.chr$ -- 0
-int.to.str$ -- 30
+int.to.str$ -- 31
 missing$ -- 0
-newline$ -- 129
-num.names$ -- 14
-pop$ -- 241
+newline$ -- 134
+num.names$ -- 16
+pop$ -- 249
 preamble$ -- 1
-purify$ -- 68
+purify$ -- 71
 quote$ -- 0
-skip$ -- 231
+skip$ -- 239
 stack$ -- 0
-substring$ -- 153
-swap$ -- 30
+substring$ -- 158
+swap$ -- 31
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 120
+type$ -- 124
 warning$ -- 23
-while$ -- 14
-width$ -- 32
-write$ -- 235
+while$ -- 16
+width$ -- 33
+write$ -- 244
 (There were 23 warnings)
