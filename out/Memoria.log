@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.8.2)  30 AUG 2021 17:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.8.2)  3 SEP 2021 19:41
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -539,7 +539,7 @@ LaTeX Info: Redefining \nameref on input line 43.
 \openout5 = `Memoria.out'.
 
  ABD: EveryShipout initializing macros
-<img/logoUDL.png, id=171, 714.41907pt x 610.53094pt>
+<img/logoUDL.png, id=163, 714.41907pt x 610.53094pt>
 File: img/logoUDL.png Graphic file (type png)
 <use img/logoUDL.png>
 Package pdftex.def Info: img/logoUDL.png  used on input line 51.
@@ -547,470 +547,570 @@ Package pdftex.def Info: img/logoUDL.png  used on input line 51.
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./img/logoUDL.png>] (out/Memoria.ind)
-Underfull \hbox (badness 10000) in paragraph at lines 120--122
+Underfull \hbox (badness 10000) in paragraph at lines 119--121
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 134--137
+Underfull \hbox (badness 10000) in paragraph at lines 133--136
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 138--142
+Underfull \hbox (badness 10000) in paragraph at lines 137--141
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 142--144
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 151--162
 
  []
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.161 				\item D
-                 esarrollo de un nodo con capacidad para: [1]
-Underfull \hbox (badness 10000) in paragraph at lines 195--196
+l.162 
+       [1]
+Underfull \hbox (badness 10000) in paragraph at lines 164--166
 
  []
 
 
-Package hyperref Warning: Difference (3) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 198.
-
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 200.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 200.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 200.
-
-Underfull \hbox (badness 10000) in paragraph at lines 198--201
+Underfull \hbox (badness 10000) in paragraph at lines 168--179
 
  []
 
 [2]
+Underfull \hbox (badness 10000) in paragraph at lines 196--197
 
-Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 206.
+ []
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.95> on input line 210.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 210.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 210.
+
+Underfull \hbox (badness 10000) in paragraph at lines 213--219
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 220--221
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 226--237
+
+ []
 
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 282--283
-
- []
-
-[4] [5]
-Underfull \hbox (badness 10000) in paragraph at lines 357--374
+Underfull \hbox (badness 10000) in paragraph at lines 238--244
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 357--374
+Underfull \hbox (badness 10000) in paragraph at lines 245--248
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 375--377
+Underfull \hbox (badness 10000) in paragraph at lines 249--256
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 258--264
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 269--273
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 274--276
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 278--282
+
+ []
+
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 312--315
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 316--318
+
+ []
+
+[5]
+Underfull \hbox (badness 10000) in paragraph at lines 374--375
 
  []
 
 [6]
-<img/ipss.png, id=224, 2528.44624pt x 773.89125pt>
-File: img/ipss.png Graphic file (type png)
-<use img/ipss.png>
-Package pdftex.def Info: img/ipss.png  used on input line 401.
-(pdftex.def)             Requested size: 455.24408pt x 139.32983pt.
+Overfull \hbox (5.2066pt too wide) in paragraph at lines 422--424
+[][] \T1/cmr/m/n/10.95 Di-a-grama
+ []
 
-Underfull \hbox (badness 10000) in paragraph at lines 401--402
+
+Underfull \hbox (badness 10000) in paragraph at lines 422--424
+
+ []
+
+[7]
+Underfull \hbox (badness 10000) in paragraph at lines 455--472
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 401--402
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 403--404
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 405--411
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 412--416
-
- []
-
-[7 <./img/ipss.png>]
-
-Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 419.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 419--427
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 443--445
+Underfull \hbox (badness 10000) in paragraph at lines 455--472
 
  []
 
 [8]
-Underfull \hbox (badness 10000) in paragraph at lines 446--449
+Underfull \hbox (badness 10000) in paragraph at lines 473--475
+
+ []
+
+<img/ipss.png, id=232, 2528.44624pt x 773.89125pt>
+File: img/ipss.png Graphic file (type png)
+<use img/ipss.png>
+Package pdftex.def Info: img/ipss.png  used on input line 499.
+(pdftex.def)             Requested size: 455.24408pt x 139.32983pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 499--500
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 450--451
+Underfull \hbox (badness 10000) in paragraph at lines 499--500
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 453--459
+Underfull \hbox (badness 10000) in paragraph at lines 501--502
 
  []
 
-<img/gestion_de_instancias.jpg, id=234, 526.96875pt x 310.15875pt>
-File: img/gestion_de_instancias.jpg Graphic file (type jpg)
-<use img/gestion_de_instancias.jpg>
-Package pdftex.def Info: img/gestion_de_instancias.jpg  used on input line 462.
-(pdftex.def)             Requested size: 341.43306pt x 200.96661pt.
-[9 <./img/gestion_de_instancias.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 486--488
+[9 <./img/ipss.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 503--509
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 489--496
-
- []
-
-<img/start_grpc_server.png, id=239, 751.80875pt x 502.87875pt>
-File: img/start_grpc_server.png Graphic file (type png)
-<use img/start_grpc_server.png>
-Package pdftex.def Info: img/start_grpc_server.png  used on input line 505.
-(pdftex.def)             Requested size: 455.24408pt x 304.51498pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 505--506
+Underfull \hbox (badness 10000) in paragraph at lines 510--514
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 505--506
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 517.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 517--525
 
  []
 
 [10]
-
-Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 509.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 509--513
-
- []
-
-<img/esquema_regresion.png, id=244, 532.99126pt x 521.69907pt>
-File: img/esquema_regresion.png Graphic file (type png)
-<use img/esquema_regresion.png>
-Package pdftex.def Info: img/esquema_regresion.png  used on input line 523.
-(pdftex.def)             Requested size: 341.43306pt x 334.20468pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 517--524
+Underfull \hbox (badness 10000) in paragraph at lines 541--543
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 517--524
-
- []
-
-[11 <./img/start_grpc_server.png>]
-<img/set_de_datos_de_entrenamiento.png, id=250, 920.68968pt x 365.11406pt>
-File: img/set_de_datos_de_entrenamiento.png Graphic file (type png)
-<use img/set_de_datos_de_entrenamiento.png>
-Package pdftex.def Info: img/set_de_datos_de_entrenamiento.png  used on input line 530.
-(pdftex.def)             Requested size: 455.24408pt x 180.53981pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 525--531
+Underfull \hbox (badness 10000) in paragraph at lines 544--547
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 525--531
-
- []
-
-[12 <./img/esquema_regresion.png> <./img/set_de_datos_de_entrenamiento.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 532--533
+Underfull \hbox (badness 10000) in paragraph at lines 548--549
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 535--536
+Underfull \hbox (badness 10000) in paragraph at lines 551--557
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 537--538
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 540--541
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 540--541
-
- []
-
-
-Overfull \hbox (21.39783pt too wide) in paragraph at lines 544--547
- \T1/cmr/bx/n/10.95 4.4.0.2 train.py[][] \T1/cmr/m/n/10.95 Du-rante el ini-cio del pro-ceso prin-ci-pal (start.py) se ob-tiene el ob-jeto trainer.Session,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 556--564
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 565--568
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 569--573
-
- []
-
-[13]
-Overfull \hbox (22.25621pt too wide) in paragraph at lines 576--579
- \T1/cmr/bx/n/10.95 4.4.0.3 _solve.py[][] \T1/cmr/m/n/10.95 Du-rante el ini-cio del pro-ceso prin-ci-pal (start.py) se ob-tiene el ob-jeto solve.Session,
- []
-
-
+<img/gestion_de_instancias.jpg, id=242, 526.96875pt x 310.15875pt>
+File: img/gestion_de_instancias.jpg Graphic file (type jpg)
+<use img/gestion_de_instancias.jpg>
+Package pdftex.def Info: img/gestion_de_instancias.jpg  used on input line 560.
+(pdftex.def)             Requested size: 341.43306pt x 200.96661pt.
+[11]
 Underfull \hbox (badness 10000) in paragraph at lines 584--586
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 587--589
+Underfull \hbox (badness 10000) in paragraph at lines 587--595
+
+ []
+
+[12 <./img/gestion_de_instancias.jpg>]
+<img/start_grpc_server.png, id=252, 751.80875pt x 502.87875pt>
+File: img/start_grpc_server.png Graphic file (type png)
+<use img/start_grpc_server.png>
+Package pdftex.def Info: img/start_grpc_server.png  used on input line 608.
+(pdftex.def)             Requested size: 455.24408pt x 304.51498pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 608--609
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 590--593
+Underfull \hbox (badness 10000) in paragraph at lines 608--609
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 594--596
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 598--602
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 598--602
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 598--602
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 603--605
-
- []
-
-[14]
-<img/service_transport_diagram.png, id=270, 2479.2625pt x 766.865pt>
-File: img/service_transport_diagram.png Graphic file (type png)
-<use img/service_transport_diagram.png>
-Package pdftex.def Info: img/service_transport_diagram.png  used on input line 609.
-(pdftex.def)             Requested size: 455.24408pt x 140.80298pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 606--610
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 606--610
-
- []
-
+[13]
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 621.
+(hyperref)                than one, level fixed on input line 612.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 621--625
+Underfull \hbox (badness 10000) in paragraph at lines 612--617
+
+ []
+
+[14 <./img/start_grpc_server.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 631--639
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 627--632
+Underfull \hbox (badness 10000) in paragraph at lines 640--641
 
  []
 
-[15 <./img/service_transport_diagram.png>]
-<img/diagrama_de_clases_de_solve.png, id=276, 655.44875pt x 782.925pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 643--644
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 645--648
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 649--652
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 653--657
+
+ []
+
+[15]
+Underfull \hbox (badness 10000) in paragraph at lines 667--669
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 670--672
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 673--676
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 677--679
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 681--685
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 687--690
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 687--690
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 687--690
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 691--693
+
+ []
+
+<img/service_transport_diagram.png, id=267, 2479.2625pt x 766.865pt>
+File: img/service_transport_diagram.png Graphic file (type png)
+<use img/service_transport_diagram.png>
+Package pdftex.def Info: img/service_transport_diagram.png  used on input line 697.
+(pdftex.def)             Requested size: 455.24408pt x 140.80298pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 694--698
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 694--698
+
+ []
+
+[16]
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 709.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 709--713
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 715--720
+
+ []
+
+<img/diagrama_de_clases_de_solve.png, id=272, 655.44875pt x 782.925pt>
 File: img/diagrama_de_clases_de_solve.png Graphic file (type png)
 <use img/diagrama_de_clases_de_solve.png>
-Package pdftex.def Info: img/diagrama_de_clases_de_solve.png  used on input line 634.
+Package pdftex.def Info: img/diagrama_de_clases_de_solve.png  used on input line 722.
 (pdftex.def)             Requested size: 341.43306pt x 407.84013pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 633--635
+Underfull \hbox (badness 10000) in paragraph at lines 721--723
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 633--635
+Underfull \hbox (badness 10000) in paragraph at lines 721--723
 
  []
 
-<img/esquema_instancias_solvers.jpg, id=277, 963.6pt x 722.7pt>
+[17 <./img/service_transport_diagram.png>]
+<img/esquema_instancias_solvers.jpg, id=278, 963.6pt x 722.7pt>
 File: img/esquema_instancias_solvers.jpg Graphic file (type jpg)
 <use img/esquema_instancias_solvers.jpg>
-Package pdftex.def Info: img/esquema_instancias_solvers.jpg  used on input line 641.
+Package pdftex.def Info: img/esquema_instancias_solvers.jpg  used on input line 729.
 (pdftex.def)             Requested size: 455.24408pt x 341.43344pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 636--642
+Underfull \hbox (badness 10000) in paragraph at lines 724--730
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 636--642
+Underfull \hbox (badness 10000) in paragraph at lines 724--730
 
  []
 
-[16 <./img/diagrama_de_clases_de_solve.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 643--650
+[18 <./img/diagrama_de_clases_de_solve.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 731--738
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 656--660
+Underfull \hbox (badness 10000) in paragraph at lines 744--748
 
  []
 
-[17 <./img/esquema_instancias_solvers.jpg>]
-<img/Esquema_puente.jpg, id=287, 963.6pt x 722.7pt>
+[19 <./img/esquema_instancias_solvers.jpg>]
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 757.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 757--763
+
+ []
+
+[20]
+Overfull \hbox (22.99918pt too wide) in paragraph at lines 783--785
+[]\T1/cmr/m/n/10.95 Realizar la re-gre-sión cada cierto pe-ri-odo de tiempo (TIME_FOR_EACH_REGRESSION_LOOP:
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 786--787
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 788--789
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 791--792
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 791--792
+
+ []
+
+<img/esquema_regresion.png, id=293, 532.99126pt x 521.69907pt>
+File: img/esquema_regresion.png Graphic file (type png)
+<use img/esquema_regresion.png>
+Package pdftex.def Info: img/esquema_regresion.png  used on input line 802.
+(pdftex.def)             Requested size: 341.43306pt x 334.20468pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 794--803
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 794--803
+
+ []
+
+[21]
+<img/set_de_datos_de_entrenamiento.png, id=299, 920.68968pt x 365.11406pt>
+File: img/set_de_datos_de_entrenamiento.png Graphic file (type png)
+<use img/set_de_datos_de_entrenamiento.png>
+Package pdftex.def Info: img/set_de_datos_de_entrenamiento.png  used on input line 807.
+(pdftex.def)             Requested size: 455.24408pt x 180.53981pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 804--808
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 804--808
+
+ []
+
+[22 <./img/esquema_regresion.png> <./img/set_de_datos_de_entrenamiento.png>]
+<img/Esquema_puente.jpg, id=306, 963.6pt x 722.7pt>
 File: img/Esquema_puente.jpg Graphic file (type jpg)
 <use img/Esquema_puente.jpg>
-Package pdftex.def Info: img/Esquema_puente.jpg  used on input line 681.
+Package pdftex.def Info: img/Esquema_puente.jpg  used on input line 823.
 (pdftex.def)             Requested size: 455.24408pt x 341.43344pt.
- [18]
-Underfull \hbox (badness 10000) in paragraph at lines 692--694
+ [23 <./img/Esquema_puente.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 834--836
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 695--698
-
- []
-
-[19 <./img/Esquema_puente.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 704--705
+Underfull \hbox (badness 10000) in paragraph at lines 837--840
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 707--710
+Underfull \hbox (badness 10000) in paragraph at lines 846--847
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 712--714
+Underfull \hbox (badness 10000) in paragraph at lines 849--852
 
  []
 
 
-Overfull \hbox (5.04782pt too wide) in paragraph at lines 722--723
+Underfull \hbox (badness 10000) in paragraph at lines 854--856
+
+ []
+
+
+Overfull \hbox (5.04782pt too wide) in paragraph at lines 864--865
 []\T1/cmr/m/n/10.95 shake-256 of 200bits: 46b9dd2b0ba88d13233b3feb743eeb243fcd52ea62b81b82b50c27646ed5762f 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 722--723
+Underfull \hbox (badness 10000) in paragraph at lines 864--865
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 744--745
+[24]
+Underfull \hbox (badness 10000) in paragraph at lines 886--887
 
  []
 
-[20] (out/Memoria.bbl
+(out/Memoria.bbl
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 6.
  (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
-)
-Underfull \hbox (badness 10000) in paragraph at lines 49--52
+) [25]
+Underfull \hbox (badness 10000) in paragraph at lines 17--20
+[]\T1/cmr/m/n/10.95 Evolución de los sis-temas dis-tribui-dos.  []$\T1/cmtt/m/n/10.95 https : / / prezi . com / aswklby3ic58 /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 54--57
 []\T1/cmr/m/n/10.95 Rest vs grpc.  []$\T1/cmtt/m/n/10.95 https : / / es . accentsconagua . com / articles / code /
  []
 
-[21]
-Underfull \hbox (badness 10000) in paragraph at lines 70--74
+
+Underfull \hbox (badness 10000) in paragraph at lines 80--84
 \T1/cmtt/m/n/10.95 9781491954379 / ch04 . html# : ~ : text = The % 20bitcoin % 20private % 20key % 20is ,[] generated %
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 76--80
+Underfull \hbox (badness 10000) in paragraph at lines 86--90
 []\T1/cmr/m/n/10.95 ¾qué es ku-ber-netes?  []$\T1/cmtt/m/n/10.95 https : / / kubernetes . io / es / docs / concepts / overview /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 82--86
+Underfull \hbox (badness 10000) in paragraph at lines 92--96
 \T1/cmtt/m/n/10.95 knowledge-[]base / a-[]beginners-[]guide-[]to-[]understanding-[]and-[]building-[]docker-[]images/$[]\T1/cmr/m/n/10.95 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 103--106
+Underfull \hbox (badness 10000) in paragraph at lines 113--116
 []\T1/cmr/m/n/10.95 Nigel Brown.  Ex-plain-ing docker im-age ids.  []$\T1/cmtt/m/n/10.95 https : / / windsock . io /
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 114--118
+[26]
+Underfull \hbox (badness 10000) in paragraph at lines 129--133
 []\T1/cmr/m/n/10.95 Mano lingam.  Hashes are unique.  []$\T1/cmtt/m/n/10.95 https : / / medium . com / predict /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 127--130
+Underfull \hbox (badness 10000) in paragraph at lines 142--145
 []\T1/cmr/m/n/10.95 Real Python.  Lin-ear re-gres-sion in python.  []$\T1/cmtt/m/n/10.95 https : / / realpython . com /
  []
 
-) [22]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 765.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 765.
+) [27]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 912.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 912.
  (out/Memoria.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 765.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 765.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 912.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 912.
 Package rerunfilecheck Info: File `Memoria.out' has not changed.
-(rerunfilecheck)             Checksum: 7D687F9D73DC4F11A7B4E48D3B6BC568;3270.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 765.
+(rerunfilecheck)             Checksum: C1819A5B56937F1DC658A03D7C48386A;3152.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 912.
  ) 
 Here is how much of TeX's memory you used:
- 20223 strings out of 483183
- 394503 string characters out of 5966293
- 637666 words of memory out of 5000000
- 34724 multiletter control sequences out of 15000+600000
- 545603 words of font info for 48 fonts, out of 8000000 for 9000
+ 20246 strings out of 483183
+ 394839 string characters out of 5966293
+ 634800 words of memory out of 5000000
+ 34735 multiletter control sequences out of 15000+600000
+ 546292 words of font info for 49 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 68i,8n,69p,442b,814s stack positions out of 5000i,500n,10000p,200000b,80000s
- </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1095.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0600.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2488.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on out/Memoria.pdf (23 pages, 850124 bytes).
+ 68i,7n,69p,442b,814s stack positions out of 5000i,500n,10000p,200000b,80000s
+ </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1095.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0600.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1095.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk> </root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2488.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on out/Memoria.pdf (28 pages, 864279 bytes).
 PDF statistics:
- 860 PDF objects out of 1000 (max. 8388607)
- 408 compressed objects within 5 object streams
- 99 named destinations out of 1000 (max. 500000)
- 391 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 893 PDF objects out of 1000 (max. 8388607)
+ 436 compressed objects within 5 object streams
+ 110 named destinations out of 1000 (max. 500000)
+ 375 words of extra memory for PDF output out of 10000 (max. 10000000)
 

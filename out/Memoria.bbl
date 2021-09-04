@@ -13,6 +13,11 @@ Documentation grpc.
 Envoy proxy.
 \newblock \url{https://www.envoyproxy.io/}.
 
+\bibitem{evolución-de-los-sistemas-distribuidos}
+Evolución de los sistemas distribuidos.
+\newblock
+  \url{https://prezi.com/aswklby3ic58/la-evolucion-de-los-sistemas-distribuidos/}.
+
 \bibitem{flatbuffers}
 Flatbuffers documentation.
 \newblock \url{https://google.github.io/flatbuffers}.
@@ -66,6 +71,11 @@ threading - gestionar operaciones concurrentes dentro de un proceso.
 Welcome to flask.
 \newblock \url{https://flask.palletsprojects.com/en/1.1.x/}.
 
+\bibitem{faas}
+What is faas.
+\newblock
+  \url{https://www.redhat.com/es/topics/cloud-native-apps/what-is-faas}.
+
 \bibitem{bitcoin_key_generation}
 Bitcoin key generation.
 \newblock
@@ -109,6 +119,11 @@ Davi Frossard.
 \newblock Linear regression with numpy.
 \newblock \url{https://www.cs.toronto.edu/~frossard/post/linear_regression/},
   May 2016.
+
+\bibitem{a_survey_of_sat_solver}
+Weiwei Gong and Xu~Zhou.
+\newblock A survey of sat solver.
+\newblock \url{https://aip.scitation.org/doi/pdf/10.1063/1.4981999}.
 
 \bibitem{lingam_2019}
 Mano lingam.
