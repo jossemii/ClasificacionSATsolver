@@ -598,37 +598,17 @@
 					\item peer\_ip\#\#node\_ip:node\_port\#\#his\_token en caso de una dependencia externa.
 				\end{itemize}
 
-			\paragraph{Balanceo de solicitudes}
-				En el supuesto de que el cliente realiza, al mismo tiempo, multitud de solicitudes para resolver solvers, podría darse el caso de que, en un mismo instante de tiempo, se requiera dar uso de 
-				un solver en concreto. 
-				El solver en cuestion podría ser capaz de resolver varios cnfs simultaneamente, dentro del mismo contenedor, aunque de esa forma no se aprobechan las ventajas del sistema distribuido.
-				Con el objetivo de que un varios cnfs se resuelvan simultaneamente por un mismo solver el clasificador crea distintas instancias de este cuando es necesario, de esta forma el nodo se encargará de 
-				instanciar el servicio entre los distintos nodos de la red. \\ 
-
-				Antes de entrar en detalle sobre la estructura sobre la que se manejan las instancias se debe de exponer el diagrama de clases siguiente: \\
-				\includegraphics[width=12cm]{diagrama_de_clases_de_solve.png}\\ \\
-
-				Como se puede observar en el diagrama anterior, para manejar las instancias de cada solver, se adopta una estructura de un diccionario de solvers (<solver config. id>:< objeto SolverConfig>), 
-				donde cada objeto SolverConfig posee una lista de instancias (objeto SolverInstance). Cuando se requiere la instancia de un solver determinado se quita de la lista y cuando se deja de usar
-				se vuelve a introducir en la lista. El acceso a todo el diccionario se proteje contra la concurrencia mediante el uso de un objeto threading.Lock. El identificador de un objeto SolverConfig 
-				se obtiene mediante el algoritmo hash sha3-256 de su binario Protobuf.\\
-				En el siguente esquema se expone el uso de la pila de instancias de un único solver: \\
-				\includegraphics[width=16cm]{esquema_instancias_solvers.jpg}\\ \\
-
-				Hay dos métodos que obtienen e introducen instancias en las listas, resolver un cnf (Session.cnf) y el del hilo de mantenimiento (Session.mainteance). \\
-				El método para resolver un cnf da uso de la lista como si se tratara de una pila normal, es decir, toma el elemento que se encuentra en el índice más elevado de la lista y coloca el elemento
-				en el índice más elevado de la lista. \\ El método de mantenimiento da uso de la lista como si se tratara de una pila inversa, es decir, toma el elemento que se encuentra en la primera posición
-				de la lista y coloca el elemento en la primera posición también. \\
-				El motivo de adoptar esta configuración es que las instancias tienen contadores sobre el último tiempo en que se usaron, estos solo se actualizan al solicitar resolver cnfs (el método Session.cnf),
-				por lo que cuando el mantenedor de instancias la toma comprueba si se paso de tiempo en deshuso, si es asi no lo vuelve a cargar en la lista, de lo contrario la deja en primera posición. De esta forma
-				se sabe seguro que las instancias en posiciones superiores llevan menos tiempo desde su último uso.\\
-
-				Si se toma una instancia, se debe de asegurar que al terminar de usarla, o bien se agrega a su lista correspondiente, o bien se solicita al nodo detenerla. 
-				No asegurar esto ocasiona un bug importante
-				ya que la instancia quedaría en estado zombie hasta que el clasificador fuera eliminado (en el supuesto en que el nodo donde se instancio matara dependencias que fueran a quedar zombies).
+			\paragraph{Balanceo de instancias de servicios}
+				Cuando el nodo recibe una solicitud para instanciar un servicio es este el que decidirá en que nodo de la red se debe de instanciar, localmente o en otro nodo. 
+				Para ello compara el coste de ejecución de la instancia en cada uno de los nodos que posee el registro (MongoDB) con el coste de ejecutar la instancia localmente y 
+				escoge el de menor coste. 
+				Ese mismo coste, el de ejecutar la instancia localmente, es el que retornará a otros métodos cuando le pregunten por el coste de ejecutar una instancia
+				(método Grpc GetServiceCost).
+				El coste de ejecutar una instancia localmente se calcula a partir de la suma del número de contenedores que se estan ejecutando en ese momento localmente junto con el
+				coste de buscar y construir su servicio en caso de ser necesario (este coste es constante).
 
 			\paragraph{Distribución de contenedores}
-				Con el fin de atender las solicitudes de obtención de un contenedor el nodo proporciona un método Grpc denominado método Grpc GetServiceTar. Éste recive la especificación de un servicio y, si puede 
+				Con el fin de atender las solicitudes de obtención de un contenedor el nodo proporciona un método Grpc denominado GetServiceTar. Éste recive la especificación de un servicio y, si puede 
 				proporcionarlo, comprime el contenedor y envía el archivo en formato .tar dividiendolo en trozos y enviandolos en streaming, en caso de no poder proporconar el contenedor salta una excepción que
 				recive el cliente.\\
 				Para la busqueda de contenedores, el nodo debe de iterar entre sus pares (resto de nodos de la red) y comprobar si alguno posee el contenedor dando uso del método anteriormente definido. \\
@@ -649,7 +629,7 @@
 				fichero start.py, donde se inicia el servidor Grpc tras acceder a la configuración inicial del servicio (archivo \_\_config\_\_ proporcionado por el nodo), tomar las variables de entorno e iniciar diferentes
 				procesos secundarios. \\
 				Da uso de un servicio con el que obtener cnfs random, por lo que solicita una instancia de este en cada sesión de entrenamiento y la mata al finalizar la sesión. Además de esta dependencia también se le añade cada
-				uno de los solvers, los cuales pueden ser añadidos por el cliente a través del servidor Grpc. 
+				uno de los solvers, los cuales pueden ser añadidos por el cliente a través del servidor Grpc.
 				El servicio de obtención de cnfs random no ha sido desarrollado durante el proyecto, solo adaptado, se da uso de un código
 				del profesor Josep Argelich, por lo que su lógica no será desarrollada en la memoria, retorna un cnf de cualquier tipo, satisfactible o insatisfactible.\\
 				También da uso de un servicio con el que obtener un modelo de regresión lineal a partir de un set de datos. Este se desarrolla más adelante. \\
@@ -734,14 +714,37 @@
 					Finalmente, el objeto solve.Session permite resolver cnfs dado un cnf, el identificador de un solver con una configuración determinada, y con la posibilidad de especificar el timeout de la operación y 
 					proporcionar la especificación del solver junto con su configuración, por si con el identificador no se encuentra. En caso de que ese solver se encontrara en el registro, se resuelve el cnf y se retorna
 					la respuesta junto con el tiempo que tomó resolverla. En caso de que no se encuentre y se halla proporcionado una especificación la añadirá al registro y retornará error. \\
-
-
-					Sobre el balanceo de instancias, cuando el nodo recibe una solicitud para instanciar un servicio es este el que decidirá en que nodo de la red se debe de instanciar, localmente o en otro nodo. 
-					Para ello compara el coste de ejecución de la instancia en cada uno de los nodos que posee el registro (MongoDB) con el número de contenedores que se están ejecutando en ese momento y 
-					escoge el de menor coste. 
-					Ese mismo coste local, el número de contenedores que se están ejecutando, es el que retornará a otros métodos cuando le pregunten por el coste de ejecutar una instancia
-					(método Grpc GetServiceCost), sin importar que instancia sea. \\
 				
+					Sobre el balanceo de solicitudes.
+					En el supuesto de que el cliente realiza, al mismo tiempo, multitud de solicitudes para resolver solvers, podría darse el caso de que, en un mismo instante de tiempo, se requiera dar uso de 
+					un solver en concreto. 
+					El solver en cuestion podría ser capaz de resolver varios cnfs simultaneamente, dentro del mismo contenedor, aunque de esa forma no se aprobechan las ventajas del sistema distribuido.
+					Con el objetivo de que un varios cnfs se resuelvan simultaneamente por un mismo solver el clasificador crea distintas instancias de este cuando es necesario, de esta forma el nodo se encargará de 
+					instanciar el servicio entre los distintos nodos de la red. \\ 
+	
+					Antes de entrar en detalle sobre la estructura sobre la que se manejan las instancias se debe de exponer el diagrama de clases siguiente: \\
+					\includegraphics[width=12cm]{diagrama_de_clases_de_solve.png}\\ \\
+	
+					Como se puede observar en el diagrama anterior, para manejar las instancias de cada solver, se adopta una estructura de un diccionario de solvers (<solver config. id>:< objeto SolverConfig>), 
+					donde cada objeto SolverConfig posee una lista de instancias (objeto SolverInstance). Cuando se requiere la instancia de un solver determinado se quita de la lista y cuando se deja de usar
+					se vuelve a introducir en la lista. El acceso a todo el diccionario se proteje contra la concurrencia mediante el uso de un objeto threading.Lock. El identificador de un objeto SolverConfig 
+					se obtiene mediante el algoritmo hash sha3-256 de su binario Protobuf.\\
+					En el siguente esquema se expone el uso de la pila de instancias de un único solver: \\
+					\includegraphics[width=16cm]{esquema_instancias_solvers.jpg}\\ \\
+	
+					Hay dos métodos que obtienen e introducen instancias en las listas, resolver un cnf (Session.cnf) y el del hilo de mantenimiento (Session.mainteance). \\
+					El método para resolver un cnf da uso de la lista como si se tratara de una pila normal, es decir, toma el elemento que se encuentra en el índice más elevado de la lista y coloca el elemento
+					en el índice más elevado de la lista. \\ El método de mantenimiento da uso de la lista como si se tratara de una pila inversa, es decir, toma el elemento que se encuentra en la primera posición
+					de la lista y coloca el elemento en la primera posición también. \\
+					El motivo de adoptar esta configuración es que las instancias tienen contadores sobre el último tiempo en que se usaron, estos solo se actualizan al solicitar resolver cnfs (el método Session.cnf),
+					por lo que cuando el mantenedor de instancias la toma comprueba si se paso de tiempo en deshuso, si es asi no lo vuelve a cargar en la lista, de lo contrario la deja en primera posición. De esta forma
+					se sabe seguro que las instancias en posiciones superiores llevan menos tiempo desde su último uso.\\
+	
+					Si se toma una instancia, se debe de asegurar que al terminar de usarla, o bien se agrega a su lista correspondiente, o bien se solicita al nodo detenerla. 
+					No asegurar esto ocasiona un bug importante
+					ya que la instancia quedaría en estado zombie hasta que el clasificador fuera eliminado (en el supuesto en que el nodo donde se instancio matara dependencias que fueran a quedar zombies).
+	
+
 				\subparagraph{Sistema de inferencia}
 					Ubicado en el archivo \_get.py. Trata de seleccionar el solver que mejor rendimiento va a dar para un cnf determinado. Solicita el tensor al servicio de regresión y realiza inferencia sobre el modelo de regresión lineal
 					de cada uno de los solvers contenidos en él. \\
@@ -761,6 +764,10 @@
 				ya posee el servicio, si lo posee para el stream y no es necesario enviar la especificación completa. \\
 				\includegraphics[width=16cm]{service_transport_diagram.png}\\ \\
 			
+				El set de datos alamcena la información generada durante el entrenamiento o la entregada al servicio de clasificación desde fuera, este almacena la puntuación de cada SAT-solver por cada tipo de CNF provado.
+				Y se utiliza el mismo modelo tanto para intercambiar datos entre el servicio de clasificación y regresión como para almacenar los datos en cada uno de los dos servicios. \\ \\
+				\includegraphics[width=16cm]{dataset_diagram.png} \\ \\
+
 			\paragraph{Servicio de regresión}
 				Sobre el servicio de regresión, este se ocupa parte de la tarea del servicio de clasificación, el cual lo instancia.
 				Este recive sets de datos, los combina y cada cierto periodo de tiempo obtiene un modelo a partir del set de datos principal.
@@ -774,7 +781,8 @@
 						\item GetDataSet, obtiene el set de datos que se ha ido acumulando.
 						\item AddDataSet, recibe un nuevo set de datos y lo combina con el que ya tiene el servicio.
 					\end{itemize}
-				
+					\includegraphics[width=12cm]{regresion_api.png} \\ \\
+
 				\subparagraph{Sesión de regresión}
 					Ubicado en el archivo session.py.
 					Durante el inicio del proceso principal (start.py) se obtiene el objeto Session, el cual sigue el patrón Singleton, este objeto es usado durante toda la vida del servicio. \\
@@ -808,11 +816,13 @@
 					su especificación se encuentra también en el set de datos. \\
 					\includegraphics[width=16cm]{set_de_datos_de_entrenamiento.png}\\ \\
 				
-				La motivación de ejecutar la regresión de modelo en un servicio independiente es que: 
-				tras realizar pruebas sobre el sistema completo (clasificación y regresión en un mismo servicio) se decide separar la función de regresión sobre el servicio de clasificación 
+				La decisión de ejecutar la regresión del modelo en un servicio independiente viene motivada por que, 
+				tras realizar pruebas sobre el sistema completo (clasificación y regresión en un mismo servicio), se observó una disminución del rendimiento al ejecutar cada iteración de regresión.
+				Por tanto se decidió separar la función de regresión sobre el servicio de clasificación 
 				con el fin de mejorar la eficiencia del entrenamiento y resolución de 
-				SAT cuando se está realizando la regresión del set de datos. Principalmente permite que el peso del clasificador se balancee, ejecutando la regresión en otro servicio da la posibilidad de que se ejecute 
-				en un nodo distinto si el balanceo de los nodos lo considera conveniente. Por tanto, el punto positivo de separar las funciones de un servico en varios es que se vuelven más livianos y, por tanto,
+				SAT cuando se está realizando la regresión del set de datos. Principalmente esto permite que el peso del clasificador se balancee, ejecutar la regresión en otro servicio da la posibilidad de que esto ocurra 
+				en un nodo distinto si el sistema de balanceo de nodos lo considera conveniente.\\
+				Por tanto, el punto positivo de separar las funciones de un servico en varios es que se vuelven más livianos y, por tanto,
 				da la posibilidad a los nodos para distribuir mejor su ejecución. El punto negativo es que se requiere ejecutar más procesos, dos más en este caso, para el servidor del nuevo servicio y para que mantenga
 				la regresión, además de que se está, en última instancia, almacenando el set de datos dos veces en vez de una, debido a que la neturaleza de los servicios les origina tal aislamiento que imposibilita que 
 				compartan memoria (esto último puede ser un punto de estudio futuro como parte de la extension de la especificación de un servicio). \\

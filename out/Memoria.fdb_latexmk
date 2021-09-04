@@ -1,17 +1,17 @@
 # Fdb version 3
-["bibtex out/Memoria"] 1630767968 "out/Memoria.aux" "out/Memoria.bbl" "out/Memoria" 1630767972
+["bibtex out/Memoria"] 1630770057 "out/Memoria.aux" "out/Memoria.bbl" "out/Memoria" 1630770373
   "/usr/share/texlive/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "out/Memoria.aux" 1630767972 7106 2edf88cd4bcc8b51760a8f11fcf5b6e0 "pdflatex"
+  "out/Memoria.aux" 1630770372 7118 b02521d604d20dda682e371a1f897202 "pdflatex"
   "referencies.bib" 1630580007 5625 6869777364a1a1696ac12490d1300357 ""
   (generated)
   "out/Memoria.blg"
   "out/Memoria.bbl"
-["makeindex out/Memoria.idx"] 1630766594 "out/Memoria.idx" "out/Memoria.ind" "out/Memoria" 1630767972
-  "out/Memoria.idx" 1630767970 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+["makeindex out/Memoria.idx"] 1630766594 "out/Memoria.idx" "out/Memoria.ind" "out/Memoria" 1630770373
+  "out/Memoria.idx" 1630770370 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   (generated)
   "out/Memoria.ind"
   "out/Memoria.ilg"
-["pdflatex"] 1630767969 "/workspaces/TFG/Memoria.tex" "out/Memoria.pdf" "Memoria" 1630767972
+["pdflatex"] 1630770368 "/workspaces/TFG/Memoria.tex" "out/Memoria.pdf" "Memoria" 1630770373
   "/etc/texmf/web2c/texmf.cnf" 1627907346 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk" 1630088581 25396 e0fbb5d3a2bdb94fa4bbd45553ad5d27 ""
   "/root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk" 1630088591 28952 8dfa1dacff488275d89a7c45aa2600bc ""
@@ -193,25 +193,27 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1581979058 38841 ce3692aa899bb693b90b87eaa5d4d84e ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1627907366 4338190 ccf23483f29b6bdb7012ae3a472369b6 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1627907374 4791331 3af588c0323212be6a096a0d7c9db9d0 ""
-  "/workspaces/TFG/Memoria.tex" 1630767962 74363 3195d6e354c4c47f4e7fade30a709456 ""
-  "Memoria.tex" 1630767962 74363 3195d6e354c4c47f4e7fade30a709456 ""
+  "/workspaces/TFG/Memoria.tex" 1630770366 75242 ec88064cfa49ed444956d8c9009eb770 ""
+  "Memoria.tex" 1630770366 75242 ec88064cfa49ed444956d8c9009eb770 ""
   "img/Esquema_puente.jpg" 1630088528 33283 111b8e0fc2f1e2617a80af4fee411bd3 ""
+  "img/dataset_diagram.png" 1630769393 56688 4a187ce7e2a3037d2e3ad6c9582d334d ""
   "img/diagrama_de_clases_de_solve.png" 1628792021 47348 4dcae2d7a0ddb2de6f5c3118f39e027f ""
   "img/esquema_instancias_solvers.jpg" 1629040326 29100 c749f9c3e7c38b36ab1ef29a4584f5d6 ""
   "img/esquema_regresion.png" 1628709061 98096 3489bba8503164a60c69b9aca7513369 ""
   "img/gestion_de_instancias.jpg" 1628524136 47726 088a2969223a95f66c796f56177f2cec ""
   "img/ipss.png" 1628697605 223490 d1e6e67a60d111ab5f903d9cc903c5d8 ""
   "img/logoUDL.png" 1628091337 35418 6c677a9abca593331753216d953bc773 ""
+  "img/regresion_api.png" 1630768747 72911 618eb827970017ec4366821119eab65e ""
   "img/service_transport_diagram.png" 1628852097 207023 5f424d8bdd6f4f9f007c45c93b27ae48 ""
   "img/set_de_datos_de_entrenamiento.png" 1628706126 50204 ea405507cc6d745dff8ec5eb797d2b35 ""
-  "img/start_grpc_server.png" 1628708615 49561 568524762ea2a44ad8cd1dd667986226 ""
-  "out/Memoria.aux" 1630767972 7106 2edf88cd4bcc8b51760a8f11fcf5b6e0 "pdflatex"
-  "out/Memoria.bbl" 1630767968 4013 74031e4c696f3a64fec853602f776842 "bibtex out/Memoria"
+  "img/start_grpc_server.png" 1630768620 86344 694c65c3c9bdcdaeebd305d5298829dc ""
+  "out/Memoria.aux" 1630770372 7118 b02521d604d20dda682e371a1f897202 "pdflatex"
+  "out/Memoria.bbl" 1630770057 4013 74031e4c696f3a64fec853602f776842 "bibtex out/Memoria"
   "out/Memoria.ind" 1630766594 0 d41d8cd98f00b204e9800998ecf8427e "makeindex out/Memoria.idx"
-  "out/Memoria.out" 1630767972 2705 9411e1ff7ce2fdf17335eb1cf32c4cee "pdflatex"
+  "out/Memoria.out" 1630770372 2717 414d70307d890c91a892d24b877c9e3c "pdflatex"
   (generated)
   "out/Memoria.aux"
-  "out/Memoria.idx"
   "out/Memoria.log"
-  "out/Memoria.out"
+  "out/Memoria.idx"
   "out/Memoria.pdf"
+  "out/Memoria.out"
