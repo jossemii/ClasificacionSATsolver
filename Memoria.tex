@@ -329,15 +329,15 @@
 	\section{Análisis de requisitos}
 		% Que debe resolver? De que funciones la debes dotar para hacer esto? 
 		% Que requisitos le das a la solución(Transparencia, escalabilidad, tolerancia a fallos, tiempo de respuesta, etc)?
-		Más concretamente, los objetivos propuestos son (algunos conceptos se desarrollan más adelante):
+		Con el fin de garantizar un desarrollo del trabajo eficiente se realiza antes un analisis de los requisitos que debe de cumplir el sistema.
+		Concretando los objetivos expuestos anteriormente, estos son :
 		\begin{itemize}
-			\item Diseño de la especificación de un servicio, de manera que una función hash pueda identificarlo sin dejar de lado ninguna de sus partes.
+			\item Diseño de la especificación de un servicio.
 			\item Desarrollo de un nodo con capacidad para:
 			\begin{itemize}
-				\item Construir y ejecutar servicios de manera autónoma.
+				\item Compilar, construir y ejecutar servicios de manera autónoma.
 				\item Compartir servicios con el resto de los nodos de la red y solicitarlos cuando no disponga de ellos.
-				\item Balancear la carga de las instancias de servicios que se le solicita ejecutar entre sí mismo y el resto de nodos de la red sin obedecer un nodo central. Buscando la mayor eficiencia
-					de sus recursos.
+				\item Balancear la carga de las instancias de servicios.
 			\end{itemize}
 			\item Desarrollo de un servicio de clasificación y selección de servicios que 
 			resuelven SAT. Este debe ser capaz de:
@@ -346,8 +346,72 @@
 					instancias de los mismos y mantenerlos (comprobar que siguen activos).
 				\item Clasificar los SAT-solvers que se le han especificado de manera que asegure una buena selección de estos.
 				\item Seleccionar un SAT-solver en función de un CNF dado para que lo resuelva y retornar la solución.
+				\item tolerar y controlar errores y excepciones por parte de otros nodos, sin que estos afecten la ejecución de las instancias que
+					él mismo ejecuta.
 			\end{itemize}
-		\end{itemize} 
+		\end{itemize}
+
+		Sobre estos objetivos se pretende analizar más a fondo los requisitos a cumplir en cada uno.
+		\paragraph{Requisitos de la especificación de un servicio}
+			Debe de ofrecer la capacidad de definir e identificar el servicio mediante un objeto estructuralmente definido. Saber que partes lo componen, que ofrece y como usarlo.
+			De manera que pueda ser identificado mediante una función hash determinista, para ello se debe de acordar como obtener el identificador de la especificación.
+		
+		\paragraph{Requisitos de un nodo}
+			Un nodo debe de ofrecer:
+			\begin{itemize}
+				\item compilar la especificación de un servicio a partir de un conjunto de datos o archivos de entrada.
+				\item una interfaz de aplicación que permita comunicarse con él, tanto por parte de los servicios que instancia como por parte de otros nodos de la red.
+				\item instanciar un servicio a partir de su especificación de manera autónoma, es decir, cargar la especificación, comprenderla, construir el contenedor si no está
+					construido y ejecutarlo según se indique en la especificación, de manera que el solicitante pueda dar uso de la instancia directamente.
+				\item compartir sus servicios y las especificaciones de estos.
+				\item determinar que coste puede suponer ejecutar la instancia de un servicio.
+				\item comprobar un posible nuevo nodo en la red a partir de la dirección de este y validarlo.
+				\item atender la solicitud de comprobación de otros nodos que pretenden verificarle.
+			\end{itemize}
+			Además de ello, debe ser capaz de:
+			\begin{itemize}
+				\item balancear la ejecución de las de instancias de servicios que se solicitan entre sí mismo y el resto de nodos de la red. Buscando la mayor eficiencia de sus recursos.
+				\item permitir que la política de balanceo sea independiente con el resto de la red, es decir, sin que exista una comun y sin obedecer un nodo central.
+				\item controlar las instancias que está ejecutando y las instancias que ordenó ejecutar, asi como que instancias ha solicitado cada una de ellas.
+				\item controlar un uso adecuado de la memoria, es decir, no seguir ejecutando instancias que ya no se usan.
+				\item encontrar nuevos nodos en la red sin configuración previa, es decir, sin que deba de introducirse su dirección para que posteriormente lo busque.
+				\item cuando reciva la especificación de un servicio junto con su identificador, validar la integridad de esta.
+				\item tolerar y controlar errores y excepciones por parte del nodo y de los servicios SAT-solver.
+			\end{itemize}
+		
+		\paragraph{Requisitos del servicio de clasificación y selección}
+			El servicio principal debe de ofrecer:
+			\begin{itemize}
+				\item una interfaz de aplicación que permita comunicarse con él.
+				\item añadir especificaciones de servicios que resuelvan SAT.
+				\item determinar si se debe de iniciar o detener el proceso de entrenamiento de los SAT-solvers.
+				\item resolver el problema SAT a partir de un CNF de entrada.
+				\item añadir datos para sumar al entrenamiento.
+				\item la obtención de los datos de entrenamiento y/o el modelo entrenado a partir de estos.
+				\item la obtención de los 'logs' del sistema en tiempo real.
+			\end{itemize}
+			Además de ello, debe ser capaz de:
+			\begin{itemize}
+				\item permitir solicitudes de manera concurrente.
+				\item resolver SAT usando el SAT-solver más eficiente en función del CNF de entrada y los datos recogidos durante el entrenamiento.
+				\item resolver SAT en un tiempo similar al que necesitan los SAT-solvers usados de manera directa, sin que estos últimos tengan tiempos de respuesta
+					de varias unidades por debajo, es decir, sin que el tiempo en resolver SAT sea la más de la mitad en cualquiera de los SAT-solvers entrenados al tiempo
+					en que tarda el servicio en seleccionar uno de ellos y resolver el problema.
+				\item almacenar las especificaciones de los servicios recibidos.
+				\item comunicarse con un nodo (sea el que lo ejecuta o no) y poder solicitarle que ejecute y detenga las instancias de 
+					los servicios SAT-sorter.
+				\item controlar que instancias de SAT-solvers se ejecutan correctamente y cuales no, además de solicitar detenerlas y ejecutarlas 
+					de nuevo cuando sea necesario.
+				\item ejecutar más de una instancia de un mismo SAT-solver si asi se requiere y, con esto, ser capaz de balancear la carga de solicitudes
+					de ese mismo SAT-solver entre sus múltiples instancias.
+				\item asegurar una cierta eficiencia a la hora de solicitar nuevas instancias, de manera que no provoque la sobrecarga del nodo o los nodos
+					de manera innecesaria.
+				\item generar CNF's aleatorios con los que provar los SAT-solvers durante el entrenamiento de datos.
+				\item recolectar datos del entrenamiento de manera eficiente, permitiendo realizar el entrenamiento durante largos periodos de tiempo sin generar
+					una perdida de rendimiento del mismo.
+				\item al recivir nuevos datos de entrenamiento por parte del cliente, validarlos y  adjuntarlos al set de datos principal en función de su integridad
+					o calidad.
+			\end{itemize}
 
 	\section{Definición y desarrollo}
 		\subsection{Planificación temporal del trabajo}
@@ -986,6 +1050,8 @@
 		\subsection{Uso de cola en el mantenedor de instancias}
 
 		\subsection{Formato de hash}
+
+		\subsection{Comunicación entre los servicios de clasificación y regresión}
 
 	\section{Resultados}
 		Resultados de los tests realizados sobre el sistema y conclusiones de los mismos.
