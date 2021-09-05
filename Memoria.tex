@@ -586,7 +586,7 @@
 							\end{itemize}
 					\end{itemize}
 				\item Tensor: Opcional. Definie la topología del modelo que entrena el servicio. Un servicio puede solicitar al nodo que le retorne las instancias
-					de aquellos servicios que tengan un tensor determinado y con ellas realizar solicitudes a servicios que ya tienen el modelo entrenado.
+					de aquellos servicios que tengan un modelo determinado y con ellas realizar solicitudes a servicios que ya tienen el modelo entrenado.
 			\end{itemize}
 			\includegraphics[width=18cm]{ipss.png}\\ \\
 
@@ -792,8 +792,14 @@
 					Ubicado en el archivo regresion.py. 
 					Durante el inicio del proceso principal (start.py) se obtiene el objeto regresion.Session, el cual sigue el patrón Singleton, este objeto es usado durante toda la vida del servicio.
 					Se encarga de instanciar y proporcionar los métodos con los que dar uso del servicio que realiza la regresión lineal y mantenerlo, esto es: control de errores y solicitud de creación
-					y suspensión de instancias al nodo, a cierto número de errores destruye la instancia y solicita otra. 
-					Posee una función de mantenimiento del servicio encargada de guardar en el servicio de clasificación el set de datos que posee el servicio de regresión, esta se ejecuta en el hilo de mantenimiento. \\
+					y suspensión de instancias al nodo, a cierto número de errores destruye la instancia y solicita otra. También posee el set de datos principal, un método para añadirle tanto los
+					datos generados por el entrenamiento como los que pueda proporcionar el cliente, asi como último modelo de regresión. \\
+					Posee una función de mantenimiento del servicio encargada de ordenar ejecutar la regresión y guardar el modelo en el servicio de clasificación cada cierto periodo de tiempo, 
+					esta se ejecuta en el hilo de mantenimiento. \\
+					Para realizar la union de dos datasets la formula queda: \\
+					\begin{equation}
+						\frac{i*\overline{S_i} + j*\overline{S_j}} {i+1} = \overline{S_{i+j}}
+					\end{equation} \\ \\
 
 				\subparagraph{Sistema de entrenamiento}
 					Ubicado en el archivo train.py. Durante el inicio del proceso principal (start.py) se obtiene el objeto trainer.Session, el cual sigue el patrón Singleton, este objeto es usado durante toda la vida del servicio. \\
@@ -802,7 +808,7 @@
 						\item Gestionar el uso del servicio de obtención de cnfs random.
 						\item ejecutar la sesión de entrenamiento.
 						\item detener la sesión de entrenamiento.
-						\item Enviar el set de datos al servicio de regresión.
+						\item Añadir nuevos datos.
 					\end{itemize} 
 
 					Cuando se inicia una sesión de entrenamiento (método StartTrain) desde el hilo principal se crea un hilo que ejecuta el método init, este inicia un servicio de cnfs random y, en cada iteración, genera un cnf y lo prueba
@@ -822,8 +828,8 @@
 						\frac{\sum_{i=1}^{i} S + S_{i+1}}{i+1}=\overline{S_{i+1}} \Longrightarrow \frac{i*\overline{S_i} + S_{i+1}}{i+1}=\overline{S_{i+1}}
 					\end{equation} \\
 
-					Cada cierto número de iteraciones en el entrenamiento (SAVE\_TRAIN\_DATA: 10 por defecto si la variable de entorno no indica lo contrario) envia el set de datos al servicio de regresión, mediante la interfaz
-					mencionada anteriormente, y elimina los datos generados. No resetear los datos cada vez que se envían al servicio de regresión provocaría desajustar la media de cada punto dando más importancia a
+					Cada cierto número de iteraciones en el entrenamiento (SAVE\_TRAIN\_DATA: 10 por defecto si la variable de entorno no indica lo contrario) añade el set de datos al set de datos principal que posee
+					la interfaz de regresión, y elimina los datos generados durante la iteración. No resetear los datos cada vez que se añaden al set principal provocaría desajustar la media de cada punto dando más importancia a
 					los más antiguos. \\
 
 					Sobre la gestión del servicio de generación de cnfs random, se crea una instancia al iniciar cada sesión de entrenamiento y se destruye al finalizarla. Además de eso es necesario solicitar
@@ -885,15 +891,15 @@
 	
 
 				\subparagraph{Sistema de inferencia}
-					Ubicado en el archivo \_get.py. Trata de seleccionar el solver que mejor rendimiento va a dar para un cnf determinado. Solicita el tensor al servicio de regresión y realiza inferencia sobre el modelo de regresión lineal
+					Ubicado en el archivo \_get.py. Trata de seleccionar el solver que mejor rendimiento va a dar para un cnf determinado. Solicita el modelo al servicio de regresión y realiza inferencia sobre el modelo de regresión lineal
 					de cada uno de los solvers contenidos en él. \\
 					La inferencia es el proceso por el cual se derivan conclusiones a partir de premisas, es decir, a partir del modelo obtenido mediante regresión lineal 
 					se supone la puntuación que se obtendría para un cnf determinado. Para realizar la inferencia se da uso de la libreria ONNX-Runtime de Microsoft. \\
 
 				\subparagraph{Hilo de mantenimiento}
 					Se trata de un hilo independiente iniciado desde start.py antes de ejecutar el servidor Grpc. Ejecuta tanto el método de mantenimiento del administrador de solvers como del de regresión 
-					cada cierto periodo de tiempo (MAINTENANCE\_SLEEP\_TIME: 100 segundos por defecto). El mantenimiento de regresión se realiza cada 10 mantenimientos de solvers por defecto (modificable con
-					variable de entorno). \\ \\ \\
+					cada cierto periodo de tiempo (MAINTENANCE\_SLEEP\_TIME: 100 segundos por defecto) para el administrador de solvers y (TIME\_FOR\_EACH\_REGRESION\_LOOP: 900 segundos por defecto ) para el de
+					regresión. \\ \\ \\
 
 				El patrón singleton o instancia única es un patrón de diseño que permite restringir la creación de objetos pertenecientes a una clase o el valor de un tipo a un único objeto. De esta forma se limita a que 
 				solo pueda haber una instancia de las clases train.Session, regresion.Session y solve.Session. \\
@@ -916,39 +922,30 @@
 					El servidor Grpc posee una serie de métodos con los que atender las solicitudes del cliente, estos son:
 					\begin{itemize}
 						\item StreamLogs, retorna los 'logs' del sistema mediante streaming.
-						\item GetTensor, recive el modelo de regresión lineal entrenado.
-						\item GetDataSet, obtiene el set de datos que se ha ido acumulando.
-						\item AddDataSet, recibe un nuevo set de datos y lo combina con el que ya tiene el servicio.
+						\item MakeRegresion, recive un set de datos, realiza la regresion lineal de este y retorna el modelo.
 					\end{itemize}
 					\includegraphics[width=12cm]{regresion_api.png} \\ \\
-
-				\subparagraph{Sesión de regresión}
-					Ubicado en el archivo session.py.
-					Durante el inicio del proceso principal (start.py) se obtiene el objeto Session, el cual sigue el patrón Singleton, este objeto es usado durante toda la vida del servicio. \\
-					El objeto Session se ocupa de:
-					\begin{itemize}
-						\item Almacenar el set de datos y el modelo de regresión lineal (se almacena en la memoria del intérprete).
-						\item Combinar nuevos sets de datos al set de datos principal.
-						\item Realizar la regresión cada cierto periodo de tiempo (TIME\_FOR\_EACH\_REGRESSION\_LOOP: 900 segundos por defecto si en la variable de entorno no se indica lo contrario)
-							dando uso de la función de regresión (explicada más adelante).
-					\end{itemize} 
-					La regresión se ejecutará a través de un hilo secundario siempre que se haya modificado el set de datos. La detección de cambios en el set de datos funciona usando un algoritmo hash sobre él. \\
-					
-					Para realizar la union de dos datasets la formula queda: \\
-					\begin{equation}
-						\frac{i*\overline{S_i} + j*\overline{S_j}} {i+1} = \overline{S_{i+j}}
-					\end{equation} \\ \\
 
 				\subparagraph{Función de regresión}
 					Ubicado en el archivo regresion.py
 					La regresión de cada solver consiste en realidad en una regresión por cada grado hasta un máximo estipulado (MAX\_DEGREE: 100 por defecto si en la variable de entorno no se indica lo contrario)
 					y escoger aquella función que se ajuste más a los datos, esto con el fin de maximizar el ajuste en la función del modelo sobre los datos. 
 					De esta forma se realizan un total de <número de solvers> * MAX\_DEGREE regresiones cada TIME\_FOR\_EACH\_REGRESSION\_LOOP segundos. \\
-					El tensor posee el formato de una lista de tensores de ONNX (Intercambio de Redes Neuronales Abierto), un ecosistema de inteligencia artificial de código abierto, asociados cada uno a un SAT solver (especificación del servicio).
+					El modelo posee el formato de una lista de modelos de ONNX (Intercambio de Redes Neuronales Abierto), un ecosistema de inteligencia artificial de código abierto, asociados cada uno a un SAT solver (especificación del servicio).
 					Se da uso del estandar Onnx por ser un estandar abierto para compartir modelos de redes neuronales entre distintas librerías de inteligencia artificial (TensorFlow, PyCharm, Sklearn \dots), 
 					aunque en este caso se utiliza para compartir modelos de regresión lineal,
 					permite que otro servicio de clasificación continue el modelo entrenado por el clasificador sin tener que utilizar la librería de la él da uso (Sklearn). \\
 					\includegraphics[width=12cm]{esquema_regresion.png} \\  Se toma la función con mayor ajuste sobre los datos. \\ \\ 
+					
+					El modelo, por tanto, posee 4 dimensiones independientes:
+					\begin{itemize}
+						\item El número de clausulas del CNF.
+						\item El número de literales del CNF.
+						\item El rendimiento ofrecido, proporcional a la capacidad de acierto e inversamente proporcional al tiempo de respuesta.
+						\item La especificación del algoritmo SAT-solver con una configuración determinada. Única dimensión de valor discreto.
+					\end{itemize}
+					De forma que se puede deducir el rendimiento ofrecido por un tipo de CNF concreto en un SAT-solver concreto. \\
+					\includegraphics[width=17cm]{modelo.png} \\  \\
 
 					El formato del set de datos consiste en una puntuación por cada tipo de cnf (número de instancias * número de clausulas) junto con el número de entradas de cada puntuación 
 					por cada solver con una configuración determinada, 
@@ -1051,8 +1048,6 @@
 
 		\subsection{Formato de hash}
 
-		\subsection{Comunicación entre los servicios de clasificación y regresión}
-
 	\section{Resultados}
 		Resultados de los tests realizados sobre el sistema y conclusiones de los mismos.
 		
@@ -1060,7 +1055,7 @@
 			conclusiones.
 
 	\section{Trabajo futuro}
-		IPFS al compartir especificaciones de servicios, contenedores, tensores \dots \\
+		IPFS al compartir especificaciones de servicios, contenedores, modelos \dots \\
 		zeroconfiguration network \\
 		API para extraer estadísticas del clasificador. \\
 		API para extraer estadisticas del nodo. \\
