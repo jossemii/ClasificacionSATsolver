@@ -15,11 +15,9 @@
 \usepackage{multirow}
 \usepackage{float}
 \usepackage{url}
-\usepackage{makeidx}
-
-\setlength\parindent{0pt}
-
+\usepackage{imakeidx}
 \makeindex
+\setlength\parindent{0pt}
 
 \setpapersize{A4}
 \setmargins{2.5cm}  % margen izquierdo
@@ -100,9 +98,7 @@
 	\end{titlepage}
 	\thispagestyle{empty}
 	\newpage
-		\renewcommand*\listfigurename{Index de figures}
-		\thispagestyle{empty}
-		\renewcommand*\listtablename{Index de taules}
+		\renewcommand*\listfigurename{Índice de figuras}
 		\thispagestyle{empty}
 	\newpage
 	
@@ -155,7 +151,7 @@
 			En contraste, la contenerización de aplicaciones en sistemas distribuidos ha permitido paso a nuevos tipos de arquitecturas sobre la manera de usar servicios de software, ya sean microservicios, FaaS o
 			Serverless.
 
-			Los microservicios son tanto un estilo de arquitectura como un modo de programar software. 
+			Los microservicios son tanto un estilo de arquitectura como un modo de programar software.
 			Con los microservicios, las aplicaciones se dividen en sus elementos más pequeños e independientes entre sí, permitiendo a cada uno de sus componentes ser desarrollados de manera más aislada y ejecutados
 			en contenedores sobre sistemas distribuidos, adoptando asi las ventajas de estas tecnologías anteriormente argumentadas.
 
@@ -528,7 +524,7 @@
 				\item Tensor: Opcional. Definie la topología del modelo que entrena el servicio. Un servicio puede solicitar al nodo que le retorne las instancias
 					de aquellos servicios que tengan un tensor determinado y con ellas realizar solicitudes a servicios que ya tienen el modelo entrenado.
 			\end{itemize}
-			\includegraphics[width=16cm]{ipss.png}\\ \\
+			\includegraphics[width=18cm]{ipss.png}\\ \\
 
 		Despues de especifiar los componentes del sistema y a que se dedica cada uno se ha realizado una implementación de cada uno de ellos para materializar la descripción de este. \\
 		\subsection{Fase de desarrollo del nodo}
@@ -579,8 +575,6 @@
 				El nodo de la red que posea el contenedor se lo devuelve mediante el streaming de lotes del archivo .tar del mismo, los cuales son almacenados en un archivo en hycache. Una vez que se ha descargado todo el archivo
 				Docker se encarga de cargarlo en un contenedor y se le da el nombre correspondiente a su identificador (<hash sha3-256>.service). \\
 
-				Sería posible verificar la imagen obtenida de la red dando uso del método verify() ??? \\
-
 			\paragraph{Gateway}
 				Ubicado en el archivo gateway.py
 				Se trata del servidor Grpc encargado de atender las solicitudes tanto de las instancias que ejecuta el nodo como de otros nodos de la red.
@@ -590,7 +584,6 @@
 				También es responsable de decidir si un determinado servicio se instancia localmente o solicita la instancia del servicio a otro nodo de la red (balanceo de instancias de servicios). 
 				Además de responder las solicitudes de otros nodos para obtener la imagen del contenedor de un servicio o su especificación y de presentarse a otros nodos de la red. \\
 
-				En esta primera fase de desarrollo solo se aborda la comunicación con instancias, esto es, crear dependencias y destruirlas.\\
 				Para ello las instancias se almacenan en Python3, dando uso de un diccionario seguro ante concurrencia con el objeto threading.Lock de Python, con el formato descrito a continuación:\\
 				\includegraphics[width=12cm]{gestion_de_instancias.jpg}\\
 				Antes de explicar cada uno de los elementos de la imágen se debe de recalcar la diferencia entre dependencia interna y externa.
@@ -614,6 +607,50 @@
 					\item peer\_ip\#\#node\_ip:node\_port\#\#his\_token en caso de una dependencia externa.
 				\end{itemize}
 
+				\subparagraph{Interfaz de aplicación del servidor Grpc}
+					Es este componente quien se comunica tanto con los servicios que instancia el nodo como con el resto de nodos de la red, para ello se da uso de los
+					siguientes métodos:
+					\begin{itemize}
+						\item StartService, recive la especificación de un servicio mediante 'streaming', primero recive únicamente los identificadores del servicio que posea el cliente,
+							si comprueba que tiene el servicio comienza a instanciarlo, si no espera a que le llegue la especificación completa. Instancia el servicio especificado y retorna
+							tanto una dirección con la que el solicitante pueda comunicarse con la instancia como un token con el que verificar al solicitante posteriormente.
+						\item StopService, recive el token asignado a una instancia que el nodo: o bien ejecuta, o bien mando ejecutar, se encarga de detener las dependencias de esa instancia, 
+							detener su contenedor y eliminarla del registro.
+						\item HyNode, recive la dirección de un par y le retorna la suya. El objeto ipss.Instance posee en este caso unicamente la dirección del nodo.
+						\item GetServiceTar, recive la especificación de un servicio (igual que StartService), comprueba si posee la imagen de Docker de ese servicio, si es asi lo comprime y se lo manda
+							en partes por streaming, en caso contrario lo puede buscar en nodos de otras redes distintas a la del solicitante.
+						\item GetServiceDef, recive identificadores de un servicio por streaming y comprueba si posee la especificación de este. Si la posee la retorna. 
+							Si no lo posee puede buscar en nodos de redes distintas a la del
+							solicitante, si las encuentra almacena la especificación y la retorna, si no salta excepción.
+						\item GetServiceCost, recive la especificación de un servicio (igual que StartService), calcula y retorna el coste que tendría ejecutar localmente una instancia de este.
+					\end{itemize}
+					\includegraphics[width=16cm]{gateway_grpc_server.png} \\ \\
+
+				\subparagraph{Diagrama de secuencia sobre el proceso de instanciar un servicio}
+					Se parte del supuesto en que la instancia de un servicio requiere dar uso de otro servicio, por tanto solicita a su nodo que se la cree. \\
+					\includegraphics[width=14cm]{instance_sequence_diagram.png} \\ \\
+
+					Los agentes que participan en el diagrama de secuencia anterior (figura ) son los siguientes:
+					\begin{itemize}
+						\item Servicio principal, es la instancia del servicio que solicita instanciar otro a su nodo.
+						\item Nodo, es el nodo al cual el Servicio principal solicita la generación de la nueva instancia.
+						\item Dependencia, es la nueva instancia de la que el Servicio principal deseaba dar uso.
+					\end{itemize}
+
+					A continuación se expone cada uno de las interacciones durante la secuencia:
+					\begin{enumerate}
+						\item La instancia del servicio principal envia a su nodo la especificación de otro servicio dando uso del método StartService de este, suponiendo asi que el nodo
+							se encargará de que se ejecute una instancia de este servicio, y espera que le devuelva la dirección de la nueva instancia, asi como el token pertinente.
+						\item El nodo, tras recibir la peticion del Servico principal, comprueba que posee la especificación del servicio y su imagen Docker, en caso de no tenerlo lo buscaría en la red. 
+						\item El nodo instancia el servicio solicitado, cargando la configuración (archivo \_\_config\_\_ en su raiz) y ejecutando su punto de entrada.
+						\item La dependencia se inicia con la ejecución descrita en el Entrypoint de su especificación.
+						\item El nodo obtiene la dirección de la instancia usando el cliente de Docker y calcula el token correspondiente de la misma. Almacena la instancia en el registro como instancia interna
+							y al servicio solicitante de esta como padre. Finalmente le retorna a este la dirección y token de la instancia.
+						\item El servicio principal (solicitante de la instancia) da uso de la dependencia mediante la dirección que le ha proporcionado el nodo.
+						\item El servicio principal decide detener la dependencia, por lo que ejecuta el método StopService del nodo enviandole el token de la dependencia.
+						\item El nodo detiene el contendor de la dependencia y la elimina del registro.
+					\end{enumerate}
+
 			\paragraph{Balanceo de instancias de servicios}
 				Cuando el nodo recibe una solicitud para instanciar un servicio es este el que decidirá en que nodo de la red se debe de instanciar, localmente o en otro nodo. 
 				Para ello compara el coste de ejecución de la instancia en cada uno de los nodos que posee el registro (MongoDB) con el coste de ejecutar la instancia localmente y 
@@ -622,6 +659,28 @@
 				(método Grpc GetServiceCost).
 				El coste de ejecutar una instancia localmente se calcula a partir de la suma del número de contenedores que se estan ejecutando en ese momento localmente junto con el
 				coste de buscar y construir su servicio en caso de ser necesario (este coste es constante).
+
+				\subparagraph{Diagrama de secuencia sobre el balanceo una instancia}
+					Se parte del supuesto en que un servicio a recibido la solicitud para ejecutar la instancia de un servicio. \\
+					\includegraphics[width=14cm]{balancer_instance_sequence_diagram.png} \\ \\
+
+					Los agentes que participan en el diagrama de secuencia anterior (figura ) son los siguientes:
+					\begin{itemize}
+						\item Servicio principal, es la instancia del servicio que solicita instanciar otro a su nodo.
+						\item Nodo 1, es el nodo al cual el Servicio principal solicita la generación de la nueva instancia.
+						\item Nodo 2, es otro nodo en la red.
+					\end{itemize}
+
+					A continuación se expone cada uno de las interacciones durante la secuencia:
+					\begin{enumerate}
+						\item Nodo 1 solicita el coste de ejecutar una instancia del servicio a cada uno de sus pares en la red. Da uso del método GetServiceCost enviando la especificación del servicio.
+						\item Nodo 2 calcula el coste de ejecutar el servicio localmente. Si no lo puede ejecutar lanzará una excepción, por el contrario le retorna el coste a Nodo 1.
+						\item Nodo 1 calcula el coste de ejecutar el servicio localmente y lo compara con los costes recividos. En este caso decide que el coste más bajo es el de Nodo 2.
+						\item Nodo 1 le solicita Nodo 2 que ejecute una instancia del servicio mediante el método StartService, le envia de nuevo la especificación de este, y espera que le retorne 
+							su dirección y token.
+						\item Nodo 2 ejecuta la instancia del servicio que le entrega Nodo 1, guarda la instancia en el registro considerando que el padre es Nodo 1 y le retorna su dirección y token.
+						\item Nodo 1 recive la dirección y token de Nodo 2, guarda la instancia en el registro como externa.
+					\end{enumerate}	
 
 			\paragraph{Distribución de contenedores}
 				Con el fin de atender las solicitudes de obtención de un contenedor el nodo proporciona un método Grpc denominado GetServiceTar. Éste recive la especificación de un servicio y, si puede 
