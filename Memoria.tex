@@ -671,49 +671,49 @@
 					\item peer\_ip\#\#node\_ip:node\_port\#\#his\_token en caso de una dependencia externa.
 				\end{itemize}
 
-				\subparagraph{Interfaz de aplicación del servidor Grpc}
-					Es este componente quien se comunica tanto con los servicios que instancia el nodo como con el resto de nodos de la red, para ello se da uso de los
-					siguientes métodos:
-					\begin{itemize}
-						\item StartService, recive la especificación de un servicio mediante 'streaming', primero recive únicamente los identificadores del servicio que posea el cliente,
-							si comprueba que tiene el servicio comienza a instanciarlo, si no espera a que le llegue la especificación completa. Instancia el servicio especificado y retorna
-							tanto una dirección con la que el solicitante pueda comunicarse con la instancia como un token con el que verificar al solicitante posteriormente.
-						\item StopService, recive el token asignado a una instancia que el nodo: o bien ejecuta, o bien mando ejecutar, se encarga de detener las dependencias de esa instancia, 
-							detener su contenedor y eliminarla del registro.
-						\item HyNode, recive la dirección de un par y le retorna la suya. El objeto ipss.Instance posee en este caso unicamente la dirección del nodo.
-						\item GetServiceTar, recive la especificación de un servicio (igual que StartService), comprueba si posee la imagen de Docker de ese servicio, si es asi lo comprime y se lo manda
-							en partes por streaming, en caso contrario lo puede buscar en nodos de otras redes distintas a la del solicitante.
-						\item GetServiceDef, recive identificadores de un servicio por streaming y comprueba si posee la especificación de este. Si la posee la retorna. 
-							Si no lo posee puede buscar en nodos de redes distintas a la del
-							solicitante, si las encuentra almacena la especificación y la retorna, si no salta excepción.
-						\item GetServiceCost, recive la especificación de un servicio (igual que StartService), calcula y retorna el coste que tendría ejecutar localmente una instancia de este.
-					\end{itemize}
-					\includegraphics[width=16cm]{gateway_grpc_server.png} \\ \\
+				Sobre la interfaz de aplicación del servicio. 
+				Es este componente quien se comunica tanto con los servicios que instancia el nodo como con el resto de nodos de la red, para ello se da uso de los
+				siguientes métodos mediante un servidor Grpc:
+				\begin{itemize}
+					\item StartService, recive la especificación de un servicio mediante 'streaming', primero recive únicamente los identificadores del servicio que posea el cliente,
+						si comprueba que tiene el servicio comienza a instanciarlo, si no espera a que le llegue la especificación completa. Instancia el servicio especificado y retorna
+						tanto una dirección con la que el solicitante pueda comunicarse con la instancia como un token con el que verificar al solicitante posteriormente.
+					\item StopService, recive el token asignado a una instancia que el nodo: o bien ejecuta, o bien mando ejecutar, se encarga de detener las dependencias de esa instancia, 
+						detener su contenedor y eliminarla del registro.
+					\item HyNode, recive la dirección de un par y le retorna la suya. El objeto ipss.Instance posee en este caso unicamente la dirección del nodo.
+					\item GetServiceTar, recive la especificación de un servicio (igual que StartService), comprueba si posee la imagen de Docker de ese servicio, si es asi lo comprime y se lo manda
+						en partes por streaming, en caso contrario lo puede buscar en nodos de otras redes distintas a la del solicitante.
+					\item GetServiceDef, recive identificadores de un servicio por streaming y comprueba si posee la especificación de este. Si la posee la retorna. 
+						Si no lo posee puede buscar en nodos de redes distintas a la del
+						solicitante, si las encuentra almacena la especificación y la retorna, si no salta excepción.
+					\item GetServiceCost, recive la especificación de un servicio (igual que StartService), calcula y retorna el coste que tendría ejecutar localmente una instancia de este.
+				\end{itemize}
+				\includegraphics[width=16cm]{gateway_grpc_server.png} \\ \\
 
-				\subparagraph{Diagrama de secuencia sobre el proceso de instanciar un servicio}
-					Se parte del supuesto en que la instancia de un servicio requiere dar uso de otro servicio, por tanto solicita a su nodo que se la cree. \\
-					\includegraphics[width=14cm]{instance_sequence_diagram.png} \\ \\
+				En el siguiente diagrama de secuencia (figura xxx) se expone el proceso de instanciar un servicio.
+				Se parte del supuesto en que la instancia de un servicio requiere dar uso de otro servicio, por tanto solicita a su nodo que se la cree. \\
+				\includegraphics[width=16cm]{instance_sequence_diagram.png} \\ \\
 
-					Los agentes que participan en el diagrama de secuencia anterior (figura ) son los siguientes:
-					\begin{itemize}
-						\item Servicio principal, es la instancia del servicio que solicita instanciar otro a su nodo.
-						\item Nodo, es el nodo al cual el Servicio principal solicita la generación de la nueva instancia.
-						\item Dependencia, es la nueva instancia de la que el Servicio principal deseaba dar uso.
-					\end{itemize}
+				Los agentes que participan en el diagrama de secuencia anterior (figura ) son los siguientes:
+				\begin{itemize}
+					\item Servicio principal, es la instancia del servicio que solicita instanciar otro a su nodo.
+					\item Nodo, es el nodo al cual el Servicio principal solicita la generación de la nueva instancia.
+					\item Dependencia, es la nueva instancia de la que el Servicio principal deseaba dar uso.
+				\end{itemize}
 
-					A continuación se expone cada uno de las interacciones durante la secuencia:
-					\begin{enumerate}
-						\item La instancia del servicio principal envia a su nodo la especificación de otro servicio dando uso del método StartService de este, suponiendo asi que el nodo
-							se encargará de que se ejecute una instancia de este servicio, y espera que le devuelva la dirección de la nueva instancia, asi como el token pertinente.
-						\item El nodo, tras recibir la peticion del Servico principal, comprueba que posee la especificación del servicio y su imagen Docker, en caso de no tenerlo lo buscaría en la red. 
-						\item El nodo instancia el servicio solicitado, cargando la configuración (archivo \_\_config\_\_ en su raiz) y ejecutando su punto de entrada.
-						\item La dependencia se inicia con la ejecución descrita en el Entrypoint de su especificación.
-						\item El nodo obtiene la dirección de la instancia usando el cliente de Docker y calcula el token correspondiente de la misma. Almacena la instancia en el registro como instancia interna
-							y al servicio solicitante de esta como padre. Finalmente le retorna a este la dirección y token de la instancia.
-						\item El servicio principal (solicitante de la instancia) da uso de la dependencia mediante la dirección que le ha proporcionado el nodo.
-						\item El servicio principal decide detener la dependencia, por lo que ejecuta el método StopService del nodo enviandole el token de la dependencia.
-						\item El nodo detiene el contendor de la dependencia y la elimina del registro.
-					\end{enumerate}
+				A continuación se exponen cada una de las interacciones durante la secuencia:
+				\begin{enumerate}
+					\item La instancia del servicio principal envia a su nodo la especificación de otro servicio dando uso del método StartService de este, suponiendo asi que el nodo
+						se encargará de que se ejecute una instancia de este servicio, y espera que le devuelva la dirección de la nueva instancia, asi como el token pertinente.
+					\item El nodo, tras recibir la peticion del Servico principal, comprueba que posee la especificación del servicio y su imagen Docker, en caso de no tenerlo lo buscaría en la red. 
+					\item El nodo instancia el servicio solicitado, cargando la configuración (archivo \_\_config\_\_ en su raiz) y ejecutando su punto de entrada.
+					\item La dependencia se inicia con la ejecución descrita en el Entrypoint de su especificación.
+					\item El nodo obtiene la dirección de la instancia usando el cliente de Docker y calcula el token correspondiente de la misma. Almacena la instancia en el registro como instancia interna
+						y al servicio solicitante de esta como padre. Finalmente le retorna a este la dirección y token de la instancia.
+					\item El servicio principal (solicitante de la instancia) da uso de la dependencia mediante la dirección que le ha proporcionado el nodo.
+					\item El servicio principal decide detener la dependencia, por lo que ejecuta el método StopService del nodo enviandole el token de la dependencia.
+					\item El nodo detiene el contendor de la dependencia y la elimina del registro.
+				\end{enumerate}
 
 			\paragraph{Balanceo de instancias de servicios}
 				Cuando el nodo recibe una solicitud para instanciar un servicio es este el que decidirá en que nodo de la red se debe de instanciar, localmente o en otro nodo. 
@@ -724,27 +724,27 @@
 				El coste de ejecutar una instancia localmente se calcula a partir de la suma del número de contenedores que se estan ejecutando en ese momento localmente junto con el
 				coste de buscar y construir su servicio en caso de ser necesario (este coste es constante).
 
-				\subparagraph{Diagrama de secuencia sobre el balanceo una instancia}
-					Se parte del supuesto en que un servicio a recibido la solicitud para ejecutar la instancia de un servicio. \\
-					\includegraphics[width=14cm]{balancer_instance_sequence_diagram.png} \\ \\
+				En el siguiente diagrama de secuencia (figura xxx) se expone el proceso de balanceo al ejecutar nuevas instancias de servicios.
+				Se parte del supuesto en que un servicio a recibido la solicitud para ejecutar la instancia de un servicio. \\
+				\includegraphics[width=16cm]{balancer_instance_sequence_diagram.png} \\ \\
 
-					Los agentes que participan en el diagrama de secuencia anterior (figura ) son los siguientes:
-					\begin{itemize}
-						\item Servicio principal, es la instancia del servicio que solicita instanciar otro a su nodo.
-						\item Nodo 1, es el nodo al cual el Servicio principal solicita la generación de la nueva instancia.
-						\item Nodo 2, es otro nodo en la red.
-					\end{itemize}
+				Los agentes que participan en el diagrama de secuencia anterior (figura ) son los siguientes:
+				\begin{itemize}
+					\item Servicio principal, es la instancia del servicio que solicita instanciar otro a su nodo.
+					\item Nodo 1, es el nodo al cual el Servicio principal solicita la generación de la nueva instancia.
+					\item Nodo 2, es otro nodo en la red.
+				\end{itemize}
 
-					A continuación se expone cada uno de las interacciones durante la secuencia:
-					\begin{enumerate}
-						\item Nodo 1 solicita el coste de ejecutar una instancia del servicio a cada uno de sus pares en la red. Da uso del método GetServiceCost enviando la especificación del servicio.
-						\item Nodo 2 calcula el coste de ejecutar el servicio localmente. Si no lo puede ejecutar lanzará una excepción, por el contrario le retorna el coste a Nodo 1.
-						\item Nodo 1 calcula el coste de ejecutar el servicio localmente y lo compara con los costes recividos. En este caso decide que el coste más bajo es el de Nodo 2.
-						\item Nodo 1 le solicita Nodo 2 que ejecute una instancia del servicio mediante el método StartService, le envia de nuevo la especificación de este, y espera que le retorne 
-							su dirección y token.
-						\item Nodo 2 ejecuta la instancia del servicio que le entrega Nodo 1, guarda la instancia en el registro considerando que el padre es Nodo 1 y le retorna su dirección y token.
-						\item Nodo 1 recive la dirección y token de Nodo 2, guarda la instancia en el registro como externa.
-					\end{enumerate}	
+				A continuación se exponen cada una de las interacciones durante la secuencia:
+				\begin{enumerate}
+					\item Nodo 1 solicita el coste de ejecutar una instancia del servicio a cada uno de sus pares en la red. Da uso del método GetServiceCost enviando la especificación del servicio.
+					\item Nodo 2 calcula el coste de ejecutar el servicio localmente. Si no lo puede ejecutar lanzará una excepción, por el contrario le retorna el coste a Nodo 1.
+					\item Nodo 1 calcula el coste de ejecutar el servicio localmente y lo compara con los costes recividos. En este caso decide que el coste más bajo es el de Nodo 2.
+					\item Nodo 1 le solicita Nodo 2 que ejecute una instancia del servicio mediante el método StartService, le envia de nuevo la especificación de este, y espera que le retorne 
+						su dirección y token.
+					\item Nodo 2 ejecuta la instancia del servicio que le entrega Nodo 1, guarda la instancia en el registro considerando que el padre es Nodo 1 y le retorna su dirección y token.
+					\item Nodo 1 recive la dirección y token de Nodo 2, guarda la instancia en el registro como externa.
+				\end{enumerate}	
 
 			\paragraph{Distribución de contenedores}
 				Con el fin de atender las solicitudes de obtención de un contenedor el nodo proporciona un método Grpc denominado GetServiceTar. Éste recive la especificación de un servicio y, si puede 
@@ -779,7 +779,7 @@
 					\item StopTrain, si existe, detiene la sesión de entrenamiento. 
 					\item UploadSolver, recive la especificación de un servicio de resolución de SAT y la añade al sistema.
 					\item StreamLogs, retorna los 'logs' del sistema mediante streaming.
-					\item Solve, recive un cnf, calcula cual es el mejor solver con el que resolverlo y lo resuelve dando uso del mismo y finalmente retorna el resultado.
+					\item Solve, recive un cnf, calcula cual es el mejor solver con el que resolverlo y lo resuelve dando uso del mismo. Finalmente retorna el resultado.
 					\item GetTensor, recive el modelo de regresión lineal entrenado.
 					\item AddTensor, permite añadir un modelo para combinarlo con el que se encuentra ya en el servicio. Este método no esta implementado.
 					\item GetDataSet, obtiene el set de datos que se han obtenido del entrenamiento utilizados para entrenar el modelo. 
@@ -891,10 +891,46 @@
 	
 
 				\subparagraph{Sistema de inferencia}
-					Ubicado en el archivo \_get.py. Trata de seleccionar el solver que mejor rendimiento va a dar para un cnf determinado. Solicita el modelo al servicio de regresión y realiza inferencia sobre el modelo de regresión lineal
+					Ubicado en el archivo \_get.py. Trata de seleccionar el solver que mejor rendimiento va a dar para un cnf determinado. Realiza inferencia sobre el modelo de regresión lineal
 					de cada uno de los solvers contenidos en él. \\
 					La inferencia es el proceso por el cual se derivan conclusiones a partir de premisas, es decir, a partir del modelo obtenido mediante regresión lineal 
-					se supone la puntuación que se obtendría para un cnf determinado. Para realizar la inferencia se da uso de la libreria ONNX-Runtime de Microsoft. \\
+					se supone la puntuación o eficiencia que se obtendría para un cnf determinado con un SAT-solver concreto. Para realizar la inferencia se da uso de la libreria ONNX-Runtime de Microsoft. \\
+
+					A continuación se expone un diagrama de secuencia (figura xxx) sobre el supuesto en el que un cliente solicita resolver SAT al servicio de clasificación, teniendo este el modelo en memoria y el solver 
+					del que dar uso instanciado. \\ \\
+					\includegraphics[width=18cm]{inference_sequence_diagram.png} \\ \\
+
+					Los agentes que participan en el diagrama de secuencia anterior (figura ) son los siguientes:
+					\begin{itemize}
+						\item Cliente que solicita al servicio la resolución de un problema SAT.
+						\item Componente principal del servicio, es decir, el servidor Grpc.
+						\item Componente de inferencia del servicio, donde se selecciona el SAT-solver dando uso del modelo entrenado.
+						\item Componente de regresion del servico, que, aparte de comunicarse con el servcio de regresión, posee el último modelo entrenado.
+						\item Administrador de SAT-solvers, componente del servicio que gestiona las instancias disponibles de cada SAT-solver.
+						\item Objeto SolverConfig, perteneciente al administrador de SAT-solvers, controla las instancias de un SAT-solver concreto con una configuración determinada.
+						\item Instancia del SAT-solver, instancia del servicio SAT-solver del que el sistema de inferencia decide dar uso para resolver ese problema concreto.
+					\end{itemize}
+
+					A continuación se exponen cada una de las interacciones durante la secuencia:
+					\begin{enumerate}
+						\item El cliente solicita al servicio, mediante el método Grpc Solve, que le resuelva un CNF determinado.
+						\item El componente principal del servicio obtiene el modelo del componente de regresión, quien poseía el último modelo entrenado por el servicio de regresión.
+						\item El componente principal del servcio solicita al componente de inferencia la especificación del SAT-solver más efectivo a partir del CNF y el modelo proporcionado previamente 
+							 por el cliente por el componente de regresión respectivamente.
+						\item El componente de inferencia obtiene los parámetros del CNF, estos son: el número de clausulas y el número de literales que posee.
+						\item El componente de inferencia obtiene el SAT-solver con el supuesto mejor rendimiento para ese número de clausulas y literales.
+						\item El componente principal solicita resolver el CNF proporcionado con el SAT-solver propuesto al administrador de SAT-solvers.
+						\item El administrador de SAT-solvers verifica poseer ese SAT-solver con esa configuración concreta en su registro. Lo tiene. En caso contrario lo añadiría y saltaría una excepción.
+						\item Se adquiere una de las instancias del SAT-solver de la pila del objeto pertinente a ese SAT-solver, de esta forma otra solicitud no conocerá de la existencia de esa instancia al no
+							encontrarla en la pila. En este caso si hay instancias en pila, de no haberlas, lanzaría una nueva mediante el proceso expuesto en el diagrama de la figura xxx.
+						\item Desde el administrador de SAT-solvers se solicita la resolución de SAT a la instancia proporcionada enviándole el CNF.
+						\item El SAT-solver retorna una interpretación o dice que es insatisfactible siempre y cuando no sale el tiempo de espera por parte del servicio principal.
+						\item Verifica la disponibilidad de la instancia. Si hubiera dado algun problema en el paso anterior le pediría resolver un CNF simple para comprobarlo, en caso de fallar
+							si que pediría la detención de la instancia.
+						\item Tras haber dado uso de la instancia y verificar que esta se encuentra activa, la incorpora de nuevo a la pila, de forma que esta disponible para usarse por el 
+							entrenamiento u otras solicitudes similares a esta.
+						\item El administrador de SAT-solvers retorna el resultado al componente principal, este a su vez lo retorna al cliente.
+					\end{enumerate}
 
 				\subparagraph{Hilo de mantenimiento}
 					Se trata de un hilo independiente iniciado desde start.py antes de ejecutar el servidor Grpc. Ejecuta tanto el método de mantenimiento del administrador de solvers como del de regresión 
