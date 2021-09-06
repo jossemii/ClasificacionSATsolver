@@ -1065,7 +1065,9 @@
 		\subsection{¿Porque contener todo el sistema de ficheros en la especificación de un servicio?}
 			La especificación de un servicio debe de definirlo de manera completa para evitar redundancia entre distintos servicios.
 			Aunque puede acarrear problemas como el tamaño de la especificación, se puede resolver en una capa de abstracción más alta, es decir,
-			es posible implementar, por ejemplo, la compresión de la especificación de una cierta manera. \\
+			es posible implementar, por ejemplo, la compresión de la especificación de algun modo u otro o, como se hace en la implementación del 
+			proyecto, cortar esa parte de la especificación (negando asi la posibilidad de verificar el contenido, ya que es una especificación
+			incompleta). \\
 
 		\subsection{¿Porque no añadir el Dockerfile en la especificación de un servicio?}
 			Igual que el problema sobre el tamaño del sistema de ficheros, especificar como se debe de construir el servicio debe de ser tratado en una capa
