@@ -409,8 +409,8 @@
 				\item generar CNF's aleatorios con los que provar los SAT-solvers durante el entrenamiento de datos.
 				\item recolectar datos del entrenamiento de manera eficiente, permitiendo realizar el entrenamiento durante largos periodos de tiempo sin generar
 					una perdida de rendimiento del mismo.
-				\item al recivir nuevos datos de entrenamiento por parte del cliente, validarlos y  adjuntarlos al set de datos principal en función de su integridad
-					o calidad.
+				\item al recibir nuevos datos de entrenamiento por parte del cliente, validarlos y  adjuntarlos al set de datos principal en función de su integridad
+					o calidad, de manera que no requiera confianza hacia el cliente sobre los datos proporcionados.
 			\end{itemize}
 
 	\section{Definición y desarrollo}
@@ -514,8 +514,31 @@
 			\end{ganttchart} \\
 
 			% Retrasos o inconvenientes.
-			Sobre retrasos o inconvenientes en el desarrollo en base a la planificación estipulada.
-			Cambio de Json a Grpc, separación del hilo de regresión del clasificador ...
+			Durante el desarrollo se han originado una serie de retrasos o inconvenientes frente a la planificación inicialmente estipulada. Estos son, por un lado, 
+			el cambio de Json a Grpc y, por otro, le división del sistema de regresión lineal del modelo del servicio principal. \\
+			
+			La versión inicial del sistema contó con el uso de REST y Json como estilo y sistema de serialización tanto en la comunicación servicio-nodo como en 
+			la especificación de un servicio. El motivo inicial de dar uso de esta tecnología fue su simplicidad y su posición dominante en su nicho (posiblemente el más usado
+			en la comunicación entre sistemas, sobre todo cliente/servidor).
+			Una vez observada la capacidad del servicio de clasificación y el nodo para interactuar entre sí usando esta arquitectura/lenguaje, aunque esta tecnología si que cumplía con 
+			los requisitos establecidos, se decidió estudiar que otras tecnologías 
+			podrían ser más convenientes en el contexto de un sistema de microservcios. Finalmente se decidió dar uso del sistema de comunicación Grpc y se adaptó todo el sistema desarrollado
+			hasta ese momento al mismo. Más adelante, en la sección '6. Problemas encontrados y decisiones técnicas tomadas' se profundiza sobre este nuevo enfoque y las ventajas e inconvenientes 
+			que conllevó. \\
+
+			La separación del sistema de regresión del servicio principal fue motivada y ejecutada de la misma forma que la decisión anterior, una vez que la regresión cumplía con los requisitos marcados 
+			anteriormente dentro del servicio principal se estudiaron diversas arquitecturas (más complejas que tener toda la lógica en el mismo servicio) con las que poder sumar eficiencia al 
+			sistema. Esto es principalmente porque si uno de los motivos de ejecutar microservicios en un sistema distribuido es repartir el coste computacional entre todos los nodos, tener un 
+			servicio principal que recoge datos, entrena modelos, balancea solicitudes y clasifica es ir, en cierto sentido, en dirección opuesta. Por tanto separar la regresión, que es posiblemente
+			la tarea más costosa en términos computacionales de todo el sistema, debería ayudar a balancear la carga entre los nodos y por tanto ganar eficiencia. Además de esto, desarrollar e integrar
+			un nuevo servicio en el sistema sin la necesidad de grandes cambios estructurales demuestra la capacidad de escalabilidad de la arquitectura de un sistema basado en microservicios. \\
+
+			Por otra parte, hay dos requisitos que no han sido cubiertos durante el desarrollo e implementación del proyecto. Uno de ellos es la capacidad de un nodo de encontrar pares en la red sin 
+			configuración previa, en lugar de esto, al añadir un nuevo nodo, es necesario informar a cada uno del resto de nodos de la red con la dirección de este, característica también especificada en 
+			los requisitos de un nodo. Por lo que quedaría como trabajo futuro implementar una política de configuración cero. \\
+			Otro requisito no abordado es el análisis, por parte del servicio de clasificación, de los datos proporcionados por el cliente. La forma en la que se ha implementado requiere tener 
+			confianza en el cliente sobre los datos proporcionados, el requirimiento establecia la necesidad de no confiar, implementando algún tipo de prueba sobre los datos que les otorgara mayor o menor 
+			peso sobre el set de datos principal. Por lo tanto, de igual manera, quedaría como trabajo futuro implementar esta función. \\ \\
 
 		\subsection{Definición del sistema}
 			Los conceptos principales que se han definido son:
@@ -1029,12 +1052,13 @@
 
 			Pero en una red de microservicios, donde los entornos de ejecución son virtualizados, Javascript pierde protagonismo y, por tanto, Json también.
 			Es por esto que cabe preguntarse cual es la mejor forma de serializar las comunicaciones entre servicios. Al ser evidente que no existe un protocolo capaz de
-			liderar ni en cualquier ámbito ni indefinidamente, cada Slot de un servicio definirá el protocolo soportado. \\
+			liderar ni en cualquier ámbito ni indefinidamente, cada Slot de un servicio definirá el protocolo soportado, esto con el fin de garantizar la escalabilidad de la
+			arquitectura del sistema. \\
 
 			Concretamente para este proyecto se dará uso de Grpc, principalmente por dos razones:
 			\begin{itemize}
 				\item Protobuf, su lenguaje de serialización, consigue comprimir bytes de manera muy eficiente enfocando los buffers a cada topología de mensajes.
-				\item Utiliza Http/2, por lo que está preparado para realizar streaming bidireccional de manera eficiente.
+				\item Utiliza Http/2, por lo que está orientado a realizar streaming bidireccional.
 			\end{itemize}
 			Otros protocolos también a tener en cuenta podrían ser Flatbuffers o Capt'n proto. \\
 		
@@ -1096,6 +1120,7 @@
 		API para extraer estadísticas del clasificador. \\
 		API para extraer estadisticas del nodo. \\
 		Cliente Front-end para interactuar con el clasificador. \\
+		Añadir nuevos datos en el clasificador teniendo en cuenta la integridad y calidad de los mismos. \\
 		Extender la especificación de un servicio. \\
 		Habilitar la modificación de variables de entorno en los servicios. \\
 		\dots
