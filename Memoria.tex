@@ -564,7 +564,7 @@
 
 				\item La configuración de un servicio se refiere a unas variables de entorno determinadas de este. Sirve para identificar una 'versión' concreta de un mismo servicio.
 				
-				\item Una instancia zombie es aquella que o bien cuyo servicio padre, quien la solicitó, ha perdido su token y por tanto no puede matarla, o bien el servicio que la solicitó ya ha muerto.
+				\item Una instancia zombie es aquella que o bien cuyo servicio padre, quien la solicitó, ha perdido su token y por tanto no puede detenerla, o bien el servicio que la solicitó ya ha sido detenido.
 			\end{itemize}
 	
 			Definir como debe comportarse un sistema requiere abordar cuales son los deberes y derechos de sus componentes. \\
@@ -582,8 +582,8 @@
 			Si un nodo posee una función con la que obtener el coste de ejecutar la instancia de un determiando servicio. Sin especificar en que debe de basarse este coste. \\ \\
 			Por tanto, para resumir, durante la construcción de la instancia de un servicio, el nodo añade en su raíz un binario que contiene como comunicarse con él.
 			Si el servicio quiere dar uso de una dependencia, le enviará la especificación de ésta al nodo, y éste le devolverá una dirección con la que comunicarse y
-			un token para poder matarla en un futuro. Será el nodo el que busque donde construir esa dependencia, si localmente o en alguno de sus pares. También será el nodo el que,
-			en caso de matar a la primera instancia, acabe con la segunda (ya que es dependencia de la primera).\\
+			un token para poder detenerla en un futuro. Será el nodo el que busque donde construir esa dependencia, si localmente o en alguno de sus pares. También será el nodo el que,
+			en caso de detener a la primera instancia, acabe con la segunda (ya que es dependencia de la primera).\\
 
 			La parte más extensa de la definición del sistema es la especificación de un servicio, este se compone de los siguientes atributos:\\
 			\begin{itemize}
@@ -817,9 +817,9 @@
 					Se encarga de instanciar y proporcionar los métodos con los que dar uso del servicio que realiza la regresión lineal y mantenerlo, esto es: control de errores y solicitud de creación
 					y suspensión de instancias al nodo, a cierto número de errores destruye la instancia y solicita otra. También posee el set de datos principal, un método para añadirle tanto los
 					datos generados por el entrenamiento como los que pueda proporcionar el cliente, asi como último modelo de regresión. \\
-					Posee una función de mantenimiento del servicio encargada de ordenar ejecutar la regresión y guardar el modelo en el servicio de clasificación cada cierto periodo de tiempo, 
-					esta se ejecuta en el hilo de mantenimiento. \\
-					Para realizar la union de dos datasets la formula queda: \\
+					Ejecuta un hilo secundario encargado de ordenar ejecutar la regresión y guardar el modelo en el servicio de clasificación cada cierto periodo de tiempo 
+					(TIME\_FOR\_EACH\_REGRESION\_LOOP: 900 segundos por defecto). \\
+					La fórmula para realizar la unión de dos sets de datos es: \\
 					\begin{equation}
 						\frac{i*\overline{S_i} + j*\overline{S_j}} {i+1} = \overline{S_{i+j}}
 					\end{equation} \\ \\
@@ -873,8 +873,8 @@
 						\item balancear las solicitudes entre las distintas instancias de un mismo solver en caso de ser necesario (este punto se aborda durante la tercera fase de desarrollo).
 					\end{itemize}
 
-					Posee una funcion dedicada a controlar el estado de las instancias de los solvers, ejecutada en el hilo de mantenimiento. Comprueba 
-					si las instancias siguen activas resolviendo un cnf básico ([[1,]]), en caso de obtener un error se encarga de destruir la instancia. \\
+					Ejecuta un hilo secundario dedicado a controlar el estado de las instancias de los solvers cada cierto periodo de tiempo (MAINTENANCE\_SLEEP\_TIME: 100 segundos por defecto). 
+					Este comprueba si las instancias siguen activas resolviendo un cnf básico ([[1,]]), en caso de obtener un error se encarga de destruir la instancia. \\
 
 					El objeto solve.Session también posee un método con el que añadir nuevos solvers a su registro, estos se almacenan en un diccionario del tipo identificador:SolverConfig. El objeto SolverConfig detalla
 					la definición de un servicio junto con una configuración del mismo determinada. \\
@@ -909,8 +909,8 @@
 					se sabe seguro que las instancias en posiciones superiores llevan menos tiempo desde su último uso.\\
 	
 					Si se toma una instancia, se debe de asegurar que al terminar de usarla, o bien se agrega a su lista correspondiente, o bien se solicita al nodo detenerla. 
-					No asegurar esto ocasiona un bug importante
-					ya que la instancia quedaría en estado zombie hasta que el clasificador fuera eliminado (en el supuesto en que el nodo donde se instancio matara dependencias que fueran a quedar zombies).
+					No asegurar esto ocasiona un 'bug' importante
+					ya que la instancia quedaría en estado zombie hasta que el clasificador fuera eliminado (en el supuesto en que el nodo donde se instanció detuviera dependencias que fueran a quedar zombies).
 	
 
 				\subparagraph{Sistema de inferencia}
@@ -955,11 +955,6 @@
 						\item El administrador de SAT-solvers retorna el resultado al componente principal, este a su vez lo retorna al cliente.
 					\end{enumerate}
 
-				\subparagraph{Hilo de mantenimiento}
-					Se trata de un hilo independiente iniciado desde start.py antes de ejecutar el servidor Grpc. Ejecuta tanto el método de mantenimiento del administrador de solvers como del de regresión 
-					cada cierto periodo de tiempo (MAINTENANCE\_SLEEP\_TIME: 100 segundos por defecto) para el administrador de solvers y (TIME\_FOR\_EACH\_REGRESION\_LOOP: 900 segundos por defecto ) para el de
-					regresión. \\ \\ \\
-
 				El patrón singleton o instancia única es un patrón de diseño que permite restringir la creación de objetos pertenecientes a una clase o el valor de un tipo a un único objeto. De esta forma se limita a que 
 				solo pueda haber una instancia de las clases train.Session, regresion.Session y solve.Session. \\
 
@@ -981,7 +976,7 @@
 					El servidor Grpc posee una serie de métodos con los que atender las solicitudes del cliente, estos son:
 					\begin{itemize}
 						\item StreamLogs, retorna los 'logs' del sistema mediante streaming.
-						\item MakeRegresion, recive un set de datos, realiza la regresion lineal de este y retorna el modelo.
+						\item MakeRegresion, recive un set de datos, realiza la regresion lineal de este y retorna el modelo dando uso de la función de regresión.
 					\end{itemize}
 					\includegraphics[width=16cm]{regresion_api.png} \\ \\
 
@@ -1027,7 +1022,7 @@
 			Basándose en la arquitectura anteriormente desarrollada, si un cliente quiere dar uso de un servicio, éste solicita la creación de una instancia del mismo a su nodo,
 			por lo tanto, si n clientes quieren dar uso del servicio, serán necesarias n instancias de éste, a fin de cuentas, la instancia de un servicio, un contenedor, no es
 			más que un hilo aislado. 
-			Por lo tanto, el paradigma cliente/servidor se ve alterado al hablar de servicios distribuidos. En vez de un servidor atendiendo múltiples clientes, un cliente solicita
+			Por lo tanto, el paradigma cliente/servidor se ve alterado al hablar de servicios sobre un sistema distribuido sin confianza. En vez de un servidor atendiendo múltiples clientes, un cliente solicita
 			el despliegue de un servicio. 
 			En términos de rendimiento no debería existir una gran diferencia entre un esquema y otro, puesto que el servidor centralizado termina ejecutando n hilos para n solicitudes
 			de clientes, en los servicios distribuidos estos hilos se aislan (esto puede ser un punto negativo sobre el uso de memoria compartida) 
@@ -1039,10 +1034,10 @@
 			\includegraphics[width=16cm]{Esquema_puente.jpg}
 		\subsection{Varias instancias no pueden compartir dependencias}
 			La naturaleza que adopta la red crea una jerarquía de instancias de servicios repartidas entre los nodos de la mísma. \\
-			Esto significa que, cuando una instancia (padre) solicita una instancia de otro servicio (hijo), este último
-			pasará a ser dependiente del primero, adoptando el padre el derecho a decidir cuando debe de morir el hijo y la responsabilidad
+			Esto significa que, cuando una instancia (padre) solicita una instancia de otro servicio (hijo o dependencia), este último
+			pasará a ser dependiente del primero, adoptando el padre el derecho a decidir cuando debe de detenerse el hijo y la responsabilidad
 			sobre su consumo de recursos (en caso en que un nodo realice un seguimiento del consumo de cada instancia, deberá tener en cuenta el de sus dependencias).
-			De esta forma, si se mata al padre, el nodo donde se este ejecutando su hijo podrá matarlo. \\
+			De esta forma, si se detiene al padre, el nodo donde se este ejecutando su hijo podrá detenerlo. \\
 			Si no fuera asi, un nodo no sabría que instancias quedan en estado 'zombie' ya que ninguno de sus clientes 
 			(instancias padre) se haría responsable.
 
@@ -1066,8 +1061,8 @@
 			La especificación de un servicio debe de definirlo de manera completa para evitar redundancia entre distintos servicios.
 			Aunque puede acarrear problemas como el tamaño de la especificación, se puede resolver en una capa de abstracción más alta, es decir,
 			es posible implementar, por ejemplo, la compresión de la especificación de algun modo u otro o, como se hace en la implementación del 
-			proyecto, cortar esa parte de la especificación (negando asi la posibilidad de verificar el contenido, ya que es una especificación
-			incompleta). \\
+			proyecto, cortar esa parte de la especificación, negando asi la posibilidad de verificar el contenido, ya que es una especificación
+			incompleta. \\
 
 		\subsection{¿Porque no añadir el Dockerfile en la especificación de un servicio?}
 			Igual que el problema sobre el tamaño del sistema de ficheros, especificar como se debe de construir el servicio debe de ser tratado en una capa
