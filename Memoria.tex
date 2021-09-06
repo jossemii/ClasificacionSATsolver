@@ -171,13 +171,13 @@
 			Estas se encargan de representar de forma compacta un archivo o conjunto de datos que normalmente es de mayor tamaño que el hash independientemente del propósito de su uso. \\
 
 			Este sistema de criptografía usa algoritmos que aseguran que con la respuesta (o hash) nunca se podrá saber cuales han sido los datos insertados, 
-			lo que indica que es una función unidireccional. Sabiendo que se puede generar cualquier resumen a partir de cualquier dato nos podemos preguntar si se podrían repetir estos resúmenes (hash) 
-			y la respuesta es que teóricamente si, podría haber colisiones, ya que no es fácil tener una función hash perfecta (que consiga que no se repita la respuesta), pero esto no supone un problema,
-			ya que si se consiguieran (con un buen algoritmo) dos hash iguales los contenidos serían totalmente distintos. \\
+			lo que indica que es una función unidireccional. Sabiendo que se puede generar cualquier resumen a partir de cualquier dato nos podemos preguntar si se podrían repetir estos resúmenes (hash), 
+			la respuesta es que teóricamente si, podría haber colisiones, ya que no es fácil tener una función hash perfecta (que consiga que no se repita la respuesta), pero esto no supone un problema,
+			ya que si se consiguieran ante dos hashes iguales los contenidos serían totalmente distintos (con un buen algoritmo). \\
 			
-			Por tanto, las características que hacen que una función hash sea util en este trabajo es que son deterministas y unidireccionales. De manera que con una misma entrada siempre da la misma salida,
+			Por tanto, las características que hacen que una función hash sea util en este trabajo es que son deterministas y unidireccionales. De manera que con una misma entrada siempre se obtiene la misma salida,
 			con la salida no se puede obtener la entrada (facilmente) y una pequeña modificación de la entrada supone una salida totalmente distinta. Permitiendo de esta manera la identificación e integridad
-			de información en sistemas distribuidos sin confianza entre sus pares. \\ \\
+			de la información en sistemas distribuidos sin confianza entre sus pares. \\ \\
 			\includegraphics[width=10cm]{hash-example.png} \\ \\
 
 		\subsection{Problema SAT}
@@ -190,7 +190,7 @@
 			\begin{equation}
 				{\displaystyle (x_{1}\lor \neg x_{3})\land (\neg x_{2}\lor x_{3}\lor \neg x_{4})}{\displaystyle (x_{1}\lor \neg x_{3})\land (\neg x_{2}\lor x_{3}\lor \neg x_{4})}
 			\end{equation}
-			sea cierta.
+			sea cierta. \\
 			Los algoritmos eficientes y escalables para SAT se desarrollaron en la última década y han contribuido a avances dramáticos en nuestra capacidad de 
 			resolver automáticamente instancias de problemas que involucran decenas de miles de variables y millones de restricciones (es decir, cláusulas). 
 			Sobre esto, un SAT solver es una herramienta que toma como entrada una fórmula CNF y genera una asignación booleana satisfactoria a las variables utilizadas en 
@@ -1102,28 +1102,43 @@
 			\end{itemize}
 			De esta forma no se requiere centralizar un registro para acordar que identificador corresponde a un algoritmo concreto. \\
 
-		\subsection{Sobre el mecanismo de coste de ejecución de instancias de servicios}
-			
-		\subsection{Uso de cola en el mantenedor de instancias}
-
-		\subsection{Formato de hash}
-
 	\section{Resultados}
-		Resultados de los tests realizados sobre el sistema y conclusiones de los mismos.
+		Resultados de los tests realizados sobre el sistema.
 		
 	\section{Conclusiones}
-			conclusiones.
+		
 
 	\section{Trabajo futuro}
-		IPFS al compartir especificaciones de servicios, contenedores, modelos \dots \\
-		zeroconfiguration network \\
-		API para extraer estadísticas del clasificador. \\
-		API para extraer estadisticas del nodo. \\
-		Cliente Front-end para interactuar con el clasificador. \\
-		Añadir nuevos datos en el clasificador teniendo en cuenta la integridad y calidad de los mismos. \\
-		Extender la especificación de un servicio. \\
-		Habilitar la modificación de variables de entorno en los servicios. \\
-		\dots
+		En el proyecto existen varios puntos de continuación distintos. \\
+
+		Por un lado, ampliar la especificación de un servicio permitiría explorar nuevos tipos de aplicaciones. Por ejemplo 
+		especificar el modelo que ofrece un servicio daría el paso a un tipo de servicio que no clasifica pero si selecciona, 
+		solicitando un tipo de modelo al nodo y este retornandole direcciones de servicios que puedan proporcionarselo, o simplemente
+		permitiría que distintos servicios que entrenan  un tipo concreto de modelo lo intercambiasen. \\
+		
+		Otro punto de estudio sobre la especificación de un servicio puede ser la posibilidad de que exista un coste por usarlo, es decir,
+		que se especifique de alguna forma el coste que tiene usar el servicio o los requisitos a cumplir para usarlo, y que dicho servicio pueda verificar 
+		que se cubrió el costo o cumplieron los requisitos sin necesitar confiar en el cliente. Esto podría ser funcional tambien para la interacción entre nodos
+		a la hora de compartir servicios o solicitar ejecutarlos. Esto es un punto importante ya que nutriría al sistema de incentivos para que cada agente (nodos y
+		servicios) interaccionasen sin un objetivo común, logrando asi alcanzar, o almenos acercarse, al concepto de autómata celular. \\
+
+		Además de estos dos puntos anteriores, tambien sería conveniente mejorar la especificación de la interfaz o la arquitectura de un servicio, asi como permitir 
+		que varios servicios compartan memoria sin que uno tenga que depender de otro (especificar una base de datos distribuida),
+		añadir a nivel de nodo un protocolo que permita distribuir archivos con mayor eficiencia y flexibilidad que hacerlo por RPC entre pares
+		de manera aislada, como por ejemplo IPFS, con el que se podrían compartir especificaciones de servicios, contenedores o modelos, o permitir 
+		la conexión entre nodos sin configuración previa. \\
+
+		Por otro lado, con el fin de mejorar la usabilidad y transparencia tanto del nodo como del servicio de clasificación se podría añadir una 
+		API para extraer estadísticas tanto del clasificador como del nodo. Asi como un cliente web para interactuar, por un lado, con el clasificador, con el
+		que ver las métricas relacionadas con el estado del servicio o estadísticas de los servicios entrenados, y por otro lado con el nodo, con el que ver
+		los servicos que instancia y sus dependencias de manera gráfica o sus pares en la red. \\
+
+		Tambien quedaría como tarea pendiente varificar la integridad y calidad de los datos que puedan ser proporcionados por parte de un cliente al clasificador. 
+		Este requeriría posiblemente provar estos datos durante varias iteraciones, lo que supondría un coste computacional elevado. \\
+		
+		Otro punto más que no se ha desarrollado es el de habilitar la modificación de variables de entorno en los servicios. Esto permitiría modelar un servicio y abriría las puertas a,
+		por ejemplo, que durante el entrenamiento se comparasen varias configuraciones de cada servico, o incluso se fuera alcanzando las más idoneas mediante, por ejemplo, un Algoritmo Genetico.\\
+
 	\bibliography{referencies}
 	\bibliographystyle{plain}
 	\nocite{*}
