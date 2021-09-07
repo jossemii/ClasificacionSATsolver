@@ -269,14 +269,11 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecbx1200.tfm
 INPUT img/hash-example.png
 INPUT ./img/hash-example.png
 INPUT ./img/hash-example.png
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecti1095.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm
 INPUT img/gantt.png
 INPUT ./img/gantt.png
 INPUT ./img/gantt.png
-INPUT img/ipss.png
-INPUT ./img/ipss.png
-INPUT ./img/ipss.png
 INPUT img/gestion_de_instancias.jpg
 INPUT ./img/gestion_de_instancias.jpg
 INPUT ./img/gestion_de_instancias.jpg
@@ -301,9 +298,6 @@ INPUT ./img/esquema_instancias_solvers.jpg
 INPUT img/inference_sequence_diagram.png
 INPUT ./img/inference_sequence_diagram.png
 INPUT ./img/inference_sequence_diagram.png
-INPUT img/service_transport_diagram.png
-INPUT ./img/service_transport_diagram.png
-INPUT ./img/service_transport_diagram.png
 INPUT img/dataset_diagram.png
 INPUT ./img/dataset_diagram.png
 INPUT ./img/dataset_diagram.png
@@ -316,9 +310,6 @@ INPUT ./img/esquema_regresion.png
 INPUT img/modelo.png
 INPUT ./img/modelo.png
 INPUT ./img/modelo.png
-INPUT img/set_de_datos_de_entrenamiento.png
-INPUT ./img/set_de_datos_de_entrenamiento.png
-INPUT ./img/set_de_datos_de_entrenamiento.png
 INPUT img/Esquema_puente.jpg
 INPUT ./img/Esquema_puente.jpg
 INPUT ./img/Esquema_puente.jpg
@@ -331,8 +322,8 @@ INPUT out/Memoria.aux
 INPUT out/Memoria.out
 INPUT out/Memoria.out
 INPUT /root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1095.600pk
-INPUT /root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1095.600pk
 INPUT /root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk
+INPUT /root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1095.600pk
 INPUT /root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk
 INPUT /root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk
 INPUT /root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk

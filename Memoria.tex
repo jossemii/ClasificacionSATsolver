@@ -105,18 +105,18 @@
 	\section{Conceptos previos}
 		\subsection{Sistemas distribuidos}
 			% Evolución de los sistemas distribuidos.
-			Un sistema distribuido es un sistema de software cuyos componentes están separados físicamente y conectados entre sí por una red de computadoras, 
-			se comunican y coordinan entre ellos pasando mensajes. Dichos componentes interactúan entre ellos para lograr una meta común.
+			Un sistema distribuido es un sistema de software cuyos componentes están separados físicamente y conectados entre sí por una red de computadoras, que 
+			se comunican y coordinan entre ellas mediante mensajes. Dichos componentes interaccionan entre ellos para lograr una meta común.
 			Los sistemas distribuidos permiten la disponibilidad y la facilidad de acceso a la información, trasferencia de datos a grandes velocidades, 
-			control al acceso a transmisión de información y administran e integran información.
+			control de acceso a transmisión de información, además de administrar e integrar información.
 
-			Los inicios de esta tecnología comenzó en los años 70, usa de las principales características de los sistemas distribuidos eran los mainframes (super computadoras de alta capacidad y eficiencia), 
+			Los inicios de esta tecnología comenzaron en los años 70, una de las principales características de los sistemas distribuidos eran los 'mainframes' (super computadoras de alta capacidad y eficiencia), 
 			pero en esta época se usaban redes WANDS, de transmisión muy lenta, y por tanto el proceso muchas veces
 			se veía limitado por su capacidad de transmisión. Poseían una velocidad de transmisión de 2400 a 9600 bits por segundo.
-			En los años 80 se añadieron los PC de escritorio y se comienzan a usar redes LANS, estas permitieron velocidades de transmisión de 4 a 16 millones de bits por segundo (casi 2 megas.) y
+			En los años 80 se añadieron los PC de escritorio y se comenzaron a usar redes LANS, estas permitieron velocidades de transmisión de 4 a 16 millones de bits por segundo (casi 2 megas.) y
 			de 56 kilobytes a 1.54 megabytes en redes WANS.
 			Durante los años 90 los sistemas de proceso de información se vuelven mucho menos cerrados, lo que permite hacer sistemas distribuidos con diferentes máquinas de diferentes fabricantes
-			conectadas por red desde diferentes áreas geográficas. Además se implementa un gran avance llamado Procesamiento Cooperativo distribuido, este permite el intercambio de la información
+			conectadas por red desde diferentes áreas geografías. Además se implementa un gran avance llamado Procesamiento Cooperativo Distribuido, este permite el intercambio de la información
 			interactivamente entre los procesadores de diferentes computadores, por ejemplo, la computación cliente-servidor. Las redes de transferencia de datos en esta época son iguales o mayores
 			a 100 megas para redes LAN, MAN y WAN.
 			Actualmente los sistemas distribuidos abarcan desde redes de ordenadores personales donde compartir información, como BitTorrent, o sistemas monetarios, como Bitcoin, hasta los grandes
@@ -129,29 +129,28 @@
 			% Concepto de virtualización.
 			Parte de esta mejora en el software de gestion de recursos en sistemas distribuidos se debe al concepto de virtualización. Este consiste en imitar las características del hardware y crear
 			un sistema informático virtual, permitiendo ejecutar más de un sistema operativo o aplicación por servidor.
-			La virtualización ofrece una serie de beneficios sobre los sistemas clásicos como una una mayor seguridad ante accesos no confiables a través de firewalls o el aislamiento de los hilos de
+			La virtualización ofrece una serie de beneficios sobre los sistemas clásicos como una una mayor seguridad ante accesos no confiables a través de 'firewalls' o el aislamiento de los hilos de
 			ejecución y la memoria del sistema ante sistemas maliciosos.
 
 			% Concepto de contenerización.
-			Sobre este concepto nació otro, la contenerización de software, este es un método de virtualización de nivel de sistema operativo (nivel OS) para implementar y ejecutar aplicaciones distribuidas
-			sin lanzar una máquina virtual completa (VM) para cada aplicación.
+			Sobre este concepto nació otro, la contenerización de software, este es un método de virtualización de nivel de sistema operativo para implementar y ejecutar aplicaciones distribuidas
+			sin lanzar una máquina virtual completa para cada aplicación.
 			En lugar de virtualizar sistemas independientes, varios sistemas aislados se ejecutan en un único host de control y acceden a un único kernel. 
 			Los contenedores de aplicaciones contienen los componentes, como archivos, variables de entorno y bibliotecas, necesarios para ejecutar el software deseado.
 			Debido a que los recursos se comparten de esta manera, se pueden crear contenedores de aplicaciones que ponen menos presión a los recursos globales disponibles. 
 			Por ejemplo, si se desea una variación de la imagen estándar (una imagen es un archivo que representa el contenedor), se puede crear un contenedor que contenga solo la nueva biblioteca.
-			En la actualidad son muchos los centros de datos y supercomputadores, ambos sistemas distribuidos compuestos por diversas máquinas, que se basan en esta tecnología, la contenerización, a la hora
-			de optimizar sus recursos, balanceando la carga de los distintos contenedores entre sus nodos. Los sistemas más notorios sobre este campo son Docker, el cual permite automatizar el despliegue de
+			En la actualidad son muchos los centros de datos y supercomputadores, ambos son sistemas distribuidos compuestos por diversas máquinas, que se basan en esta tecnología, la contenerización, a la hora
+			de optimizar sus recursos, balanceando la carga de los distintos contenedores entre sus nodos. Los sistemas más destacados sobre este campo son Docker, el cual permite automatizar el despliegue de
 			contenedores, y Kubernetes, que permite, además, escalar y balancear la carga de contenedores en un sistema distribuido. \\
 
 			% Comentar paradigmas basados en servicios y explicar paradigmas de microservicios, FaaS, Serverless, etc ...
 			En un servidor tradicional, todos los componentes de una aplicación son desarrollados y ejecutados sobre una misma base (sistema operativo, plataforma, ...), lo que provoca una menor adaptabilidad y
 			una mayor rigidez del sistema, este tipo de arquitectura se denomina monolítica.
 			En contraste, la contenerización de aplicaciones en sistemas distribuidos ha permitido paso a nuevos tipos de arquitecturas sobre la manera de usar servicios de software, ya sean microservicios, FaaS o
-			Serverless.
-
+			Serverless. \\
 			Los microservicios son tanto un estilo de arquitectura como un modo de programar software.
 			Con los microservicios, las aplicaciones se dividen en elementos más pequeños e independientes entre sí, permitiendo a cada uno de sus componentes ser desarrollados de manera aislada y ejecutados
-			en contenedores sobre sistemas distribuidos, adoptando asi las ventajas de estas tecnologías anteriormente argumentadas.
+			en contenedores sobre sistemas distribuidos, adoptando asi las ventajas de las tecnologías anteriormente definidas.
 
 			La función como servicio, o FaaS, es un modelo de ejecución informática que se basa en eventos y se ejecuta en contenedores sin estado. 
 			Esas funciones son las que gestionan la lógica y el estado de los servidores a través del uso de servicios. Gracias a la FaaS, los desarrolladores pueden diseñar, ejecutar y gestionar esos paquetes de
@@ -173,10 +172,11 @@
 			la respuesta es que teóricamente si, podría haber colisiones, ya que no es fácil tener una función hash perfecta (que consiga que no se repita la respuesta), pero esto no supone un problema,
 			ya que si se consiguieran ante dos hashes iguales los contenidos serían totalmente distintos (con un buen algoritmo). \\
 			
-			Por tanto, tal como se muestra en la figura 1, las características que hacen que una función hash sea util en este trabajo es que son deterministas y unidireccionales. De manera que con una misma entrada siempre se obtiene la misma salida,
+			Por tanto, tal como se muestra en la figura 1, las características que hacen que una función hash sea útil en este proyecto es que son deterministas y unidireccionales. De manera que con una misma entrada siempre se obtiene la misma salida,
 			con la salida no se puede obtener la entrada (facilmente) y una pequeña modificación de la entrada supone una salida totalmente distinta. Permitiendo de esta manera la identificación e integridad
 			de la información en sistemas distribuidos sin confianza entre sus pares. \\ \\
-			\includegraphics[width=10cm]{hash-example.png} \\ \\
+			\includegraphics[width=10cm]{hash-example.png} \\
+			\textit{Figura 1: Ejemplo de función hash.} \\ \\
 
 		\subsection{Problema SAT}
 			% Explicación del problema SAT.
@@ -191,7 +191,7 @@
 			sea cierta. \\
 			Los algoritmos eficientes y escalables para SAT se desarrollaron en la última década y han contribuido a avances dramáticos en nuestra capacidad de 
 			resolver automáticamente instancias de problemas que involucran decenas de miles de variables y millones de restricciones (es decir, cláusulas). 
-			Sobre esto, un SAT solver es una herramienta que toma como entrada una fórmula CNF y genera una asignación booleana satisfactoria a las variables utilizadas en 
+			Sobre esto, un SAT-solver es una herramienta que toma como entrada una fórmula CNF y genera una asignación booleana satisfactoria a las variables utilizadas en 
 			la fórmula CNF si la fórmula es satisfactible o no. \\
 
 			La clasificación más comun sobre algoritmos que resuelven SAT es si son completos o incompletos.
@@ -215,10 +215,9 @@
 			La ventaja del algoritmo incompleto es una mayor eficiencia a la hora de encontrar interpretaciones válidas siempre y cuando existan, de no ser asi
 			el algoritmo nunca dará con una solución. \\
 
-			Otra forma de resolver problemas SAT es transformar el problema de satisfacibilidad en otro problema en otro
+			Otra forma de resolver problemas SAT es transformar el problema de satisfacibilidad en un problema de otro
 			campo, que se puede resolver rápidamente, como el algoritmo genético, el algoritmo de recocido simulado o la propagación
 			de encuestas. \\
-			% Aunque no puedes acabar la sección con este párrafo.
 
 	\section{Introdución}
 		\subsection{Contexto}
@@ -263,12 +262,12 @@
 			el de satisfactibilidad (SAT) por ser un problema interesante en el campo de la IA.
 
 			% ¿Que ventajas tienes, ejecutar este problema que propones  a través de servicios?
-			De forma que, ante la necesidad de resolver SAT, no sea necesario escojer un algoritmo concreto (forma de actuación determinada) si no que el sistema escoja la mejor de forma autónoma
+			De esta forma, ante la necesidad de resolver SAT, no sea necesario escojer un algoritmo concreto (forma de actuación determinada) si no que el sistema escoja la mejor de forma autónoma
 			incluso con el paso del tiempo, pudiendo el usuario añadir posteriormente nuevos algoritmos (SAT-solvers) que compitan con el resto.
 
 		\subsection{Objetivos}
 			Por tanto el objetivo principal del proyecto es diseñar un servicio que clasifique SAT-solvers en función de su eficiencia a la hora de resolver un tipo u otro de CNF
-			y seleccione el SAT solver más eficiente para un CNF concreto.
+			y seleccione el SAT-solver más eficiente para un CNF concreto.
 			Este trabajo pretende, principalmente, dos cosas:
 			\begin{itemize}
 				\item Definir, de manera simple, 
@@ -345,14 +344,14 @@
 					instancias de los mismos y mantenerlos (comprobar que siguen activos).
 				\item Clasificar los SAT-solvers que se le han especificado de manera que asegure una buena selección de estos.
 				\item Seleccionar un SAT-solver en función de un CNF dado para que lo resuelva y retornar la solución.
-				\item tolerar y controlar errores y excepciones por parte de otros nodos, sin que estos afecten la ejecución de las instancias que
+				\item Tolerar y controlar errores y excepciones por parte de otros nodos, sin que estos afecten la ejecución de las instancias que
 					él mismo ejecuta.
 			\end{itemize}
 		\end{itemize}
 
 		Sobre estos objetivos se pretende analizar más a fondo los requisitos a cumplir en cada uno.
 		\paragraph{Requisitos de la especificación de un servicio}
-			Debe de ofrecer la capacidad de definir e identificar el servicio mediante un objeto estructuralmente definido. Saber que partes lo componen, que ofrece y como usarlo.
+			Debe permitir definir e identificar el servicio mediante un objeto estructuralmente definido, saber que partes lo componen, que ofrece y como usarlo.
 			De manera que pueda ser identificado mediante una función hash determinista, para ello se debe de acordar como obtener el identificador de la especificación.
 		
 		\paragraph{Requisitos de un nodo}
@@ -370,7 +369,7 @@
 			Además de ello, debe ser capaz de:
 			\begin{itemize}
 				\item balancear la ejecución de las de instancias de servicios que se solicitan entre sí mismo y el resto de nodos de la red. Buscando la mayor eficiencia de sus recursos.
-				\item permitir que la política de balanceo sea independiente con el resto de la red, es decir, sin que exista una comun y sin obedecer un nodo central.
+				\item permitir que la política de balanceo sea independiente con el resto de la red, es decir, sin que exista una común y sin obedecer un nodo central.
 				\item controlar las instancias que está ejecutando y las instancias que ordenó ejecutar, asi como que instancias ha solicitado cada una de ellas.
 				\item controlar un uso adecuado de la memoria, es decir, no seguir ejecutando instancias que ya no se usan.
 				\item encontrar nuevos nodos en la red sin configuración previa, es decir, sin que deba de introducirse su dirección para que posteriormente lo busque.
@@ -471,19 +470,20 @@
 			Ambas fases de desarrollo se abarcan de manera paralela, su distinción se debe a la abstracción entre nodo y servicio el cual permite un desarrollo de este tipo, es decir, aislar cada 
 			parte y desarrollarla sin preocuparse demasiado de la otra. \\ \\
 			
-			\includegraphics[width=16cm]{gantt.png} \\ \\
+			\includegraphics[width=16cm]{gantt.png} \\
+			\textit{Figura 2: Diagrama de Gantt} \\ \\
 
 			% Retrasos o inconvenientes.
 			Durante el desarrollo se han originado una serie de retrasos o inconvenientes frente a la planificación inicialmente estipulada. Estos son, por un lado, 
 			el cambio de Json a Grpc y, por otro, le división del sistema de regresión lineal del modelo del servicio principal. \\
 			
-			La versión inicial del sistema contó con el uso de REST y Json como estilo y sistema de serialización tanto en la comunicación servicio-nodo como en 
+			La versión inicial del sistema contó con el uso de Rest y Json como estilo y sistema de serialización tanto en la comunicación servicio-nodo como en 
 			la especificación de un servicio. El motivo inicial de dar uso de esta tecnología fue su simplicidad y su posición dominante en su nicho (posiblemente el más usado
 			en la comunicación entre sistemas, sobre todo cliente/servidor).
 			Una vez observada la capacidad del servicio de clasificación y el nodo para interactuar entre sí usando esta arquitectura/lenguaje, aunque esta tecnología si que cumplía con 
 			los requisitos establecidos, se decidió estudiar que otras tecnologías 
 			podrían ser más convenientes en el contexto de un sistema de microservcios. Finalmente se decidió dar uso del sistema de comunicación Grpc y se adaptó todo el sistema desarrollado
-			hasta ese momento al mismo. Más adelante, en la sección '6. Problemas encontrados y decisiones técnicas tomadas' se profundiza sobre este nuevo enfoque y las ventajas e inconvenientes 
+			hasta ese momento al mismo. Más adelante, en la sección 6 se profundiza sobre este nuevo enfoque y las ventajas e inconvenientes 
 			que conllevó. \\
 
 			La separación del sistema de regresión del servicio principal fue motivada y ejecutada de la misma forma que la decisión anterior, una vez que la regresión cumplía con los requisitos marcados 
@@ -570,10 +570,7 @@
 					\end{itemize}
 				\item Tensor: Opcional. Definie la topología del modelo que entrena el servicio. Un servicio puede solicitar al nodo que le retorne las instancias
 					de aquellos servicios que tengan un modelo determinado y con ellas realizar solicitudes a servicios que ya tienen el modelo entrenado.
-			\end{itemize}
-			En la figura 3 se puede observar cada uno de sus componentes. \\
-			\includegraphics[width=18cm]{ipss.png}\\ \\
-			
+			\end{itemize}			
 
 		Despues de especifiar los componentes del sistema y a que se dedica cada uno se ha realizado una implementación de cada uno de ellos para materializar la descripción de este. \\
 		\subsection{Fase de desarrollo del nodo}
@@ -633,8 +630,9 @@
 				También es responsable de decidir si un determinado servicio se instancia localmente o solicita la instancia del servicio a otro nodo de la red (balanceo de instancias de servicios). 
 				Además de responder las solicitudes de otros nodos para obtener la imagen del contenedor de un servicio o su especificación y de presentarse a otros nodos de la red. \\
 
-				Para ello las instancias se almacenan en Python3, dando uso de un diccionario seguro ante concurrencia con el objeto threading.Lock de Python, con el formato descrito en la figura 4: \\
-				\includegraphics[width=12cm]{gestion_de_instancias.jpg}\\ \\
+				Para ello las instancias se almacenan en Python3, dando uso de un diccionario seguro ante concurrencia con el objeto threading.Lock de Python, con el formato descrito en la figura 3: \\
+				\includegraphics[width=12cm]{gestion_de_instancias.jpg}\\
+				\textit{Figura 3: Gestión de instancias} \\ \\
 
 				Antes de explicar cada uno de los elementos de la imágen se debe de recalcar la diferencia entre dependencia interna y externa.
 				\begin{itemize}
@@ -654,14 +652,12 @@
 				El token de una instancia posee el formato:
 				\begin{itemize}
 					\item peer\_ip\#\#container\_ip\#\#container\_id en caso de una dependencia interna.
-					\item peer\_ip\#\#node\_ip:node\_port\#\#his\_token en caso de una dependencia externa.
+					\item peer\_ip\#\#node\_ip:node\_port\#\#his\_token en caso de una dependencia externa. \\
 				\end{itemize}
 
-				
-				
 				Sobre la interfaz de aplicación del servicio. 
 				Es este componente quien se comunica tanto con los servicios que instancia el nodo como con el resto de nodos de la red, para ello se da uso de los
-				siguientes métodos mediante un servidor Grpc (expuestos en la figura 5):
+				siguientes métodos mediante un servidor Grpc (expuestos en la figura 4):
 				\begin{itemize}
 					\item StartService, recive la especificación de un servicio mediante 'streaming', primero recive únicamente los identificadores del servicio que posea el cliente,
 						si comprueba que tiene el servicio comienza a instanciarlo, si no espera a que le llegue la especificación completa. Instancia el servicio especificado y retorna
@@ -676,13 +672,15 @@
 						solicitante, si las encuentra almacena la especificación y la retorna, si no salta excepción.
 					\item GetServiceCost, recive la especificación de un servicio (igual que StartService), calcula y retorna el coste que tendría ejecutar localmente una instancia de este.
 				\end{itemize}
-				\includegraphics[width=14cm]{gateway_grpc_server.png} \\ \\
+				\includegraphics[width=14cm]{gateway_grpc_server.png} \\
+				\textit{Figura 4: Interfaz de un nodo} \\ \\
 
-				En el diagrama de secuencia de la figura 6 se expone el proceso de instanciar un servicio.
+				En el diagrama de secuencia de la figura 5 se expone el proceso de instanciar un servicio.
 				Se parte del supuesto en que la instancia de un servicio requiere dar uso de otro servicio, por tanto solicita a su nodo que se la cree. \\
-				\includegraphics[width=16cm]{instance_sequence_diagram.png} \\ \\
+				\includegraphics[width=16cm]{instance_sequence_diagram.png} \\
+				\textit{Figura 5: Diagrama de secuencia de la ejecución de una instancia} \\ \\
 
-				Los agentes que participan en el diagrama de secuencia anterior (figura ) son los siguientes:
+				Los agentes que participan en el diagrama de secuencia anterior (figura 5) son los siguientes:
 				\begin{itemize}
 					\item Servicio principal, es la instancia del servicio que solicita instanciar otro a su nodo.
 					\item Nodo, es el nodo al cual el Servicio principal solicita la generación de la nueva instancia.
@@ -712,11 +710,12 @@
 				El coste de ejecutar una instancia localmente se calcula a partir de la suma del número de contenedores que se estan ejecutando en ese momento localmente junto con el
 				coste de buscar y construir su servicio en caso de ser necesario (este coste es constante). \\
 
-				En el siguiente diagrama de secuencia (figura xxx) se expone el proceso de balanceo al ejecutar nuevas instancias de servicios.
+				En el siguiente diagrama de secuencia (figura 6) se expone el proceso de balanceo al ejecutar nuevas instancias de servicios.
 				Se parte del supuesto en que un servicio a recibido la solicitud para ejecutar la instancia de un servicio. \\
-				\includegraphics[width=16cm]{balancer_instance_sequence_diagram.png} \\ \\
+				\includegraphics[width=16cm]{balancer_instance_sequence_diagram.png} \\
+				\textit{Figura 6: Diagrama de secuencia sobre el balanceo de instancias} \\ \\
 
-				Los agentes que participan en el diagrama de secuencia anterior (figura ) son los siguientes:
+				Los agentes que participan en el diagrama de secuencia anterior (figura 6) son los siguientes:
 				\begin{itemize}
 					\item Servicio principal, es la instancia del servicio que solicita instanciar otro a su nodo.
 					\item Nodo 1, es el nodo al cual el Servicio principal solicita la generación de la nueva instancia.
@@ -767,7 +766,7 @@
 				del profesor Josep Argelich, por lo que su lógica no será desarrollada en la memoria, retorna un cnf de cualquier tipo, satisfactible o insatisfactible.\\
 				También da uso de un servicio con el que obtener un modelo de regresión lineal a partir de un set de datos. Este se desarrolla más adelante. \\
 
-				El servidor Grpc posee una serie de métodos con los que atender las solicitudes del cliente, estos son:
+				El servidor Grpc posee una serie de métodos con los que atender las solicitudes del cliente, tal como se observa en la figura 7 estos son:
 				\begin{itemize}
 					\item StartTrain, inicia una sesion de entrenamiento si no está ya inicializada.
 					\item StopTrain, si existe, detiene la sesión de entrenamiento. 
@@ -779,7 +778,8 @@
 					\item GetDataSet, obtiene el set de datos que se han obtenido del entrenamiento utilizados para entrenar el modelo. 
 					\item AddDataSet, recibe un nuevo set de datos y lo combina con el que ya tiene el servicio.
 				\end{itemize}
-				\includegraphics[width=16cm]{start_grpc_server.png} \\ \\
+				\includegraphics[width=16cm]{start_grpc_server.png} \\
+				\textit{Figura 7: Interfaz del servicio de clasificación} \\ \\
 
 				Las partes principales en las que se divide la lógica del servicio son:
 				\subparagraph{Interfaz de regresión}
@@ -861,15 +861,17 @@
 					Con el objetivo de que un varios cnfs se resuelvan simultaneamente por un mismo solver el clasificador crea distintas instancias de este cuando es necesario, de esta forma el nodo se encargará de 
 					instanciar el servicio entre los distintos nodos de la red. \\ 
 	
-					Antes de entrar en detalle sobre la estructura sobre la que se manejan las instancias se debe de exponer el diagrama de clases siguiente: \\
-					\includegraphics[width=12cm]{diagrama_de_clases_de_solve.png}\\ \\
+					Antes de entrar en detalle sobre la estructura sobre la que se manejan las instancias se debe de exponer el diagrama de clases de la figura 8: \\
+					\includegraphics[width=12cm]{diagrama_de_clases_de_solve.png}\\
+					\textit{Figura 8: Diagrama de clases del administrador de SAT-solvers} \\ \\
 	
 					Como se puede observar en el diagrama anterior, para manejar las instancias de cada solver, se adopta una estructura de un diccionario de solvers (<solver config. id>:< objeto SolverConfig>), 
 					donde cada objeto SolverConfig posee una lista de instancias (objeto SolverInstance). Cuando se requiere la instancia de un solver determinado se quita de la lista y cuando se deja de usar
 					se vuelve a introducir en la lista. El acceso a todo el diccionario se proteje contra la concurrencia mediante el uso de un objeto threading.Lock. El identificador de un objeto SolverConfig 
 					se obtiene mediante el algoritmo hash sha3-256 de su binario Protobuf.\\
-					En el siguente esquema se expone el uso de la pila de instancias de un único solver: \\
-					\includegraphics[width=16cm]{esquema_instancias_solvers.jpg}\\ \\
+					En el esquema de la figura 9 se expone el uso de la pila de instancias de un único solver: \\
+					\includegraphics[width=16cm]{esquema_instancias_solvers.jpg}\\
+					\textit{Figura 9: Uso de pila de instancias} \\ \\
 	
 					Hay dos métodos que obtienen e introducen instancias en las listas, resolver un cnf (Session.cnf) y el del hilo de mantenimiento (Session.mainteance). \\
 					El método para resolver un cnf da uso de la lista como si se tratara de una pila normal, es decir, toma el elemento que se encuentra en el índice más elevado de la lista y coloca el elemento
@@ -890,11 +892,12 @@
 					La inferencia es el proceso por el cual se derivan conclusiones a partir de premisas, es decir, a partir del modelo obtenido mediante regresión lineal 
 					se supone la puntuación o eficiencia que se obtendría para un cnf determinado con un SAT-solver concreto. Para realizar la inferencia se da uso de la libreria ONNX-Runtime de Microsoft. \\
 
-					A continuación se expone un diagrama de secuencia (figura xxx) sobre el supuesto en el que un cliente solicita resolver SAT al servicio de clasificación, teniendo este el modelo en memoria y el solver 
+					A continuación se expone un diagrama de secuencia (figura 10) sobre el supuesto en el que un cliente solicita resolver SAT al servicio de clasificación, teniendo este el modelo en memoria y el solver 
 					del que dar uso instanciado. \\ \\
-					\includegraphics[width=18cm]{inference_sequence_diagram.png} \\ \\
+					\includegraphics[width=18cm]{inference_sequence_diagram.png} \\
+					\textit{Figura 10: Diagrama de secuencia sobre el uso del clasificador} \\ \\
 
-					Los agentes que participan en el diagrama de secuencia anterior (figura ) son los siguientes:
+					Los agentes que participan en el diagrama de secuencia anterior (figura 10) son los siguientes:
 					\begin{itemize}
 						\item Cliente que solicita al servicio la resolución de un problema SAT.
 						\item Componente principal del servicio, es decir, el servidor Grpc.
@@ -916,7 +919,7 @@
 						\item El componente principal solicita resolver el CNF proporcionado con el SAT-solver propuesto al administrador de SAT-solvers.
 						\item El administrador de SAT-solvers verifica poseer ese SAT-solver con esa configuración concreta en su registro. Lo tiene. En caso contrario lo añadiría y saltaría una excepción.
 						\item Se adquiere una de las instancias del SAT-solver de la pila del objeto pertinente a ese SAT-solver, de esta forma otra solicitud no conocerá de la existencia de esa instancia al no
-							encontrarla en la pila. En este caso si hay instancias en pila, de no haberlas, lanzaría una nueva mediante el proceso expuesto en el diagrama de la figura xxx.
+							encontrarla en la pila. En este caso si hay instancias en pila, de no haberlas, lanzaría una nueva mediante el proceso expuesto en el diagrama de la figura 5.
 						\item Desde el administrador de SAT-solvers se solicita la resolución de SAT a la instancia proporcionada enviándole el CNF.
 						\item El SAT-solver retorna una interpretación o dice que es insatisfactible siempre y cuando no sale el tiempo de espera por parte del servicio principal.
 						\item Verifica la disponibilidad de la instancia. Si hubiera dado algun problema en el paso anterior le pediría resolver un CNF simple para comprobarlo, en caso de fallar
@@ -932,11 +935,13 @@
 				Para enviar la especificación de un servicio por Grpc se utiliza el mensaje Grpc ServiceTransport, este optimiza el proceso enviando por streaming cada hash de la especificación (una por una) y finalmente la
 				especificación completa, además de enviar la configuración (en caso de usarse para solicitar una instancia) en tan solo una de las partes. Cuando el servidor recive el stream comprueba con las hashes si
 				ya posee el servicio, si lo posee para el stream y no es necesario enviar la especificación completa. \\
-				\includegraphics[width=16cm]{service_transport_diagram.png}\\ \\
 			
-				El set de datos alamcena la información generada durante el entrenamiento o la entregada al servicio de clasificación desde fuera, este almacena la puntuación de cada SAT-solver por cada tipo de CNF provado.
+				El formato del set de datos consiste en una puntuación por cada tipo de cnf (número de instancias * número de clausulas) junto con el número de entradas de cada puntuación 
+				por cada solver con una configuración determinada, su especificación se encuentra también en el set de datos.
+				Como se observa en la figura 11, el set de datos alamcena la información generada durante el entrenamiento o la entregada al servicio de clasificación desde fuera, este almacena la puntuación de cada SAT-solver por cada tipo de CNF provado.
 				Y se utiliza el mismo modelo tanto para intercambiar datos entre el servicio de clasificación y regresión como para almacenar los datos en cada uno de los dos servicios. \\ \\
-				\includegraphics[width=16cm]{dataset_diagram.png} \\ \\
+				\includegraphics[width=16cm]{dataset_diagram.png} \\
+				\textit{Figura 11: Diagrama de clases de un set de datos} \\ \\
 
 			\paragraph{Servicio de regresión}
 				Sobre el servicio de regresión, este se ocupa parte de la tarea del servicio de clasificación, el cual lo instancia.
@@ -944,12 +949,13 @@
 				Se compone de tres partes:
 				\subparagraph{Servidor Grpc}
 					Ubicado en el archivo start.py.
-					El servidor Grpc posee una serie de métodos con los que atender las solicitudes del cliente, estos son:
+					Tal como se observa en la figura 12, el servidor Grpc posee una serie de métodos con los que atender las solicitudes del cliente, estos son:
 					\begin{itemize}
 						\item StreamLogs, retorna los 'logs' del sistema mediante streaming.
-						\item MakeRegresion, recive un set de datos, realiza la regresion lineal de este y retorna el modelo dando uso de la función de regresión.
+						\item MakeRegresion, recive un set de datos, realiza la regresion lineal de este y retorna el modelo dando uso de la función de regresión. \\
 					\end{itemize}
-					\includegraphics[width=16cm]{regresion_api.png} \\ \\
+					\includegraphics[width=16cm]{regresion_api.png} \\
+					\textit{Figura 12: Interfaz del servicio de regresión} \\ \\
 
 				\subparagraph{Función de regresión}
 					Ubicado en el archivo regresion.py
@@ -960,9 +966,11 @@
 					Se da uso del estandar Onnx por ser un estandar abierto para compartir modelos de redes neuronales entre distintas librerías de inteligencia artificial (TensorFlow, PyCharm, Sklearn \dots), 
 					aunque en este caso se utiliza para compartir modelos de regresión lineal,
 					permite que otro servicio de clasificación continue el modelo entrenado por el clasificador sin tener que utilizar la librería de la él da uso (Sklearn). \\
-					\includegraphics[width=12cm]{esquema_regresion.png} \\  Se toma la función con mayor ajuste sobre los datos. \\ \\ 
+					\includegraphics[width=12cm]{esquema_regresion.png} \\ 
+					\textit{Figura 13: Comparativa en el ajuste al realizar regresión lineal} \\ \\
+					Se toma la función con mayor ajuste sobre los datos. \\ \\ 
 					
-					El modelo, por tanto, posee 4 dimensiones independientes:
+					El modelo, por tanto, posee 4 dimensiones independientes, tal como se ve en la figura 14:
 					\begin{itemize}
 						\item El número de clausulas del CNF.
 						\item El número de literales del CNF.
@@ -970,12 +978,8 @@
 						\item La especificación del algoritmo SAT-solver con una configuración determinada. Única dimensión de valor discreto.
 					\end{itemize}
 					De forma que se puede deducir el rendimiento ofrecido por un tipo de CNF concreto en un SAT-solver concreto. \\
-					\includegraphics[width=17cm]{modelo.png} \\  \\
-
-					El formato del set de datos consiste en una puntuación por cada tipo de cnf (número de instancias * número de clausulas) junto con el número de entradas de cada puntuación 
-					por cada solver con una configuración determinada, 
-					su especificación se encuentra también en el set de datos. \\
-					\includegraphics[width=16cm]{set_de_datos_de_entrenamiento.png}\\ \\
+					\includegraphics[width=17cm]{modelo.png} \\
+					\textit{Figura 14: Esquema del modelo} \\ \\
 				
 				La decisión de ejecutar la regresión del modelo en un servicio independiente viene motivada por que, 
 				tras realizar pruebas sobre el sistema completo (clasificación y regresión en un mismo servicio), se observó una disminución del rendimiento al ejecutar cada iteración de regresión.
@@ -1000,9 +1004,10 @@
 			y se reparten entre los nodos de la red. \\
 			Ahora bien, en caso de querer realizar un servicio web, al que poder, tal vez, conectar con un frontend en un navegador, será necesario un nuevo servicio el cual se encargue
 			de recibir las solicitudes de los clientes y desplegar y dar uso del servicio de clasificación. 
-			Este servicio por tanto, puede ser comprendido como un puente entre la "web tradicional" y una red de servicios distribuidos.
-			
-			\includegraphics[width=16cm]{Esquema_puente.jpg}
+			Este servicio, tal como se puede ver en la figura 15, puede ser comprendido como un puente entre la "web tradicional" y una red de servicios distribuidos. \\
+			\includegraphics[width=16cm]{Esquema_puente.jpg} \\
+			\textit{Figura 15: Esquema de servicio puente} \\ \\
+
 		\subsection{Varias instancias no pueden compartir dependencias}
 			La naturaleza que adopta la red crea una jerarquía de instancias de servicios repartidas entre los nodos de la mísma. \\
 			Esto significa que, cuando una instancia (padre) solicita una instancia de otro servicio (hijo o dependencia), este último
