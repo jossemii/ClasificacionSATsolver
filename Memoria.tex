@@ -120,7 +120,7 @@
 			interactivamente entre los procesadores de diferentes computadores, por ejemplo, la computación cliente-servidor. Las redes de transferencia de datos en esta época son iguales o mayores
 			a 100 megas para redes LAN, MAN y WAN.
 			Actualmente los sistemas distribuidos abarcan desde redes de ordenadores personales donde compartir información, como BitTorrent, o sistemas monetarios, como Bitcoin, hasta los grandes
-			centros de datos que sobre los que funcionan los servicios de Internet más usados, ya que en estos centros se conectan gran cantidad de ordenadores entre sí.\\
+			centros de datos que sobre los que funcionan los servicios de Internet más usados, ya que en estos centros se conectan gran cantidad de ordenadores entre sí \cite{sistemas-distribuidos}.\\
 
 			% Software de gestion de gran cantidad de recursos heterogeneos.
 			También se han dado grandes avances en la capacidad del software para gestionar gran cantidad de recursos sobre sistemas distribuidos, permitiendo una mayor tolerancia ante fallas bizantinas
@@ -152,7 +152,7 @@
 			Con los microservicios, las aplicaciones se dividen en elementos más pequeños e independientes entre sí, permitiendo a cada uno de sus componentes ser desarrollados de manera aislada y ejecutados
 			en contenedores sobre sistemas distribuidos, adoptando asi las ventajas de las tecnologías anteriormente definidas.
 
-			La función como servicio, o FaaS, es un modelo de ejecución informática que se basa en eventos y se ejecuta en contenedores sin estado. 
+			La función como servicio, o FaaS, es un modelo de ejecución informática que se basa en eventos y se ejecuta en contenedores sin estado \cite{faas}. 
 			Esas funciones son las que gestionan la lógica y el estado de los servidores a través del uso de servicios. Gracias a la FaaS, los desarrolladores pueden diseñar, ejecutar y gestionar esos paquetes de
 			aplicaciones como funciones, sin tener que mantener su propia infraestructura.
 			La FaaS es una forma de implementar la informática sin servidor (Serverless), donde los desarrolladores escriben la lógica empresarial que luego se ejecuta en los contenedores de Linux totalmente
@@ -165,7 +165,7 @@
 			Las funciones de resumen o funciones hash son algoritmos que consiguen crear a partir de una entrada (ya sea un texto, una contraseña o un archivo, por ejemplo) 
 			una salida alfanumérica de longitud normalmente fija que representa un resumen de toda la información que se le ha dado 
 			(es decir, a partir de los datos de la entrada crea una cadena que solo puede volverse a crear con esos mismos datos).
-			Estas se encargan de representar de forma compacta un archivo o conjunto de datos que normalmente es de mayor tamaño que el hash independientemente del propósito de su uso. \\
+			Estas se encargan de representar de forma compacta un archivo o conjunto de datos que normalmente es de mayor tamaño que el hash independientemente del propósito de su uso \cite{hash-function}. \\
 
 			Este sistema de criptografía usa algoritmos que aseguran que con la respuesta (o hash) nunca se podrá saber cuales han sido los datos insertados, 
 			lo que indica que es una función unidireccional. Sabiendo que se puede generar cualquier resumen a partir de cualquier dato nos podemos preguntar si se podrían repetir estos resúmenes (hash), 
@@ -174,7 +174,7 @@
 			
 			Por tanto, tal como se muestra en la figura 1, las características que hacen que una función hash sea útil en este proyecto es que son deterministas y unidireccionales. De manera que con una misma entrada siempre se obtiene la misma salida,
 			con la salida no se puede obtener la entrada (facilmente) y una pequeña modificación de la entrada supone una salida totalmente distinta. Permitiendo de esta manera la identificación e integridad
-			de la información en sistemas distribuidos sin confianza entre sus pares. \\ \\
+			de la información en sistemas distribuidos sin confianza entre sus pares \cite{lingam_2019}. \\ \\
 			\includegraphics[width=10cm]{hash-example.png} \\
 			\textit{Figura 1: Ejemplo de función hash.} \\ \\
 
@@ -194,7 +194,7 @@
 			Sobre esto, un SAT-solver es una herramienta que toma como entrada una fórmula CNF y genera una asignación booleana satisfactoria a las variables utilizadas en 
 			la fórmula CNF si la fórmula es satisfactible o no. \\
 
-			La clasificación más comun sobre algoritmos que resuelven SAT es si son completos o incompletos.
+			La clasificación más comun sobre algoritmos que resuelven SAT es si son completos o incompletos \cite{a_survey_of_sat_solver}.
 
 			El algoritmo completo busca el espacio de solución de un problema SAT dado basándose en mecanismos de búsqueda de enumeración y retroceso. 
 			Si el problema es satisfactorio, entonces se dará la solución de la fórmula lógica, y si no, se dará prueba de que está completo. 
@@ -222,10 +222,10 @@
 	\section{Introdución}
 		\subsection{Contexto}
 			En 1970, el matemático británico John Horton Conway diseño un automata celular al que llamo El Juego de la Vida.
-			Un autómata celular es un modelo matemático y computacional para un sistema dinámico que evoluciona en pasos discretos.
+			Un autómata celular es un modelo matemático y computacional para un sistema dinámico que evoluciona en pasos discretos \cite{automata-celular}.
 
 			El juego de la vida viene a decir que, a partir de un conjunto de reglas simples, se pueden generar estructuras complejas.
-			Un sistema compuesto de un conjunto de agentes ( o células), que ocupan un lugar en él, que poseen una serie de reglas 
+			Un sistema compuesto de un conjunto de agentes (o células), que ocupan un lugar en él, que poseen una serie de reglas 
 			que definen como interaccionan con el resto de agentes.
 
 			Y es que, en cierto modo, asi es como funciona la evolución de un ecosistema de seres vivos, mejorando y optimizando sus procesos sin que exista
@@ -294,7 +294,7 @@
 		el más oportuno. \\
 		
 		% Tecnologías computacionales de las que se dispone.
-		Para realizar la tarea de clasificación se opta por dar uso del método de regresión lineal.
+		Para realizar la tarea de clasificación se opta por dar uso del método de regresión lineal \cite{linear_regression}.
 		La regresión lineal es un algoritmo de aprendizaje automático basado en el aprendizaje supervisado. 
 		Realiza una tarea de regresión. La regresión modela un valor de predicción objetivo basado en variables independientes. 
 		Se utiliza principalmente para averiguar la relación entre las variables y la previsión y puede ayudar a predecir el comportamiento de sistemas complejos o a analizar datos.
@@ -310,7 +310,7 @@
 		En el caso de la clasificación de algoritmos SAT (o SAT solvers) la variable dependiente del modelo sería el grado de eficiencia del algoritmo y las variables independientes el número de 
 		clausulas y literales del CNF. \\
 
-		El servicio que se encarga de realizar la regresión lineal da uso de la librería de Sklearn. Scikit-learn es una biblioteca para aprendizaje automático de software libre para el 
+		El servicio que se encarga de realizar la regresión lineal da uso de la librería de Sklearn \cite{scikit}. Scikit-learn es una biblioteca para aprendizaje automático de software libre para el 
 		lenguaje de programación Python, incluye varios algoritmos de clasificación, regresión y análisis de grupos. \\
 
 		% A partir de las tecnologías disponibles se pretende hacer esto para resolver el problema.
@@ -319,9 +319,9 @@
 		de la implementación de fuentes específicas, hasta la eliminación de costos adicionales de energía, la virtualización es una técnica muy utilizada en este tipo de entornos (sistemas
 		distribuidos y computación en la nube). \\
 
-		Para realizar la tarea de construcción y gestion de servicios, virtualización o contenerización de cada uno, se da uso de la plataforma Docker, principalmente por ser la más extendida
+		Para realizar la tarea de construcción y gestion de servicios, virtualización o contenerización de cada uno, se da uso de la plataforma Docker \cite{docker}, principalmente por ser la más extendida
 		y con mayor comunidad en su nicho. Docker es un proyecto de código abierto que automatiza el despliegue de aplicaciones dentro de contenedores de software, este permite construir y ejecutar
-		cada uno de los servicios que componen todo el sistema. Otra plataforma muy usada en el contexto de la contenerización de software es Kubernetes, esta puede integrase con Docker para escalar y
+		cada uno de los servicios que componen todo el sistema. Otra plataforma muy usada en el contexto de la contenerización de software es Kubernetes \cite{kubernetes_2020}, esta puede integrase con Docker para escalar y
 		balancear contenedores en red. \\
 
 	\section{Análisis de requisitos}
@@ -505,7 +505,7 @@
 			\begin{itemize}
 				\item Un servicio es un contenedor de software que realiza una tarea especifica, puede entenderse como una ``caja negra'', existe una especificación del mismo en 
 					formato binario, donde se especifica todo lo necesario para construirlo y comunicarse con él que hace innecesario conocer su funcionamiento interno. Puede tener
-					o no estado, pero esto es irrelevante en la especificación.
+					o no estado \cite{red_hat}, pero esto es irrelevante en la especificación.
 	
 				\item Un nodo es un computador que forma parte de la red, debe de tener la capacidad de encontrar otros nodos y comunicarse con ellos, compartir y construir servicios
 					y orquestar los servicios entre él y otros nodos.
@@ -515,7 +515,7 @@
 				\item Tanto los servicios como los nodos ejecutarán servidores con los que atender solicitudes, concretamente en el trabajo son servidores Grpc. 
 	
 				\item La especificación de un servicio se refiere a un buffer de bytes que define el servicio, esto es, como esta formado y como comunicarse con él, y no se refiere a como construirlo.
-					La especificación de un servico se serializa en un binario Protobuf.
+					La especificación de un servico se serializa en un binario Protobuf \cite{google}.
 				
 				\item La imágen de un servicio se refiere a la imágen del contenedor de un servicio, asi como un contendor se refiere a la instancia de la imagen de un servicio.
 				
@@ -575,14 +575,14 @@
 		Despues de especifiar los componentes del sistema y a que se dedica cada uno se ha realizado una implementación de cada uno de ellos para materializar la descripción de este. \\
 		\subsection{Fase de desarrollo del nodo}
 			Esta fase de desarrollo abarca la lógica detrás de un nodo, esto es, la compilación y construcción de servicios y el manejo de solicitudes de los mismos.
-			El entorno donde se ejecuta esta implementación del nodo será Python3 sobre Ubuntu(Linux), dando uso, además, del sistema de base de datos MongoDB, donde se almacenan
-			la información relativa a otros nodos de la red, y el motor de contenerización DockerEngine, con el que ejecutar instancias de servicios.
+			El entorno donde se ejecuta esta implementación del nodo será Python3 sobre Ubuntu(Linux) \cite{python_doc}, dando uso, además, del sistema de base de datos MongoDB \cite{mongo}, donde se almacenan
+			la información relativa a otros nodos de la red, y el motor de contenerización DockerEngine \cite{docker}, con el que ejecutar instancias de servicios \cite{brown_2018}.
 			El uso obligatorio de Linux se debe principalmente a que dentro de la lógica implementada en Python se da uso de comandos Bash.
 			Además de eso, se da uso de Systemd para correr tres demonios de manera intermitente e indefinida: docker, mongo y gateway.py. La lógica detras del nodo se puede dividir
 			en tres componentes principales: Compilador, Constructor y Gateway. \\
 			
-			Existen, además, dos directorios, registry y hycache, en registry se almacenan las descripciones de servicios provenientes, o bien de su compilación (Compilador) o bien una solicitud de 
-			otro servicio interno o externo (Gateway), y el directorio hycache sirve para almacenar datos durante diferentes operaciones, ya sea para almacenar el contenedor 
+			Existen, además, dos directorios, 'registry' y 'hycache', en registry se almacenan las descripciones de servicios provenientes, o bien de su compilación (Compilador) o bien una solicitud de 
+			otro servicio interno o externo (Gateway), y el directorio 'hycache' sirve para almacenar datos durante diferentes operaciones, ya sea para almacenar el contenedor 
 			comprimido de un servico al ser solicitado a otro nodo (Constructor), guardar la configuracion de una nueva instancia para copiarla dentro de su contenedor (Gateway)
 			o para almacenar y calcular la hash de un sistema de archivos durante la compilación de un servicio (Compilador). \\
 
@@ -630,7 +630,7 @@
 				También es responsable de decidir si un determinado servicio se instancia localmente o solicita la instancia del servicio a otro nodo de la red (balanceo de instancias de servicios). 
 				Además de responder las solicitudes de otros nodos para obtener la imagen del contenedor de un servicio o su especificación y de presentarse a otros nodos de la red. \\
 
-				Para ello las instancias se almacenan en Python3, dando uso de un diccionario seguro ante concurrencia con el objeto threading.Lock de Python, con el formato descrito en la figura 3: \\
+				Para ello las instancias se almacenan en Python3, dando uso de un diccionario seguro ante concurrencia con el objeto threading.Lock \cite{threading} de Python, con el formato descrito en la figura 3: \\
 				\includegraphics[width=12cm]{gestion_de_instancias.jpg}\\
 				\textit{Figura 3: Gestión de instancias} \\ \\
 
@@ -890,7 +890,7 @@
 					Ubicado en el archivo \_get.py. Trata de seleccionar el solver que mejor rendimiento va a dar para un cnf determinado. Realiza inferencia sobre el modelo de regresión lineal
 					de cada uno de los solvers contenidos en él. \\
 					La inferencia es el proceso por el cual se derivan conclusiones a partir de premisas, es decir, a partir del modelo obtenido mediante regresión lineal 
-					se supone la puntuación o eficiencia que se obtendría para un cnf determinado con un SAT-solver concreto. Para realizar la inferencia se da uso de la libreria ONNX-Runtime de Microsoft. \\
+					se supone la puntuación o eficiencia que se obtendría para un cnf determinado con un SAT-solver concreto. Para realizar la inferencia se da uso de la libreria ONNX-Runtime de Microsoft \cite{onnx_runtime}. \\
 
 					A continuación se expone un diagrama de secuencia (figura 10) sobre el supuesto en el que un cliente solicita resolver SAT al servicio de clasificación, teniendo este el modelo en memoria y el solver 
 					del que dar uso instanciado. \\ \\
@@ -962,7 +962,7 @@
 					La regresión de cada solver consiste en realidad en una regresión por cada grado hasta un máximo estipulado (MAX\_DEGREE: 100 por defecto si en la variable de entorno no se indica lo contrario)
 					y escoger aquella función que se ajuste más a los datos, esto con el fin de maximizar el ajuste en la función del modelo sobre los datos. 
 					De esta forma se realizan un total de <número de solvers> * MAX\_DEGREE regresiones cada TIME\_FOR\_EACH\_REGRESSION\_LOOP segundos. \\
-					El modelo posee el formato de una lista de modelos de ONNX (Intercambio de Redes Neuronales Abierto), un ecosistema de inteligencia artificial de código abierto, asociados cada uno a un SAT solver (especificación del servicio).
+					El modelo posee el formato de una lista de modelos de ONNX (Intercambio de Redes Neuronales Abierto) \cite{onnx}, un ecosistema de inteligencia artificial de código abierto, asociados cada uno a un SAT solver (especificación del servicio).
 					Se da uso del estandar Onnx por ser un estandar abierto para compartir modelos de redes neuronales entre distintas librerías de inteligencia artificial (TensorFlow, PyCharm, Sklearn \dots), 
 					aunque en este caso se utiliza para compartir modelos de regresión lineal,
 					permite que otro servicio de clasificación continue el modelo entrenado por el clasificador sin tener que utilizar la librería de la él da uso (Sklearn). \\
@@ -1028,10 +1028,10 @@
 
 			Concretamente para este proyecto se dará uso de Grpc, principalmente por dos razones:
 			\begin{itemize}
-				\item Protobuf, su lenguaje de serialización, consigue comprimir bytes de manera muy eficiente enfocando los buffers a cada topología de mensajes.
+				\item Protobuf, su lenguaje de serialización, consigue comprimir bytes de manera muy eficiente enfocando los buffers a cada topología de mensajes \cite{restvsgrpc}.
 				\item Utiliza Http/2, por lo que está orientado a realizar streaming bidireccional.
 			\end{itemize}
-			Otros protocolos también a tener en cuenta podrían ser Flatbuffers o Capt'n proto. \\
+			Otros protocolos también a tener en cuenta podrían ser Flatbuffers \cite{flatbuffers} o Capt'n proto. \\
 		
 		\subsection{¿Porque contener todo el sistema de ficheros en la especificación de un servicio?}
 			La especificación de un servicio debe de definirlo de manera completa para evitar redundancia entre distintos servicios.
@@ -1162,7 +1162,7 @@
 		Además de estos dos puntos anteriores, tambien sería conveniente mejorar la especificación de la interfaz o la arquitectura de un servicio, asi como permitir 
 		que varios servicios compartan memoria sin que uno tenga que depender de otro (especificar una base de datos distribuida),
 		añadir a nivel de nodo un protocolo que permita distribuir archivos con mayor eficiencia y flexibilidad que hacerlo por RPC entre pares
-		de manera aislada, como por ejemplo IPFS, con el que se podrían compartir especificaciones de servicios, contenedores o modelos, o permitir 
+		de manera aislada, como por ejemplo IPFS \cite{ipfs}, con el que se podrían compartir especificaciones de servicios, contenedores o modelos, o permitir 
 		la conexión entre nodos sin configuración previa. \\
 
 		Por otro lado, con el fin de mejorar la usabilidad y transparencia tanto del nodo como del servicio de clasificación se podría añadir una 

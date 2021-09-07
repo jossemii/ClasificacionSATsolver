@@ -3,68 +3,66 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: Memoria.aux
 The style file: plain.bst
 Database file #1: referencies.bib
-Warning--to sort, need author or key in isa-json-format
-Warning--to sort, need author or key in jfrog_2021
-Warning--to sort, need author or key in gregory
+Warning--I didn't find a database entry for "onnx_runtime"
+Warning--to sort, need author or key in sistemas-distribuidos
+Warning--to sort, need author or key in faas
+Warning--to sort, need author or key in automata-celular
+Warning--to sort, need author or key in linear_regression
+Warning--to sort, need author or key in scikit
 Warning--to sort, need author or key in docker
-Warning--to sort, need author or key in nginx_2021
-Warning--to sort, need author or key in grpc
-Warning--to sort, need author or key in envoy
-Warning--to sort, need author or key in flatbuffers
-Warning--to sort, need author or key in gunicorn
-Warning--to sort, need author or key in ipfs
-Warning--to sort, need author or key in open_container_initiative
-Warning--to sort, need author or key in onnx
+Warning--to sort, need author or key in kubernetes_2020
+Warning--to sort, need author or key in red_hat
 Warning--to sort, need author or key in google
 Warning--to sort, need author or key in python_doc
-Warning--to sort, need author or key in restvsgrpc
-Warning--to sort, need author or key in scikit
-Warning--to sort, need author or key in red_hat
+Warning--to sort, need author or key in mongo
 Warning--to sort, need author or key in threading
-Warning--to sort, need author or key in flask
-Warning--to sort, need author or key in kubernetes_2020
-Warning--to sort, need author or key in bitcoin_key_generation
-Warning--to sort, need author or key in evolución-de-los-sistemas-distribuidos
-Warning--to sort, need author or key in faas
-You've used 31 entries,
+Warning--to sort, need author or key in onnx
+Warning--to sort, need author or key in restvsgrpc
+Warning--to sort, need author or key in flatbuffers
+Warning--to sort, need author or key in ipfs
+Warning--to sort, need author or key in jfrog_2021
+Warning--to sort, need author or key in gregory
+Warning--to sort, need author or key in grpc
+Warning--to sort, need author or key in onnx-runtime
+You've used 26 entries,
             2118 wiz_defined-function locations,
-            633 strings with 7913 characters,
-and the built_in function-call counts, 5408 in all, are:
-= -- 508
-> -- 85
+            599 strings with 6992 characters,
+and the built_in function-call counts, 4498 in all, are:
+= -- 422
+> -- 68
 < -- 0
-+ -- 52
-- -- 18
-* -- 194
-:= -- 688
-add.period$ -- 69
-call.type$ -- 31
-change.case$ -- 102
++ -- 43
+- -- 14
+* -- 151
+:= -- 566
+add.period$ -- 58
+call.type$ -- 26
+change.case$ -- 85
 chr.to.int$ -- 0
-cite$ -- 54
-duplicate$ -- 217
-empty$ -- 706
-format.name$ -- 18
-if$ -- 1296
+cite$ -- 46
+duplicate$ -- 182
+empty$ -- 593
+format.name$ -- 14
+if$ -- 1083
 int.to.chr$ -- 0
-int.to.str$ -- 31
+int.to.str$ -- 26
 missing$ -- 0
-newline$ -- 134
-num.names$ -- 16
-pop$ -- 249
+newline$ -- 113
+num.names$ -- 12
+pop$ -- 209
 preamble$ -- 1
-purify$ -- 71
+purify$ -- 59
 quote$ -- 0
-skip$ -- 239
+skip$ -- 203
 stack$ -- 0
-substring$ -- 158
-swap$ -- 31
+substring$ -- 133
+swap$ -- 26
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 124
-warning$ -- 23
-while$ -- 16
-width$ -- 33
-write$ -- 244
-(There were 23 warnings)
+type$ -- 104
+warning$ -- 20
+while$ -- 12
+width$ -- 28
+write$ -- 201
+(There were 21 warnings)

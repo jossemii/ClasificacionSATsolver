@@ -1,19 +1,28 @@
 \begin{thebibliography}{10}
 
+\bibitem{automata-celular}
+Autómata celular.
+\newblock
+  \url{https://es.wikipedia.org/wiki/Aut%C3%B3mata_celular#:~:text=Un%20aut%C3%B3mata%20celular%20(A.C.)%20es,interact%C3%BAen%20localmente%20unos%20con%20otros.}
+
 \bibitem{gregory}
 Deterministic and minimal docker images.
 \newblock
   \url{https://gregoryszorc.com/blog/2014/10/13/deterministic-and-minimal-docker-images/}.
 
+\bibitem{docker}
+Docker documentation.
+\newblock \url{https://docs.docker.com/}.
+
+\bibitem{mongo}
+Documentacion mongodb.
+\newblock \url{https://docs.mongodb.com/}.
+
 \bibitem{grpc}
 Documentation grpc.
 \newblock \url{https://grpc.io/docs/}.
 
-\bibitem{envoy}
-Envoy proxy.
-\newblock \url{https://www.envoyproxy.io/}.
-
-\bibitem{evolución-de-los-sistemas-distribuidos}
+\bibitem{sistemas-distribuidos}
 Evolución de los sistemas distribuidos.
 \newblock
   \url{https://prezi.com/aswklby3ic58/la-evolucion-de-los-sistemas-distribuidos/}.
@@ -22,21 +31,17 @@ Evolución de los sistemas distribuidos.
 Flatbuffers documentation.
 \newblock \url{https://google.github.io/flatbuffers}.
 
-\bibitem{gunicorn}
-Gunicorn python.
-\newblock \url{https://gunicorn.org/#docs}.
-
 \bibitem{ipfs}
 Ipfs documentation.
 \newblock \url{https://docs.ipfs.io/}.
 
-\bibitem{isa-json-format}
-Isa-json format.
-\newblock \url{https://isa-specs.readthedocs.io/en/latest/isajson.html}.
+\bibitem{linear_regression}
+Linear regression in python.
+\newblock \url{https://realpython.com/linear-regression-in-python/}.
 
-\bibitem{open_container_initiative}
-Open container initiative.
-\newblock \url{https://opencontainers.org/}.
+\bibitem{onnx-runtime}
+Onnx-runtime documentation.
+\newblock \url{https://onnxruntime.ai/docs/}.
 
 \bibitem{onnx}
 Open neural network exchange.
@@ -56,7 +61,8 @@ Rest vs grpc.
   \url{https://es.accentsconagua.com/articles/code/rest-vs-grpc-battle-of-the-apis.html}.
 
 \bibitem{scikit}
-Scikit-learn.
+Scikit-learn documentation.
+\newblock \url{https://scikit-learn.org/0.21/documentation.html}.
 
 \bibitem{red_hat}
 Sistemas con estado y sin estado.
@@ -67,40 +73,21 @@ Sistemas con estado y sin estado.
 threading - gestionar operaciones concurrentes dentro de un proceso.
 \newblock \url{https://rico-schmidt.name/pymotw-3/threading/}.
 
-\bibitem{flask}
-Welcome to flask.
-\newblock \url{https://flask.palletsprojects.com/en/1.1.x/}.
-
 \bibitem{faas}
 What is faas.
 \newblock
   \url{https://www.redhat.com/es/topics/cloud-native-apps/what-is-faas}.
 
-\bibitem{bitcoin_key_generation}
-Bitcoin key generation.
-\newblock
-  \url{https://www.oreilly.com/library/view/mastering-bitcoin-2nd/9781491954379/ch04.html#:~:text=The%20bitcoin%20private%20key%20is,generated%20from%20the%20private%20key.},
-  Jun 2020.
-
 \bibitem{kubernetes_2020}
 ¿qué es kubernetes?
 \newblock
-  \url{https://kubernetes.io/es/docs/concepts/overview/what-is-kubernetes/},
-  Jun 2020.
+  \url{https://kubernetes.io/es/docs/concepts/overview/what-is-kubernetes/}.
 
 \bibitem{jfrog_2021}
 A beginner's guide to understanding and building docker images.
 \newblock
   \url{https://jfrog.com/knowledge-base/a-beginners-guide-to-understanding-and-building-docker-images/},
   Mar 2021.
-
-\bibitem{docker}
-Docker documentation.
-\newblock \url{https://docs.docker.com/}, Apr 2021.
-
-\bibitem{nginx_2021}
-Documentacion ngnix.
-\newblock \url{https://www.nginx.com/}, Apr 2021.
 
 \bibitem{balakrishnan_2019}
 Ramanan Balakrishnan.
@@ -113,12 +100,6 @@ Ramanan Balakrishnan.
 Nigel Brown.
 \newblock Explaining docker image ids.
 \newblock \url{https://windsock.io/explaining-docker-image-ids/}, Apr 2018.
-
-\bibitem{frossard_2016}
-Davi Frossard.
-\newblock Linear regression with numpy.
-\newblock \url{https://www.cs.toronto.edu/~frossard/post/linear_regression/},
-  May 2016.
 
 \bibitem{a_survey_of_sat_solver}
 Weiwei Gong and Xu~Zhou.
@@ -143,10 +124,5 @@ John Minnihan.
 \newblock
   \url{https://thenewstack.io/understanding-the-docker-cache-for-faster-builds/},
   Mar 2021.
-
-\bibitem{linear_regression}
-Real Python.
-\newblock Linear regression in python.
-\newblock \url{https://realpython.com/linear-regression-in-python/}, Mar 2021.
 
 \end{thebibliography}
