@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex out/Memoria"] 1631047837 "out/Memoria.aux" "out/Memoria.bbl" "out/Memoria" 1631047931
+["bibtex out/Memoria"] 1631048450 "out/Memoria.aux" "out/Memoria.bbl" "out/Memoria" 1631048455
   "/usr/share/texlive/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "out/Memoria.aux" 1631047841 7349 184160311d26f1ef8fc4d8a90df38723 "pdflatex"
-  "referencies.bib" 1631047828 4288 78f3cbd558fb4cdbb67792b4472e13a0 ""
+  "out/Memoria.aux" 1631048454 7349 ab7fe08f9ad50b3ecf7565905e3165fd "pdflatex"
+  "referencies.bib" 1631048431 4288 b8e59d2365798bd8c8d496b66b34647e ""
   (generated)
-  "out/Memoria.blg"
   "out/Memoria.bbl"
-["pdflatex"] 1631047838 "/workspaces/TFG/Memoria.tex" "out/Memoria.pdf" "Memoria" 1631047931
+  "out/Memoria.blg"
+["pdflatex"] 1631048450 "/workspaces/TFG/Memoria.tex" "out/Memoria.pdf" "Memoria" 1631048455
   "/etc/texmf/web2c/texmf.cnf" 1627907346 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk" 1630088591 28952 8dfa1dacff488275d89a7c45aa2600bc ""
   "/root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk" 1630088585 31928 c85555531e4c5a728831ae90170208e8 ""
@@ -182,8 +182,8 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1581979058 38841 ce3692aa899bb693b90b87eaa5d4d84e ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1627907366 4338190 ccf23483f29b6bdb7012ae3a472369b6 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1627907374 4791331 3af588c0323212be6a096a0d7c9db9d0 ""
-  "/workspaces/TFG/Memoria.tex" 1631047925 107736 39773c5dc7b258f806cfd4164bf91f5f ""
-  "Memoria.tex" 1631047925 107736 39773c5dc7b258f806cfd4164bf91f5f ""
+  "/workspaces/TFG/Memoria.tex" 1631048442 107736 3a25fb26cdc57cfc4fe34ada9bb26ff9 ""
+  "Memoria.tex" 1631048442 107736 3a25fb26cdc57cfc4fe34ada9bb26ff9 ""
   "img/Esquema_puente.jpg" 1630088528 33283 111b8e0fc2f1e2617a80af4fee411bd3 ""
   "img/balancer_instance_sequence_diagram.png" 1630856803 42541 2f36bb7695ca81b1f7526b49269e7ce8 ""
   "img/dataset_diagram.png" 1630769393 56688 4a187ce7e2a3037d2e3ad6c9582d334d ""
@@ -200,13 +200,13 @@
   "img/modelo.png" 1630881073 15825 d8c6d40921729cf16a437a70d1b9aa66 ""
   "img/regresion_api.png" 1630952548 72911 2474ff9be404ed8b0359a305684537d7 ""
   "img/start_grpc_server.png" 1630768620 86344 694c65c3c9bdcdaeebd305d5298829dc ""
-  "out/Memoria.aux" 1631047841 7349 184160311d26f1ef8fc4d8a90df38723 "pdflatex"
-  "out/Memoria.bbl" 1631047837 3645 ca6e253db41fc4ba34edce9a9eef06e8 "bibtex out/Memoria"
-  "out/Memoria.out" 1631047841 2804 8bb46632c96942b0f77efa99d08b5df6 "pdflatex"
-  "out/Memoria.toc" 1631047841 3773 d75b34ac08037e7d4ffa6d83b849d330 "pdflatex"
+  "out/Memoria.aux" 1631048454 7349 ab7fe08f9ad50b3ecf7565905e3165fd "pdflatex"
+  "out/Memoria.bbl" 1631048450 3645 14fd4dd9c6cac180ee5bf30ab74240bc "bibtex out/Memoria"
+  "out/Memoria.out" 1631048454 2804 8bb46632c96942b0f77efa99d08b5df6 "pdflatex"
+  "out/Memoria.toc" 1631048454 3773 d75b34ac08037e7d4ffa6d83b849d330 "pdflatex"
   (generated)
-  "out/Memoria.toc"
   "out/Memoria.out"
+  "out/Memoria.toc"
   "out/Memoria.aux"
-  "out/Memoria.pdf"
   "out/Memoria.log"
+  "out/Memoria.pdf"

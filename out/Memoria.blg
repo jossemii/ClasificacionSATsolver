@@ -3,7 +3,6 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: Memoria.aux
 The style file: plain.bst
 Database file #1: referencies.bib
-Warning--I didn't find a database entry for "onnx_runtime"
 Warning--to sort, need author or key in sistemas-distribuidos
 Warning--to sort, need author or key in faas
 Warning--to sort, need author or key in automata-celular
@@ -16,6 +15,7 @@ Warning--to sort, need author or key in google
 Warning--to sort, need author or key in python_doc
 Warning--to sort, need author or key in mongo
 Warning--to sort, need author or key in threading
+Warning--to sort, need author or key in onnx-runtime
 Warning--to sort, need author or key in onnx
 Warning--to sort, need author or key in restvsgrpc
 Warning--to sort, need author or key in flatbuffers
@@ -23,10 +23,9 @@ Warning--to sort, need author or key in ipfs
 Warning--to sort, need author or key in jfrog_2021
 Warning--to sort, need author or key in gregory
 Warning--to sort, need author or key in grpc
-Warning--to sort, need author or key in onnx-runtime
 You've used 26 entries,
             2118 wiz_defined-function locations,
-            599 strings with 6992 characters,
+            598 strings with 6980 characters,
 and the built_in function-call counts, 4498 in all, are:
 = -- 422
 > -- 68
@@ -65,4 +64,4 @@ warning$ -- 20
 while$ -- 12
 width$ -- 28
 write$ -- 201
-(There were 21 warnings)
+(There were 20 warnings)
