@@ -15,8 +15,6 @@
 \usepackage{multirow}
 \usepackage{float}
 \usepackage{url}
-\usepackage{imakeidx}
-\makeindex
 \setlength\parindent{0pt}
 
 \setpapersize{A4}
@@ -102,7 +100,7 @@
 		\thispagestyle{empty}
 	\newpage
 	
-	\printindex
+	\tableofcontents
 
 	\section{Conceptos previos}
 		\subsection{Sistemas distribuidos}
@@ -175,7 +173,7 @@
 			la respuesta es que teóricamente si, podría haber colisiones, ya que no es fácil tener una función hash perfecta (que consiga que no se repita la respuesta), pero esto no supone un problema,
 			ya que si se consiguieran ante dos hashes iguales los contenidos serían totalmente distintos (con un buen algoritmo). \\
 			
-			Por tanto, las características que hacen que una función hash sea util en este trabajo es que son deterministas y unidireccionales. De manera que con una misma entrada siempre se obtiene la misma salida,
+			Por tanto, tal como se muestra en la figura 1, las características que hacen que una función hash sea util en este trabajo es que son deterministas y unidireccionales. De manera que con una misma entrada siempre se obtiene la misma salida,
 			con la salida no se puede obtener la entrada (facilmente) y una pequeña modificación de la entrada supone una salida totalmente distinta. Permitiendo de esta manera la identificación e integridad
 			de la información en sistemas distribuidos sin confianza entre sus pares. \\ \\
 			\includegraphics[width=10cm]{hash-example.png} \\ \\
@@ -416,7 +414,7 @@
 
 	\section{Definición y desarrollo}
 		\subsection{Planificación temporal del trabajo}
-			El trabajo se ha dividido en las siguientes partes, tal y cómo se puede ver en el diagrama de Gantt de la figura XXX.
+			El trabajo se ha dividido en las siguientes partes, tal y cómo se puede ver en el diagrama de Gantt de la figura 2.
 
 			\begin{enumerate}
 				\item Estudio previo y definición del sistema
@@ -450,7 +448,7 @@
 							este puede derivar a otros nodos de la red la tarea de construir y ejecutar un servicio. \\
 							Se debe de desarrollar la lógica necesaria para que lo haga.
 						\item Distribución de contenedores. \\
-						\item Busqueda de otro nodos en la red.
+						\item Busqueda de otros nodos en la red.
 					\end{itemize}
 				\item Fase de desarrollo de los servicios
 					\begin{itemize}
@@ -469,50 +467,11 @@
 					\end{itemize}
 				\item Fase de testing del sistema \\
 					Se comprueba el comportamiento del sistema en su conjunto, balanceo de carga, conexión entre nodos, respuesta ante la caida de servicios \dots, además de su eficiencia.
-			\end{enumerate} 
-
+			\end{enumerate}
 			Ambas fases de desarrollo se abarcan de manera paralela, su distinción se debe a la abstracción entre nodo y servicio el cual permite un desarrollo de este tipo, es decir, aislar cada 
-			parte y desarrollarla sin preocuparse demasiado de la otra. \\
+			parte y desarrollarla sin preocuparse demasiado de la otra. \\ \\
 			
-			\begin{ganttchart}[
-				canvas/.append style={fill=none, draw=black!5, line width=.75pt},
-				hgrid style/.style={draw=black!5, line width=0.75pt},
-				vgrid={*1{draw=black!5, line width=.75pt}},
-				title/.style={
-					draw=none, 
-					fill=none
-				},
-				title label font=\tiny,
-				title label node/.append style={below=7pt},
-				include title in canvas=false,
-				bar label font=\mdseries\small\color{black!70},
-				bar/.append style={
-					draw=none, 
-					fill=barblue
-				},
-				bar progress label font=\mdseries\footnotesize\color{black!70},
-			]{1}{18}
-				\gantttitle{Noviem.}{2}
-				\gantttitle{Diciem.}{2}
-				\gantttitle{Enero}{2}
-				\gantttitle{Febrero}{2}
-				\gantttitle{Marzo}{2}
-				\gantttitle{Abril}{2}
-				\gantttitle{Mayo}{2}
-				\gantttitle{Junio}{2}
-				\gantttitle{Julio}{2}
-				\gantttitle{Agosto}{2}\\
-				\ganttbar[]{\textbf{Estudio previo}}{1}{2} \\
-				\ganttbar[]{\textbf{Reunion inicial}}{3}{3} \\
-				\ganttbar[]{\textbf{Analisis de requisitos}}{3}{3} \\
-				\ganttbar[]{\textbf{Fase de desarrollo del nodo}}{4}{16} \\
-				\ganttbar[]{\textbf{Fase de desarrollo de servicios}}{7}{18} \\
-				\ganttbar[]{\textbf{Reunion de seguimiento}}{15}{15} \\
-				\ganttbar[]{\textbf{Fase de pruebas del sistema}}{16}{19} \\
-				\ganttbar[]{\textbf{Redacción de la memoria}}{18}{20} \\
-				\ganttbar[]{\textbf{Reunion final}}{20}{20} \\
-
-			\end{ganttchart} \\
+			\includegraphics[width=16cm]{gantt.png} \\ \\
 
 			% Retrasos o inconvenientes.
 			Durante el desarrollo se han originado una serie de retrasos o inconvenientes frente a la planificación inicialmente estipulada. Estos son, por un lado, 
@@ -612,7 +571,9 @@
 				\item Tensor: Opcional. Definie la topología del modelo que entrena el servicio. Un servicio puede solicitar al nodo que le retorne las instancias
 					de aquellos servicios que tengan un modelo determinado y con ellas realizar solicitudes a servicios que ya tienen el modelo entrenado.
 			\end{itemize}
+			En la figura 3 se puede observar cada uno de sus componentes. \\
 			\includegraphics[width=18cm]{ipss.png}\\ \\
+			
 
 		Despues de especifiar los componentes del sistema y a que se dedica cada uno se ha realizado una implementación de cada uno de ellos para materializar la descripción de este. \\
 		\subsection{Fase de desarrollo del nodo}
@@ -672,8 +633,9 @@
 				También es responsable de decidir si un determinado servicio se instancia localmente o solicita la instancia del servicio a otro nodo de la red (balanceo de instancias de servicios). 
 				Además de responder las solicitudes de otros nodos para obtener la imagen del contenedor de un servicio o su especificación y de presentarse a otros nodos de la red. \\
 
-				Para ello las instancias se almacenan en Python3, dando uso de un diccionario seguro ante concurrencia con el objeto threading.Lock de Python, con el formato descrito a continuación:\\
-				\includegraphics[width=12cm]{gestion_de_instancias.jpg}\\
+				Para ello las instancias se almacenan en Python3, dando uso de un diccionario seguro ante concurrencia con el objeto threading.Lock de Python, con el formato descrito en la figura 4: \\
+				\includegraphics[width=12cm]{gestion_de_instancias.jpg}\\ \\
+
 				Antes de explicar cada uno de los elementos de la imágen se debe de recalcar la diferencia entre dependencia interna y externa.
 				\begin{itemize}
 					\item una dependencia interna es aquella que el nodo decide ejecutar localmente.
@@ -695,9 +657,11 @@
 					\item peer\_ip\#\#node\_ip:node\_port\#\#his\_token en caso de una dependencia externa.
 				\end{itemize}
 
+				
+				
 				Sobre la interfaz de aplicación del servicio. 
 				Es este componente quien se comunica tanto con los servicios que instancia el nodo como con el resto de nodos de la red, para ello se da uso de los
-				siguientes métodos mediante un servidor Grpc:
+				siguientes métodos mediante un servidor Grpc (expuestos en la figura 5):
 				\begin{itemize}
 					\item StartService, recive la especificación de un servicio mediante 'streaming', primero recive únicamente los identificadores del servicio que posea el cliente,
 						si comprueba que tiene el servicio comienza a instanciarlo, si no espera a que le llegue la especificación completa. Instancia el servicio especificado y retorna
@@ -712,9 +676,9 @@
 						solicitante, si las encuentra almacena la especificación y la retorna, si no salta excepción.
 					\item GetServiceCost, recive la especificación de un servicio (igual que StartService), calcula y retorna el coste que tendría ejecutar localmente una instancia de este.
 				\end{itemize}
-				\includegraphics[width=16cm]{gateway_grpc_server.png} \\ \\
+				\includegraphics[width=14cm]{gateway_grpc_server.png} \\ \\
 
-				En el siguiente diagrama de secuencia (figura xxx) se expone el proceso de instanciar un servicio.
+				En el diagrama de secuencia de la figura 6 se expone el proceso de instanciar un servicio.
 				Se parte del supuesto en que la instancia de un servicio requiere dar uso de otro servicio, por tanto solicita a su nodo que se la cree. \\
 				\includegraphics[width=16cm]{instance_sequence_diagram.png} \\ \\
 
@@ -1124,7 +1088,7 @@
 		asi como los identificadores del servicio de clasificación y selección de SAT-solvers y el servicio de generación de CNF's aleatorios, además de la especificación de los dos SAT-solvers
 		previamente mencionados. \\ El programa se compone de los siguientes pasos:
 		\begin{enumerate}
-			\item se conecta a la Raspberry-Pi cuya dirección se le ha proporcionado.
+			\item se conecta a la Raspberry-Pi, cuya dirección se le ha proporcionado.
 			\item solicita la ejecución de las instancias de los servicios de clasificación, generación de CNF's y del SAT-solver 'sano' (del que partieron los otros dos).
 			\item proporciona al clasificador las especificaciones de los dos SAT-solvers con fallos.
 			\item inicia el entrenamiento en el clasificador.
