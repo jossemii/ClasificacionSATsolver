@@ -269,7 +269,8 @@
 			incluso con el paso del tiempo, pudiendo el usuario añadir posteriormente nuevos algoritmos (SAT-solvers) que compitan con el resto.
 
 		\subsection{Objetivos}
-			Por tanto el objetivo general del proyecto es diseñar un servicio que clasifique y seleccione el SAT solver más eficiente para un CNF concreto.
+			Por tanto el objetivo principal del proyecto es diseñar un servicio que clasifique SAT-solvers en función de su eficiencia a la hora de resolver un tipo u otro de CNF
+			y seleccione el SAT solver más eficiente para un CNF concreto.
 			Este trabajo pretende, principalmente, dos cosas:
 			\begin{itemize}
 				\item Definir, de manera simple, 
@@ -745,7 +746,7 @@
 				Ese mismo coste, el de ejecutar la instancia localmente, es el que retornará a otros métodos cuando le pregunten por el coste de ejecutar una instancia
 				(método Grpc GetServiceCost).
 				El coste de ejecutar una instancia localmente se calcula a partir de la suma del número de contenedores que se estan ejecutando en ese momento localmente junto con el
-				coste de buscar y construir su servicio en caso de ser necesario (este coste es constante).
+				coste de buscar y construir su servicio en caso de ser necesario (este coste es constante). \\
 
 				En el siguiente diagrama de secuencia (figura xxx) se expone el proceso de balanceo al ejecutar nuevas instancias de servicios.
 				Se parte del supuesto en que un servicio a recibido la solicitud para ejecutar la instancia de un servicio. \\
@@ -769,22 +770,28 @@
 					\item Nodo 1 recive la dirección y token de Nodo 2, guarda la instancia en el registro como externa.
 				\end{enumerate}	
 
-			\paragraph{Distribución de contenedores}
-				Con el fin de atender las solicitudes de obtención de un contenedor el nodo proporciona un método Grpc denominado GetServiceTar. Éste recive la especificación de un servicio y, si puede 
+			\paragraph{Distribución de servicios}
+				Hay dos tipos de elementos que obtener sobre un servicio, su especificación y su contenedor Docker (ya que la implementación del nodo usa Docker).
+				Con el fin de atender las solicitudes de obtención del contenedor Docker de un servicio el nodo proporciona un método Grpc denominado GetServiceTar. 
+				Éste recive la especificación de un servicio y, si puede 
 				proporcionarlo, comprime el contenedor y envía el archivo en formato .tar dividiendolo en trozos y enviandolos en streaming, en caso de no poder proporconar el contenedor salta una excepción que
 				recive el cliente.\\
 				Para la busqueda de contenedores, el nodo debe de iterar entre sus pares (resto de nodos de la red) y comprobar si alguno posee el contenedor dando uso del método anteriormente definido. \\
 				
-				Para la distribución de especificaciones de servicios se utilizan métodos Grpc con mecánicas similares.
-	
+				Para la distribución de especificaciones de servicios se utiliza el método Grpc GetServiceDef, con las políticas anteriores pero sin que sea necesario comprimir y dividir la especificación, ya que
+				la especificación es enviada mediante un objeto Protobuf.
+				Con tal de evitar que se originen ciclos en las solicitudes, de manera que el nodo al que se le solicita un servicio vuelva a solicitarlo al nodo que le solicitó o a un nodo que este ya podría heberlo solicitado, al
+				recivir una solicitud de obtención de un servicio (contenedor o especificación) y no poseer el elemento el nodo busca por todas las redes de nodos menos por la que tiene en común con el nodo
+				solicitante, ya que entiende que el solicitante comprobará por si mismo que el resto de nodos de la red común tengan o no el servicio que busca. \\
+
 			\paragraph{Conexión con nuevos nodos}
 				Al añadir un nuevo nodo a la red se debe de usar el comando 'python3 zeroconf.py <uri del nuevo nodo>' desde la consola de un nodo, el comando ejecutará el método Grpc HyNode
-				en el supuesto nuevo nodo, si este le responde con un objeto Instance, el nodo le retornará su instancia y lo tomará como un nodo completamente operativo, si no responde olvidará la solicitud.
+				en el supuesto nuevo nodo, si este le responde con un objeto Instance, el nodo le retornará su instancia y lo tomará como un nodo completamente operativo, si no responde olvidará la solicitud. \\
 
 				
 		\subsection{Fase de desarrollo de servicios}
 			Esta fase consiste principalmente en desarrollar el servicio de clasificación de solvers, este tiene la finalidad de: por un lado atender solicitudes para resolver CNF's, y por otro realizar un entrenamiento
-			con cnf's aleatorios para clasificar diferentes servicios SATsolvers, esto con la intencion de utilizar el SATsorter más adecuado para cada CNF durante las solicitudes reales. \\
+			con cnf's aleatorios para clasificar diferentes servicios SATsolvers, esto con la intencion de utilizar el SATsorter más adecuado para cada CNF durante las solicitudes reales.
 
 			\paragraph{Servicio de clasificación}
 				El servicio realiza varias tareas de manera simultanea, al igual que el nodo, se ha optado por dar uso de Python3 como tecnología sobre la que desarrollar su lógica. El punto de entrada del servicio es el
@@ -1100,14 +1107,78 @@
 			De esta forma no se requiere centralizar un registro para acordar que identificador corresponde a un algoritmo concreto. \\
 
 	\section{Resultados}
-		Resultados de los tests realizados sobre el sistema.
+		Tras el la implementación del sistema, nodo y servicios de clasificación y regresión, cabe analizar su comportamiento en función de los
+		requisitos marcados durante el inicio del proyecto. \\
+
+		Por parte del servicio de clasificación y selección, con el fin de estudiar su efectividad al clasificar SAT-solvers y seleccionar el conveniente, se 
+		ha creado un entorno que permita el estudio con facilidad. A partir de un SAT-solver totalmente funcional se han implementado dos más, uno retorna una interpretación
+		erronea con los CNF's de un número bajo de clausulas y literales y el otro retorna una interpretación erronea con los CNF's con un número elevado de clausulas o literales.
+		De esta manera ambos son capaces de cubrir todo el espectro de posibles CNF's originados por el servicio de generación de CNF's aleatorios sin que exista un subconjunto común
+		del que ambos sean capaces de dar una interpretación válida. \\
+
+		El entorno de ejecución de la prueba cuenta con el uso de una Raspberry-Pi (ARM 64) y un ordenador portátil básico (Intel core i3) conectada a una red Wi-Fi que harán 
+		la función de nodos (ejecutando la implementación descrita), y
+		desde otro computador cualquiera conectado a esa misma red se ejecutará un cliente escrito en Python3. 
+		Ambos nodos se conectan manualmente, añadiendo en uno la direccíon del otro, de forma autónoma uno se comunica con el otro, verifican que son nodos y almacenan sus direcciones en MongoDB. \\
+		Este programa, el cliente, es dotado de la dirección de uno de los dos nodos,
+		asi como los identificadores del servicio de clasificación y selección de SAT-solvers y el servicio de generación de CNF's aleatorios, además de la especificación de los dos SAT-solvers
+		previamente mencionados. \\ El programa se compone de los siguientes pasos:
+		\begin{enumerate}
+			\item se conecta a la Raspberry-Pi cuya dirección se le ha proporcionado.
+			\item solicita la ejecución de las instancias de los servicios de clasificación, generación de CNF's y del SAT-solver 'sano' (del que partieron los otros dos).
+			\item proporciona al clasificador las especificaciones de los dos SAT-solvers con fallos.
+			\item inicia el entrenamiento en el clasificador.
+			\item añade un set de datos de una sesión anterior.
+			\item solicita el set de datos para asegurar que se añadió correctamente.
+			\item durante 10 iteraciones cada 15 minutos el cliente genera un CNF y le solicita una interpretación tanto 
+				al clasificador como al SAT-solver 'sano' directamente y comprueba si una interpretación es válida. De esta forma cuenta el tiempo que tarda cada uno, usando la función 'time()'.
+			\item termina el entrenamiento.
+			\item solicita la resolución de 10 CNF's aleatorios al clasificador al mismo tiempo durante tres iteraciones, esto permite observar si el clasificador realmente escala instancias de cada
+				SAT-solver y balancea sus solicitudes.
+			\item espera durante 15 minutos para comprobar que el administrador de instancias del clasificador se ocupe de eliminarlas, porque se sabe que ya no se les da uso.
+			\item solicita al nodo que detenga el servicio de clasificación.
+		\end{enumerate}
+		Esto nos permite estudiar varios puntos, por un lado, mientras se realiza el entrenamiento podemos observar si recoge datos, si se comunica con el servicio de regresión, si este genera el modelo,
+		y si realiza una inferencia correcta al seleccionar un SAT-solver simplemente comparando entre los resultados del clasificador y del SAT-solver 'sano'. En caso de que el SAT-solver 'sano' dé una
+		interpretación válida y el clasificador no significará que se seleccionó el SAT-solver incorrecto, si el 'sano' da respuesta y el clasificador no significará que ni siquiera obtuvo el modelo. \\
+		%\includegraphics[width=16cm]{results.png} \\ \\
+
+		Como se ha podido observar el comportamiento del sistema ha sido positivo, durante todas las iteraciones el clasificador ha acertado al seleccionar el SAT-solver, lo que significa que tanto la recolección
+		de datos como la regresión e inferencia se efectuaron correctamente. Por otra parte no se detecta un tiempo significativamente superior entre el SAT-solver 'sano' (que se usa directamente) y el servicio
+		de clasificación (que tiene un proceso más complejo hasta usar el SAT-solver). Por otra parte, el inicio y detención del entrenamiento es satisfactorio, al ejecutar múltiples solicitudes simultaneas 
+		escala y balancea correctamente ya que se puede observar que el nodo creó nuevos contenedores, aunque la primera de las tres iteraciones tardá más, debido a que el administrador de SAT-solvers debe de 
+		solicitar nuevas instancias. Tras esto, antes de detener el clasificador, se terminan deteniendo todos los SAT-solvers, lo que muestra que la gestión de mantenimiento y pila del administrador de SAT-solvers
+		es correcta y que la detencion de instancias por parte del nodo también lo es. Finalmente, detener el clasificador implica que el nodo elimine también sus dependencias, es decir, el servicio de regresión
+		(el de generación de CNF's se eliminó al finalizar el entrenamiento), y se observa que también se realiza correctamente. 
+		Sobre el balanceo de instancias, la Raspberry-Pi soporto una mayor carga debido a que el servicio de clasificación ordenó ejecutar en ella, aun así el servicio de regresion se ejecutó en el otro nodo. \\
 		
+		Por parte del nodo, el sistema es capaz de compilar la especificación de un servicio a partir de ciertos datos de entrada, del mismo modo, 
+		es capaz de, tras recibir la especificación de uno, ejecutarlo desde el punto de entrada  y abriendo los puertos que esta indica. Mantiene, a su vez,
+		un control eficiente de las instancias que ejecuta, es decir, sabe quien se las ordenó ejecutar (padre) y las detiene cuando el padre es detenido.
+		El control de instancias es eficiente porque el aumento del número de instancias no provoca un incremento exponencial en el uso de la memoria del nodo.
+		Si un nodo le solicita un servicio a otro, este último comprime correctamente el contenedor y se lo envia al solicitante, el primer nodo lo descomprime y
+		lanza instancias del servicio correctamente.
+		Finalmente, el nodo atiende solicitudes de ejecución de instancias y las reparte entre sus pares, cada par hace lo mismo, por lo que se controla que no
+		se originen ciclos de peticiones infinitas. Sobre esta posibilidad, que se originen ciclos en las solicitudes de ejecución de instancias,
+		no será posible ya que el coste que dice tener un nodo con un SAT-solver en un tiempo concreto no tiene en cuenta 
+		el coste que podría suponerle solicitarlo a su vez a otro par. \\	
+
 	\section{Conclusiones}
+		Tras exponer el análisis de los resultados se puede concluir que gran parte de los requisitos expuestos al inicio del proyecto han sido cubiertos, dejando de lado la política
+		de configuración cero de la red de nodos y el análisis de los sets de datos que proporcione el cliente. \\
 		
+		Sobre el objetivo principal del proyecto, clasificar y seleccionar el 
+		SAT-solver más eficiente para un CNF concreto, el sistema ha sido capaz de cumplirlo, puesto que entre dos SAT-solvers, uno válido y otro no, seleccionó siempre el válido. \\ 
+		Dicho esto, eso no significa que sea un método siempre competente frente al uso directo de un SAT-solver que se comporte bien con todo tipo de entradas, es decir, 
+		dificilmente la tarea de recibir un CNF, analizarlo y
+		extraer sus atributos, realizar inferencia sobre un modelo, obtener que SAT-solver usar, tomar una instancia de este y usarla será más o igual de rápido que directamente tomar un SAT-solver
+		que se sabe que funcionará bien y dar uso de él. \\
+		
+		El potencial de clasificar y seleccionar formas de resolver un problema de manera autónoma tiene más que ver con la capacidad de no requerir de 
+		un análisis o decisión manual ante una nueva propuesta para resolverlo, más aún si ocurre sobre un sistema distribuido, ya que permite mayor capacidad de soluciones que añadir y comparar. \\
 
 	\section{Trabajo futuro}
 		En el proyecto existen varios puntos de continuación distintos. \\
-
 		Por un lado, ampliar la especificación de un servicio permitiría explorar nuevos tipos de aplicaciones. Por ejemplo 
 		especificar el modelo que ofrece un servicio daría el paso a un tipo de servicio que no clasifica pero si selecciona, 
 		solicitando un tipo de modelo al nodo y este retornandole direcciones de servicios que puedan proporcionarselo, o simplemente
