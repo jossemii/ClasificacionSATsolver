@@ -265,6 +265,8 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy8.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm
 OUTPUT out/Memoria.toc
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm1000.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecbx1000.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecbx1200.tfm
 INPUT img/hash-example.png
 INPUT ./img/hash-example.png
@@ -325,6 +327,8 @@ INPUT /root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1095.600pk
 INPUT /root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk
 INPUT /root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1095.600pk
 INPUT /root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk
+INPUT /root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk
+INPUT /root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk
 INPUT /root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk
 INPUT /root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk
 INPUT /root/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600pk

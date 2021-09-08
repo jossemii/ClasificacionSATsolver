@@ -101,7 +101,39 @@
 	\newpage
 	
 	\tableofcontents
+	\newpage
+	\begin{abstract}
+		El objetivo principal del proyecto es diseñar un sistema que analize distintas formas de resolver un problema y seleccione la más conveniente en función 
+		de la instancia concreta del problema a resolver. \\ 
+		El sistema es diseñado pensando en la escalabilidad, eficiencia y tolerancia a fallos de los sistemas distribuidos y los paradigmas basados en microservicios, dividiéndolo
+		en una capa lógica de servicios que resuelven problemas concretos y otra capa de nodos que comparten y ejecutan servicos entre sí.
+		De forma que sea posible implementar una serie de servicios, donde unos den uso de los otros, sin abarcar la problemática de cómo se distribuyen o balancean estos servicios 
+		a través de la red, puesto que esto lo tratará cada uno de los nodos. \\
 
+		Se escoge el problema SAT debido a su complejidad y cantidad de formas de resolverlo. De manera que, para resolver 
+		un problema SAT concreto, no sea necesario que el usuario escoja un algoritmo concreto si no que el sistema le dé respuesta seleccionando el algoritmo de resolución SAT más eficiente.
+		Además de permitir que cualquier usuario pueda añadir nuevas formas de resolver SAT para que compitan con las ya establecidas. Se estudia la viavilidad de este sistema y su eficiencia 
+		frente a resolver el problema directamente usando un algoritmo de resolución SAT general (sin estar adaptado a esa instancia del problema). \\ \\ \\
+
+		The main objective of the project is to design a system that analyzes different forms of
+		solve a problem and select the most suitable based on the specific instance of the
+		problem to solve. \\
+		The system is designed with scalability, efficiency and fault tolerance in mind for distributed systems and microservices-based paradigms, dividing it into a logical layer
+		of services that solve concrete problems and another layer of nodes that share and execute
+		services each other.
+		In such a way that it is possible to implement a series of services, where some make use of the others,
+		without covering the problem of how these services are distributed or balanced through the
+		network, since this will be handled by each of the nodes. \\
+		
+		The SAT problem is chosen because of its complexity and number of ways to solve it. From
+		so that, to solve a specific SAT problem, it is not necessary for the user to choose a
+		specific algorithm, the system gives you an answer by selecting the resolution algorithm
+		SAT more efficient. In addition to allowing any user to add new forms of
+		solve SAT so that they compete with those already established. The viability of this system
+		and his efficiency versus solving the problem directly using a solving algorithm
+		general SAT (without being adapted to that instance of the problem) are analyzed. \\ \\
+		
+	\end{abstract}
 	\section{Conceptos previos}
 		\subsection{Sistemas distribuidos}
 			% Evolución de los sistemas distribuidos.
@@ -482,7 +514,7 @@
 			en la comunicación entre sistemas, sobre todo cliente/servidor).
 			Una vez observada la capacidad del servicio de clasificación y el nodo para interactuar entre sí usando esta arquitectura/lenguaje, aunque esta tecnología si que cumplía con 
 			los requisitos establecidos, se decidió estudiar que otras tecnologías 
-			podrían ser más convenientes en el contexto de un sistema de microservcios. Finalmente se decidió dar uso del sistema de comunicación Grpc y se adaptó todo el sistema desarrollado
+			podrían ser más convenientes en el contexto de un sistema de microservicios. Finalmente se decidió dar uso del sistema de comunicación Grpc y se adaptó todo el sistema desarrollado
 			hasta ese momento al mismo. Más adelante, en la sección 6 se profundiza sobre este nuevo enfoque y las ventajas e inconvenientes 
 			que conllevó. \\
 
