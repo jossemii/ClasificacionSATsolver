@@ -864,8 +864,7 @@
 
 					Sobre el mecanismo para detener el entrenamiento, hay que tener en cuenta que para evitar que el método stop, usada por el método StopTrain del servidor Grpc en start.py,
 					mate el hilo durante un entrenamiento el método stop emite el mensaje de que se debe de parar el entrenamiento en la siguiente vuelta,
-					y a continuación espera a que el entrenamiento salga del bucle y termine. De esta forma se asegura que no deja instancias fuera de pila y por tanto instancias zombie 
-					(la pila se aborda en la tercera fase de desarrollo). \\
+					y a continuación espera a que el entrenamiento salga del bucle y termine. De esta forma se asegura que no deja instancias fuera de pila y por tanto instancias zombie. \\
 
 				\subparagraph{Administrador de solvers}
 					Ubicado en el archivo \_solve.py. Durante el inicio del proceso principal (start.py) se obtiene el objeto solve.Session, el cual sigue el patrón Singleton, este objeto es usado durante toda la vida del servicio. \\
@@ -873,7 +872,7 @@
 					\begin{itemize}
 						\item gestionar las instancias de todos los solvers
 						\item solicitar a un solver determinado que resuelva un cnf determinado
-						\item balancear las solicitudes entre las distintas instancias de un mismo solver en caso de ser necesario (este punto se aborda durante la tercera fase de desarrollo).
+						\item balancear las solicitudes entre las distintas instancias de un mismo solver en caso de ser necesario.
 					\end{itemize}
 
 					Ejecuta un hilo secundario dedicado a controlar el estado de las instancias de los solvers cada cierto periodo de tiempo (MAINTENANCE\_SLEEP\_TIME: 100 segundos por defecto). 
@@ -887,9 +886,9 @@
 					la respuesta junto con el tiempo que tomó resolverla. En caso de que no se encuentre y se halla proporcionado una especificación la añadirá al registro y retornará error. \\
 				
 					Sobre el balanceo de solicitudes.
-					En el supuesto de que el cliente realiza, al mismo tiempo, multitud de solicitudes para resolver solvers, podría darse el caso de que, en un mismo instante de tiempo, se requiera dar uso de 
+					En el supuesto de que el cliente realize, al mismo tiempo, multitud de solicitudes para resolver solvers, podría darse el caso de que, en un mismo instante de tiempo, se requiera dar uso de 
 					un solver en concreto. 
-					El solver en cuestion podría ser capaz de resolver varios cnfs simultaneamente, dentro del mismo contenedor, aunque de esa forma no se aprobechan las ventajas del sistema distribuido.
+					El solver en cuestion podría ser capaz de resolver varios CNF's simultaneamente, dentro del mismo contenedor, aunque de esa forma no se aprobechan las ventajas del sistema distribuido.
 					Con el objetivo de que un varios cnfs se resuelvan simultaneamente por un mismo solver el clasificador crea distintas instancias de este cuando es necesario, de esta forma el nodo se encargará de 
 					instanciar el servicio entre los distintos nodos de la red. \\ 
 	
